@@ -1,5 +1,10 @@
-;(function(RP, $){			
-	RP.WebStatus = Backbone.Model.extend({
+;(function(WE, $){
+
+	var MSG = {
+
+	}; 
+
+	WE.WebStatus = Backbone.Model.extend({
 		defaults: function () {
 			return {
 				code: null,
@@ -25,7 +30,7 @@
 			});
 		},
 		getMsgByCode: function (code){
-			return "";
+			return MSG[code] || "";
 		},
 		toJSON: function () {
 			var json = {
@@ -38,4 +43,4 @@
 			return json;
 		}
 	});
-})(RP, jQuery);
+})(WE, jQuery);
