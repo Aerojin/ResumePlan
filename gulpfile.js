@@ -69,6 +69,6 @@ gulp.task('default', function() {
 });
 
 gulp.task('watch', function () {
-	gulp.watch('./js/*.js', ['default']);
+	gulp.watch('./js/**/*.js', ['default']);
 });
 

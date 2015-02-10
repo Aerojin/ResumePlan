@@ -52,8 +52,8 @@
             this.ui.content.empty().append(content);
         },
 
-        getContent: function () {
-            return this.ui.content;
+        getWrap: function () {
+            return this.ui.wrap;
         },
 
         close: function () {

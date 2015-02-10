@@ -1,8 +1,7 @@
-/*
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.Model.ModelBase;
-    var _class = "WE.Register.Model";  
+    var _class = "WE.Forget.Model";  
 
     WE.namespace(_class, superClass.extend({
         
@@ -10,10 +9,9 @@
 
         defaults: function () {
             return {
-                state: null,
                 username: null,
-                password: null,
-                code: null
+                code: null,
+                title: "忘记密码"
             };            
         },      
 
@@ -33,7 +31,7 @@
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.View.ViewBase;
-    var _class = "WE.Register.View";  
+    var _class = "WE.Forget.View";  
 
     WE.namespace(_class, WE.View.ViewBase.extend({
         
@@ -41,16 +39,35 @@
 
         el: 'body',
 
-        STATE: {
-            LOGIN: "login",
-            FORGET: "forget",
-            REGISTER: "register"
-        },
+        el: '<ul class="windowFrom">\
+                <li>\
+                    <div class="inputBox">\
+                        <input type="text" placeholder="输入您的邮箱..."  class="input" id="txt-username" />\
+                        <p class="inputBox_p">邮箱已使用</p>\
+                    </div>\
+                </li>\
+                <li class="clearfix">\
+                    <div class="inputBox inputBox_yz">\
+                        <input type="text"  placeholder="验证码" class="input" id="txt-code" />\
+                    </div>\
+                    <img src="../images/yz.png" alt="" title="" id="img-code" class="inputBox_img" />\
+                    <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
+                </li>\
+            </ul>\
+            <div class="window_btn window_btnNew">\
+                <a href="javascript:void(0);" id="btn-send" class="btnF btnSuccess">发送</a>\
+            </div>',
 
-        el: "",
+        template: '<div class="window successWindow" id="<%-cid%>-dialog">\
+                        <a href="javascript:void(0);" id="btn-close" class="i_icoClose"></a>\
+                        <i class="i_icoSuccess"></i>\
+                        <p>邮件已发送，请到邮箱查收。</p>\
+                    </div>',
 
-        initialize: function () {
-            this.model = new WE.Login.Model();
+        initialize: function (options) {
+            this.dialog = options.dialog;
+            this.model = new WE.Forget.Model();
+
             this.initEvents();
             this.render();
             this.initPageEvents();
@@ -58,174 +75,50 @@
 
         initEvents: function () {
             var _this = this;
-
-            this.model.on("change:state", function () {
-                var state = this.get("state");
-                var template = _this.template[state];
-                
-                _this[state].render.call(this, template);
-            });            
+            
         },
 
         initPageEvents: function () {
             var _this = this;
 
-            this.ui.login.click(function () {
-                _this.model.set({state: _this.STATE.LOGIN});
+            this.ui.btnRefresh.click(function(event) {
+                /* Act on the event */
+            });
+
+            this.ui.btnSend.click(function(event) {
+                /* Act on the event */
+                _this.trigger('send');
+                _this.showSuccess();
             });
         },
 
         render: function () {
 
-            this.el = this.template;
-
             this.ui = {};
-            this.ui.login = this.$el.find("#login");            
-        },
+            this.ui.btnSend = this.$el.find("#btn-send");
+            this.ui.btnRefresh = this.$el.find("#btn-refresh");
+            this.ui.txtUserName = this.$el.find("#txt-username");
+            this.ui.txtCode = this.$el.find("#txt-code");
+            this.ui.imgCode = this.$el.find("#img-code");
+            this.ui.txtInput = this.$el.find(".txt-input");
 
-        showDialog: function (options) {
-            this.dialog = new WE.Login.Dialog({
-                title: options.title,
-                content: options.content,
-                onClose: options.onClose
+            this.dialog.setContent(this.$el);
+            this.dialog.setTitle(this.model.get("title"));
+        },
+        showSuccess: function () {
+            var template = _.template(this.template);
+            var  wrap = $(template({cid: this.cid}));
+
+            wrap.find('#btn-close').click(function(event) {
+                wrap.remove();
             });
-        },
-        login: {
-            render: function (template) {
-                this.showDialog({
-                    title: "登陆",
-                    content: template,
-                    onClose: function () {
 
-                    }
-                });
-
-                var _this = this;
-                var ui = {};
-                    ui.wrap = this.dialog.getContent();
-                    ui.btnLogin = ui.wrap.find("#btn-login");
-                    ui.btnRegister = ui.wrap.find("#btn-register");
-                    ui.btnRefresh = ui.wrap.find("#btn-refresh");
-                    ui.txtEmail = ui.wrap.find("#txt-email");
-                    ui.txtPassword = ui.wrap.find("#txt-password");
-                    ui.txtCode = ui.wrap.find("#txt-code");
-                    ui.imgCode = ui.wrap.find("#img-code");
-                    
-
-
-                ui.btnLogin.click(function () {
-                    
-                });
-
-                ui.btnRegister.click(function () {
-                    _this.model.set({state: _this.STATE.register});
-                });
-
-                ui.btnRefresh.click(function () {
-                    
-                });
-
-            }
-        },
-        register: {
-            render: function (template) {
-
-            }
-        },
-        forget: {
-            render: function (template) {
-
-            }
-        }
-
-        template: {
-            login: '<ul class="windowFrom">\
-                        <li>\
-                            <div class="inputBox">\
-                                <input type="text" placeholder="输入您的邮箱..." class="input" id="txt-email" />\
-                                <i class="i_icoOk"></i>\
-                                <p class="inputBox_p">邮箱已使用</p>\
-                            </div>\
-                        </li>\
-                        <li>\
-                            <div class="inputBox">\
-                                <input type="password" placeholder="输入您的密码..." class="input" id="txt-password" />\
-                                <i class="i_icoError"></i>\
-                                <p class="inputBox_p">密码格式有误</p>\
-                                <a href="javascript:void(0);" id="btn-forget" class="inputBox_span">忘记密码？</a>\
-                            </div>\
-                        </li>\
-                        <li class="clearfix">\
-                            <div class="inputBox inputBox_yz">\
-                                <input type="text" placeholder="验证码" class="input" id="txt-code" />\
-                            </div>\
-                            <img src="../images/yz.png" id="img-code" alt="" title="" class="inputBox_img" />\
-                            <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
-                        </li>\
-                    </ul>\
-                    <div class="window_btn">\
-                        <a href="javascript:void(0);" id="btn-login" class="btnF">登录</a>\
-                        <a href="javascript:void(0);" id="btn-register" class="btnF btnRegist">注册</a>\
-                    </div>',
-            register: '<div class="window registWindow" style="display:none;">\
-                            <a href="javascript:void(0);" class="i_icoClose"></a>\
-                            <h2>注册</h2>\
-                            <ul class="windowFrom">\
-                                <li>\
-                                    <div class="inputBox">\
-                                        <input type="text" name="" class="input" id="inputBox1" />\
-                                        <label class="label" for="inputBox1">输入您的邮箱...</label>\
-                                        <i class="i_icoOk"></i>\
-                                        <p class="inputBox_p">邮箱已使用</p>\
-                                    </div>\
-                                </li>\
-                                <li>\
-                                    <div class="inputBox">\
-                                        <input type="password" name="" class="input" id="inputBox2" />\
-                                        <label class="label" for="inputBox2">输入您的密码...</label>\
-                                        <i class="i_icoError"></i>\
-                                        <p class="inputBox_p">密码格式有误</p>\
-                                    </div>\
-                                </li>\
-                                <li class="clearfix">\
-                                    <div class="inputBox inputBox_yz">\
-                                        <input type="text" name="" class="input" id="inputBox3" />\
-                                        <label class="label" for="inputBox3">验证码</label>\
-                                    </div>\
-                                    <img src="../images/yz.png" alt="" title="" class="inputBox_img" />\
-                                    <a href="javascript:void(0);" class="i_icoRefresh"></a>\
-                                </li>\
-                            </ul>\
-                            <div class="window_btn"><a href="javascript:void(0);" class="btnF btnLoginA">登录</a><a href="#" class="btnF">注册</a></div>\
-                        </div>',
-            forget: '<div class="window forgetWindow" style="display:none;">\
-                        <a href="javascript:void(0);" class="i_icoClose"></a>\
-                        <h2>忘记密码</h2>\
-                        <ul class="windowFrom">\
-                            <li>\
-                                <div class="inputBox">\
-                                    <input type="text" name="" class="input" id="inputBox1" />\
-                                    <label class="label" for="inputBox1">输入您的邮箱...</label>\
-                                    <i class="i_icoOk"></i>\
-                                    <p class="inputBox_p">邮箱已使用</p>\
-                                </div>\
-                            </li>\
-                            <li class="clearfix">\
-                                <div class="inputBox inputBox_yz">\
-                                    <input type="text" name="" class="input" id="inputBox3" />\
-                                    <label class="label" for="inputBox3">验证码</label>\
-                                </div>\
-                                <img src="../images/yz.png" alt="" title="" class="inputBox_img" />\
-                                <a href="javascript:void(0);" class="i_icoRefresh"></a>\
-                            </li>\
-                        </ul>\
-                        <div class="window_btn window_btnNew"><a href="#" class="btnF btnSuccess">发送</a></div>\
-                    </div>'
+            $('body').append(wrap);
         }
 
     }));
 
 
 })(WE, jQuery, Backbone);
-*/
+
 

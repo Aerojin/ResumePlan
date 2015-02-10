@@ -112,7 +112,14 @@
         },
         forget: {
             render: function () {
+                var _this = this;
+                var view = new WE.Forget.View({
+                    dialog:this.dialog
+                });
 
+                view.on("send", function () {
+                    _this.dialog.close();
+                });
             }
         }
 

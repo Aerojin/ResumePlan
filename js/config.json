@@ -27,6 +27,7 @@
 		"compress": false,
 		"name": "we.index.pack.js",
 		"src": [
+			"./js/login/we.feedback.view.js",
 			"./js/src/we.index.model.js",
 			"./js/src/we.index.view.js"
 		]
@@ -40,7 +41,8 @@
 			"./js/login/we.login.main.js",
 			"./js/login/we.login.view.js",
 			"./js/login/we.register.view.js",
-			"./js/login/we.forget.view.js"
+			"./js/login/we.forget.view.js",
+			"./js/login/we.feedback.view.js"
 		]
 	}
 }
