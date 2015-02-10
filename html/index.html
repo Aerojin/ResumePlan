@@ -11,19 +11,20 @@
 <link rel="stylesheet" type="text/css" href="../css/contentShow.css" media="all" />
 <script type="text/javascript" src="../js/pack/libs.pack.js"></script>
 <script type="text/javascript" src="../js/pack/we.base.pack.js"></script>
+<script type="text/javascript" src="../js/pack/we.login.pack.js"></script>
 </head>
 <body>
 	<div class="header headerOne">
 		<div class="headerTop headerTopIndex">
 			<div class="headerCon  clearfix">
-				<a href="#" class="logo"></a>
+				<a href="index.html" class="logo"></a>
 				<div class="nav">
 					<ul class="navList clearfix">
-						<li><a href="#">选择模板</a></li>
-						<li><a href="#">服务购买</a></li>
-						<li><a href="#">FAQ</a></li>
+						<li><a href="selected.html">选择模板</a></li>
+						<li><a href="pay.html">服务购买</a></li>
+						<li><a href="faq.html">FAQ</a></li>
 					</ul>
-					<a href="javascript:;" class="btnLogin">登录 / 注册</a>
+					<a href="javascript:void(0);" id="app-login" class="btnLogin">登录 / 注册</a>
 				</div>
 			</div>
 		</div>
@@ -149,38 +150,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="window loginWindow" style="display:none;">
-		<a href="#" class="i_icoClose"></a>
-		<h2>登录</h2>
-		<ul class="windowFrom">
-			<li>
-				<div class="inputBox">
-					<input type="text" name="" class="input" id="inputBox1" />
-					<label class="label" for="inputBox1">输入您的邮箱...</label>
-					<i class="i_icoOk"></i>
-					<p class="inputBox_p">邮箱已使用</p>
-				</div>
-			</li>
-			<li>
-				<div class="inputBox">
-					<input type="password" name="" class="input" id="inputBox2" />
-					<label class="label" for="inputBox2">输入您的密码...</label>
-					<i class="i_icoError"></i>
-					<p class="inputBox_p">密码格式有误</p>
-					<a href="#" class="inputBox_span">忘记密码？</a>
-				</div>
-			</li>
-			<li class="clearfix">
-				<div class="inputBox inputBox_yz">
-					<input type="text" name="" class="input" id="inputBox3" />
-					<label class="label" for="inputBox3">验证码</label>
-				</div>
-				<img src="../images/yz.png" alt="" title="" class="inputBox_img" />
-				<a href="#" class="i_icoRefresh"></a>
-			</li>
-		</ul>
-		<div class="window_btn"><a href="#" class="btnF btnRegist">注册</a><a href="#" class="btnF">登录</a></div>
-	</div>
+	
 	<div class="window registWindow" style="display:none;">
 		<a href="#" class="i_icoClose"></a>
 		<h2>注册</h2>

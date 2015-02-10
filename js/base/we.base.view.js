@@ -279,10 +279,10 @@
         /**
          * 获得dom元素id加了cid前缀后的jq对象
          */
-        getCidEl: function (id) {
+        getCidEl: function (id, container) {
             if (!id)
                 return null;
-            return $("#" + this.cid + "_" + id);
+            return $("#" + this.cid + "-" + id, container || document);
         },
 
         /**

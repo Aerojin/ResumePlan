@@ -30,5 +30,17 @@
 			"./js/src/we.index.model.js",
 			"./js/src/we.index.view.js"
 		]
+	},
+	"login": {
+		"merge": true,
+		"compress": false,
+		"name": "we.login.pack.js",
+		"src":[
+			"./js/login/we.login.dialog.js",
+			"./js/login/we.login.main.js",
+			"./js/login/we.login.view.js",
+			"./js/login/we.register.view.js",
+			"./js/login/we.forget.view.js"
+		]
 	}
 }

@@ -722,3 +722,4 @@ a:hover{color:#333; text-decoration:none;}
 .payMoney strong{font-size:48px; font-weight:normal; display:inline-block; height:48px; line-height:48px;}
 .payMoneyGreen strong{color:#80d244;}
 .payMoneyOrange strong{color:#dab764;}
+.hide{display: node}

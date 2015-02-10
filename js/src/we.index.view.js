@@ -3,7 +3,7 @@
 	var superClass = WE.View.ViewBase;
     var _class = "WE.Index.View";  
 
-    WE.namespace(_class, WE.View.ViewBase.extend({
+    WE.namespace(_class, superClass.extend({
     	
     	name: _class,
 

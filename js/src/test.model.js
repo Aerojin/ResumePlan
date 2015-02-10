@@ -1,9 +1,9 @@
 ;(function (WE, jQuery, Backbone) {
 
-    var superClass = WE.Model.ViewModel;
+    var superClass = WE.Model.ModelBase;
     var _class = "WE.Index.Model";  
 
-    WE.namespace(_class, WE.Model.ViewModel.extend({
+    WE.namespace(_class, superClass.extend({
         
         name: _class,       
 

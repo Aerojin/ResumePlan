@@ -42,7 +42,7 @@
 			$indexs = $lis.index($(this));
 			$contents.eq($indexs).show().siblings().hide();
 		});
-	
+	/*
 	//登录
 	$(".inputBox .input, .textareaBox textarea").focus(function(){
 		$(this).siblings(".label").hide();
@@ -77,6 +77,7 @@
 		$(".window").fadeOut();
 		$(".successWindow").fadeIn();
 	});
+	*/
 
 	//模板
 	$(".i_icoClosesBtn, .btnIbtn, .i_icoCloseWBtn").click(function(){
