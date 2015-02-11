@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="header headerOne">
-		<div class="headerTop headerTopIndex">
+		<div class="headerTop headerTopIndex" style="position: fixed;" id="head-bar">
 			<div class="headerCon  clearfix">
 				<a href="index.html" class="logo"></a>
 				<div class="nav">
@@ -31,41 +31,41 @@
 		<div class="headerInfo">
 			<h2>简单,专业而实用,甚至可能很有趣.</h2>
 			<div class="headerInfo_btn">
-				<a href="#" class="btnA">创建您的新简历</a>
-				<a href="#" class="btnB"><i class="i_icoPlay"></i>浏览所有模板</a>
+				<a href="selected.html" class="btnA">创建您的新简历</a>
+				<a href="selected.html" class="btnB"><i class="i_icoPlay"></i>浏览所有模板</a>
 			</div>
 		</div>
 	</div>
-	<div class="main">
+	<div class="main" id="main">
 		<ul class="indexList clearfix">
 			<li>
 				<i class="i_icoLone"></i>
 				<strong>一页简历</strong>
 				<p>一份好简历应该只有一页。HR每天阅读海量的简历，多页的简历在浏览时势必会对阅读的流畅和信息的准确传达上造成阻碍。因此onepage简历成为目前最好的简历形式。</p>
-				<a href="#" class="btnC">创建您的新简历</a>
+				<a href="selected.html" class="btnC">创建您的新简历</a>
 			</li>
 			<li>
 				<i class="i_icoLtwo"></i>
 				<strong>最好的设计</strong>
 				<p>我们有最棒的简历设计团队，制作出来的每一份模板都可以把你最重要的信息，以最快的速度，用最美的形式展现出来。</p>
-				<a href="#" class="btnC">浏览所有模板</a>
+				<a href="selected" class="btnC">浏览所有模板</a>
 			</li>
 			<li>
 				<i class="i_icoLthree"></i>
 				<strong>云编辑</strong>
 				<p>所有的简历模板都很容易进行编辑修改 卡片化的操作方式和自动保存功能意味着只要有网络，你可以随时登陆和编辑你的简历。不需要任何规划和设计功底就可以做出一份出色的简历。</p>
-				<a href="#" class="btnC">创建您的新简历</a>
+				<a href="selected.html" class="btnC">创建您的新简历</a>
 			</li>
 			<li>
 				<i class="i_icoLfour"></i>
 				<strong>定制&打印</strong>
 				<p>不仅仅是简历，一对一的服务针对于每个用户的个体情况设计方案，真正的私人定制。</p>
-				<a href="#" class="btnC">雇佣我们</a>
+				<a href="http://item.taobao.com/item.htm?spm=a230r.1.14.33.Qd7Qrb&id=39370195727&ns=1&abbucket=10#detail" class="btnC">雇佣我们</a>
 			</li>
 		</ul>
 	</div>
 	<div class="contentTabsBox">
-		<ul class="contentTabs">
+		<ul class="contentTabs" id="tab-content">
 			<li class="on">
 				<div class="contentShow_one">
 					<div class="contentShow">
@@ -123,12 +123,32 @@
 				</div>
 			</li>
 		</ul>
-		<ul class="contentTabs_list clearfix">
-			<li class="focus"><a href="javascript:;" class="i_icoTabsOne"></a><p class="TabsColorOne">操作界面</p><i class="i_icoTop"></i></li>
-			<li><a href="javascript:;" class="i_icoTabsTwo"></a><p class="TabsColorTwo">模板更换</p><i class="i_icoTop"></i></li>
-			<li><a href="javascript:;" class="i_icoTabsThree"></a><p class="TabsColorThree">自动保存</p><i class="i_icoTop"></i></li>
-			<li><a href="javascript:;" class="i_icoTabsFour"></a><p class="TabsColorFour">简历导出</p><i class="i_icoTop"></i></li>
-			<li><a href="javascript:;" class="i_icoTabsFive"></a><p class="TabsColorFive">高级账户</p><i class="i_icoTop"></i></li>
+		<ul class="contentTabs_list clearfix" id="tab-button">
+			<li class="focus">
+				<a href="javascript:void(0);" class="i_icoTabsOne"></a>
+				<p class="TabsColorOne">操作界面</p>
+				<i class="i_icoTop"></i>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="i_icoTabsTwo"></a>
+				<p class="TabsColorTwo">模板更换</p>
+				<i class="i_icoTop" style="display:none;"></i>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="i_icoTabsThree"></a>
+				<p class="TabsColorThree">自动保存</p>
+				<i class="i_icoTop" style="display:none;"></i>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="i_icoTabsFour"></a>
+				<p class="TabsColorFour">简历导出</p>
+				<i class="i_icoTop" style="display:none;"></i>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="i_icoTabsFive"></a>
+				<p class="TabsColorFive">高级账户</p>
+				<i class="i_icoTop" style="display:none;"></i>
+			</li>
 		</ul>
 	</div>
 	<div class="indexFeedback">
@@ -141,9 +161,9 @@
 				<span>感谢unsplash为本站提供免费商用图片</span>
 			</div>
 			<div class="footerConBtn">
-				<a href="#" class="btnD"></a>
-				<a href="#" class="btnE"></a>
-				<div class="footerWindow" style="display:none;">
+				<a href="javascript:void(0);" id="btn-sina" target="_blank" class="btnD"></a>
+				<a href="javascript:void(0);" id="btn-weixin" class="btnE"></a>
+				<div class="footerWindow" id="div-weixin" style="display:none;">
 					<i class="i_icoDown"></i>
 					<img src="../images/img_01.jpg" alt="" title="" />
 				</div>
@@ -224,6 +244,7 @@
 		<div class="window_btn"><a href="#" class="btnG">发送</a></div>
 	</div>
 <script type="text/javascript" src="../js/pack/we.index.pack.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/src/we.common.view.js"></script>
+<!--<script type="text/javascript" src="../js/common.js"></script>-->
 </body>
 </html>

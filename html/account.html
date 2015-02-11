@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>账户设置</title>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<meta content="zh-cn" http-equiv="content-language" />
+<meta content="版权" name="copyright" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/contentShow.css" media="all" />
+<script type="text/javascript" src="../js/pack/libs.pack.js"></script>
+<script type="text/javascript" src="../js/pack/we.base.pack.js"></script>
+<script type="text/javascript" src="../js/pack/we.login.pack.js"></script>
+</head>
+<body>
+	<div class="headerBlack">
+		<div class="headerBlackCon clearfix">
+			<div class="logoBlack clearfix">
+				<a href="index.html" class="logoBlacks"><i class="logoOther"></i><span>账户设置</span></a>
+				<span class="logoBlack_line">|</span>
+				<span class="i_icoHome"></span>
+			</div>
+			<div class="nav">
+				<ul class="navList clearfix">
+					<li><a href="selected.html">选择模板</a></li>
+					<li><a href="pay.html">服务购买</a></li>
+					<li><a href="faq.html">FAQ</a></li>
+				</ul>
+				<div class="user" id="btn-user">
+					<a href="javascript:void(0);" id="user-name" class="userName">Diso</a>
+					<a href="javascript:void(0);" id="user-photo" class="userImg"></a>
+					<span class="i_icoDowns"></span>
+					<ul class="userList" id="box-user" style="display:none;">
+						<li><a href="account.html">账户设置</a></li>
+						<li><a href="#">登出</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h2 class="loginH2 mt_20"><span>头像设置</span></h2>
+	<div class="main">
+		<div class="loginImg">
+			<a href="javascript:void(0);" class="loginImgA"><input type="file" name="" class="" /></a>
+			<p>**只支持JPG、PNG、GIF，大小不超过5M。</p>
+		</div>
+	</div>
+	<h2 class="loginH2"><span>修改密码</span></h2>
+	<div class="main">
+		<div class="login loginOther">
+			<ul>
+				<li>
+					<div class="input">
+						<input type="password" name="password" id="txt-old" placeholder="旧密码" class="normal password" value="" />
+					</div>
+					<p class="inputTips error-tip" style="display: none;">密码有误</p>
+				</li>
+				<li>
+					<div class="input">
+						<input type="password" name="newPassword" id="txt-new" placeholder="新密码" class="normal password" value="" />
+					</div>
+					<p class="inputTips error-tip" style="display: none;">密码有误</p>					
+				</li>
+				<li>
+					<div class="input">
+						<input type="password" name="affirmPassword" class="password" id="txt-affirm" placeholder="再次输入新密码" value="" />
+					</div>
+					<p class="inputTips error-tip" style="display: none;">密码有误</p>
+				</li>
+			</ul>
+			<p class="loginBtn loginBtnOther">
+				<a href="javascript:void(0);" id="btn-save" class="btnA">保存</a>
+			</p>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footerCon clearfix">
+			<div class="footerConInfo">
+				<p>Copyright &copy; 2015 简历计划 - 鄂ICP备12017804号-1</p>
+				<span>感谢unsplash为本站提供免费商用图片</span>
+			</div>
+			<div class="footerConBtn">
+				<a href="javascript:void(0);" id="btn-sina" target="_blank" class="btnD"></a>
+				<a href="javascript:void(0);" id="btn-weixin" class="btnE"></a>
+				<div class="footerWindow" id="div-weixin" style="display:none;">
+					<i class="i_icoDown"></i>
+					<img src="../images/img_01.jpg" alt="" title="" />
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="../js/src/we.account.view.js"></script>
+<script type="text/javascript" src="../js/src/we.common.view.js"></script>
+</body>
+</html>

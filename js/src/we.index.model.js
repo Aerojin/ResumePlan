@@ -5,7 +5,14 @@
 
     WE.namespace(_class, superClass.extend({
     	
-    	name: _class,    	
+    	name: _class,
+
+        defaults: function () {
+            return {
+                index: 0, //轮播当前页
+                max: 4 //轮播总数
+            };
+        },    	
 
     	initialize: function () {
 

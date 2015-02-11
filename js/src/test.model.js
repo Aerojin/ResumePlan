@@ -5,7 +5,13 @@
 
     WE.namespace(_class, superClass.extend({
         
-        name: _class,       
+        name: _class, 
+
+        defaults: function () {
+            return {
+                
+            };
+        },      
 
         initialize: function () {
 
