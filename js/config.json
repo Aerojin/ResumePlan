@@ -17,6 +17,7 @@
 			"./js/base/we.core.js",
 			"./js/base/we.object.js",
 			"./js/base/we.string.js",
+			"./js/base/we.date.js",
 			"./js/base/we.http.client.js",
 			"./js/base/we.base.model.js",
 			"./js/base/we.base.view.js"

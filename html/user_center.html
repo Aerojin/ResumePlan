@@ -58,7 +58,7 @@
 					</div>
 					<p class="userInfo_comBtn">
 						<a href="http://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-7809348483.1.XEGB1z&id=39844918692&qq-pf-to=pcqq.c2c" target="_blank" class="i_icoPrint"></a>
-						<a href="javascript:void(0);" class="i_icoForwarding"></a>
+						<a href="javascript:void(0);" id="btn-share" class="i_icoForwarding"></a>
 						<a href="javascript:void(0);" class="i_icoWrite"></a>
 						<a href="javascript:void(0);" class="i_icoDownload"></a>
 					</p>
@@ -122,8 +122,8 @@
 			</div>
 		</div>
 	</div>
-<span class="blackBackground" style=""></span>
-<div class="windowPreview" style="">
+<span class="blackBackground" style="display:none;"></span>
+<div class="windowPreview" style="display:none;">
 	<div class="imgnav" id="imgnav"> 
 		<div id="img"> 
 			<ul>
@@ -175,8 +175,8 @@
 		 </div>
 	</div>  
 </div>
-<a href="javascript:;" class="i_icoCloses i_icoClosesBtn" style=""></a>
-<div class="windowBox" style="width:480px;">
+<a href="javascript:;" class="i_icoCloses i_icoClosesBtn" style="display:none;"></a>
+<div class="windowBox" style="width:480px;display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>分享</h2>
 	<ul class="shareList clearfix">
@@ -187,12 +187,12 @@
 		<li><a href="#" class="i_icoSfive"></a></li>
 	</ul>
 </div>
-<div class="windowBox" style="width:480px;">
+<div class="windowBox" style="width:480px;display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>确定删除</h2>
 	<p class="windowBoxBtn"><a href="#" class="btnK">确定</a><a href="#" class="btnK">取消</a></p>
 </div>
-<div class="windowBox" style="width:710px; margin-left:-355px;">
+<div class="windowBox" style="width:710px; margin-left:-355px;display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>简历印制</h2>
 	<div class="windowBoxCustom clearfix">
@@ -204,6 +204,7 @@
 				<a class="hide"><img src="../images/pic_02.jpg"></a>
 			</div>
 			<div class="item">
+                
 				<a class="seld"></a>
 				<a></a>
 				<a></a>
@@ -217,8 +218,12 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="../js/common.js"></script>
+<!--<script type="text/javascript" src="../js/common.js"></script>-->
+<script src="../js/src/we.user.center.view.js" type="text/javascript"></script>
+<script src="../js/src/we.common.view.js" type="text/javascript"></script>
+<script src="../js/kit/we.share.js" type="text/javascript"></script>
 <script>
+/*
 $(document).ready(function(){                          
     var index=0;
     var length=$("#img li").length;
@@ -284,8 +289,9 @@ $(document).ready(function(){
 			$(this).children("a").fadeIn();
 		},function(){
 			$(this).children("a").fadeOut();
-		})*/
+		})
     })	
+    */
 </script>
 </body>
 </html>
