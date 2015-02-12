@@ -20,7 +20,8 @@
 			"./js/base/we.date.js",
 			"./js/base/we.http.client.js",
 			"./js/base/we.base.model.js",
-			"./js/base/we.base.view.js"
+			"./js/base/we.base.view.js",
+			"./js/ui/we.ui.js"
 		]
 	},
 	"index": {
@@ -31,6 +32,15 @@
 			"./js/login/we.feedback.view.js",
 			"./js/src/we.index.model.js",
 			"./js/src/we.index.view.js"
+		]
+	},
+	"selected": {
+		"merge": true,
+		"compress": false,
+		"name": "we.selected.pack.js",
+		"src": [
+			"./js/src/we.selected.model.js",
+			"./js/src/we.selected.view.js"
 		]
 	},
 	"login": {
