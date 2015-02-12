@@ -19,7 +19,46 @@
 
         initEvents: function () {
 
+        },
+        getSingle: function () {
+            var list = [];
+
+            for(var i = 0; i < 20; i++){
+                var item = {
+                    type: Math.floor(Math.random() * 3),
+                    title: "简历计划",
+                    image: "../images/pic_01.jpg",
+                    time: i + Math.floor(Math.random() * 4),
+                    collect: !!(i % 2),
+                    lock: !!(i % 5)
+                };
+
+                list.push(item);
+            }
+
+            return list;
+
+        },
+        getDouble: function () {
+            var list = [];
+
+            for(var i = 0; i < 10; i++){
+                var item = {
+                    type: Math.floor(Math.random() * 3),
+                    title: "简历计划",
+                    image: "../images/pic_01.jpg",
+                    time: i + Math.floor(Math.random() * 4),
+                    collect: !!(i % 2),
+                    lock: !!(i % 5)
+                };
+
+                list.push(item);
+            }
+
+            return list;
         }
+
+
 
     }));
 

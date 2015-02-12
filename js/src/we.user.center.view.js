@@ -64,9 +64,9 @@
 
             this.model.on("change:date", function () {
                 var date = this.get("date") || new Date();
-                    //date = WE.Date.format("yyyy-MM-dd", date);
+                    date = WE.Date.format("yyyy-MM-dd", date);
                 
-                _this.ui.spanTime.text("2015.02.12");
+                _this.ui.spanTime.text(date);
             });
         },
 

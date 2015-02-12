@@ -55,5 +55,16 @@
 			"./js/login/we.forget.view.js",
 			"./js/login/we.feedback.view.js"
 		]
+	},
+	"template": {
+		"merge": true,
+		"compress": false,
+		"name": "we.template.pack.js",
+		"src":[
+			"./js/kit/we.template.free.js",
+			"./js/kit/we.template.charge.js",
+			"./js/kit/we.template.time.js",
+			"./js/kit/we.template.js"
+		]
 	}
 }

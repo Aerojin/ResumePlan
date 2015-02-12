@@ -34,51 +34,47 @@
 
 ;(function (WE, jQuery, Backbone) {
 
-    var superClass = WE.View.ViewBase;
-    var _class = "WE.Template";  
+    WE.namespace("WE.Template.Main", function (options) {
 
-    WE.namespace(_class, superClass.extend({
-        
-        name: _class,
-
-        template: "",
-
-        initialize: function () {
-
-        },
-
-        initEvents: function () {
-
-        },
-
-        render: function () {
-
-        }
-
-    }));
+        this.TYPE = {
+            FREE: 0,
+            CHARGE: 1,
+            TIME:2
+        };
 
 
-    WE.namespace("WE.Template.Free", superClass.extend({
-        
-        name: "WE.Template.Free",
+        this.options = {};
+        this.options.type = options.type || this.TYPE.FREE;
+        this.options.title = options.title;
+        this.options.image = options.image;
+        this.options.time = options.time;
+        this.options.collect = options.collect;
+        this.options.lock  = options.lock || false;
 
-        template: "",
+        this.init = function () {
 
-        initialize: function () {
-
-        },
-
-        initEvents: function () {
-
-        },
-
-        render: function () {
-
-        }
-
-    }));
+            switch(this.options.type){
+                case this.TYPE.FREE:
+                    this.template = new WE.Template.Free(this.options);
+                    break;
+                case this.TYPE.CHARGE:
+                    this.template = new WE.Template.Charge(this.options);
+                    break;
+                case this.TYPE.TIME:
+                    this.template = new WE.Template.Time(this.options);
+                    break;
+            }
 
 
+        };
+
+        this.getElement = function () {
+            return this.template.getElement();
+        };
+
+        this.init();
+
+    }); 
 
 
 

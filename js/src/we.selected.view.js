@@ -44,6 +44,14 @@
             this.ui.document = $(document);
             this.ui.btnWhite = $("#btn-white");
             this.ui.whiteTmpl = $("#white-tmpl");
+            this.ui.divDouble = $("#div-double");
+            this.ui.divSingle = $("#div-single");
+
+            this.ui.divDouble.empty();
+            this.ui.divSingle.empty();
+
+            this.loadSingle();
+            this.loadDouble();
         },
         showWhite: function () {
             var template = _.template(this.ui.whiteTmpl.html());
@@ -63,6 +71,26 @@
             });
 
             this.ui.body.append(ui.wrap);
+        },
+        loadSingle: function () {
+            var data = this.model.getSingle();
+
+            for(var i = 0; i < data.length; i++){
+                var item = new WE.Template.Main(data[i]);
+
+                this.ui.divSingle.append(item.getElement());
+            }
+
+
+        },
+        loadDouble: function () {
+            var data = this.model.getDouble();
+
+            for(var i = 0; i < data.length; i++){
+                var item = new WE.Template.Main(data[i]);
+
+                this.ui.divDouble.append(item.getElement());
+            }
         }
 
     }));
