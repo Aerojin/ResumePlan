@@ -3,9 +3,9 @@
 	$(window).scroll(function (){
 		var offsetTop = $(window).scrollTop();
 		if (offsetTop>=1){
-			$(".headerTopIndex").addClass("headerTopFixed");
+			$(".headerTopIndex, .headerTwo .headerTop, .bodyTransparent .headerBlack").addClass("headerTopFixed");
 		}else{
-			$(".headerTopIndex").removeClass("headerTopFixed");
+			$(".headerTopIndex, .headerTwo .headerTop, .bodyTransparent .headerBlack").removeClass("headerTopFixed");
 		}
 		if (offsetTop>=62){
 			$(".colorBox").addClass("colorBoxFoucs");

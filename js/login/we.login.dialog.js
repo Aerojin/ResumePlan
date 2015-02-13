@@ -36,12 +36,15 @@
 
             this.ui = {};
             this.ui.wrap = this.wrap;
+            this.ui.body = $("body");
+            this.ui.mask = $(this.maskTmpl);
             this.ui.title = this.getCidEl("title", this.ui.wrap);
             this.ui.btnClose = this.getCidEl("close", this.ui.wrap);            
             this.ui.content = this.getCidEl("content", this.ui.wrap);
 
             this.ui.content.empty().append(this.content);
             this.$el.append(this.wrap);
+            //this.ui.body.append(this.ui.mask);
         },
 
         setTitle: function (title) {
@@ -58,6 +61,7 @@
 
         close: function () {
             this.ui.wrap.remove();
+            //this.ui.mask.remove();
             this.onClose();
         },
 
@@ -70,7 +74,8 @@
                         <a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoClose"></a>\
                         <h2 id="<%-cid%>-title"><%-title%></h2>\
                         <div id="<%-cid%>-content"></div>\
-                    </div>'
+                    </div>',
+        maskTmpl : '<span class="blackBackground"></span>'
 
     }));
 

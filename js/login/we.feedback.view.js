@@ -80,6 +80,7 @@
                     }
                 });
 
+                
             	_this.dialog.getWrap().addClass('feedbackWindow');
         	});
 

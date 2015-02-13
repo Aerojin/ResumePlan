@@ -53,6 +53,19 @@
                     _this.ui.boxUser.hide();
                 }, 300);
             });
+
+            if(this.ui.topHead.length > 0){
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop();
+                    var height = _this.ui.topHead.height();
+
+                    if(scrollTop > height){
+                        _this.ui.topHead.addClass("headerTopFixed");
+                    }else{
+                        _this.ui.topHead.removeClass("headerTopFixed");
+                    } 
+                });
+            }
         },
 
         render: function () {
@@ -64,6 +77,7 @@
             this.ui.userPhoto = $("#user-photo");
             this.ui.userName = $("#user-name");
             this.ui.boxUser = $("#box-user");
+            this.ui.topHead = $("#top-head");
 
             //设置新浪连接
             this.ui.btnSina.attr("href", this.getUrl());

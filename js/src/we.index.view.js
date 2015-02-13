@@ -33,9 +33,9 @@
                 var offset = _this.ui.main.offset();
 
                 if(scrollTop > offset.top - 20){
-                    _this.ui.headBar.addClass("headerWhite headerTopFixed");
+                    _this.ui.headBar.addClass("headerTopFixed");
                 }else{
-                    _this.ui.headBar.removeClass("headerWhite headerTopFixed");
+                    _this.ui.headBar.removeClass("headerTopFixed");
                 }
             });
 
@@ -60,8 +60,7 @@
             this.ui.headBar = $("#head-bar");
             this.ui.tabContent = $("#tab-content li");
             this.ui.tabButton = $("#tab-button li");
-            this.ui.btnWeixin = $("#btn-weixin");
-            this.ui.divWeixin = $("#div-weixin");
+            
             
     	},
         showTab: function (index) {

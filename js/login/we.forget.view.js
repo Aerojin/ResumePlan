@@ -43,12 +43,13 @@
                 <li>\
                     <div class="inputBox">\
                         <input type="text" placeholder="输入您的邮箱..."  class="input" id="txt-username" />\
-                        <p class="inputBox_p">邮箱已使用</p>\
+                        <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
                 </li>\
                 <li class="clearfix">\
                     <div class="inputBox inputBox_yz">\
                         <input type="text"  placeholder="验证码" class="input" id="txt-code" />\
+                        <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
                     <img src="../images/yz.png" alt="" title="" id="img-code" class="inputBox_img" />\
                     <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
@@ -86,9 +87,10 @@
             });
 
             this.ui.btnSend.click(function(event) {
-                /* Act on the event */
-                _this.trigger('send');
-                _this.showSuccess();
+                if(_this.validate()){
+                    _this.trigger('send');
+                    _this.showSuccess();
+                }
             });
         },
 
@@ -114,6 +116,36 @@
             });
 
             $('body').append(wrap);
+        },
+
+        validate: function () {
+            var renValue = true;
+            var code = this.ui.txtCode.val().trim();
+            var username = this.ui.txtUserName.val().trim();
+
+            if(username.length == 0){
+                renValue = false;
+                this.showTip(this.ui.txtUserName, "请输入电子邮件");                
+            }
+
+            if(code.length == 0){
+                renValue = false;
+                this.showTip(this.ui.txtCode, "请输入验证码");
+            }
+
+            return renValue;
+        },
+
+        showTip: function (dom, text) {
+            dom.nextAll(".error-tip").text(text).css({
+                "display": "block"
+            });
+        },
+
+        hideTip: function (dom) {
+            dom.nextAll(".error-tip").text("").css({
+                "display": "none"
+            });
         }
 
     }));

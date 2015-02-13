@@ -11,8 +11,8 @@
 <link rel="stylesheet" type="text/css" href="static/css/contentShow.css" media="all" />
 <script type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
 </head>
-<body>
-	<div class="headerBlack">
+<body class="windowPreviewHidden">
+	<div class="headerBlack ">
 		<div class="headerBlackCon clearfix">
 			<div class="logoBlack clearfix">
 				<a href="#" class="logoBlacks"><i class="logoOther"></i><span>个人中心</span></a>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="userCenterMain">
+	<div class="userCenterMain ">
 		<div class="userCenter">
 			<div class="userInfo clearfix">
 				<div class="userInfo_img fl">
@@ -65,7 +65,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="userCenterMainOther">
+	<div class="userCenterMainOther ">
 		<div class="userCenter">
 			<h3>备用简历</h3>
 			<ul class="userCenterList clearfix">
@@ -84,7 +84,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="userCenterMainOther noLine">
+	<div class="userCenterMainOther noLine ">
 		<div class="userCenter">
 			<h3>我的收藏</h3>
 			<ul class="userCenterList clearfix">
@@ -97,7 +97,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="footer">
+	<div class="footer ">
 		<div class="footerCon clearfix">
 			<div class="footerConInfo">
 				<p>Copyright &copy; 2015 简历计划 - 鄂ICP备12017804号-1</p>
@@ -114,7 +114,7 @@
 		</div>
 	</div>
 <span class="blackBackground" style=""></span>
-<div class="windowPreview" style="">
+<div class="windowPreview" style=" display:none;">
 	<div class="imgnav" id="imgnav"> 
 		<div id="img"> 
 			<ul>
@@ -161,13 +161,13 @@
 					</div>
 				</li>
 			</ul>
-			<div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
-			<div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a></div>
+			<div id="front" title="上一张"><a href="javaScript:void(0)" class="pngFix"></a><a href="javaScript:void(0)" class="pngFix No"></a></div>
+			<div id="next" title="下一张"><a href="javaScript:void(0)" class="pngFix"></a><a href="javaScript:void(0)" class="pngFix No"></a></div>
 		 </div>
 	</div>  
 </div>
 <a href="javascript:;" class="i_icoCloses i_icoClosesBtn" style=""></a>
-<div class="windowBox" style="width:480px;">
+<div class="windowBox " style="width:480px;  display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>分享</h2>
 	<ul class="shareList clearfix">
@@ -178,12 +178,30 @@
 		<li><a href="#" class="i_icoSfive"></a></li>
 	</ul>
 </div>
-<div class="windowBox" style="width:480px;">
+<div class="windowBox " style="width:480px; display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>确定删除</h2>
-	<p class="windowBoxBtn"><a href="#" class="btnK">确定</a><a href="#" class="btnK">取消</a></p>
+	<p class="windowBoxBtn mt_80"><a href="#" class="btnK">确定</a><a href="#" class="btnK">取消</a></p>
 </div>
-<div class="windowBox" style="width:710px; margin-left:-355px;">
+<div class="windowBox " style="width:480px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>提示</h2>
+	<p class="windowBox_box">亲，您的款已付。</p>
+	<p class="windowBoxBtn mt_50"><a href="#" class="btnK">确定</a><a href="#" class="btnK">取消</a></p>
+</div>
+<div class="windowBox " style="width:480px;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>提示</h2>
+	<p class="windowBox_box"><i class="i_icoOkss"></i></p>
+	<p class="windowBoxBtn mt_50"><a href="#" class="btnK">确定</a></p>
+</div>
+<div class="windowBox " style="width:480px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>提示</h2>
+	<p class="windowBox_box"><i class="i_icoPrompts mr_10"></i>亲，您的款已付。</p>
+	<p class="windowBoxBtn mt_50"><a href="#" class="btnK">确定</a></p>
+</div>
+<div class="windowBox " style="width:710px; margin-left:-355px; display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>简历印制</h2>
 	<div class="windowBoxCustom clearfix">

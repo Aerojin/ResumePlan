@@ -69,6 +69,7 @@
                 <li class="clearfix">\
                     <div class="inputBox inputBox_yz">\
                         <input type="text"  data-key="code" placeholder="验证码" class="input txt-input" id="txt-code" />\
+                        <p class="inputBox_p hide error-tip">密码格式有误</p>\
                     </div>\
                     <img src="../images/yz.png" id="img-code" alt="" title="" class="inputBox_img" />\
                     <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
@@ -161,7 +162,8 @@
             }
 
             if(code.length == 0){
-
+                renValue = false;
+                this.showTip(this.ui.txtCode, "请输入验证码");
             }
 
             return renValue;
@@ -174,7 +176,6 @@
         },
 
         hideTip: function (dom) {
-            dom.nextAll(".ico").hide();
             dom.nextAll(".error-tip").text("").css({
                 "display": "none"
             });
