@@ -8,9 +8,9 @@
 			$(".headerTopIndex, .headerTwo .headerTop, .bodyTransparent .headerBlack").removeClass("headerTopFixed");
 		}
 		if (offsetTop>=62){
-			$(".colorBox").addClass("colorBoxFoucs");
+			$(".colorBoxFoucs").show();
 		}else{
-			$(".colorBox").removeClass("colorBoxFoucs");
+			$(".colorBoxFoucs").hide();
 		}
 	}); 
 
