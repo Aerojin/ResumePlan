@@ -66,6 +66,47 @@
 			"./js/src/we.user.center.view.js"
 		]
 	},
+	"account": {
+		"merge": true,
+		"compress": false,
+		"name": "we.account.pack.js",
+		"src":[
+			"./js/src/we.account.view.js"
+		]
+	},
+	"pay": {
+		"merge": true,
+		"compress": false,
+		"name": "we.pay.pack.js",
+		"src":[
+			"./js/src/we.pay.view.js"
+		]
+	},
+	"service": {
+		"merge": true,
+		"compress": false,
+		"name": "we.service.pack.js",
+		"src":[
+			"./js/kit/we.slideshow.js",
+			"./js/src/we.service.view.js"
+		]
+	},
+	"start": {
+		"merge": true,
+		"compress": false,
+		"name": "we.start.pack.js",
+		"src":[
+			"./js/src/we.start.view.js"
+		]
+	},
+	"common": {
+		"merge": true,
+		"compress": false,
+		"name": "we.common.pack.js",
+		"src":[
+			"./js/src/we.common.view.js"
+		]
+	},
 	"template": {
 		"merge": true,
 		"compress": false,
