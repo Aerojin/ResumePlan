@@ -108,6 +108,7 @@
                 var data = {
                     list: [{
                         id: "10001",
+                        direct: true,
                         title: "张三的简历",
                         image: "../images/pic_09.jpg"
                     }],
@@ -140,6 +141,7 @@
 
                 for(var i = 0; i < 10; i++){
                     data.list.push({
+                        direct: false,
                         id: "10001" + i,
                         title: "张三的简历",
                         image: "../images/pic_09.jpg"

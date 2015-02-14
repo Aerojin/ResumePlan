@@ -8,10 +8,11 @@
         this.id = options.id;
         this.image = options.image;
         this.title = options.title;
+        this.direct = options.direct;
 
         this.init = function () {
             var template = _.template(this.template);
-                template = template({title: this.title, image: this.image});
+                template = template({title: this.title, image: this.image, direct: this.getDirect()});
 
             this.ui = {};
             this.ui.wrap = $(template);
@@ -20,6 +21,7 @@
             this.ui.btnShare = this.ui.wrap.find(".btn-share");
             this.ui.btnMail = this.ui.wrap.find(".btn-mail");
             this.ui.btnDown = this.ui.wrap.find(".btn-down");
+            this.ui.btnDirect = this.ui.wrap.find(".btn-direct");
 
             this.initEvents();
         };
@@ -45,6 +47,11 @@
 
             this.ui.btnDown.click(function () {
                 _this.down();
+            });
+
+            this.ui.btnDirect.click(function() {
+                _this.direct = !_this.direct;
+                $(this).text(_this.getDirect());
             });
         };
 
@@ -83,6 +90,14 @@
             WE.UI.alert("下载简历");
         };
 
+        this.getDirect = function () {
+            if(this.direct){
+                return "主";
+            }
+
+            return "备";
+        };
+
         this.template = [
             '<li style="display: none;">',
                 '<img src="<%-image%>" width="469" height="664">',
@@ -93,6 +108,7 @@
                         '<a href="javaScript:void(0);" class="i_icoWindThree btn-share"></a>',
                         '<a href="javaScript:void(0);" class="i_icoWindFour btn-mail"></a>',
                         '<a href="javaScript:void(0);" class="i_icoWindFive btn-down"></a>',
+                        '<a href="javaScript:void(0);" class="i_icoWindSix btn-direct"><%-direct%></a>',
                     '</p>',
                     '<strong class="windowPreview_btnR"><%-title%></strong>',
                 '</div>',

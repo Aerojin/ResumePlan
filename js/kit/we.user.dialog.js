@@ -136,8 +136,7 @@
 
         maskTmpl: '<span class="blackBackground"></span>',
 
-        closeTmpl: '<a href="javascript:void(0);" class="i_icoCloses i_icoClosesBtn" style=""></a>'
-
+        closeTmpl: '<a href="javascript:void(0);" class="i_icoCloses i_icoClosesBtn"></a>'
 
     }));
 
