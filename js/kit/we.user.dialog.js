@@ -38,15 +38,7 @@
                 _this.next();
             });
 
-            this.ui.content.click(function () {
-                return false;
-            });
-
-            this.ui.button.click(function () {
-                return false;
-            });
-
-            this.ui.wrap.click( function () {
+            this.ui.close.click(function () {
                 _this.close();
             });
 
@@ -61,6 +53,7 @@
             this.ui.body = $("body");
             this.ui.wrap = $(template);
             this.ui.mask = $(this.maskTmpl);
+            this.ui.close = $(this.closeTmpl);
             this.ui.button = this.ui.wrap.find(".button");
             this.ui.btnPrev = this.ui.wrap.find(".btn-prev");
             this.ui.btnNext = this.ui.wrap.find(".btn-next");
@@ -74,6 +67,7 @@
 
             this.ui.body.append(this.ui.mask);
             this.ui.body.append(this.ui.wrap);
+            this.ui.body.append(this.ui.close);
             this.ui.html.css({'padding-right': '17px','margin': '0px', 'overflow-y': 'hidden'});
             //this.ui.container.css({"z-index": 10, "width": "100%", "position": "relative", "text-align": "center"});
         },
@@ -119,18 +113,19 @@
         close: function () {
             this.ui.wrap.remove();
             this.ui.mask.remove();
+            this.ui.close.remove();
             this.ui.html.css({'padding-right': '0px', 'margin': '0px', 'overflow-y': 'auto'});
         },
 
         template: ['<div class="windowPreview" id="<%-cid%>-dialog">',
                     '<div class="imgnav"> ',
-                        '<div id="img">',
+                        '<div class="img">',
                             '<ul id="<%-cid%>-content"></ul>',
-                            '<div id="front" class="button btn-prev" title="上一张" style="display:none;">',
+                            '<div class="button front btn-prev" title="上一张" style="display:none;">',
                                 '<a href="javaScript:void(0);" class="pngFix enabled" style="display:none;"></a>',
                                 '<a href="javaScript:void(0);" class="pngFix No disabled"></a>',
                             '</div>',
-                            '<div id="next" class="button btn-next" title="下一张" style="display:none;">',
+                            '<div class="button next btn-next" title="下一张" style="display:none;">',
                                 '<a href="javaScript:void(0);" class="pngFix enabled" style="display:none;"></a>',
                                 '<a href="javaScript:void(0);" class="pngFix No disabled"></a>',
                             '</div>',
@@ -139,7 +134,9 @@
                 '</div>'
             ].join("\n"),
 
-        maskTmpl: '<span class="blackBackground"></span>'
+        maskTmpl: '<span class="blackBackground"></span>',
+
+        closeTmpl: '<a href="javascript:void(0);" class="i_icoCloses i_icoClosesBtn" style=""></a>'
 
 
     }));

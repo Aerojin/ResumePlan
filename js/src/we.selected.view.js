@@ -28,9 +28,9 @@
                 var offset = _this.ui.menu.offset();
 
                 if(scrollTop > offset.top){
-                    _this.ui.menu.addClass("colorBoxFoucs");
+                    _this.ui.menuMini.show();
                 }else{
-                    _this.ui.menu.removeClass("colorBoxFoucs");
+                    _this.ui.menuMini.hide();
                 }
             });
         },
@@ -41,6 +41,7 @@
             this.ui.body = $("body");
             this.ui.main = $("#main");
             this.ui.menu = $("#menu");
+            this.ui.menuMini = $("#menu-mini");
             this.ui.document = $(document);
             this.ui.btnWhite = $("#btn-white");
             this.ui.whiteTmpl = $("#white-tmpl");
