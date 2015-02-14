@@ -11,7 +11,7 @@
 	},
 	"base": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.base.pack.js",
 		"src": [
 			"./js/base/we.core.js",
@@ -26,7 +26,7 @@
 	},
 	"index": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.index.pack.js",
 		"src": [
 			"./js/login/we.feedback.view.js",
@@ -36,7 +36,7 @@
 	},
 	"selected": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.selected.pack.js",
 		"src": [
 			"./js/src/we.selected.model.js",
@@ -45,7 +45,7 @@
 	},
 	"login": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.login.pack.js",
 		"src":[
 			"./js/login/we.login.dialog.js",
@@ -57,7 +57,7 @@
 	},
 	"user_center": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.user.center.pack.js",
 		"src":[
 			"./js/kit/we.share.js",
@@ -68,7 +68,7 @@
 	},
 	"account": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.account.pack.js",
 		"src":[
 			"./js/src/we.account.view.js"
@@ -76,7 +76,7 @@
 	},
 	"pay": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.pay.pack.js",
 		"src":[
 			"./js/src/we.pay.view.js"
@@ -84,7 +84,7 @@
 	},
 	"service": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.service.pack.js",
 		"src":[
 			"./js/kit/we.slideshow.js",
@@ -93,7 +93,7 @@
 	},
 	"start": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.start.pack.js",
 		"src":[
 			"./js/src/we.start.view.js"
@@ -101,7 +101,7 @@
 	},
 	"common": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.common.pack.js",
 		"src":[
 			"./js/src/we.common.view.js"
@@ -109,7 +109,7 @@
 	},
 	"template": {
 		"merge": true,
-		"compress": true,
+		"compress": false,
 		"name": "we.template.pack.js",
 		"src":[
 			"./js/kit/we.template.free.js",
