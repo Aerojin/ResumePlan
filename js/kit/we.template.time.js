@@ -8,19 +8,19 @@
         name: _class,
 
         template: ['<li id="<%-cid%>-item">',
+        			'<h2><%-state%></h2>',
                     '<div class="templateLi hover-info">',
                         '<img src="<%-image%>" alt="" title="" />',
                         '<span class="blackBg hover background" style="display:none;"></span>',
                         '<a href="javascript:void(0);" class="i_icoAdd hover btn-add" style="display:none;"></a>',
                         '<a href="javascript:void(0);" class="btnCollect btn-collect">',
-                        	'<i class="i_icoStarB"></i>收藏',
+                        	'<%=collect%>',
                         '</a>',
                         '<span class="templateTimeBg"></span>',
 						'<p class="templateTime">限时免费-还剩<%-time%>天</p>',
                     '</div>',
                     '<p class="templateP"><%-title%></p>',
                 '</li>'].join("\n"),
-
          collect: false,       
 
         initialize: function (options) {
@@ -28,6 +28,7 @@
         	this.time = options.time;
         	this.title = options.title;
         	this.image = options.image;
+        	this.state = options.state;
         	this.collect = options.collect;
 
             this.render();
@@ -49,12 +50,8 @@
 
             this.ui.btnCollect.click(function () {
                 _this.collect = !_this.collect;
-                
-                if(_this.collect){
-                    $(this).html('<i class="i_icoStarA"></i>取消');
-                }else{
-                    $(this).html('<i class="i_icoStarB"></i>收藏');
-                }
+
+                $(this).html(_this.getCollect());
             });
         },
 
@@ -64,7 +61,9 @@
                     cid: this.cid,
                     image: this.image,
                     title: this.title,
-                    time: this.time
+                    time: this.time,
+                    state:  this.getSate(),
+                    collect: this.getCollect()
                 });
 
             this.ui = {};
@@ -73,6 +72,23 @@
             this.ui.btnUnlock = this.ui.wrap.find(".btn-unlock");
             this.ui.btnCollect = this.ui.wrap.find(".btn-collect");
             this.ui.background = this.ui.wrap.find(".background");
+        },
+
+        getSate: function () {
+        	if(this.state){
+        		return "单栏";
+        	}
+
+        	return "双栏";
+        },
+
+        getCollect: function () {
+        	if(this.collect){
+                return '<i class="i_icoStarA"></i>取消';
+            }
+
+            return '<i class="i_icoStarB"></i>收藏';
+            
         },
 
         getElement: function  (argument) {

@@ -77,6 +77,10 @@
                 _this.openShare();
             });
 
+            this.ui.btnUpdate.click(function () {
+                //window.location.href="resume.html";                
+            });
+
             this.ui.hoverInfo.hover(function () {
                 $(this).find(".ico-look").show();
                 $(this).find(".ico-close").show();
@@ -101,6 +105,16 @@
             });
 
             this.ui.main.find(".ico-look").click(function () {
+                var data = {
+                    list: [{
+                        id: "10001",
+                        title: "张三的简历",
+                        image: "../images/pic_09.jpg"
+                    }],
+                    showButton: false
+                };
+
+                var dialog = new WE.User.Dialog(data);
 
             });
 
@@ -119,6 +133,20 @@
             });
 
             this.ui.otherMain.find(".ico-look").click(function () {
+                var data = {
+                    list: [],
+                    showButton: true
+                };
+
+                for(var i = 0; i < 10; i++){
+                    data.list.push({
+                        id: "10001" + i,
+                        title: "张三的简历",
+                        image: "../images/pic_09.jpg"
+                    });
+                }
+
+                var dialog = new WE.User.Dialog(data);
 
             });
             
@@ -130,6 +158,7 @@
             this.ui = {};
             this.ui.body = $("body");
             this.ui.main = $("#main");
+            this.ui.btnUpdate = this.ui.main.find("#btn-update");
             this.ui.btnShare = this.ui.main.find("#btn-share");
             this.ui.spanTime = this.ui.main.find("#span-time");
             this.ui.spanPercent = this.ui.main.find("#span-percent");

@@ -23,14 +23,15 @@
         getSingle: function () {
             var list = [];
 
-            for(var i = 0; i < 20; i++){
+            for(var i = 0; i < 30; i++){
                 var item = {
                     type: Math.floor(Math.random() * 3),
                     title: "简历计划",
                     image: "../images/pic_01.jpg",
                     time: i + Math.floor(Math.random() * 4),
                     collect: !!(i % 2),
-                    lock: !!(i % 5)
+                    lock: !!(i % 5),
+                    state: i % 2
                 };
 
                 list.push(item);

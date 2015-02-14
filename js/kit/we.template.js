@@ -48,6 +48,7 @@
         this.options.title = options.title;
         this.options.image = options.image;
         this.options.time = options.time;
+        this.options.state = options.state;
         this.options.collect = options.collect;
         this.options.lock  = options.lock || false;
 

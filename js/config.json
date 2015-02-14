@@ -55,6 +55,17 @@
 			"./js/login/we.forget.view.js"
 		]
 	},
+	"user_center": {
+		"merge": true,
+		"compress": false,
+		"name": "we.user.center.pack.js",
+		"src":[
+			"./js/kit/we.share.js",
+			"./js/kit/we.user.item.js",
+			"./js/kit/we.user.dialog.js",
+			"./js/src/we.user.center.view.js"
+		]
+	},
 	"template": {
 		"merge": true,
 		"compress": false,

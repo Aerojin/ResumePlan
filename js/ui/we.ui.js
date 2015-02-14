@@ -7,6 +7,16 @@
         
         name: _class,
 
+        TIPS: {
+            TIP: "提示",
+            INFO: "消息"
+        },
+
+        TYPE: {
+            "success": "i_icoOkss",
+            "warn": "i_icoPrompts"
+        },
+
         initialize: function () {
 
         },
@@ -20,8 +30,16 @@
         },
 
         alert: function (text, options) {
+            options = options || {};
+
+            var type = options.type || "success";
             var template = _.template(this.template.alert);
-                template = template({cid: this.cid, text: text});
+                template = template({
+                    cid: this.cid,
+                    text: text,
+                    type: this.TYPE[type],
+                    title: options.title || this.TIPS.TIP
+                });
 
             var ui = {};
                 ui.wrap = $(template);
@@ -48,8 +66,10 @@
             $("body").append(ui.wrap);
         },
         confirm: function (text, options) {
+            options = options || {};
+
             var template = _.template(this.template.confirm);
-                template = template({cid: this.cid, text: text});
+                template = template({cid: this.cid, text: text, title: options.title || this.TIPS.TIP});
 
             var ui = {};
                 ui.wrap = $(template);
@@ -87,24 +107,27 @@
 
         template: {
            confirm: [
-                '<span class="blackBackground"></span>',
+                '<span class="blackBackground" style="display:none;"></span>',
                 '<div class="windowBox" id="<%-cid%>-dialog" style="width:480px;">',
-                    '<h2><%-text%></h2>',
-                    '<p class="windowBoxBtn">',
+                    '<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
+                    '<h2><%-title%></h2>',
+                    '<p class="windowBox_box"><%-text%></p>',
+                    '<p class="windowBoxBtn mt_50">',
                         '<a href="javascript:void(0);" id="<%-cid%>-confirm" class="btnK">确定</a>',
                         '<a href="javascript:void(0);" id="<%-cid%>-cancel" class="btnK">取消</a>',
                     '</p>',
-                    '<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
+                    
                 '</div>'
            ].join("\n"),
            alert: [
-                '<span class="blackBackground"></span>',
+                '<span class="blackBackground" style="display:none;"></span>',
                 '<div class="windowBox" id="<%-cid%>-dialog" style="width:480px;">',
-                    '<h2><%-text%></h2>',
-                    '<p class="windowBoxBtn">',
+                '<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
+                    '<h2><%-title%></h2>',
+                    '<p class="windowBox_box"><i class="<%-type%> mr_10"></i><%-text%></p>',
+                    '<p class="windowBoxBtn mt_50">',
                         '<a href="javascript:void(0);" id="<%-cid%>-confirm" class="btnK">确定</a>',                        
                     '</p>',
-                    '<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
                 '</div>'
            ].join("\n"),
 
