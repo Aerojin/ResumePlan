@@ -107,6 +107,15 @@
 			"./js/src/we.common.view.js"
 		]
 	},
+	"resume": {
+		"merge": true,
+		"compress": false,
+		"name": "we.resume.pack.js",
+		"src":[
+			"./js/src/we.resume.view.js",
+			"./js/src/we.resume.model.js"
+		]
+	},
 	"template": {
 		"merge": true,
 		"compress": false,

@@ -7,17 +7,18 @@
 <meta name="description" content="描述" />
 <meta content="zh-cn" http-equiv="content-language" />
 <meta content="版权" name="copyright" />
-<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="../css/contentShow.css" media="all" />
-<script type="text/javascript" src="../js/lib/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/style.pack.css" media="all" />
+<script type="text/javascript" src="../static/js/libs.pack.js"></script>
+<script type="text/javascript" src="../static/js/we.base.pack.js"></script>
+<script type="text/javascript" src="../static/js/we.login.pack.js"></script>
 </head>
 <body class="bodyGray">
 	<div class="headerBlack ">
 		<div class="headerBlackCon clearfix">
 			<div class="headerNav clearfix">
-				<a href="#"><i class="i_icoHomeN"></i></a>
-				<a href="#" class="focus"><i class="i_icoReplace"></i>换模板</a>
-				<a href="#"><i class="i_icoExport"></i>导出简历</a>
+				<a href="index,html"><i class="i_icoHomeN"></i></a>
+				<a href="selected.html" class="focus"><i class="i_icoReplace"></i>换模板</a>
+				<a href="javascript:void(0);"><i class="i_icoExport"></i>导出简历</a>
 			</div>
 			<div class="nav">
 				<span class="resumeUser">付瀚轮的个人简历</span>
@@ -27,7 +28,7 @@
 					<span class="i_icoDowns"></span>
 					<ul class="userList" id="box-user" style="display:none;">
 						<li><a href="account.html">账户设置</a></li>
-						<li><a href="#">登出</a></li>
+						<li><a href="javascript:void(0);">登出</a></li>
 					</ul>
 				</div>
 			</div>
@@ -35,22 +36,55 @@
 	</div>
 	<div class="scroll ">
 		<div class="scrollWindow">
-			<ul class="scroll_ul clearfix">
-				<li class="focus"><div class="scrollBox"><i class="i_icoSok"></i></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"><span class="scroll_spanOne">限免</span></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"><span class="scroll_spanTwo">5元</span></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"><span class="scroll_spanThree">买断</span></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
-				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
+			<ul class="scroll_ul clearfix" id="wrap-slide">
+				<li class="focus">
+					<div class="scrollBox"><i class="i_icoSok"></i></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"><span class="scroll_spanOne">限免</span></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"><span class="scroll_spanTwo">5元</span></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"><span class="scroll_spanThree">买断</span></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
+				<li>
+					<div class="scrollBox"></div>
+					<p class="scroll_li_name">RIVER</p>
+				</li>
 			</ul>
-			<div class="scroll_left"><a href="#" class="i_icoLeft"></a></div>
-			<div class="scroll_right"><a href="#" class="i_icoRight"></a></div>
+			<div class="scroll_left" id="btn-left">
+				<a href="javascript:void(0);" class="i_icoLeft enabled" style="display:none;"></a>
+				<a href="javascript:void(0);" class="i_icoLeftNo disabled"></a>
+			</div>
+			<div class="scroll_right" id="btn-right">
+				<a href="javascript:void(0);" class="i_icoRight enabled" style="display:none;"></a>
+				<a href="javascript:void(0);" class="i_icoRightNo disabled"></a>
+			</div>
 		</div>
 	</div>
-	<div class="main mt_47 clearfix">
+	<div class="main mt_47 clearfix" id="main">
 		<div class="resumeCon ">
 			<div class="resumeCon_header clearfix">
 				<div class="resumeCon_img">
@@ -178,86 +212,86 @@
 			<h2>编辑内容</h2>
 			<ul class="resumeMenu_list clearfix">
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMone"></i>
 						<p>教育背景</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMtwo"></i>
 						<p>校园经历</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMthree"></i>
 						<p>工作经历</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMfour"></i>
 						<p>技能</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMfive"></i>
 						<p>获奖经历</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMsix"></i>
 						<p>自我评价</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMseven"></i>
 						<p>科研经历</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMeight"></i>
 						<p>发表文章</p>
 					</a>
 				</li>
 				<li></li>
 				<li class="not">
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMnine"></i>
 						<p>主修课程</p>
 					</a>
 				</li>
 				<li class="not">
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMten"></i>
 						<p>爱好</p>
 					</a>
 				</li>
 				<li></li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMeleven"></i>
 						<p>导出</p>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="javascript:void(0);">
 						<i class="i_icoMtwelve"></i>
 						<p>返回个人中心</p>
 					</a>
 				</li>
 			</ul>
-			<p class="resumeMenuBtn"><a href="#" class="btnLa">上一步</a><a href="#" class="btnL">下一步</a></p>
+			<p class="resumeMenuBtn"><a href="javascript:void(0);" class="btnLa">上一步</a><a href="javascript:void(0);" class="btnL">下一步</a></p>
 			<div class="resumeMenu_num clearfix">
 				<div class="resumeMenu_numBox">
-					<a href="#" class="i_icoAdd"></a>
+					<a href="javascript:void(0);" class="i_icoAdds"></a>
 					<span>100%</span>
-					<a href="#" class="i_icoCut"></a>
+					<a href="javascript:void(0);" class="i_icoCut"></a>
 				</div>
 				<span class="i_icoThrough"></span>
 				<span class="i_icoLoad"></span>
@@ -266,7 +300,7 @@
 	</div>
 <span class="blackBackground hide"></span>
 <div class="windowBoxA hide">
-	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<a href="javascript:void(0);" class="i_icoCloseW i_icoCloseWBtn"></a>
 	<h2>获奖经历</h2>
 	<div class="clearfix">
 		<div class="windowBoxA_from">
@@ -296,37 +330,39 @@
 				</li>
 			</ul>
 			<div class="windowBoxA_from_bottom">
-				<a href="#" class="i_icoWadd"></a>
+				<a href="javascript:void(0);" class="i_icoWadd"></a>
 				<p>加一条～</p>
 			</div>
 		</div>
 		<div class="windowBoxA_menu">
 			<ul>
 				<li class="clearfix focus">
-					<a href="#" class="i_icoCloseSmall"></a>
+					<a href="javascript:void(0);" class="i_icoCloseSmall"></a>
 					<span>1</span>
 					<p>武汉好在来酒屋</p>
 				</li>
 				<li class="clearfix">
-					<a href="#" class="i_icoCloseSmall"></a>
+					<a href="javascript:void(0);" class="i_icoCloseSmall"></a>
 					<span>2</span>
 					<p>武汉好在来酒屋</p>
 				</li>
 				<li class="clearfix hover">
-					<a href="#" class="i_icoCloseSmall"></a>
+					<a href="javascript:void(0);" class="i_icoCloseSmall"></a>
 					<span>3</span>
 					<p>武汉好在来酒屋</p>
 				</li>
 				<li class="clearfix">
-					<a href="#" class="i_icoCloseSmall"></a>
+					<a href="javascript:void(0);" class="i_icoCloseSmall"></a>
 					<span>4</span>
 					<p>武汉好在来酒屋</p>
 				</li>
 			</ul>
-			<p class="windowBoxA_menu_btn"><a href="#" class="btnM">保存</a></p>
+			<p class="windowBoxA_menu_btn"><a href="javascript:void(0);" class="btnM">保存</a></p>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="../js/common.js"></script>
+<script src="../js/kit/we.resume.slideshow.js" type="text/javascript"></script>
+<script src="../static/js/we.common.pack.js" type="text/javascript"></script>
+<script src="../static/js/we.resume.pack.js" type="text/javascript"></script>
 </body>
 </html>

@@ -61,7 +61,7 @@ a:hover{color:#333; text-decoration:none;}
 .main{position:relative; z-index:1;}
 
 /*图标*/
-.logo, .logoOther, .btnLogin, .i_icoPlay, .i_icoDown, .i_icoDian, .i_icoClose, .i_icoHome, .i_icoHomeN, .i_icoDowns, .userImg, .i_icoAdd, .i_icoStarA, .i_icoStarB, .i_icoPrompt, .i_icoPrompts, .i_icoCloses, .i_icoCorrect, .item a, .i_icoCloseX, .i_icoLook, .i_icoPrint, .i_icoForwarding, .i_icoWrite, .i_icoDownload, .front a, .next a, .front a.No, .next a.No, .i_icoWindOne, .i_icoWindTwo, .i_icoWindThree, .i_icoWindFour, .i_icoWindFive, .i_icoWindSix,
+.logo, .logoOther, .btnLogin, .i_icoPlay, .i_icoDown, .i_icoDian, .i_icoClose, .i_icoHome, .i_icoHomeN, .i_icoDowns, .userImg, .i_icoAdd,.i_icoSub, .i_icoStarA, .i_icoStarB, .i_icoPrompt, .i_icoPrompts, .i_icoCloses, .i_icoCorrect, .item a, .i_icoCloseX, .i_icoLook, .i_icoPrint, .i_icoForwarding, .i_icoWrite, .i_icoDownload, .front a, .next a, .front a.No, .next a.No, .i_icoWindOne, .i_icoWindTwo, .i_icoWindThree, .i_icoWindFour, .i_icoWindFive, .i_icoWindSix,
 .i_icoLone, .i_icoLtwo, .i_icoLthree, .i_icoLfour, .i_icoLfive, .i_icoLsix, .i_icoLseven,
 .i_icoTabsOne, .i_icoTabsTwo, .i_icoTabsThree, .i_icoTabsFour, .i_icoTabsFive, .i_icoTop, .i_icoOk, .i_icoOks, .i_icoOkss, .i_icoError, .i_icoRefresh, .i_icoSuccess,
 .i_icoColorOne, .i_icoColorTwo, .i_icoColorThree, .i_icoColorFour, .i_icoColorFive, .i_icoColorSix, .i_icoColorSeven, .i_icoColorEight, .i_icoColorNine, .i_icoColorTen, .i_icoColorEleven,
@@ -123,6 +123,9 @@ a:hover{color:#333; text-decoration:none;}
 .i_icoColorTen{background-position:-325px -308px; width:35px; height:35px;}
 .i_icoColorEleven{background-position:-361px -308px; width:35px; height:35px;}
 .i_icoAdd{background-position:-335px -209px; width:85px; height:85px;}
+.i_icoSub{background-position:1px -540px; width:32px; height:31px;}
+.i_icoSub:hover{background-position:-61px -540px;}
+
 .i_icoStarA{background-position:-469px -91px; width:15px; height:14px;}
 .i_icoStarB{background-position:-485px -91px; width:15px; height:14px;}
 .i_icoPrompt{background-position:-427px -308px; width:29px; height:29px;}
@@ -161,13 +164,13 @@ a:hover{color:#333; text-decoration:none;}
 .i_icoMthree{background-position:-75px -503px; width:36px; height:37px;}
 .i_icoMfour{background-position:-112px -503px; width:37px; height:37px;}
 .i_icoMfive{background-position:-150px -503px; width:37px; height:37px;}
-.i_icoMsix{background-position:-112px -503px; width:37px; height:37px;}
-.i_icoMseven{background-position:-188px -503px; width:32px; height:37px;}
-.i_icoMeight{background-position:-221px -503px; width:33px; height:37px;}
-.i_icoMnine{background-position:-255px -503px; width:35px; height:37px;}
-.i_icoMten{background-position:-291px -503px; width:25px; height:37px;}
-.i_icoMeleven{background-position:-317px -503px; width:35px; height:37px;}
-.i_icoMtwelve{background-position:-353px -503px; width:30px; height:37px;}
+.i_icoMsix{background-position:-188px -503px; width:32px; height:37px;}
+.i_icoMseven{background-position:-221px -503px; width:33px; height:37px;}
+.i_icoMeight{background-position:-255px -503px; width:35px; height:37px;}
+.i_icoMnine{background-position:-291px -503px; width:25px; height:37px;}
+.i_icoMten{background-position:-317px -503px; width:35px; height:37px;}
+.i_icoMeleven{background-position:-353px -503px; width:30px; height:37px;}
+.i_icoMtwelve{background-position:-383px -503px; width:35px; height:37px;}
 .i_icoAdds{background-position:0 -541px; width:30px; height:30px;}
 .i_icoAdds:hover{background-position:-62px -541px;}
 .i_icoCut{background-position:-31px -541px; width:30px; height:30px;}
