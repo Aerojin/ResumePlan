@@ -20,7 +20,6 @@
                     '<li><a href="javascript:void(0);" shareid="weixin" class="i_icoSfive"></a></li>',
                 '</ul>',
             '</div>'
-        
         ].join("\n"),
 
         jiaThisAPI: "http://www.jiathis.com/send/?webid=<%-shareid%>&url=<%-url%>&title=<%-title%>&summary=<%-summary%>&imageUrl=<%-imageUrl%>",

@@ -116,6 +116,14 @@
 			"./js/src/we.resume.model.js"
 		]
 	},
+	"resume_kit": {
+		"merge": true,
+		"compress": false,
+		"name": "we.resume.kit.pack.js",
+		"src":[
+			"./js/src/resume/*.js"
+		]
+	},
 	"template": {
 		"merge": true,
 		"compress": false,
