@@ -8,9 +8,11 @@
 			$(".headerTopIndex, .headerTwo .headerTop, .bodyTransparent .headerBlack").removeClass("headerTopFixed");
 		}
 		if (offsetTop>=62){
-			$(".colorBoxFoucs").show();
+			$(".colorBox li").hide();
+			$(".colorBoxFoucs, .colorBoxFoucs li").show();
 		}else{
-			$(".colorBoxFoucs").hide();
+			$(".colorBox li").show();
+			$(".colorBoxFoucs, .colorBoxFoucs li").hide();
 		}
 	}); 
 

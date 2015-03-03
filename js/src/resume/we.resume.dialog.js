@@ -16,6 +16,8 @@
         	this.render();
         	this.initEvents();
         	this.setPosition();
+
+            window.dialog = this;
         },
 
         initEvents: function () {
@@ -49,7 +51,7 @@
         	var left = (winWidth - this.width) / 2;
 
 
-        	this.ui.wrap.css({"left": left, "margin-left": 0});
+        	this.ui.wrap.css({"left": left, "margin-left": 0, "top": "10%"});
         },
 
         close: function () {
@@ -59,6 +61,10 @@
         },
 
         show: function () {
+            if(window.dialog){
+                window.dialog.close();
+            }
+
         	this.render();
         },
 

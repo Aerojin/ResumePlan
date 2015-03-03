@@ -47,7 +47,7 @@
 				<li><div class="scrollBox"></div><p class="scroll_li_name">RIVER</p></li>
 			</ul>
 			<div class="scroll_left"><a href="#" class="i_icoLeft"></a><a href="#" class="i_icoLeftNo"></a></div>
-			<div class="scroll_right"><a href="#" class="i_icoRight"></a><a href="#" class="i_icoRightNo"></a><</div>
+			<div class="scroll_right"><a href="#" class="i_icoRight"></a><a href="#" class="i_icoRightNo"></a></div>
 		</div>
 	</div>
 	<div class="main mt_47 clearfix">
@@ -181,18 +181,21 @@
 					<a href="#">
 						<i class="i_icoMone"></i>
 						<p>教育背景</p>
+						<i class="i_icoLock"></i>
 					</a>
 				</li>
 				<li>
 					<a href="#">
 						<i class="i_icoMtwo"></i>
 						<p>校园经历</p>
+						<i class="i_icoLook"></i>
 					</a>
 				</li>
 				<li>
 					<a href="#">
 						<i class="i_icoMthree"></i>
 						<p>工作经历</p>
+						<i class="i_icoUnlook"></i>
 					</a>
 				</li>
 				<li>
@@ -252,7 +255,7 @@
 					</a>
 				</li>
 			</ul>
-			<p class="resumeMenuBtn"><a href="#" class="btnLa">上一步</a><a href="#" class="btnL">下一步</a></p>
+			<p class="resumeMenuBtn"><a href="#" class="btnL">上一步</a><a href="#" class="btnL ml_20">下一步</a></p>
 			<div class="resumeMenu_num clearfix">
 				<div class="resumeMenu_numBox">
 					<a href="#" class="i_icoAdds"></a>
@@ -264,26 +267,27 @@
 			</div>
 		</div>
 	</div>
-<span class="blackBackground" style="display:none;"></span>
-<div class="windowBoxA windowBoxA4" style="display:none;">
+<span class="blackBackground" style=""></span>
+<div class="windowBoxA" style="display:none;">
 	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
-	<h2>获奖经历</h2>
+	<h2>获奖经历 <span>必填板块无法隐藏</span></h2>
 	<div class="clearfix">
 		<div class="windowBoxA_from">
-			<ul>
-				<li>
+			<ul class="fromList">
+				<li class="on">
 					<label>奖项名称*</label>
 					<input type="text" name="" class="input mt_5" />
+					<div class="tips">TIPS:名字不要起的太怪，例如岳龙飞。</div>
 				</li>
 				<li>
 					<label>获得时间*</label>
 					<div class="clearfix mt_5">
-						<select name="" id="" class="select">
+						<select name="" id="" class="select gray">
 							<option value="">2008</option>
 							<option value="">2008</option>
 							<option value="">2008</option>
 						</select>
-						<select name="" id="" class="select">
+						<select name="" id="" class="select gray">
 							<option value="">1</option>
 							<option value="">1</option>
 							<option value="">1</option>
@@ -326,6 +330,760 @@
 			<p class="windowBoxA_menu_btn"><a href="#" class="btnM">保存</a></p>
 		</div>
 	</div>
+</div>
+<div class="windowBoxA" style="width:818px; margin-left:-409px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>基本信息 <span><i class="i_icoLooks mr_10"></i>隐藏该模块</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_picture">
+			<a href="javascript:;" class="i_icoPicture"><input type="file" name="" class="" /></a>
+		</div>
+		<ul class="fromList fromListBox clearfix">
+			<li class="on">
+				<label>姓名*</label>
+				<input type="text" name="" class="input mt_5" />
+				<div class="tips">TIPS:名字不要起的太怪，例如岳龙飞。</div>
+			</li>
+			<li>
+				<label>手机*</label>
+				<input type="text" name="" class="input mt_5" />
+			</li>
+			<li>
+				<label>性别*</label>
+				<input type="text" name="" class="input mt_5" />
+			</li>
+			<li>
+				<label>政治面貌</label>
+				<input type="text" name="" class="input mt_5 fromListEm gray" value="投往外企不建议填写政治面貌" />
+			</li>
+			<li>
+				<label>年龄*</label>
+				<input type="text" name="" class="input mt_5" />
+			</li>
+			<li>
+				<label>名族</label>
+				<input type="text" name="" class="input mt_5 fromListEm gray" value="如投递企业有特殊需要否则不建议填写" />
+			</li>
+			<li>
+				<label>邮箱*</label>
+				<input type="text" name="" class="input mt_5 fromListEm gray" value="建议使用私人邮箱以便及时查收" />
+			</li>
+			<li>
+				<label>所在地</label>
+				<input type="text" name="" class="input mt_5" />
+			</li>
+		</ul>
+	</div>
+	<p class="fromListBox_btn"><a href="#" class="btnM">保存</a></p>
+</div>
+<div class="windowBoxA" style="width:863px; margin-left:-431px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>教育背景 <span><i class="i_icoUnlooks mr_10"></i>隐藏该模块</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>学位*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li>
+					<label>毕业*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li>
+					<label>学校名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li>
+					<label>GPA*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray" style="width:134px">
+							<option value="">2.5/4.0</option>
+							<option value="">2.5/4.0</option>
+							<option value="">2.5/4.0</option>
+						</select>
+					</div>
+				</li>
+				<li>
+					<label>专业排名*</label>
+					<input type="text" name="" class="input mt_5" style="width:120px;" />
+				</li>
+				<li>
+					<label>专业*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>入学*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:300px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:863px; margin-left:-431px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>校园经历 <span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>学位*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>学校名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li style="margin-top:-62px;">
+					<label>工作描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+				<li>
+					<label>开始*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>结束*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:300px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:978px; margin-left:-489px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>工作经历 <span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_nav">
+			<ul>
+				<li class="focus"><a href="#">工作经历</a></li>
+				<li><a href="#">项目经历</a></li>
+			</ul>
+		</div>
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>公司名称**</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li>
+					<label>离职时间*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li>
+					<label>职位*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>入职时间*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li style="margin-top:-62px;">
+					<label>工作描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:380px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:978px; margin-left:-489px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>工作经历<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_nav">
+			<ul>
+				<li><a href="#">工作经历</a></li>
+				<li class="focus"><a href="#">项目经历</a></li>
+			</ul>
+		</div>
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>项目名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>职责*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li style="margin-top:-62px;">
+					<label>工作描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+				<li>
+					<label>开始时间**</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>结束时间*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:380px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:665px; margin-left:-332px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>技能<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_nav">
+			<ul>
+				<li class="focus"><a href="#">技能</a></li>
+				<li><a href="#">证书</a></li>
+			</ul>
+		</div>
+		<div class="windowBoxA_from_two">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>技能名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:240px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:665px; margin-left:-332px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>技能<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_nav">
+			<ul>
+				<li><a href="#">技能</a></li>
+				<li class="focus"><a href="#">证书</a></li>
+			</ul>
+		</div>
+		<div class="windowBoxA_from_two">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>证书名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:240px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:338px; margin-left:-169px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>自我评价<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from">
+			<ul class="fromList">
+				<li>
+					<label>描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<p class="fromListBox_btn"><a class="btnM" href="#">保存</a></p>
+</div>
+<div class="windowBoxA" style="width:863px; margin-left:-431px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>科研经历<span><i class="i_icoUnlooks mr_10"></i>隐藏该模块</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>课题名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>职责*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li style="margin-top:-62px;">
+					<label>描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+				<li>
+					<label>开始*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>结束*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:300px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:338px; margin-left:-169px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>爱好<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from">
+			<ul class="fromList">
+				<li>
+					<label>描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<p class="fromListBox_btn"><a class="btnM" href="#">保存</a></p>
+</div>
+<div class="windowBoxA" style="width:863px; margin-left:-431px; display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>培训经历<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from_one">
+			<ul class="fromList fromListBox clearfix">
+				<li>
+					<label>课题名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>培训机构*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li style="margin-top:-62px;">
+					<label>课程描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+				<li>
+					<label>开始*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li class="fromList_no"></li>
+				<li>
+					<label>结束*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:300px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="display:none;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>发表文章</h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from">
+			<ul class="fromList">
+				<li>
+					<label>文章名称*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+				<li>
+					<label>发表时间*</label>
+					<div class="clearfix mt_5">
+						<select name="" id="" class="select gray">
+							<option value="">2008</option>
+							<option value="">2008</option>
+							<option value="">2008</option>
+						</select>
+						<select name="" id="" class="select gray">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>
+					</div>
+				</li>
+				<li>
+					<label>报刊名称／刊号*</label>
+					<input type="text" name="" class="input mt_5" />
+				</li>
+			</ul>
+			<div class="windowBoxA_from_bottom" style="left:120px;">
+				<a href="#" class="btnM"> 保存</a>
+			</div>
+		</div>
+		<div class="windowBoxA_menu">
+			<ul>
+				<li class="clearfix focus">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>1</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>2</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix hover">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>3</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="i_icoCloseSmall"></a>
+					<span>4</span>
+					<p>武汉好在来酒屋</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="windowBoxA" style="width:338px; margin-left:-169px;">
+	<a href="#" class="i_icoCloseW i_icoCloseWBtn"></a>
+	<h2>主修课程<span>必填板块无法隐藏</span></h2>
+	<div class="clearfix">
+		<div class="windowBoxA_from">
+			<ul class="fromList">
+				<li>
+					<label>描述*</label>
+					<textarea name="" rows="" cols="" class="textarea mt_5"></textarea>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<p class="fromListBox_btn"><a class="btnM" href="#">保存</a></p>
 </div>
 <script language="JavaScript" type="text/javascript">
 <!--

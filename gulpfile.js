@@ -112,7 +112,6 @@ gulp.task('release', function () {
 	createImage();
 	createJs();
 	replaceMD5();
-
 });
 
 

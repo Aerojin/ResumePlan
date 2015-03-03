@@ -15,72 +15,84 @@
     			education: {
     				key: "education",
     				text: "教育背景",
+                    ico: "i_icoLock",
     				className: "i_icoMone",
     				isShow: true
     			},
     			school: {
     				key: "school",
     				text: "校园经历",
+                    ico: "i_icoLock",
     				className: "i_icoMtwo",
     				isShow: true
     			},
     			work: {
     				key: "work",
     				text: "工作经历",
+                    ico: "i_icoLock",
     				className: "i_icoMthree",
     				isShow: true
     			},
     			skill: {
     				key: "skill",
     				text: "技能",
+                    ico: "i_icoLock",
     				className: "i_icoMfour",
     				isShow: true
     			},
     			prize: {
     				key: "prize",
     				text: "获奖经历",
+                    ico: "i_icoLook",
     				className: "i_icoMfive",
     				isShow: true
     			},
     			evaluation: {
     				key: "evaluation",
     				text: "自我评价",
+                    ico: "i_icoLook",
     				className: "i_icoMtwo",
     				isShow: true
     			},
     			research: {
     				key: "research",
     				text: "科研经历",
+                    ico: "i_icoUnlook",
     				className: "i_icoMseven",
-    				isShow: true
+    				isShow: false
     			},
     			article: {
     				key: "article",
     				text: "发表文章",
+                    ico: "i_icoUnlook",
     				className: "i_icoMeight",
-    				isShow: true
+    				isShow: false
     			},
     			subject: {
     				key: "subject",
     				text: "主修课程",
+                    ico: "i_icoUnlook",
     				className: "i_icoMnine",
-    				isShow: true
+    				isShow: false
     			},
     			hobbies: {
     				key: "hobbies",
     				text: "爱好",
+                    ico: "i_icoLook",
     				className: "i_icoMten",
     				isShow: true
     			},
     			exports: {
     				id: "btn-exports",
     				text: "导出",
+                    ico: "i_icoLock",
     				className: "i_icoMeleven",
     				isShow: true
     			},
     			back: {
     				id: "btn-back",
     				text: "返回个人中心",
+                    ico: "i_icoLock",
     				className: "i_icoMtwelve",
     				isShow: true
     			}
@@ -176,6 +188,8 @@
         			}else{
         				$(this).addClass('not');
         			}
+
+                    _this.showDialog(key);
         		}
         	});
 
@@ -194,6 +208,43 @@
         	this.ui.sidebar = $("#sidebar");
         	this.ui.btnPrev = $("#btn-prev");
         	this.ui.btnNext = $("#btn-next");
+        },
+
+        showDialog: function (key) {
+
+            switch(key){
+                case "education": 
+                    this.dialog = new WE.Resume.Education.View();
+                    break;
+                case "school":
+                    this.dialog = new WE.Resume.School.View();
+                    break;
+                case "work": 
+                    this.dialog = new WE.Resume.Work.View();
+                    break;
+                case "skill": 
+                    this.dialog = new WE.Resume.Skill.View();
+                    break;
+                case "prize": 
+                    this.dialog = new WE.Resume.Prize.View();
+                    break;
+                case "evaluation": 
+                    this.dialog = new WE.Resume.Evaluation.View();
+                    break;
+                case "research": 
+                    this.dialog = new WE.Resume.Research.View();
+                    break;
+                case "article": 
+                    this.dialog = new WE.Resume.Article.View();
+                    break;
+                case "subject": 
+                    this.dialog = new WE.Resume.Subject.View();
+                    break;
+                case "hobbies": 
+                    this.dialog = new WE.Resume.Hobbies.View();
+                    break;
+            }
+
         },
 
         gotoPage: function (pageIndex) {
@@ -229,6 +280,7 @@
 				'<a href="javascript:void(0);">',
 					'<i class="<%=className%>"></i>',
 					'<p><%=text%></p>',
+                    '<i class="<%-ico%>"></i>',
 				'</a>',
 			'</li>'
         ].join("\n")

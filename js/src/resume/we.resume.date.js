@@ -16,7 +16,6 @@
 
         	this.render();
         	this.initEvents();
-
         },
 
         initEvents: function () {
@@ -50,7 +49,7 @@
         	var max = this.getNowYear();
         	var template = _.template(this.template.option);
         	
-        	for(var i = 1950; i <= max; i++){
+        	for(var i = 2000; i <= max; i++){
         		html.push(template({
         			text: i,
         			value: i,
