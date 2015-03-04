@@ -17,70 +17,90 @@
     				text: "教育背景",
                     ico: "i_icoLock",
     				className: "i_icoMone",
-    				isShow: true
+    				isShow: true,
+                    isLock: true,
+                    width: 863
     			},
     			school: {
     				key: "school",
     				text: "校园经历",
                     ico: "i_icoLock",
     				className: "i_icoMtwo",
-    				isShow: true
+    				isShow: true,
+                    isLock: true,
+                    width: 863
     			},
     			work: {
     				key: "work",
     				text: "工作经历",
                     ico: "i_icoLock",
     				className: "i_icoMthree",
-    				isShow: true
+    				isShow: true,
+                    isLock: true,
+                    width: 978
     			},
     			skill: {
     				key: "skill",
     				text: "技能",
                     ico: "i_icoLock",
     				className: "i_icoMfour",
-    				isShow: true
+    				isShow: true,
+                    isLock: true,
+                    width: 665
     			},
     			prize: {
     				key: "prize",
     				text: "获奖经历",
                     ico: "i_icoLook",
     				className: "i_icoMfive",
-    				isShow: true
+    				isShow: true,
+                    isLock: false,
+                    width: 551
     			},
     			evaluation: {
     				key: "evaluation",
     				text: "自我评价",
                     ico: "i_icoLook",
     				className: "i_icoMtwo",
-    				isShow: true
+    				isShow: true,
+                    isLock: false,
+                    width: 338
     			},
     			research: {
     				key: "research",
     				text: "科研经历",
                     ico: "i_icoUnlook",
     				className: "i_icoMseven",
-    				isShow: false
+    				isShow: false,
+                    isLock: false,
+                    width: 863
     			},
     			article: {
     				key: "article",
     				text: "发表文章",
                     ico: "i_icoUnlook",
     				className: "i_icoMeight",
-    				isShow: false
+    				isShow: false,
+                    isLock: false,
+                    width: 551
     			},
     			subject: {
     				key: "subject",
     				text: "主修课程",
                     ico: "i_icoUnlook",
     				className: "i_icoMnine",
-    				isShow: false
+    				isShow: false,
+                    isLock: false,
+                    width: 338
     			},
     			hobbies: {
     				key: "hobbies",
     				text: "爱好",
                     ico: "i_icoLook",
     				className: "i_icoMten",
-    				isShow: true
+    				isShow: true,
+                    isLock: false,
+                    width: 338
     			},
     			exports: {
     				id: "btn-exports",
@@ -173,24 +193,32 @@
         		_this.model.set({pageIndex: pageIndex});
         	});
 
-        	this.ui.sidebar.delegate("li", "click", function () {
-        		var key = $(this).data("key");
-        		var options = {};
+            this.ui.sidebar.delegate("li", "click", function () {
+                var key = $(this).data("key");
+                var options = _this.getOptions(key);
+                
+                _this.showDialog(key, options[key]);
+            });
 
+        	this.ui.sidebar.delegate(".i_icoLook,.i_icoUnlook", "click", function () {
+        		var options = {};
+                var key = $(this).closest("li").data("key");
 
         		if(key){
-        			options[key] = _this.model.get(key);
-        			options[key].isShow = !options[key].isShow;
-        			_this.model.set(options);
+        			options = _this.getOptions(key);
+                    options[key].isShow = !options[key].isShow;
+                    _this.model.set(options);
 
         			if(options[key].isShow){
-        				$(this).removeClass("not");
+        				$(this).closest("li").removeClass("not");
+                        $(this).removeClass("i_icoUnlook").addClass("i_icoLook");
         			}else{
-        				$(this).addClass('not');
+        				$(this).closest("li").addClass('not');
+                        $(this).addClass("i_icoUnlook").removeClass("i_icoLook");
         			}
-
-                    _this.showDialog(key);
         		}
+
+                return false;
         	});
 
         	this.ui.sidebar.delegate("#btn-back", "click", function () {
@@ -210,38 +238,38 @@
         	this.ui.btnNext = $("#btn-next");
         },
 
-        showDialog: function (key) {
+        showDialog: function (key, data) {
 
             switch(key){
                 case "education": 
-                    this.dialog = new WE.Resume.Education.View();
+                    this.dialog = new WE.Resume.Education.View(data);
                     break;
                 case "school":
-                    this.dialog = new WE.Resume.School.View();
+                    this.dialog = new WE.Resume.School.View(data);
                     break;
                 case "work": 
-                    this.dialog = new WE.Resume.Work.View();
+                    this.dialog = new WE.Resume.Work.View(data);
                     break;
                 case "skill": 
-                    this.dialog = new WE.Resume.Skill.View();
+                    this.dialog = new WE.Resume.Skill.View(data);
                     break;
                 case "prize": 
-                    this.dialog = new WE.Resume.Prize.View();
+                    this.dialog = new WE.Resume.Prize.View(data);
                     break;
                 case "evaluation": 
-                    this.dialog = new WE.Resume.Evaluation.View();
+                    this.dialog = new WE.Resume.Evaluation.View(data);
                     break;
                 case "research": 
-                    this.dialog = new WE.Resume.Research.View();
+                    this.dialog = new WE.Resume.Research.View(data);
                     break;
                 case "article": 
-                    this.dialog = new WE.Resume.Article.View();
+                    this.dialog = new WE.Resume.Article.View(data);
                     break;
                 case "subject": 
-                    this.dialog = new WE.Resume.Subject.View();
+                    this.dialog = new WE.Resume.Subject.View(data);
                     break;
                 case "hobbies": 
-                    this.dialog = new WE.Resume.Hobbies.View();
+                    this.dialog = new WE.Resume.Hobbies.View(data);
                     break;
             }
 
@@ -273,6 +301,13 @@
 
         		this.ui.sidebar.append(html);
         	}
+        },
+
+        getOptions: function (key) {
+            var options = {};
+                options[key] = this.model.get(key);
+
+            return options;
         },
 
         template: [

@@ -7,11 +7,7 @@
         
         name: _class,
 
-        width: 665,
-
         state: "ability",
-
-        TITLE: "技能",
 
         STATE: {
             ABILITY: "ability",
@@ -19,6 +15,8 @@
         },
 
         initialize: function (options) {
+            this.options = options;
+
         	this.render();
         	this.initEvents();
         },
@@ -61,11 +59,8 @@
 
         showDialog: function () {
         	if(!this.dialog){
-	        	this.dialog = new WE.Resume.Dialog({
-	        		title: this.TITLE,
-	        		content: this.ui.wrap,
-	        		width: this.width
-	        	});
+	        	this.options.content = this.ui.wrap;
+                this.dialog = new WE.Resume.Dialog(this.options);
 
 	        	this.dialog.onClose = function () {
 

@@ -10,7 +10,6 @@
         defaults: function () {
             return {
             	state: null,
-            	title: "教育背景",
             	id: null,
                 academic: null,
                 graduate: null,
@@ -131,7 +130,6 @@
         
         name: _class,
 
-        width: 863,
 
         STATE: {
         	ADD: "add",
@@ -140,6 +138,7 @@
 
         initialize: function (options) {
 
+            this.options = options;
         	this.model = new WE.Resume.Education.Model();
         	this.collection = new Backbone.Collection();
 
@@ -255,12 +254,8 @@
 
         showDialog: function () {
         	if(!this.dialog){
-	        	this.dialog = new WE.Resume.Dialog({
-	        		title: this.model.get("title"),
-	        		content: this.ui.wrap,
-	        		width: this.width
-	        	});
-
+                this.options.content = this.ui.wrap;
+	        	this.dialog = new WE.Resume.Dialog(this.options);
 	        	this.dialog.onClose = function () {
 
 	        	};

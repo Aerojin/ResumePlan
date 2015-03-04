@@ -9,7 +9,6 @@
 
             defaults: function () {
                 return {
-                	title: "自我评价",
                     context: null
                 };
             },
@@ -79,10 +78,8 @@
             
             name: _class,
 
-            width: 338,
-
             initialize: function (options) {
-
+                this.options = options;
             	this.model = new WE.Resume.Evaluation.Model();
 
             	this.render();
@@ -136,11 +133,8 @@
 
             showDialog: function () {
             	if(!this.dialog){
-    	        	this.dialog = new WE.Resume.Dialog({
-    	        		title: this.model.get("title"),
-    	        		content: this.ui.wrap,
-    	        		width: this.width
-    	        	});
+    	        	this.options.content = this.ui.wrap;
+                    this.dialog = new WE.Resume.Dialog(this.options);
 
     	        	this.dialog.onClose = function () {
 

@@ -7,10 +7,18 @@
         
         name: _class,
 
+        STATE: {
+            LOOK: 'look',
+            LOCK: 'lock',
+            UN_LOOK: 'unLook'
+        },
+
         initialize: function (options) {
 
+            this.isLock = options.isLock;
+            this.isShow = options.isShow;
         	this.width = options.width;
-        	this.title = options.title;
+        	this.title = options.text;
         	this.content = options.content;
 
         	this.render();
@@ -31,8 +39,13 @@
 
         render: function () {
             
+            var state = this.getState();
             var template = _.template(this.template);
-            	template = template({cid: this.cid, title: this.title});
+            	template = template({
+                    cid: this.cid,
+                    title: this.title,
+                    state: this.stateTmpl[state]
+                });
 
             this.el = $(template);
             this.ui = {};
@@ -68,20 +81,38 @@
         	this.render();
         },
 
-        onClose: function () {
+        getState: function () {
+            if(this.isLock){
+                return this.STATE.LOCK;
+            }
 
+            if(this.isShow){
+                return this.STATE.LOOK;
+            }
+
+            return this.STATE.UN_LOOK;
+        },
+
+        onClose: function () {
+            //
+            //
         },
 
         template: ['<div class="windowBoxA" id="<%-cid%>-dialog">',
 			'<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
-			'<h2><%-title%></h2>',
+			'<h2><%-title%> <%=state%></h2>',
 			'<div id="<%-cid%>-container"></div>',
-		'</div>'].join("\n")
+		'</div>'].join("\n"),
+
+        stateTmpl: {
+            lock: '<span>必填板块无法隐藏</span>',
+            look: '<span><i class="i_icoLooks mr_10"></i>隐藏该模块</span>',
+            unLook: '<span><i class="i_icoUnlooks mr_10"></i>显示该模块</span>'
+        }
 
     }));
 
 })(WE, jQuery, Backbone);
-
 
 
 

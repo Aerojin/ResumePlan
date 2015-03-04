@@ -9,7 +9,6 @@
 
             defaults: function () {
                 return {
-                	title: "获奖经历",
                     name: null,
                     dateY: null,
                     dateM: null,
@@ -99,10 +98,8 @@
             
             name: _class,
 
-            width: 551,
-
             initialize: function (options) {
-
+                this.options = options;
             	this.model = new WE.Resume.Prize.Model();
 
             	this.render();
@@ -161,12 +158,8 @@
 
             showDialog: function () {
             	if(!this.dialog){
-    	        	this.dialog = new WE.Resume.Dialog({
-    	        		title: this.model.get("title"),
-    	        		content: this.ui.wrap,
-    	        		width: this.width
-    	        	});
-
+    	        	this.options.content = this.ui.wrap;
+                    this.dialog = new WE.Resume.Dialog(this.options);
     	        	this.dialog.onClose = function () {
 
     	        	};
