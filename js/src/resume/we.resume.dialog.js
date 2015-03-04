@@ -20,6 +20,7 @@
         	this.width = options.width;
         	this.title = options.text;
         	this.content = options.content;
+            this.constant = WE.Resume.getConstant();
 
         	this.render();
         	this.initEvents();
@@ -30,6 +31,10 @@
 
         initEvents: function () {
             var _this = this;
+
+            this.constant.on("change", function () {
+                
+            });
 
             this.ui.btnClose.click(function () {
             	_this.close();

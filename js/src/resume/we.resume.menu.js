@@ -105,14 +105,14 @@
     			exports: {
     				id: "btn-exports",
     				text: "导出",
-                    ico: "i_icoLock",
+                    ico: "",
     				className: "i_icoMeleven",
     				isShow: true
     			},
     			back: {
     				id: "btn-back",
     				text: "返回个人中心",
-                    ico: "i_icoLock",
+                    ico: "",
     				className: "i_icoMtwelve",
     				isShow: true
     			}
