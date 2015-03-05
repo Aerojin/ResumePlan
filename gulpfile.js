@@ -33,6 +33,7 @@ var getConfig = function () {
 
 var createFile = function (obj) {
 	var stream = gulp.src(obj.src);
+	var md5 = gulp.src(obj.src);
 	
 	if(obj.merge){
 		stream =  stream.pipe(concat(obj.name));
@@ -41,7 +42,11 @@ var createFile = function (obj) {
 	if(obj.compress){
 		stream = stream.pipe(uglify());
 	}
-	
+
+	stream.pipe(through.obj(function(file, enc, cb){
+		map[obj.name] = getFileMd5Str(file.contents);
+	}));
+
 	stream.pipe(gulp.dest(out_path));
 };
 
@@ -72,18 +77,22 @@ var replaceMD5 = function (obj) {
 };
 
 var createCss = function (isMini) {
+	var name = "style.pack.css";
 	var stream =gulp.src(css_path + '*.css')
-		.pipe(concat('style.pack.css'));
+		.pipe(concat(name));
 
 
 	if(isMini){
 		stream = stream.pipe(minifycss());
 	}
 
+	stream.pipe(through.obj(function(file, enc, cb){
+		map[name] = getFileMd5Str(file.contents);
+	}));
+
 	stream.pipe(gulp.dest(out_css));
 
-	
-	createMap(out_css, 'style.pack.css');
+	//createMap(out_css, 'style.pack.css');
 };
 
 var createImage = function () {
@@ -96,8 +105,10 @@ var createJs = function () {
 	
 	for(var c in config){
 		createFile(config[c]);
-		createMap(out_path, config[c].name);
+		//createMap(out_path, config[c].name);
 	}
+
+	console.log(map);
 };
 
 
