@@ -7,16 +7,10 @@
         
         name: _class,
 
-        STATE: {
-            LOOK: 'look',
-            LOCK: 'lock',
-            UN_LOOK: 'unLook'
-        },
-
         initialize: function (options) {
 
+            this.key = options.key;
             this.isLock = options.isLock;
-            this.isShow = options.isShow;
         	this.width = options.width;
         	this.title = options.text;
         	this.content = options.content;
@@ -32,24 +26,23 @@
         initEvents: function () {
             var _this = this;
 
-            this.constant.on("change", function () {
-                
-            });
+            this.constant.on("change", this.setState, this);
 
             this.ui.btnClose.click(function () {
             	_this.close();
             });
 
+            this.ui.wrap.delegate(".btn-ico","click",function() {
+                _this.constant.setKey(_this.key);
+            });
         },
 
         render: function () {
-            
-            var state = this.getState();
             var template = _.template(this.template);
             	template = template({
                     cid: this.cid,
                     title: this.title,
-                    state: this.stateTmpl[state]
+                    state: this.getState()
                 });
 
             this.el = $(template);
@@ -68,15 +61,16 @@
         	var winWidth = $(window).width();
         	var left = (winWidth - this.width) / 2;
 
-
         	this.ui.wrap.css({"left": left, "margin-left": 0, "top": "10%"});
         },
 
         close: function () {
         	this.ui.wrap.remove();
+            this.constant.off("change", this.setState);
 
         	this.onClose();
         },
+
 
         show: function () {
             if(window.dialog){
@@ -86,21 +80,28 @@
         	this.render();
         },
 
+        setState: function () {
+            var ico = this.getState();
+            var data = this.constant.changed;
+            var element = this.ui.wrap.find(".btn-ico");
+
+            element.after(ico).remove();
+        },
+
         getState: function () {
             if(this.isLock){
-                return this.STATE.LOCK;
+                return this.stateTmpl.lock;
             }
 
-            if(this.isShow){
-                return this.STATE.LOOK;
+            if(this.constant.getKey(this.key)){
+                return this.stateTmpl.look;
             }
 
-            return this.STATE.UN_LOOK;
+            return this.stateTmpl.unLook;
         },
 
         onClose: function () {
-            //
-            //
+
         },
 
         template: ['<div class="windowBoxA" id="<%-cid%>-dialog">',
@@ -111,8 +112,8 @@
 
         stateTmpl: {
             lock: '<span>必填板块无法隐藏</span>',
-            look: '<span><i class="i_icoLooks mr_10"></i>隐藏该模块</span>',
-            unLook: '<span><i class="i_icoUnlooks mr_10"></i>显示该模块</span>'
+            look: '<span class="currentP btn-ico"><i class="i_icoLooks mr_10"></i>隐藏该模块</span>',
+            unLook: '<span class="currentP btn-ico"><i class="i_icoUnlooks mr_10"></i>显示该模块</span>'
         }
 
     }));

@@ -10,7 +10,7 @@ var minifycss = require('gulp-minify-css');
 var path = require('path');
 var fs = require('fs');
 
-var out_path = './static/js/';
+var out_js = './static/js/';
 var out_css = './static/css/';
 var out_img = './static/images/';
 var out_html = './static/html/';
@@ -27,11 +27,11 @@ var getFileMd5Str = function (fileContent) {
     return crypto.createHash('md5').update(fileContent).digest('hex');
 };
 
-var getConfig = function () {	
-	return JSON.parse(fs.readFileSync('./js/config.json', 'utf-8'));	
+var getConfig = function (type) {	
+	return JSON.parse(fs.readFileSync('./js/config_' + type + '.json', 'utf-8'));	
 };
 
-var createFile = function (obj) {
+var createFile = function (obj, outPath) {
 	var stream = gulp.src(obj.src);
 	var md5 = gulp.src(obj.src);
 	
@@ -47,7 +47,7 @@ var createFile = function (obj) {
 		map[obj.name] = getFileMd5Str(file.contents);
 	}));
 
-	stream.pipe(gulp.dest(out_path));
+	stream.pipe(gulp.dest(outPath));
 };
 
 var createMap = function (path, name) {
@@ -76,7 +76,14 @@ var replaceMD5 = function (obj) {
 		.pipe(gulp.dest(out_html));
 };
 
-var createCss = function (isMini) {
+var createCss = function () {
+	var config = getConfig("css");
+
+	for(var c in config){
+		createFile(config[c], out_css);
+	}
+
+	/*
 	var name = "style.pack.css";
 	var stream =gulp.src(css_path + '*.css')
 		.pipe(concat(name));
@@ -91,7 +98,7 @@ var createCss = function (isMini) {
 	}));
 
 	stream.pipe(gulp.dest(out_css));
-
+	*/
 	//createMap(out_css, 'style.pack.css');
 };
 
@@ -101,25 +108,23 @@ var createImage = function () {
 };
 
 var createJs = function () {
-	var config = getConfig();
+	var config = getConfig("js");
 	
 	for(var c in config){
-		createFile(config[c]);
-		//createMap(out_path, config[c].name);
+		createFile(config[c], out_js);
+		//createMap(out_js, config[c].name);
 	}
-
-	console.log(map);
 };
 
 
 gulp.task('default', function() {
 	createJs();
 	createImage();
-	createCss(false);
+	createCss();
 });
 
 gulp.task('release', function () {
-	createCss(true);
+	createCss();
 	createImage();
 	createJs();
 	replaceMD5();

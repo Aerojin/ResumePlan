@@ -1,7 +1,7 @@
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.Model.ModelBase;
-    var _class = "WE.Resume.BaseInfo.Model";  
+    var _class = "WE.Resume.Base.Model";  
 
     WE.namespace(_class, superClass.extend({
         
@@ -9,7 +9,6 @@
 
         defaults: function () {
             return {
-            	title: "基本信息",
                 name: null,
                 sex: null,
                 age: null,
@@ -125,17 +124,15 @@
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.View.ViewBase;
-    var _class = "WE.Resume.BaseInfo.View";  
+    var _class = "WE.Resume.Base.View";  
 
     WE.namespace(_class, superClass.extend({
         
         name: _class,
 
-        width: 818,
-
         initialize: function (options) {
-
-        	this.model = new WE.Resume.BaseInfo.Model();
+            this.options = options;
+        	this.model = new WE.Resume.Base.Model();
 
         	this.render();
         	this.initEvents();
@@ -194,15 +191,11 @@
 
         showDialog: function () {
         	if(!this.dialog){
-	        	this.dialog = new WE.Resume.Dialog({
-	        		title: this.model.get("title"),
-	        		content: this.ui.wrap,
-	        		width: this.width
-	        	});
+                this.options.content = this.ui.wrap;
+                this.dialog = new WE.Resume.Dialog(this.options);
+                this.dialog.onClose = function () {
 
-	        	this.dialog.onClose = function () {
-
-	        	};
+                };
 
 	        	return;
 	        }

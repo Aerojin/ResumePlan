@@ -10,111 +10,94 @@
         defaults: function () {
             return {
             	pageIndex: null,
-            	pageCount: 4,
+            	pageCount: 3,
             	pageSize: 1,
+                base: {
+                    key: "base",
+                    text: "基本信息",
+                    className: "i_icoInfo",
+                    isLock: true,
+                    width: 818
+                },
     			education: {
     				key: "education",
     				text: "教育背景",
-                    ico: "i_icoLock",
     				className: "i_icoMone",
-    				isShow: true,
                     isLock: true,
                     width: 863
     			},
     			school: {
     				key: "school",
     				text: "校园经历",
-                    ico: "i_icoLock",
     				className: "i_icoMtwo",
-    				isShow: true,
                     isLock: true,
                     width: 863
     			},
     			work: {
     				key: "work",
     				text: "工作经历",
-                    ico: "i_icoLock",
     				className: "i_icoMthree",
-    				isShow: true,
                     isLock: true,
                     width: 978
     			},
     			skill: {
     				key: "skill",
     				text: "技能",
-                    ico: "i_icoLock",
     				className: "i_icoMfour",
-    				isShow: true,
                     isLock: true,
                     width: 665
     			},
     			prize: {
     				key: "prize",
     				text: "获奖经历",
-                    ico: "i_icoLook",
     				className: "i_icoMfive",
-    				isShow: true,
                     isLock: false,
                     width: 551
     			},
     			evaluation: {
     				key: "evaluation",
     				text: "自我评价",
-                    ico: "i_icoLook",
     				className: "i_icoMtwo",
-    				isShow: true,
                     isLock: false,
                     width: 338
     			},
     			research: {
     				key: "research",
     				text: "科研经历",
-                    ico: "i_icoUnlook",
     				className: "i_icoMseven",
-    				isShow: false,
                     isLock: false,
                     width: 863
     			},
     			article: {
     				key: "article",
     				text: "发表文章",
-                    ico: "i_icoUnlook",
     				className: "i_icoMeight",
-    				isShow: false,
                     isLock: false,
                     width: 551
     			},
     			subject: {
     				key: "subject",
     				text: "主修课程",
-                    ico: "i_icoUnlook",
     				className: "i_icoMnine",
-    				isShow: false,
                     isLock: false,
                     width: 338
     			},
     			hobbies: {
     				key: "hobbies",
     				text: "爱好",
-                    ico: "i_icoLook",
     				className: "i_icoMten",
-    				isShow: true,
                     isLock: false,
                     width: 338
     			},
     			exports: {
-    				id: "btn-exports",
+    				key: "btn-exports",
     				text: "导出",
-                    ico: "",
-    				className: "i_icoMeleven",
-    				isShow: true
+    				className: "i_icoMeleven"
     			},
     			back: {
-    				id: "btn-back",
+    				key: "btn-back",
     				text: "返回个人中心",
-                    ico: "",
-    				className: "i_icoMtwelve",
-    				isShow: true
+    				className: "i_icoMtwelve"
     			}
             };
         },      
@@ -140,14 +123,14 @@
         name: _class,
 
         page: [
-        	["education", "school", "work", "skill", "prize", "evaluation"],
-        	["research", "article"],
+        	["base","education", "school", "work", "skill", "prize", "evaluation","research", "article"],
         	["subject", "hobbies"],
         	["exports", "back"]
         ],
 
         initialize: function (options) {
         	this.model = options.model;
+            this.constant = options.constant;
 
         	this.render();
         	this.initEvents();
@@ -157,6 +140,16 @@
 
         initEvents: function () {
         	var _this = this;
+
+            this.constant.on("change", function () {
+                var changed = this.getChanged();
+                var actionClass = changed.value ? "" : "not";
+                var element = _this.ui.sidebar.find("#" + changed.key);
+                var ico = changed.value ? "i_icoLook" : "i_icoUnlook";
+
+                element.removeClass("not").addClass(actionClass);
+                element.find(".btn-ico").removeClass("i_icoLook i_icoUnlook").addClass(ico);
+            });
 
         	this.model.on("change:pageIndex", function () {
         		var pageIndex = this.get("pageIndex");
@@ -200,24 +193,10 @@
                 _this.showDialog(key, options[key]);
             });
 
-        	this.ui.sidebar.delegate(".i_icoLook,.i_icoUnlook", "click", function () {
-        		var options = {};
+        	this.ui.sidebar.delegate(".btn-ico", "click", function () {
                 var key = $(this).closest("li").data("key");
 
-        		if(key){
-        			options = _this.getOptions(key);
-                    options[key].isShow = !options[key].isShow;
-                    _this.model.set(options);
-
-        			if(options[key].isShow){
-        				$(this).closest("li").removeClass("not");
-                        $(this).removeClass("i_icoUnlook").addClass("i_icoLook");
-        			}else{
-        				$(this).closest("li").addClass('not');
-                        $(this).addClass("i_icoUnlook").removeClass("i_icoLook");
-        			}
-        		}
-
+                _this.constant.setKey(key);
                 return false;
         	});
 
@@ -241,6 +220,9 @@
         showDialog: function (key, data) {
 
             switch(key){
+                case "base":
+                    this.dialog = new WE.Resume.Base.View(data);
+                    break;
                 case "education": 
                     this.dialog = new WE.Resume.Education.View(data);
                     break;
@@ -276,31 +258,32 @@
         },
 
         gotoPage: function (pageIndex) {
+            var html = []
         	var page = this.page[pageIndex];
         	var template = _.template(this.template);
 
-
-        	this.ui.sidebar.empty();
-
-
         	for(var i = 0; i < page.length; i++){
-        		var options = this.model.get(page[i]);
-        		var html = $(template(options));
+                var config = _.clone(this.model.get(page[i]));
+                var isShow = this.constant.getKey(config.key);
 
-        		if(!options.isShow){
-        			html.addClass("not");
-        		}
+        		config = _.extend(config, {
+                    id: config.key,
+                    ico: this.getIcoHtml(config),
+                    actionClass: isShow ? "" : "not"
+                });
 
-        		if(options.id){
-        			html.attr({"id": options.id});
-        		}
+                if(_.isUndefined(config.isLock)){
+                    config.actionClass = "";
+                }
 
-        		if(options.key){
-        			html.data({key: options.key});
-        		}
-
-        		this.ui.sidebar.append(html);
+                html.push(template(config));
         	}
+
+            this.ui.sidebar.html(html.join("\n"));
+        },
+
+        setAction: function (data) {
+
         },
 
         getOptions: function (key) {
@@ -310,12 +293,36 @@
             return options;
         },
 
+        getIcoHtml: function (data) {
+            if(_.isUndefined(data.isLock)){
+                return "";
+            }
+
+            var template = _.template('<i class="<%-ico%>"></i>');
+
+            return template({
+                ico: this.getIcoClass(data)
+            });
+        },
+
+        getIcoClass: function (data) {
+            if(data.isLock){
+                return "i_icoLock";
+            }
+
+            if(this.constant.getKey(data.key)){
+                return "i_icoLook btn-ico";
+            }
+
+            return "i_icoUnlook  btn-ico";
+        },
+
         template: [
-        	'<li>',
+        	'<li id="<%-id%>" data-key="<%-key%>" class="<%-actionClass%>">',
 				'<a href="javascript:void(0);">',
 					'<i class="<%=className%>"></i>',
 					'<p><%=text%></p>',
-                    '<i class="<%-ico%>"></i>',
+                    '<%=ico%>',
 				'</a>',
 			'</li>'
         ].join("\n")
@@ -324,7 +331,10 @@
 
 	$(function () {
 		var model = new WE.Resume.Menu.Model();
-    	var view = new WE.Resume.Menu.View({model: model});
+    	var view = new WE.Resume.Menu.View({
+            model: model,
+            constant: WE.Resume.getConstant()
+        });
 	});
 
 })(WE, jQuery, Backbone);

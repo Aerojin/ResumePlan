@@ -9,6 +9,14 @@
 			"./js/lib/backbone-min.js"
 		]
 	},
+	"jquery-ui":{
+		"merge": true,
+		"compress": false,
+		"name": "jquery.ui.pack.js",
+		"src": [
+			"./js/lib/jquery-ui.min.js"
+		]
+	},
 	"base": {
 		"merge": true,
 		"compress": false,

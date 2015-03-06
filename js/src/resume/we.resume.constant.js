@@ -9,6 +9,7 @@
 
         defaults: function () {
             return {
+                base: true,
                 education: true,
                 school: true,
                 work: true,
@@ -23,12 +24,37 @@
         },      
 
         initialize: function () {
-
+            this.initEvents();
         },
 
         initEvents: function () {
 
-        }
+        },
+
+        getChanged: function () {
+            var changed = {};
+            var object = this.changed;
+
+            for(var key in object){
+                changed.key = key;
+                changed.value = object[key];
+
+                break;
+            }
+
+            return changed;
+        },
+
+        getKey: function (key) {
+            return this.get(key);
+        },
+
+        setKey: function (key) {
+            var obj = {};
+                obj[key] = !this.get(key);
+
+            this.set(obj);
+        }  
 
     }));
 
