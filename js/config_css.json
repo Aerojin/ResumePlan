@@ -1,7 +1,7 @@
 {
 	"style": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "style.pack.css",
 		"src": [
 			"./css/contentShow.css",
@@ -10,7 +10,7 @@
 	},
 	"jquery-ui": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "jquery.ui.pack.css",
 		"src": [
 			"./css/jquery-ui.css",

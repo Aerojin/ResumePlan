@@ -9,17 +9,17 @@
 			"./js/lib/backbone-min.js"
 		]
 	},
-	"jquery-ui":{
+	"drag":{
 		"merge": true,
-		"compress": false,
-		"name": "jquery.ui.pack.js",
+		"compress": true,
+		"name": "we.drag.pack.js",
 		"src": [
-			"./js/lib/jquery-ui.min.js"
+			"./js/kit/we.drop.js"
 		]
 	},
 	"base": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.base.pack.js",
 		"src": [
 			"./js/base/we.core.js",
@@ -34,7 +34,7 @@
 	},
 	"index": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.index.pack.js",
 		"src": [
 			"./js/login/we.feedback.view.js",
@@ -44,7 +44,7 @@
 	},
 	"selected": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.selected.pack.js",
 		"src": [
 			"./js/src/we.selected.model.js",
@@ -53,7 +53,7 @@
 	},
 	"login": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.login.pack.js",
 		"src":[
 			"./js/login/we.login.dialog.js",
@@ -65,7 +65,7 @@
 	},
 	"user_center": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.user.center.pack.js",
 		"src":[
 			"./js/kit/we.share.js",
@@ -76,7 +76,7 @@
 	},
 	"account": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.account.pack.js",
 		"src":[
 			"./js/src/we.account.view.js"
@@ -84,7 +84,7 @@
 	},
 	"pay": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.pay.pack.js",
 		"src":[
 			"./js/src/we.pay.view.js"
@@ -92,7 +92,7 @@
 	},
 	"service": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.service.pack.js",
 		"src":[
 			"./js/kit/we.slideshow.js",
@@ -101,7 +101,7 @@
 	},
 	"start": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.start.pack.js",
 		"src":[
 			"./js/src/we.start.view.js"
@@ -109,7 +109,7 @@
 	},
 	"common": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.common.pack.js",
 		"src":[
 			"./js/src/we.common.view.js"
@@ -117,7 +117,7 @@
 	},
 	"resume": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.resume.pack.js",
 		"src":[
 			"./js/src/we.resume.view.js",
@@ -126,7 +126,7 @@
 	},
 	"resume_kit": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.resume.kit.pack.js",
 		"src":[
 			"./js/src/resume/*.js"
@@ -134,7 +134,7 @@
 	},
 	"template": {
 		"merge": true,
-		"compress": false,
+		"compress": true,
 		"name": "we.template.pack.js",
 		"src":[
 			"./js/kit/we.template.free.js",

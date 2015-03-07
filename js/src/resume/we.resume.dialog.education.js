@@ -173,11 +173,6 @@
         initPageEvents: function () {
         	var _this = this;
 
-
-        	this.ui.btnSave.click(function () {
-
-        	});
-
         	this.ui.txtInput.focus(function () {
                 var name = $(this).attr('name');
                 _this.hideTip(_this.byName(name));
@@ -198,7 +193,7 @@
                 }                
             });
 
-            this.ui.btnAdd.click(function () {
+            this.ui.btnSave.click(function () {
             	var state = _this.model.get("state") || _this.STATE.ADD;
 
             	_this[state].update.call(_this);
@@ -235,7 +230,6 @@
         	this.el = $(template);
         	this.ui = {};
         	this.ui.wrap = this.el;
-        	this.ui.btnAdd = this.getCidEl("add", this.ui.wrap);
         	this.ui.btnSave = this.getCidEl("save", this.ui.wrap);
         	this.ui.graduate = this.getCidEl("graduate", this.ui.wrap);
         	this.ui.entrance = this.getCidEl("entrance", this.ui.wrap);
@@ -419,35 +413,13 @@
 					'</div>',
 				'</li>',
 			'</ul>',
-			'<div class="windowBoxA_from_bottom" style="left:380px;">',
-				'<a href="javascript:void(0)" id="<%-cid%>-add" class="i_icoWadd"></a>',
-				'<p>加一条～</p>',
-			'</div>',
+            '<div class="windowBoxA_from_bottom" style="left:300px;">',
+                '<a href="javascript:void(0);" id="<%-cid%>-save" class="btnM"> 保存</a>',
+            '</div>',
 		'</div>',
 		'<div class="windowBoxA_menu">',
 			'<ul id="<%-cid%>-menu">',
-				'<li class="clearfix focus">',
-					'<a href="javascript:void(0)" class="i_icoCloseSmall"></a>',
-					'<span>1</span>',
-					'<p>武汉好在来酒屋</p>',
-				'</li>',
-				'<li class="clearfix">',
-					'<a href="javascript:void(0)" class="i_icoCloseSmall"></a>',
-					'<span>2</span>',
-					'<p>武汉好在来酒屋</p>',
-				'</li>',
-				'<li class="clearfix hover">',
-					'<a href="javascript:void(0)" class="i_icoCloseSmall"></a>',
-					'<span>3</span>',
-					'<p>武汉好在来酒屋</p>',
-				'</li>',
-				'<li class="clearfix">',
-					'<a href="javascript:void(0)" class="i_icoCloseSmall"></a>',
-					'<span>4</span>',
-					'<p>武汉好在来酒屋</p>',
-				'</li>',
 			'</ul>',
-			'<p class="windowBoxA_menu_btn"><a href="javascript:void(0);" id="<%-cid%>-save" class="btnM">保存</a></p>',
 		'</div>',
 	'</div>'].join("\n"),
 

@@ -50,6 +50,25 @@ var createFile = function (obj, outPath) {
 	stream.pipe(gulp.dest(outPath));
 };
 
+var createFileByCss = function (obj, outPath) {
+	var stream = gulp.src(obj.src);
+	var md5 = gulp.src(obj.src);
+	
+	if(obj.merge){
+		stream =  stream.pipe(concat(obj.name));
+	}
+	
+	if(obj.compress){
+		stream = stream.pipe(minifycss());
+	}
+
+	stream.pipe(through.obj(function(file, enc, cb){
+		map[obj.name] = getFileMd5Str(file.contents);
+	}));
+
+	stream.pipe(gulp.dest(outPath));
+};
+
 var createMap = function (path, name) {
 	var context = fs.readFileSync(path + name, "utf-8");
 	var md5 = getFileMd5Str(context);
@@ -64,12 +83,16 @@ var replaceMD5 = function (obj) {
 			var	file = src.substring(src.lastIndexOf('/') + 1);
 			var md5 = map[file] || new Date().getTime();
 
+			src = src.replace("static/", "");
+			
 			return a.replace(b, src + "?v=" + md5);
 		}))
 		.pipe(replace(css_reg, function (a, b) {
 			var src = b.indexOf("?") > -1 ? b.substring(0,b.indexOf("?")) : b;
 			var	file = src.substring(src.lastIndexOf('/') + 1);
 			var md5 = map[file] || new Date().getTime();
+
+			src = src.replace("static/", "");
 
 			return a.replace(b, src + "?v=" + md5);
 		}))
@@ -80,7 +103,7 @@ var createCss = function () {
 	var config = getConfig("css");
 
 	for(var c in config){
-		createFile(config[c], out_css);
+		createFileByCss(config[c], out_css);
 	}
 
 	/*
@@ -127,7 +150,10 @@ gulp.task('release', function () {
 	createCss();
 	createImage();
 	createJs();
-	replaceMD5();
+
+	setTimeout(function() {
+		replaceMD5();	
+	}, 5000);
 });
 
 

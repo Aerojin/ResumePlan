@@ -11,11 +11,13 @@
 
         initialize: function (options) {
             this.model = options.model;
+            this.constant = options.constant;
 
             this.render();
             this.initEvents();
 
             this.initZoom();
+            this.initDrog();
             this.initSlideShow();
         },
 
@@ -23,10 +25,22 @@
             var _this = this;
             var ui = this.ui;
 
+            this.constant.on("change", function () {
+                _this.setItem(this.getChanged());
+            });
+
             ui.infoBox.hover(function() {
                 $(this).addClass('hover');
             }, function() {
                 $(this).removeClass('hover');
+            });
+
+            ui.infoBox.mousedown(function () {
+                $(this).addClass("focus").removeClass("hover");
+            });
+
+            ui.infoBox.mouseup(function () {
+                $(this).removeClass("focus");
             });
 
         },
@@ -70,13 +84,43 @@
                 span: this.ui.span,
                 element: this.ui.resume
             });
+        },
+
+        initDrog: function () {
+            var id = _.template("drag-<%-id%>");
+            var array = ["base","education", "school", "work", "skill", "prize", "evaluation","research", "article", "subject", "hobbies"];
+
+            for(var i = 0; i < array.length; i++){
+                var newId = id({id: array[i]});
+
+                new Drag(newId,newId);
+
+                this.setItem({
+                    key: array[i],
+                    value: this.constant.getKey(array[i])
+                });
+            }
+        },
+
+        setItem: function (data) {
+            var id = _.template("#drag-<%-id%>");
+                id = id({id: data.key});
+
+            if(data.value){
+                $(id).show();    
+            }else{
+                $(id).hide();
+            }
         }
 
     }));
 
     $(function () {
         var model = new WE.Resume.Model();
-        var view = new WE.Resume.View({model: model});
+        var view = new WE.Resume.View({
+            model: model,
+            constant: WE.Resume.getConstant()
+        });
     });
 
 

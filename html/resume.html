@@ -7,12 +7,11 @@
 <meta name="description" content="描述" />
 <meta content="zh-cn" http-equiv="content-language" />
 <meta content="版权" name="copyright" />
-<link rel="stylesheet" type="text/css" href="../static/css/jquery.ui.pack.css" />
 <link rel="stylesheet" type="text/css" href="../static/css/style.pack.css" />
 <script type="text/javascript" src="../static/js/libs.pack.js"></script>
-<script type="text/javascript" src="../static/js/jquery.ui.pack.js"></script>
 <script type="text/javascript" src="../static/js/we.base.pack.js"></script>
 <script type="text/javascript" src="../static/js/we.login.pack.js"></script>
+<script type="text/javascript" src="../static/js/we.drag.pack.js"></script>
 </head>
 <body class="bodyGray">
 	<div class="headerBlack">
@@ -87,7 +86,7 @@
 		</div>
 	</div>
 	<div class="main mt_47 clearfix" id="main">
-		<div class="resumeCon resumeConBox">
+		<div class="resumeCon resumeConBox" id="resume">
 			<div class="resumeCon_header clearfix">
 				<div class="resumeCon_img">
 					<span></span>
@@ -104,112 +103,114 @@
 				</div>
 			</div>
 			<div class="resume_body clearfix mt_20">
-				<div class="resume_body_left">
-					<div class="infoBox">
-						<h2>基本信息</h2>
-						<ul class="infoBoxList">
-							<li><strong>性别</strong><span>男</span></li>
-							<li><strong>政治面貌</strong><span>中共党员</span></li>
-							<li><strong>专业及学历</strong><span>财务管理 管理学学士</span></li>
-							<li><strong>电话</strong><span>13999999999</span></li>
-							<li><strong>电子邮箱</strong><span>13999999999@qq.com</span></li>
-						</ul>
-					</div>
-					<div class="infoBox">
-						<h2>校园经历</h2>
-						<ul class="infoBoxListB">
-							<li>
-								<strong>学生会主席<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>在任期间学生会获得校级优秀学生会(5/14)和最具组织力学生会称号(1/14)。</p>
-							</li>
-							<li>
-								<strong>外联部部长<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>负责学生会全部外联，赞助，嘉宾邀请及其他对外交流工作。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>任职期间曾与多种类型商户合作，在学校的元旦晚会上开创邀请明星加盟之先河。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>代表理工大学出席武汉市第十一届学生联合会代表大会。</p>
-							</li>
-							<li>
-								<strong>外联部部长<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>负责学生会全部外联，赞助，嘉宾邀请及其他对外交流工作。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>任职期间曾与多种类型商户合作，在学校的元旦晚会上开创邀请明星加盟之先河。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>代表理工大学出席武汉市第十一届学生联合会代表大会。</p>
-							</li>
-						</ul>
-					</div>
-					<div class="infoBox">
-						<h2>获奖经历</h2>
-						<ul class="infoBoxListA">
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-							<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
-						</ul>
-					</div>
-				</div>
-				<div class="resume_body_right">
-					<div class="infoBox">
-						<h2>教育背景</h2>
-						<ul class="infoBoxD">
-							<li class="infoBoxD_li clearfix">
-								<span class="infoBoxD_time">2010/09—2014/07</span>
-								<div class="infoBoxD_info">
-									<strong>武汉理工大学华夏学院</strong>
-									<p>本科 I 视觉传达</p>
-									<ul>
-										<li><i class="i_icoPoints"></i>GPA：3.7</li>
-										<li><i class="i_icoPoints"></i>专业排名：前10</li>
-									</ul>
+				<table id="dragTable" cellpadding="2"  style=" border:solid 0px green;width:98%;">
+					<tr>
+						<td valign="top" style="width:50%">
+							<div class="infoBox" id="drag-base">
+								<h2>基本信息</h2>
+								<ul class="infoBoxList">
+									<li><strong>性别</strong><span>男</span></li>
+									<li><strong>政治面貌</strong><span>中共党员</span></li>
+									<li><strong>专业及学历</strong><span>财务管理 管理学学士</span></li>
+									<li><strong>电话</strong><span>13999999999</span></li>
+									<li><strong>电子邮箱</strong><span>13999999999@qq.com</span></li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-school">
+								<h2>校园经历</h2>
+								<ul class="infoBoxListB">
+									<li>
+										<strong>学生会主席<span>2013.5-2013.7</span></strong>
+										<span>人文系学生会</span>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>在任期间学生会获得校级优秀学生会(5/14)和最具组织力学生会称号(1/14)。</p>
+									</li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-article">
+								<h2>发表文章</h2>
+								<ul class="infoBoxListA">
+									<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-prize">
+								<h2>获奖经历</h2>
+								<ul class="infoBoxListA">
+									<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛 <p>2014.10.10  全国铜奖</p></span></li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-skill">
+								<h2>技能</h2>
+								<ul class="infoBoxListA">
+									<li class="clearfix mb_10"><i></i><span>第八届挑战杯“复星”中国大学生创业计划竞赛</span></li>
+								</ul>
+							</div>
+						</td>
+						<td valign="top" style="width:50%">
+							<div class="infoBox" id="drag-education">
+								<h2>教育背景</h2>
+								<ul class="infoBoxD">
+									<li class="infoBoxD_li clearfix">
+										<span class="infoBoxD_time">2010/09—2014/07</span>
+										<div class="infoBoxD_info">
+											<strong>武汉理工大学华夏学院</strong>
+											<p>本科 I 视觉传达</p>
+											<ul>
+												<li><i class="i_icoPoints"></i>GPA：3.7</li>
+												<li><i class="i_icoPoints"></i>专业排名：前10</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-work">
+								<h2>工作经历</h2>
+								<ul class="infoBoxListB">
+									<li>
+										<strong>学生会主席<span>2013.5-2013.7</span></strong>
+										<span>人文系学生会</span>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>在任期间学生会获得校级优秀学生会(5/14)和最具组织力学生会称号(1/14)。</p>
+									</li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-research">
+								<h2>科研经历</h2>
+								<ul class="infoBoxListB">
+									<li>
+										<strong>学生会主席<span>2013.5-2013.7</span></strong>
+										<span>人文系学生会</span>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>在任期间学生会获得校级优秀学生会(5/14)和最具组织力学生会称号(1/14)。</p>
+									</li>
+								</ul>
+							</div>
+							<div class="infoBox" id="drag-evaluation">
+								<h2>自我评价</h2>
+								<div class="infoBoxE">在学习上力争上游，在学生工作中游刃有余，在实践活动中稳杂稳打。作为学生干部，我会组织，善沟通，重创新，有激情，愿学习，更能做到学习与工作的完美结合。作为一名有抱负的青年，我真诚、自信、谦逊、专注、独立。</div>
+							</div>
+							<div class="infoBox" id="drag-hobbies">
+								<h2>爱好</h2>
+								<div class="infoBoxE">
+									<p>日漫，游戏</p>
+									<p>爱读书，爱思考</p>
+									<p>研究3C产品，刷系统，看大神测评视频，观看科技</p>
+									<p>公司发布会</p>
+									<p>热爱各种运动，游泳初中得过全市中学生比赛第二名</p>
+									<p>听歌唱歌，尤爱摇滚民谣</p>
 								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="infoBox">
-						<h2>工作经历</h2>
-						<ul class="infoBoxListB">
-							<li>
-								<strong>学生会主席<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>在任期间学生会获得校级优秀学生会(5/14)和最具组织力学生会称号(1/14)。</p>
-							</li>
-							<li>
-								<strong>外联部部长<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>负责学生会全部外联，赞助，嘉宾邀请及其他对外交流工作。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>任职期间曾与多种类型商户合作，在学校的元旦晚会上开创邀请明星加盟之先河。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>代表理工大学出席武汉市第十一届学生联合会代表大会。</p>
-							</li>
-							<li>
-								<strong>外联部部长<span>2013.5-2013.7</span></strong>
-								<span>人文系学生会</span>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>负责学生会全部外联，赞助，嘉宾邀请及其他对外交流工作。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>任职期间曾与多种类型商户合作，在学校的元旦晚会上开创邀请明星加盟之先河。</p>
-								<p><i class="i_icoPoint mr_5 ml_5"></i>代表理工大学出席武汉市第十一届学生联合会代表大会。</p>
-							</li>
-						</ul>
-					</div>
-					<div class="infoBox">
-						<h2>自我评价</h2>
-						<div class="infoBoxE">在学习上力争上游，在学生工作中游刃有余，在实践活动中稳杂稳打。作为学生干部，我会组织，善沟通，重创新，有激情，愿学习，更能做到学习与工作的完美结合。作为一名有抱负的青年，我真诚、自信、谦逊、专注、独立。</div>
-					</div>
-					<div class="infoBox">
-						<h2>爱好</h2>
-						<div class="infoBoxE">
-							<p>日漫，游戏</p>
-							<p>爱读书，爱思考</p>
-							<p>研究3C产品，刷系统，看大神测评视频，观看科技</p>
-							<p>公司发布会</p>
-							<p>热爱各种运动，游泳初中得过全市中学生比赛第二名</p>
-							<p>听歌唱歌，尤爱摇滚民谣</p>
-						</div>
-					</div>
-				</div>
+							</div>
+							<div class="infoBox" id="drag-subject">
+								<h2>主修课程</h2>
+								<ul class="infoBoxListB">
+									<li>
+										<p><i class="i_icoPoint mr_5 ml_5"></i>策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。</p>
+									</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div class="resumeMenu clearfix">
@@ -371,5 +372,16 @@
 <script src="../static/js/we.resume.kit.pack.js" type="text/javascript"></script>
 <script src="../static/js/we.common.pack.js" type="text/javascript"></script>
 <script src="../static/js/we.resume.pack.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function () {
+		var list = $(".infoBox");
+		var obj = {};
+
+		for(var i = 0; i < list.length; i++){
+			obj[i] = new Drag(list.get(i), list.get(i));
+		}
+	});
+
+</script>
 </body>
 </html>
