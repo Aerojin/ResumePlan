@@ -16,7 +16,7 @@
 	                        '<span>“ 5元解锁 ” </span>',
 	                        '<a href="javascript:void(0);" class="btnH btn-unlock">点击解锁</a>',
 	                    '</p>',
-	                    '<a href="javascript:void(0);" class="btnCollect btn-collect">',
+	                    '<a href="javascript:void(0);" class="btnCollect hover btn-collect" style="display:none;">',
 	                        '<%=collect%>',
 	                    '</a>',
                     '</div>',

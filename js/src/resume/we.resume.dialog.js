@@ -49,12 +49,13 @@
             this.ui = {};
             this.ui.wrap = this.el;
             this.ui.body = $("body");
+            this.ui.background = $(this.background);
             this.ui.btnClose = this.getCidEl("close", this.ui.wrap);
             this.ui.container = this.getCidEl("container", this.ui.wrap);
 
+            this.ui.background.appendTo(this.ui.body) ;
             this.ui.container.empty().append(this.content);
             this.ui.wrap.width(this.width).appendTo(this.ui.body);
-
         },
 
         setPosition: function () {
@@ -66,6 +67,7 @@
 
         close: function () {
         	this.ui.wrap.remove();
+            this.ui.background.remove();
             this.constant.off("change", this.setState);
 
         	this.onClose();
@@ -109,6 +111,8 @@
 			'<h2><%-title%> <%=state%></h2>',
 			'<div id="<%-cid%>-container"></div>',
 		'</div>'].join("\n"),
+
+        background: '<span class="blackBackground"></span>',
 
         stateTmpl: {
             lock: '<span>必填板块无法隐藏</span>',

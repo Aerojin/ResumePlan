@@ -56,6 +56,7 @@
             this.master.on("change:state", function () {
                 var state = this.get("state");
                 
+                _this.createDialog();
                 _this[state].render.call(_this);
             });
 
@@ -119,6 +120,10 @@
 
                 view.on("send", function () {
                     _this.dialog.close();
+                });
+
+                view.on("close", function () {
+                    _this.master.set({state: _this.master.STATE.LOGIN});
                 });
             }
         }

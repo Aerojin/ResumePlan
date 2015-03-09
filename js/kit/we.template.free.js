@@ -13,7 +13,7 @@
                         '<img src="<%-image%>" alt="" title="" />',
                         '<span class="blackBg hover background" style="display:none;"></span>',
                         '<a href="javascript:void(0);" class="i_icoAdd hover btn-add" style="display:none;"></a>',
-                        '<a href="javascript:void(0);" class="btnCollect btn-collect">',
+                        '<a href="javascript:void(0);" class="btnCollect hover btn-collect" style="display:none;">',
                             '<%=collect%>',
                         '</a>',
                     '</div>',

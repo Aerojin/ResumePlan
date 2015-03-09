@@ -18,6 +18,7 @@
 
         initEvents: function () {
             var _this = this;
+            var offset = _this.ui.menu.offset();
 
             this.ui.btnWhite.click(function () {
                 _this.showWhite();
@@ -25,11 +26,12 @@
 
             this.ui.document.scroll(function () {
                 var scrollTop = $(this).scrollTop();
-                var offset = _this.ui.menu.offset();
 
                 if(scrollTop > offset.top){
+                    _this.ui.menu.hide();
                     _this.ui.menuMini.show();
                 }else{
+                    _this.ui.menu.show();
                     _this.ui.menuMini.hide();
                 }
             });

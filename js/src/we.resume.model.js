@@ -9,7 +9,7 @@
 
         defaults: function () {
             return {
-                
+                scroll: false
             };
         },      
 

@@ -13,12 +13,12 @@
 <script type="text/javascript" src="../static/js/we.login.pack.js"></script>
 <script type="text/javascript" src="../static/js/we.drag.pack.js"></script>
 </head>
-<body class="bodyGray">
+<body class="bodyGray" style="min-width:1100px;">
 	<div class="headerBlack">
 		<div class="headerBlackCon clearfix">
 			<div class="headerNav clearfix">
 				<a href="index.html"><i class="i_icoHomeN"></i></a>
-				<a href="selected.html" class="focus"><i class="i_icoReplace"></i>换模板</a>
+				<a href="javascript:void(0);" id="btn-replace" class="focus"><i class="i_icoReplace"></i>换模板</a>
 				<a href="javascript:void(0);"><i class="i_icoExport"></i>导出简历</a>
 			</div>
 			<div class="nav">
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="scroll ">
+	<div class="scroll pt_62" id="scroll" style="display:none;">
 		<div class="scrollWindow">
 			<ul class="scroll_ul clearfix" id="wrap-slide">
 				<li class="focus">
@@ -85,8 +85,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="main mt_47 clearfix" id="main">
-		<div class="resumeCon resumeConBox">
+	<div class="main pt_62 mt_47 clearfix" id="main">
+		<div class="resumeCon">
 			<div class="resumeConSize" id="resume">
 			<div class="resumeCon_header clearfix">
 				<div class="resumeCon_img">
@@ -215,7 +215,7 @@
 			</div>
 		</div>
 		</div>
-		<div class="resumeMenu clearfix">
+		<div class="resumeMenu resumeMenuFixed clearfix" id="resume-menu">
 			<h2>编辑内容</h2>
 			<ul class="resumeMenu_list clearfix" id="sidebar">
 				<li>

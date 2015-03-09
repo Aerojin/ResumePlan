@@ -116,6 +116,16 @@
             });
 
             $('body').append(wrap);
+
+            this.hideSuccess(wrap);
+        },
+
+        hideSuccess: function (wrap) {
+            var _this = this;
+            setTimeout(function () {
+                wrap.remove();
+                _this.trigger("close");
+            }, 3000);
         },
 
         validate: function () {

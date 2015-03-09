@@ -37,6 +37,7 @@
             this.ui = {};
             this.ui.wrap = this.wrap;
             this.ui.body = $("body");
+            this.ui.html = $('html');
             this.ui.mask = $(this.maskTmpl);
             this.ui.title = this.getCidEl("title", this.ui.wrap);
             this.ui.btnClose = this.getCidEl("close", this.ui.wrap);            
@@ -44,7 +45,8 @@
 
             this.ui.content.empty().append(this.content);
             this.$el.append(this.wrap);
-            //this.ui.body.append(this.ui.mask);
+            this.ui.body.append(this.ui.mask);
+            this.ui.html.css({'padding-right': '17px','margin': '0px', 'overflow-y': 'hidden'});
         },
 
         setTitle: function (title) {
@@ -61,14 +63,14 @@
 
         close: function () {
             this.ui.wrap.remove();
-            //this.ui.mask.remove();
+            this.ui.mask.remove();
+            this.ui.html.css({'padding-right': '0px', 'margin': '0px', 'overflow-y': 'auto'});
             this.onClose();
         },
 
         onClose: function () {
 
         },
-
 
         template: '<div class="window" id="<%-cid%>-dialog">\
                         <a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoClose"></a>\

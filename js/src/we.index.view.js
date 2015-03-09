@@ -51,6 +51,14 @@
                     _this.animation();
                 },10);                    
             });
+
+            this.ui.tabContent.hover(function () {
+                if(_this.interval){
+                    clearInterval(_this.interval);
+                }
+            }, function() {
+                _this.animation();
+            })
     	},
 
     	render: function () {
@@ -68,7 +76,7 @@
             this.ui.tabButton.eq(index).find(".i_icoTop").show();
 
             this.ui.tabContent.removeClass("on").hide();
-            this.ui.tabContent.eq(index).addClass("on").show();
+            this.ui.tabContent.eq(index).addClass("on").fadeIn("slow");
         },
         animation: function () {
             var _this = this;

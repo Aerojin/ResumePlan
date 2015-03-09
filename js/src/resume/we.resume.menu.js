@@ -129,8 +129,8 @@
         ],
 
         initialize: function (options) {
-        	this.model = options.model;
             this.constant = options.constant;
+            this.model = new WE.Resume.Menu.Model();
 
         	this.render();
         	this.initEvents();
@@ -170,6 +170,23 @@
         		_this.gotoPage(pageIndex);
         	});
 
+            this.on("show", function (height) {
+                if(!_this.topHeight){
+                    _this.topHeight = height;
+                }
+
+                _this.ui.wrap.animate({top: height + 100});
+            });
+
+            this.on("scroll", function (offset) {
+                var scrollTop = $(document).scrollTop();
+                var top = _this.topHeight + 110 - scrollTop;
+                    top = top < 100 ? 100 : top;
+
+                _this.ui.wrap.animate({top: top});
+                
+            });
+
 
         	this.ui.btnPrev.click(function () {
         		var pageIndex = _this.model.get("pageIndex") - 1;
@@ -207,6 +224,21 @@
         	this.ui.sidebar.delegate("#btn-exports", "click", function () {
         		window.location.href = "user_center.html";
         	});
+
+            $(window).resize(function () {
+                var maxWidth = $(document).width();
+                var offset = _this.ui.parent.offset();
+                var wrapWidth = _this.ui.wrap.width();
+                var width = maxWidth - offset.left - wrapWidth - 815;
+
+                console.log("maxWidth",maxWidth);
+                console.log("offset",offset);
+                console.log("wrapWidth",wrapWidth);
+                console.log("width",width);
+                _this.ui.wrap.css({right: width / 2});
+            });
+
+            $(window).resize();
         },
 
         render: function () {
@@ -215,6 +247,8 @@
         	this.ui.sidebar = $("#sidebar");
         	this.ui.btnPrev = $("#btn-prev");
         	this.ui.btnNext = $("#btn-next");
+            this.ui.wrap = $("#resume-menu");
+            this.ui.parent = $("#resume").parent();
         },
 
         showDialog: function (key, data) {
@@ -311,7 +345,7 @@
             }
 
             if(this.constant.getKey(data.key)){
-                return "i_icoLook btn-ico";
+                return "i_icoLookB btn-ico";
             }
 
             return "i_icoUnlook  btn-ico";
@@ -328,13 +362,5 @@
         ].join("\n")
 
     }));
-
-	$(function () {
-		var model = new WE.Resume.Menu.Model();
-    	var view = new WE.Resume.Menu.View({
-            model: model,
-            constant: WE.Resume.getConstant()
-        });
-	});
 
 })(WE, jQuery, Backbone);

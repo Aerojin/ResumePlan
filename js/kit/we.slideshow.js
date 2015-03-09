@@ -104,8 +104,9 @@
 
 		this.fade = function( index ){
 		
+			
 			this.elements.eq(this.currentIndex).stop(true, true).fadeOut().clearQueue();
-			this.elements.eq(index).stop(true, true).fadeIn().clearQueue();			
+			this.elements.eq(index).stop(true, true).fadeIn().clearQueue();	
 			this.currentIndex = index;
 			this.onChange( this.currentIndex );
 		};

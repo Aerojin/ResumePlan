@@ -68,7 +68,7 @@ a:hover{color:#333; text-decoration:none;}
 .i_icoColorOne, .i_icoColorTwo, .i_icoColorThree, .i_icoColorFour, .i_icoColorFive, .i_icoColorSix, .i_icoColorSeven, .i_icoColorEight, .i_icoColorNine, .i_icoColorTen, .i_icoColorEleven,
 .btnC, .btnD, .btnE, .btnH,
 .i_icoSone, .i_icoStwo, .i_icoSthrere, .i_icoSfour, .i_icoSfive, .i_icoCloseW, .i_icoReplace, .i_icoExport, .i_icoSok, .i_icoLeft, .i_icoRight, .i_icoLeftNo, .i_icoRightNo,
-.i_icoInfo, .i_icoMone, .i_icoMtwo, .i_icoMthree, .i_icoMfour, .i_icoMfive, .i_icoMsix, .i_icoMseven, .i_icoMeight, .i_icoMnine, .i_icoMten, .i_icoMeleven, .i_icoMtwelve, .i_icoAdds, .i_icoCut, .i_icoThrough, .i_icoLoad, .i_icoWadd, .i_icoCloseSmall, .i_icoErrors, .loginImgA, .i_icoPay, .payTableGreen i, .payTableOrange i, .payCon_radio i, .payCon_radioGreen.on i, .payCon_radioOrange.on i, .i_icoPicture, .i_icoPoint, .i_icoPoints, .i_icoPointss, .i_icoLock, .i_icoLook, .i_icoUnlook, .i_icoLooks, .i_icoUnlooks
+.i_icoInfo, .i_icoMone, .i_icoMtwo, .i_icoMthree, .i_icoMfour, .i_icoMfive, .i_icoMsix, .i_icoMseven, .i_icoMeight, .i_icoMnine, .i_icoMten, .i_icoMeleven, .i_icoMtwelve, .i_icoAdds, .i_icoCut, .i_icoThrough, .i_icoLoad, .i_icoWadd, .i_icoCloseSmall, .i_icoErrors, .loginImgA, .i_icoPay, .payTableGreen i, .payTableOrange i, .payCon_radio i, .payCon_radioGreen.on i, .payCon_radioOrange.on i, .i_icoPicture, .i_icoPoint, .i_icoPoints, .i_icoPointss, .i_icoLock, .i_icoLookB, .i_icoUnlook, .i_icoLooks, .i_icoUnlooks
 {background:url(../images/icon_01.png) no-repeat; _background:url(../images/icon_01_8.png) no-repeat; display:inline-block; vertical-align:middle; overflow:hidden;}
 .logo{background-position:-160px -226px; width:166px; height:40px;}
 .logoOther{background-position:-160px -226px; width:34px; height:40px;}
@@ -194,7 +194,7 @@ a:hover{color:#333; text-decoration:none;}
 }
 .i_icoPointsss{background-color:#3284bc; width:7px; height:7px; display:inline-block; vertical-align:middle;}
 .i_icoLock{background-position:-439px -591px; width:12px; height:16px;}
-.i_icoLook{background-position:-452px -591px; width:16px; height:16px;}
+.i_icoLookB{background-position:-452px -591px; width:16px; height:16px;}
 .i_icoUnlook{background-position:-469px -591px; width:16px; height:16px;}
 .i_icoLooks{background-position:-452px -608px; width:16px; height:18px;}
 .i_icoUnlooks{background-position:-469px -608px; width:16px; height:16px;}
@@ -347,7 +347,7 @@ a:hover{color:#333; text-decoration:none;}
 .user .i_icoDowns{margin-left:11px;}
 .user a{color:#fff;}
 .user.focus{background-color:#262626;}
-.userList{position:absolute; right:0; top:60px; width:135px; background-color:#000;}
+.userList{position:absolute; right:0; top:60px; width:118px; background-color:#000;}
 .userList a{line-height:30px; height:30px; padding:0 14px; color:#868686; display:block;}
 .userList a:hover{background-color:#262626;}
 
@@ -402,10 +402,10 @@ a:hover{color:#333; text-decoration:none;}
 .contentTabs_list li.focus .TabsColorFive{color:#b9a999;}
 
 /*底部*/
-.footer{border-top:1px solid #e9e9e9; padding:60px 0 55px; position:relative; z-index:2;}
+.footer{background:url(../images/bg_05.png) repeat-x; padding:60px 0 55px; position:relative; z-index:2;}
 .footerConInfo{float:left;}
-.footerConInfo p{color:#5e5e5e;}
-.footerConInfo span{color:#c0bfbf; display:inline-block; margin-top:12px;}
+.footerConInfo p{color:#c0bfbf;}
+.footerConInfo span{color:#5e5e5e; display:inline-block; margin-top:12px;}
 .footerConBtn{float:right; position:relative; zoom:1;}
 .footerConBtn a{margin-left:20px;}
 .footerWindow{position:absolute; right:-69px; bottom:55px; border:7px solid #353535; padding:12px; background-color:#fff;
@@ -510,11 +510,12 @@ a:hover{color:#333; text-decoration:none;}
 .colorBoxFoucs .i_icoColorEleven{background-position:-260px -344px; width:25px; height:25px;}
 
 /*模板*/
-.templateBg{background:url(../images/bg_01.png) repeat-y; padding-bottom:50px;}
-.template h2{font-size:14px; color:#a8a8a8; font-weight:normal; line-height:20px;}
+.templateBg{/*background:url(../images/bg_01.png) repeat-y;*/ padding-bottom:50px;}
+.template h2{font-size:14px; color:#a8a8a8; font-weight:normal; line-height:20px; padding-bottom:5px;}
 .template_left{float:left; width:640px;}
 .template_right{float:right; width:310px;}
-.template li{float:left; width:310px; height:514px; margin-right:9px; _display:inline;}
+.template ul{margin-left:-15px;}
+.template li{float:left; width:310px; height:514px; margin-left:15px; _display:inline;}
 .template .templateLi{border:1px solid #e1e1e1; position:relative; zoom:1; width:308px; height:437px;}
 .template li .blackBg{background:#000; filter:alpha(opacity=30); -moz-opacity:0.3; -khtml-opacity:0.3; opacity:0.3; position:absolute; left:0; top:0; width:308px; height:437px;}
 .template li .whiteBg{background:#fff; filter:alpha(opacity=70); -moz-opacity:0.7; -khtml-opacity:0.7; opacity:0.7; position:absolute; left:0; top:0; width:308px; height:437px;}
@@ -766,7 +767,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeMenu_list li.not a, .resumeMenu_list li.not a:hover{background-color:#222322;}
 .resumeMenu_list a{background-color:#16bb00; color:#fff; width:85px; height:73px; display:inline-block; text-align:center; padding-top:12px; position:relative; zoom:1;}
 .resumeMenu_list a:hover{background-color:#8bed00;}
-.resumeMenu_list a .i_icoLock, .resumeMenu_list a .i_icoLook, .resumeMenu_list a .i_icoUnlook{position:absolute; right:2px; bottom:2px;}
+.resumeMenu_list a .i_icoLock, .resumeMenu_list a .i_icoLookB, .resumeMenu_list a .i_icoUnlook{position:absolute; right:2px; bottom:2px;}
 .resumeMenu_list p{margin-top:12px;}
 .resumeMenuBtn{text-align:center; margin-top:46px;}
 .resumeMenuBtn .btnLa{font-size:14px; color:#7c7c7c; margin-right:20px;}

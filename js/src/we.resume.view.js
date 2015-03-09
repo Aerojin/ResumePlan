@@ -18,6 +18,7 @@
 
             this.initZoom();
             this.initDrog();
+            this.initMenu();
             this.initSlideShow();
         },
 
@@ -27,6 +28,17 @@
 
             this.constant.on("change", function () {
                 _this.setItem(this.getChanged());
+            });
+
+            this.model.on("change:scroll", function () {
+                if(this.get("scroll")){
+                    _this.ui.divScroll.show("fast", function () {
+                        _this.menuView.trigger("show", $(this).height());
+                    });
+                }else{
+                    _this.ui.divScroll.hide("fast");
+                    _this.menuView.trigger("show", 0);
+                }
             });
 
             ui.infoBox.hover(function() {
@@ -43,6 +55,25 @@
                 $(this).removeClass("focus");
             });
 
+            ui.btnReplace.click(function () {
+                var scroll = _this.model.get("scroll");
+
+                _this.model.set({scroll: !scroll});
+            });
+
+            $(document).scroll(function() {
+                if(_this.model.get("scroll")){
+
+                    if(_this.timer){
+                        clearTimeout(_this.timer);
+                    }
+
+                    _this.timer = setTimeout(function () {
+                        _this.menuView.trigger("scroll", _this.ui.main.offset());    
+                    }, 50);
+                }
+            });
+
         },
 
         render: function () {
@@ -55,6 +86,8 @@
             this.ui.btnCut = $("#btn-cut");
             this.ui.resume = $("#resume");
             this.ui.span = $("#span-text");
+            this.ui.btnReplace = $("#btn-replace");
+            this.ui.divScroll = $("#scroll");
 
             this.ui.infoBox = $(".infoBox");
         },
@@ -100,6 +133,12 @@
                     value: this.constant.getKey(array[i])
                 });
             }
+        },
+
+        initMenu: function () {
+            this.menuView = new WE.Resume.Menu.View({
+                constant: this.constant
+            });
         },
 
         setItem: function (data) {
