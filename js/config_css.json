@@ -7,15 +7,5 @@
 			"./css/contentShow.css",
 			"./css/style.css"
 		]
-	},
-	"jquery-ui": {
-		"merge": true,
-		"compress": true,
-		"name": "jquery.ui.pack.css",
-		"src": [
-			"./css/jquery-ui.css",
-			"./css/jquery-ui.structure.css",
-			"./css/jquery-ui.theme.css"
-		]
 	}
 }
