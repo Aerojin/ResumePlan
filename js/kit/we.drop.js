@@ -116,6 +116,7 @@ Drag.prototype = {
         //设置点击是否透明，默认透明60%
         titleBar = Common.getItself(titleBar);
         dragDiv = Common.getItself(dragDiv);
+
         this.dragArea = { maxLeft: -9999, maxRight: 9999, maxTop: -9999, maxBottom: 9999 };
         if (Options) {
             this.opacity = Options.opacity ? (isNaN(parseInt(Options.opacity)) ? 100 : parseInt(Options.opacity)) : 100;
@@ -140,6 +141,7 @@ Drag.prototype = {
 
         titleBar.onmousedown = function(e) {
             var ev = e || window.event || Common.getEvent();
+            console.log(ev);
             //只允许通过鼠标左键进行拖拽,IE鼠标左键为1 FireFox为0
             if (Common.isIE && ev.button == 1 || !Common.isIE && ev.button == 0) {
             }
@@ -217,7 +219,6 @@ Drag.prototype = {
                     var movePos = Common.getMousePos(ev);
                     dragDiv.style.left = Math.max(Math.min(movePos.x - dragObj.tmpX, dragObj.dragArea.maxRight), dragObj.dragArea.maxLeft) + "px";
                     dragDiv.style.top = Math.max(Math.min(movePos.y - dragObj.tmpY, dragObj.dragArea.maxBottom), dragObj.dragArea.maxTop) + "px";
-
                     var targetDiv = null;
                     for (var k = 0; k < dragObj.dragArray.length; k++) {
                         if (dragDiv == dragObj.dragArray[i]) {
@@ -227,56 +228,57 @@ Drag.prototype = {
                         if (movePos.x > dragObj.dragArray[k].PosLeft && movePos.x < dragObj.dragArray[k].PosLeft + dragObj.dragArray[k].PosWidth
                             && movePos.y > dragObj.dragArray[k].PosTop && movePos.y < dragObj.dragArray[k].PosTop + dragObj.dragArray[k].PosHeight
                         ) {
-                            targetDiv = document.getElementById(dragObj.dragArray[k].DragId);
+                            targetDiv = $("#" + dragObj.dragArray[k].DragId);
+
                             if (movePos.y < dragObj.dragArray[k].PosTop + dragObj.dragArray[k].PosHeight / 2) {
                                 //往上移
                                 dashedElement.style.width = targetDiv.offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
-                                targetDiv.parentNode.insertBefore(dashedElement, targetDiv);
+                                targetDiv.before(dashedElement);
                             }
                             else {
                                 //往下移
                                 dashedElement.style.width = targetDiv.offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
-                                if (targetDiv.nextSibling) {
-                                    targetDiv.parentNode.insertBefore(dashedElement, targetDiv.nextSibling);
-                                }
-                                else {
-                                    targetDiv.parentNode.appendChild(dashedElement);
-                                }
+                                targetDiv.after(dashedElement);
                             }
+
+                            break;
                         }
                     }
-                    
-                    for (j = 0; j < dragTbl.rows[0].cells.length; j++) {
-                        var startLeft = Common.getElementPos(dragTbl.rows[0].cells[j]).x;
-                        if (movePos.x > startLeft && movePos.x < startLeft + dragTbl.rows[0].cells[j].offsetWidth) {
-                            ///列无DIV
-                            if (dragTbl.rows[0].cells[j].getElementsByTagName("div").length == 0) {
-                                dashedElement.style.width = dragTbl.rows[0].cells[j].offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
-                                dragTbl.rows[0].cells[j].appendChild(dashedElement);
-                            }
-                            else {
-                                var posFirstChild = Common.getElementPos(Common.firstChild(dragTbl.rows[0].cells[j], "DIV"));
-                                var posLastChild = Common.getElementPos(Common.lastChild(dragTbl.rows[0].cells[j], "DIV"));
-                                //处理特殊情况：在最上/下面MOVE时不碰到现有DIV的情况下，又回到起始拖拽的列最上/下方
-                                var tmpUp, tmpDown;
-                                if (tmpObj.colId == j) {
-                                    tmpUp = tmpObj.firstChildUp;
-                                    tmpDown = tmpObj.lastChildDown;
-                                }
-                                else {
-                                    tmpUp = posFirstChild.y;
-                                    tmpDown = posLastChild.y + Common.lastChild(dragTbl.rows[0].cells[j], "DIV").offsetHeight;
-                                }
 
-                                if (movePos.y < tmpUp) {///从最上面插入虚线框
-                                    dashedElement.style.width = Common.firstChild(dragTbl.rows[0].cells[j], "DIV").offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
-                                    dragTbl.rows[0].cells[j].insertBefore(dashedElement, Common.firstChild(dragTbl.rows[0].cells[j], "DIV"));
-                                }
-                                else if (movePos.y > tmpDown) {///从最下面插入虚线框
-                                    dashedElement.style.width = Common.lastChild(dragTbl.rows[0].cells[j], "DIV").offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
+
+                    if(!targetDiv){
+                        for (j = 0; j < dragTbl.rows[0].cells.length; j++) {
+                            var startLeft = Common.getElementPos(dragTbl.rows[0].cells[j]).x;
+                            if (movePos.x > startLeft && movePos.x < startLeft + dragTbl.rows[0].cells[j].offsetWidth) {
+                                ///列无DIV
+                                if (dragTbl.rows[0].cells[j].getElementsByTagName("div").length == 0) {
+                                    dashedElement.style.width = dragTbl.rows[0].cells[j].offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
                                     dragTbl.rows[0].cells[j].appendChild(dashedElement);
                                 }
+                                else {
+                                    var posFirstChild = Common.getElementPos(Common.firstChild(dragTbl.rows[0].cells[j], "DIV"));
+                                    var posLastChild = Common.getElementPos(Common.lastChild(dragTbl.rows[0].cells[j], "DIV"));
+                                    //处理特殊情况：在最上/下面MOVE时不碰到现有DIV的情况下，又回到起始拖拽的列最上/下方
+                                    var tmpUp, tmpDown;
+                                    if (tmpObj.colId == j) {
+                                        tmpUp = tmpObj.firstChildUp;
+                                        tmpDown = tmpObj.lastChildDown;
+                                    }
+                                    else {
+                                        tmpUp = posFirstChild.y;
+                                        tmpDown = posLastChild.y + Common.lastChild(dragTbl.rows[0].cells[j], "DIV").offsetHeight;
+                                    }
 
+                                    if (movePos.y < tmpUp) {///从最上面插入虚线框
+                                        dashedElement.style.width = Common.firstChild(dragTbl.rows[0].cells[j], "DIV").offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
+                                        dragTbl.rows[0].cells[j].insertBefore(dashedElement, Common.firstChild(dragTbl.rows[0].cells[j], "DIV"));
+                                    }
+                                    else if (movePos.y > tmpDown) {///从最下面插入虚线框
+                                        dashedElement.style.width = Common.lastChild(dragTbl.rows[0].cells[j], "DIV").offsetWidth - 2 * parseInt(dashedElement.style.borderWidth) + "px";
+                                        dragTbl.rows[0].cells[j].appendChild(dashedElement);
+                                    }
+
+                                }
                             }
                         }
                     }
@@ -327,16 +329,20 @@ Drag.prototype = {
         return maxZindex;
     },
     RegDragsPos: function() {
-        var arrDragDivs = new Array();
-        var dragTbl = document.getElementById("dragTable");
         var tmpDiv, tmpPos;
-        for (i = 0; i < dragTbl.getElementsByTagName("div").length; i++) {
-            tmpDiv = dragTbl.getElementsByTagName("div")[i];
-            if (tmpDiv.className == "dragDiv") {
-                tmpPos = Common.getElementPos(tmpDiv);
-                arrDragDivs.push({ DragId: tmpDiv.id, PosLeft: tmpPos.x, PosTop: tmpPos.y, PosWidth: tmpDiv.offsetWidth, PosHeight: tmpDiv.offsetHeight });
-            }
+        var arrDragDivs = new Array();
+        var dragDiv = $("#dragTable .dragDiv:visible");
+
+        for (i = 0; i < dragDiv.length; i++) {
+            tmpDiv = dragDiv.get(i);
+            tmpPos = Common.getElementPos(tmpDiv);
+            arrDragDivs.push({ DragId: tmpDiv.id, PosLeft: tmpPos.x, PosTop: tmpPos.y, PosWidth: tmpDiv.offsetWidth, PosHeight: tmpDiv.offsetHeight });
         }
+        console.log("arrDragDivs:",arrDragDivs);
+
+        //$("#dragTable .dragDiv:hidden").remove();
         return arrDragDivs;
+
+        
     }
 }

@@ -11,7 +11,15 @@
 <script type="text/javascript" src="../static/js/libs.pack.js"></script>
 <script type="text/javascript" src="../static/js/we.base.pack.js"></script>
 <script type="text/javascript" src="../static/js/we.login.pack.js"></script>
-<script type="text/javascript" src="../static/js/we.drag.pack.js"></script>
+<script src="../static/js/we.drag.pack.js" type="text/javascript"></script>
+    <style type="text/css">
+
+    .dragDiv,.nodragDiv{
+	    position:relative;
+	    filter:alpha(opacity=100);
+	    opacity:1;
+	}
+    </style>
 </head>
 <body class="bodyGray" style="min-width:1100px;">
 	<div class="headerBlack">
@@ -91,7 +99,7 @@
 			<div class="resumeCon_header clearfix">
 				<div class="resumeCon_img">
 					<span></span>
-					<img src="../static/images/pic_10.jpg" alt="" title="" />
+					<img src="../images/pic_10.jpg" alt="" title="" />
 				</div>
 				<div class="resumeCon_name">
 					<strong>付瀚轮</strong>
@@ -371,19 +379,9 @@
 		</div>
 	</div>
 </div>
+
 <script src="../static/js/we.resume.kit.pack.js" type="text/javascript"></script>
 <script src="../static/js/we.common.pack.js" type="text/javascript"></script>
 <script src="../static/js/we.resume.pack.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(function () {
-		var list = $(".infoBox");
-		var obj = {};
-
-		for(var i = 0; i < list.length; i++){
-			obj[i] = new Drag(list.get(i), list.get(i));
-		}
-	});
-
-</script>
 </body>
 </html>

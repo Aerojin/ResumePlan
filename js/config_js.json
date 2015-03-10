@@ -14,7 +14,7 @@
 		"compress": true,
 		"name": "we.drag.pack.js",
 		"src": [
-			"./js/kit/we.drop.js"
+			"./js/kit/we.drag.js"
 		]
 	},
 	"base": {

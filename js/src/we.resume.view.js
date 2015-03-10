@@ -48,11 +48,11 @@
             });
 
             ui.infoBox.mousedown(function () {
-                $(this).addClass("focus").removeClass("hover");
+               // $(this).addClass("focus").removeClass("hover");
             });
 
             ui.infoBox.mouseup(function () {
-                $(this).removeClass("focus");
+                //$(this).removeClass("focus");
             });
 
             ui.btnReplace.click(function () {
@@ -72,6 +72,12 @@
                         _this.menuView.trigger("scroll", _this.ui.main.offset());    
                     }, 50);
                 }
+            });
+
+            $("body").click(function (event) {
+                console.log("event", event);
+                console.log("pageX", event.pageX);
+                console.log("pageY", event.pageY);
             });
 
         },
@@ -120,13 +126,18 @@
         },
 
         initDrog: function () {
-            var id = _.template("drag-<%-id%>");
+            var id = _.template("#drag-<%-id%>");
             var array = ["base","education", "school", "work", "skill", "prize", "evaluation","research", "article", "subject", "hobbies"];
 
             for(var i = 0; i < array.length; i++){
                 var newId = id({id: array[i]});
 
-                new Drag(newId,newId);
+                new WE.Drag({
+                    dragClass: ".dragDiv",
+                    dragTable: $("#dragTable"),
+                    dragElement: $(newId),
+                    moveElement: $(newId)
+                });
 
                 this.setItem({
                     key: array[i],

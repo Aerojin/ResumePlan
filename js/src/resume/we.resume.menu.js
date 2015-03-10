@@ -145,10 +145,10 @@
                 var changed = this.getChanged();
                 var actionClass = changed.value ? "" : "not";
                 var element = _this.ui.sidebar.find("#" + changed.key);
-                var ico = changed.value ? "i_icoLook" : "i_icoUnlook";
+                var ico = changed.value ? "i_icoLookB" : "i_icoUnlook";
 
                 element.removeClass("not").addClass(actionClass);
-                element.find(".btn-ico").removeClass("i_icoLook i_icoUnlook").addClass(ico);
+                element.find(".btn-ico").removeClass("i_icoLookB i_icoUnlook").addClass(ico);
             });
 
         	this.model.on("change:pageIndex", function () {
@@ -230,11 +230,7 @@
                 var offset = _this.ui.parent.offset();
                 var wrapWidth = _this.ui.wrap.width();
                 var width = maxWidth - offset.left - wrapWidth - 815;
-
-                console.log("maxWidth",maxWidth);
-                console.log("offset",offset);
-                console.log("wrapWidth",wrapWidth);
-                console.log("width",width);
+                
                 _this.ui.wrap.css({right: width / 2});
             });
 
