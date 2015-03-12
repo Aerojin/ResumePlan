@@ -136,7 +136,15 @@
                     dragClass: ".dragDiv",
                     dragTable: $("#dragTable"),
                     dragElement: $(newId),
-                    moveElement: $(newId)
+                    moveElement: $(newId),
+                    onMouseUp: function (element) {
+                        element.css({cursor: "default"});
+                        element.removeClass("focus");
+                    },
+                    onMouseDown: function (element) {
+                        element.css({cursor: "move"});
+                        element.addClass("focus").removeClass("hover");
+                    }
                 });
 
                 this.setItem({

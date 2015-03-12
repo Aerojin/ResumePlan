@@ -16,6 +16,8 @@
     	this.column = this.dragTable.find("tr:first td");
     	this.opacity = options.opacity ? options.opacity : 60;
 
+        this.onMouseUp = options.onMouseUp || function () {};
+        this.onMouseDown = options.onMouseDown || function () {};
 
     	this.init = function () {
     		this.tmpX = 0;
@@ -46,24 +48,21 @@
 
     	this.regEvent = function () {
     		this.dragElement.mousedown(function (event) {
-    			_this.mousedown(event);
-    			$(this).css({cursor: "move"});
-    			$(this).addClass("focus").removeClass("hover");
+    			_this.onMouseDown($(this));
+                _this.mousedown(event);
     		});
     	};
 
     	this.mousedown = function (ev) {
     		//只允许通过鼠标左键进行拖拽,IE鼠标左键为1 FireFox为0
-    		if (this.isIE && ev.button == 1 || !this.isIE && ev.button == 0) {
-            }
-            else {
+    		if (ev.button ==2) {
                 return false;
             }
 
             //处理特殊情况：在最上/下面MOVE时不碰到现有DIV的情况下，又回到起始拖拽的列最上/下方
             var tmpColId;
             for (c = 0; c < this.cells.length; c++) {
-            	if(this.cells[c].element.find(this.dragElement).length > 0){
+            	if(this.cells[c].element.find(this.moveElement).length > 0){
             		tmpColId = c;
             		this.currentCells = this.cells[c];
             		break;
@@ -77,33 +76,31 @@
             //保存当前可拖拽各容器的所在位置
             this.dragArray = this.regDragsPos();
             this.dashedElement = this.createDashed();
-            this.dragElement.after(this.dashedElement);
+            this.moveElement.after(this.dashedElement);
 
             //拖动时变为absolute
             this.moveable = true;
-            this.dragElement.css({
-            	"width": this.dragElement.width(),
+            this.moveElement.css({
+            	"width": this.moveElement.width(),
             	"position": "absolute",
             	"z-index": this.getZindex + 1
             });
-
-            console.log("dragElement:", this.dragElement)
 
             var downPos = {
             	x: ev.pageX,
             	y: ev.pageY
             };
 
-            this.tmpX = downPos.x - this.dragElement.offset().left;
-            this.tmpY = downPos.y - this.dragElement.offset().top;
+            this.tmpX = downPos.x - this.moveElement.get(0).offsetLeft;
+            this.tmpY = downPos.y - this.moveElement.get(0).offsetTop;
 
             if (this.isIE) {
-                this.dragElement.get(0).setCapture();
+                this.moveElement.get(0).setCapture();
             } else {
                 window.captureEvents(Event.mousemove);
             }
 
-            this.setOpacity(this.dragElement, this.opacity);
+            this.setOpacity(this.moveElement, this.opacity);
 
             //FireFox 去除容器内拖拽图片问题
             if (ev.preventDefault) {
@@ -127,24 +124,15 @@
                     ev.returnValue = false;
                 }
 
-                var movePos = this.getMousePos(ev);
-                /*
-                {
-	            	x: ev.pageX,
-	            	y: ev.pageY
-	            };*/
-
-	       
-
-	            console.log("movePos:", movePos);
+                var movePos = {
+                    x: ev.pageX,
+                    y: ev.pageY
+                };
 
 	            var top = Math.max(Math.min(movePos.y - this.tmpY, this.dragArea.maxBottom), this.dragArea.maxTop);
 	            var left = Math.max(Math.min(movePos.x - this.tmpX, this.dragArea.maxRight), this.dragArea.maxLeft);
 
-	            console.log("top:", top);
-	            console.log("left:", left);
-
-	            this.dragElement.css({
+	            this.moveElement.css({
 	            	top: top,
 	            	left: left
 	            });
@@ -155,7 +143,7 @@
                 for (var k = 0; k < this.dragArray.length; k++) {
                     drag = this.dragArray[k];
 
-                    if (this.dragElement.attr("id") == drag.DragId) {
+                    if (this.moveElement.attr("id") == drag.DragId) {
                         continue;
                     }
 
@@ -225,30 +213,30 @@
     	this.mouseup = function (ev) {
     		if (this.moveable) {
                 if (this.isIE) {
-                    this.dragElement.get(0).releaseCapture();
+                    this.moveElement.get(0).releaseCapture();
                 } else {
-                    window.releaseEvents(this.dragElement.get(0).mousemove);
+                    window.releaseEvents(this.moveElement.get(0).mousemove);
                 }
 
 				this.document.unbind("mouseup");
                 this.document.unbind("mousemove");
 
-                this.setOpacity(this.dragElement, 100);
+                this.setOpacity(this.moveElement, 100);
                 this.moveable = false;
                 this.tmpX = 0;
                 this.tmpY = 0;
 
                 //务必写在此IF内
-                this.dragElement.css({
+                this.moveElement.css({
                 	left: "",
                 	top: "",
                 	width: "",
                 	position: "",
                 });
 
-                this.dashedElement.before(this.dragElement);
-                this.dashedElement.remove();
-                this.dragElement.removeClass("focus");
+                this.dashedElement.before(this.moveElement);
+                this.dashedElement.remove();                
+                this.onMouseUp(this.moveElement);
             }
     	};
 
@@ -260,9 +248,8 @@
 	            	"margin-bottom": "6px",
 	            	"border": " dashed 2px #aaa ",
 	            	"width":  this.currentCells.width - this.borderWidth + "px",
-	            	"height": this.dragElement.height() - this.borderWidth + "px"
+	            	"height": this.moveElement.height() - this.borderWidth + "px"
 	            });
-
 
             return $(dashedElement);
     	};
@@ -283,14 +270,8 @@
 	        }
     	};
 
-
-
     	this.setOpacity = function(dragDiv, n) {
-	        if (this.isIE) {
-	            dragDiv.get(0).filters.alpha.opacity = n;
-	        }else {
-	            dragDiv.css({opacity: n / 100});
-	        }
+	        dragDiv.css({opacity: n / 100});
 	    };
 
 	    this.getZindex =  function() {
@@ -336,31 +317,6 @@
 				height: dom.height()
 			};
 		};
-
-		this.getMousePos = function(ev) {
-	        if (!ev) {
-	            ev = this.getEvent();
-	        }
-	        if (ev.pageX || ev.pageY) {
-	            return {
-	                x: ev.pageX,
-	                y: ev.pageY
-	            };
-	        }
-
-	        if (document.documentElement && document.documentElement.scrollTop) {
-	            return {
-	                x: ev.clientX + document.documentElement.scrollLeft - document.documentElement.clientLeft,
-	                y: ev.clientY + document.documentElement.scrollTop - document.documentElement.clientTop
-	            };
-	        }
-	        else if (document.body) {
-	            return {
-	                x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-	                y: ev.clientY + document.body.scrollTop - document.body.clientTop
-	            };
-	        }
-	    };
 
 		this.init();
     });

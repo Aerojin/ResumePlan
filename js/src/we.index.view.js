@@ -39,7 +39,7 @@
                 }
             });
 
-            this.ui.tabButton.click(function () {
+            this.ui.tabButton.mouseenter(function () {
                 var index = _this.ui.tabButton.index($(this));
 
                 if(_this.interval){
@@ -72,7 +72,9 @@
             
     	},
         showTab: function (index) {
+            this.ui.tabButton.removeClass("focus");
             this.ui.tabButton.find(".i_icoTop").hide();
+            this.ui.tabButton.eq(index).addClass("focus");
             this.ui.tabButton.eq(index).find(".i_icoTop").show();
 
             this.ui.tabContent.removeClass("on").hide();
