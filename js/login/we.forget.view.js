@@ -63,7 +63,8 @@
                         <a href="javascript:void(0);" id="btn-close" class="i_icoClose"></a>\
                         <i class="i_icoSuccess"></i>\
                         <p>邮件已发送，请到邮箱查收。</p>\
-                    </div>',
+                    </div>\
+                    <span class="blackBackground"></span>',
 
         initialize: function (options) {
             this.dialog = options.dialog;
@@ -97,6 +98,7 @@
         render: function () {
 
             this.ui = {};
+            this.ui.html = $('html');
             this.ui.btnSend = this.$el.find("#btn-send");
             this.ui.btnRefresh = this.$el.find("#btn-refresh");
             this.ui.txtUserName = this.$el.find("#txt-username");
@@ -116,6 +118,7 @@
             });
 
             $('body').append(wrap);
+            this.ui.html.css({'padding-right': '17px','margin': '0px', 'overflow-y': 'hidden'});
 
             this.hideSuccess(wrap);
         },
@@ -124,6 +127,7 @@
             var _this = this;
             setTimeout(function () {
                 wrap.remove();
+                _this.ui.html.css({'padding-right': '0px', 'margin': '0px', 'overflow-y': 'auto'});
                 _this.trigger("close");
             }, 3000);
         },

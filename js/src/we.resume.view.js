@@ -58,6 +58,7 @@
             ui.btnReplace.click(function () {
                 var scroll = _this.model.get("scroll");
 
+                $(document).scrollTop(0);
                 _this.model.set({scroll: !scroll});
             });
 

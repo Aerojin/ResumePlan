@@ -168,6 +168,17 @@
             this.ui.selImports = $("#sel-imports");
             this.ui.btnNext = $("#btn-next");
             this.ui.main = $("#main");
+            this.ui.footer = $("#footer");
+            this.ui.header = $("#header");
+
+            var win = $(window).height();
+            var footer = this.ui.footer.height(); 
+            var header = this.ui.header.height();
+            var context = this.ui.main.find(".context").height();
+            var height = win - footer - header - 115;
+            
+            this.ui.main.height(height);
+            this.ui.main.css({top: (height - context - 50) / 2});
         },
         showTip: function (dom, msg) {
             dom.closest("li").find(".error-tip").show().text(msg);

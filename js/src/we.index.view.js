@@ -33,9 +33,9 @@
                 var offset = _this.ui.main.offset();
 
                 if(scrollTop > offset.top - 20){
-                    _this.ui.headBar.addClass("headerTopFixed");
+                    _this.ui.headBar.addClass("headerTopFixed headerTop headerTopIndex").removeClass("headerBlack");
                 }else{
-                    _this.ui.headBar.removeClass("headerTopFixed");
+                    _this.ui.headBar.removeClass("headerTopFixed  headerTop headerTopIndex").addClass("headerBlack");
                 }
             });
 

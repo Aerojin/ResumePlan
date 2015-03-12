@@ -57,6 +57,7 @@
             this.loadDouble();
         },
         showWhite: function () {
+            var _this = this;
             var template = _.template(this.ui.whiteTmpl.html());
                 template = template({cid: this.cid});
 

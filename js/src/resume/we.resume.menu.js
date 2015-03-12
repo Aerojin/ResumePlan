@@ -57,7 +57,7 @@
     			evaluation: {
     				key: "evaluation",
     				text: "自我评价",
-    				className: "i_icoMtwo",
+    				className: "i_icoMsix",
                     isLock: false,
                     width: 338
     			},
@@ -217,6 +217,14 @@
                 return false;
         	});
 
+            this.ui.sidebar.delegate("li", "mouseenter", function () {
+                $(this).find(".btn-hover").show();
+            });
+
+            this.ui.sidebar.delegate("li", "mouseleave", function () {
+                $(this).find(".btn-hover").hide();
+            });
+
         	this.ui.sidebar.delegate("#btn-back", "click", function () {
 
         	});
@@ -328,7 +336,7 @@
                 return "";
             }
 
-            var template = _.template('<i class="<%-ico%>"></i>');
+            var template = _.template('<i class="<%-ico%> btn-hover" style="display:none;"></i>');
 
             return template({
                 ico: this.getIcoClass(data)

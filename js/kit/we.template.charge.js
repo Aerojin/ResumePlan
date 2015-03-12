@@ -41,9 +41,9 @@
             var _this = this;
 
             this.ui.wrap.hover(function () {
-                _this.ui.hover.show();
+                _this.ui.hover.fadeIn("slow");;
             }, function () {
-                _this.ui.hover.hide();
+                _this.ui.hover.fadeOut("slow");
             });
 
             this.ui.btnUnlock.click(function () {
