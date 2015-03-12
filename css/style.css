@@ -290,6 +290,12 @@ a:hover{color:#333; text-decoration:none;}
 .navList a:hover i, .navList .focus a i{display:block;}
 
 .nav .btnLogin{margin-top:12px; _display:inline;}
+.headerTopIndex{position:fixed; _position:absolute; border-bottom:1px solid #000; background-color:#000\9;
+	-moz-box-shadow:0 1px 2px #000;
+    -webkit-box-shadow:0 1px 2px #000;
+    box-shadow:0 1px 2px #000;
+}
+:root .headerTopIndex{background-color:rgba(0, 0, 0, 0.8);}
 .headerTopFixed{position:fixed; _position:absolute; border-bottom:1px solid #eae7e7; background-color:#fff\9;
 	-moz-box-shadow:0 1px 2px #eae7e7;
     -webkit-box-shadow:0 1px 2px #eae7e7;
@@ -299,6 +305,7 @@ a:hover{color:#333; text-decoration:none;}
 .headerTopFixed .logo{background-position:0 -168px; width:119px; height:40px;}
 /*.headerTopFixed .navList a, .headerTopFixed .navList a:hover{color:#747171;}*/
 .headerTopFixed .btnLogin{margin:13px 3px 0;}
+.headerTopFixed .navList a{color:#747171;}
 
 /*头部信息*/
 .headerInfo{padding-top:200px;}
@@ -404,8 +411,8 @@ a:hover{color:#333; text-decoration:none;}
 /*底部*/
 .footer{background:url(../images/bg_05.png) repeat-x; padding:60px 0 55px; position:relative; z-index:2;}
 .footerConInfo{float:left;}
-.footerConInfo p{color:#c0bfbf;}
-.footerConInfo span{color:#5e5e5e; display:inline-block; margin-top:12px;}
+.footerConInfo p{color:#5e5e5e;}
+.footerConInfo span{color:#c0bfbf; display:inline-block; margin-top:12px;}
 .footerConBtn{float:right; position:relative; zoom:1;}
 .footerConBtn a{margin-left:20px;}
 .footerWindow{position:absolute; right:-69px; bottom:55px; border:7px solid #353535; padding:12px; background-color:#fff;
@@ -414,6 +421,8 @@ a:hover{color:#333; text-decoration:none;}
     border-radius:4px;
 }
 .footerWindow .i_icoDown{position:absolute; left:89px; bottom:-14px;}
+.footerFaq .footerConInfo p{color:#c0bfbf;}
+.footerFaq .footerConInfo span{color:#5e5e5e;}
 
 /*弹窗*/
 .window{width:442px; background-color:#141414\9; position:fixed; _position:absolute; left:50%; top:25%; padding:16px 20px 28px; margin:0 0 0 -240px; z-index:111;
