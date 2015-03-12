@@ -83,7 +83,7 @@
             this.moveElement.css({
             	"width": this.moveElement.width(),
             	"position": "absolute",
-            	"z-index": this.getZindex + 1
+            	"z-index": this.getZindex() + 1
             });
 
             var downPos = {
@@ -232,6 +232,7 @@
                 	top: "",
                 	width: "",
                 	position: "",
+                    "z-index": ""
                 });
 
                 this.dashedElement.before(this.moveElement);
@@ -279,7 +280,9 @@
 		    var divs = $("div");
 
 		    for (z = 0; z < divs.length; z++) {
-		        maxZindex = Math.max(maxZindex, divs.get(z).style.zIndex);
+                if($.isNumeric(divs.eq(z).css("z-index"))){
+                    maxZindex = Math.max(maxZindex, parseInt(divs.eq(z).css("z-index")));
+                }
 		    }
 
 		    return maxZindex;
