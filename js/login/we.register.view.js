@@ -80,7 +80,9 @@
                     return getResult(key, self.TIPS.EMAIL_ERROR);   
                 }
 
-                return getResult(key, self.TIPS.SUCCESS, true);
+                if (args && args.target) {
+                    return getResult(key, self.TIPS.SUCCESS, true);
+                }
             }
 
             //验证密码有效性
@@ -90,7 +92,9 @@
                     return getResult(key, self.TIPS.PASSWORD_EMPTY);
                 }
 
-                return getResult(key, self.TIPS.SUCCESS, true);
+                if (args && args.target) {
+                    return getResult(key, self.TIPS.SUCCESS, true);
+                }
             }
 
             //验证验证码有效性
@@ -100,8 +104,18 @@
                     return getResult(key, self.TIPS.CODE_EMPTY);
                 }
 
-                return getResult(key, self.TIPS.SUCCESS, true);
+                if (args && args.target) {
+                    return getResult(key, self.TIPS.SUCCESS, true);
+                }
             }
+        },
+        register: function (options, context) {
+            options.data = {
+                email: this.get("username"),
+                password: this.get("password")
+            };
+
+            WE.Api.Register(options, context);
         }
 
     }));
@@ -182,7 +196,7 @@
 
             this.ui.btnRegister.click(function () {
                 if(_this.model.isValid()){
-                    WE.UI.alert("注册成功!");
+                    _this.register()
                 }
             });
 
@@ -252,6 +266,19 @@
 
                 }
             };
+        },
+        register: function () {
+            var _this = this;
+            var options = {
+                success: function () {
+
+                },
+                error: function () {
+
+                }
+            };
+
+            this.model.register(options, this);
         }
 
     }));

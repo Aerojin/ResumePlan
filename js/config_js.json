@@ -5,6 +5,7 @@
 		"name": "libs.pack.js",
 		"src": [
 			"./js/lib/jquery-1.8.3.min.js",
+			"./js/lib/jquery.cookie.js",
 			"./js/lib/underscore-min.js",
 			"./js/lib/backbone-min.js"
 		]
@@ -26,9 +27,12 @@
 			"./js/base/we.object.js",
 			"./js/base/we.string.js",
 			"./js/base/we.date.js",
+			"./js/base/we.array.js",
 			"./js/base/we.http.client.js",
 			"./js/base/we.base.model.js",
 			"./js/base/we.base.view.js",
+			"./js/api/we.api.model.js",
+			"./js/api/we.api.web.status.js",
 			"./js/ui/we.ui.js"
 		]
 	},

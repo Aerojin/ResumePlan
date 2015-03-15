@@ -20,7 +20,7 @@
 			this.on("change:code", function () {
 				
 				var code = this.get("code");				
-				var success = code == "0";
+				var success = code == "1";
 				var msg = this.getMsgByCode(code);
 				
 				this.set({

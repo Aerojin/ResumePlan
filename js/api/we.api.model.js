@@ -12,20 +12,12 @@
         }
 	}));
 
-	WE.Api = Backbone.model.extend({
-		defaults: function () {
-			return {
-				index: ""	
-			};
-		},
-		initialize: function () {
-
-		},
-		call: function (api, data, options, context) {
-			options = options || {};
+    WE.namespace("WE.Api", {
+        call: function (api, data, options, context) {
+            options = options || {};
             var client = new WE.Api.HttpClient({});
             var httpMethod = options.httpMethod || "post";
-            var url = "";
+            var url = this.getUrl(api);
 
             client.on('error', function() {
                 if (options.error) {
@@ -42,23 +34,59 @@
                 timeout: 20000,
             }, function (e) {
                 var result = new WE.WebStatus();
-                /*	result.set({
-                		code: null,
-						data: null
-                	});*/
-            	if(result.get("success")){
-            		if(_.isFunction(options.success)){
-            			options.success(context, result.toJSON());
-            		}
-            		return;
-            	}
+                /*  result.set({
+                        code: null,
+                        data: null
+                    });*/
+                if(result.get("success")){
+                    if(_.isFunction(options.success)){
+                        options.success.call(context, result.toJSON());
+                    }
+                    return;
+                }
 
-            	if(_.isFunction(options.error)){
-					options.error.call(context, result.toJSON());
-				}
+                if(_.isFunction(options.error)){
+                    options.error.call(context, result.toJSON());
+                }
             });
-		}
-	});
+        },
+        getUrl: function (api) {
+            return "{0}/api.php?m=user&a={1}".format(this.getHost, api);
+        },
+        getHost: function () {
+            return "http://www.jianlipro.com:8081";
+        }
+    });
+
+    WE.Api.Login = function (options, context) {
+        var data = options.data || {};
+        var requestUrl = 'login';
+        var requestBody = data;
+
+        options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.Register = function (options, context) {
+        var data = options.data || {};
+        var requestUrl = 'regist';
+        var requestBody = data;
+
+        options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.Logout = function (options, context) {
+        var data = options.data || {};
+        var requestUrl = 'regist';
+        var requestBody = data;
+
+        options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    }; 
 	
 	
 })(WE, jQuery, Backbone);
