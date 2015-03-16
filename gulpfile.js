@@ -13,7 +13,7 @@ var fs = require('fs');
 var out_js = './static/js/';
 var out_css = './static/css/';
 var out_img = './static/images/';
-var out_html = './static/html/';
+var out_html = './static/';
 var html_path = './html/';
 var css_path = './css/';
 var img_path = './images/';
@@ -83,7 +83,7 @@ var replaceMD5 = function (obj) {
 			var	file = src.substring(src.lastIndexOf('/') + 1);
 			var md5 = map[file] || new Date().getTime();
 
-			src = src.replace("static/", "");
+			src = src.replace("../static/", "");
 			
 			return a.replace(b, src + "?v=" + md5);
 		}))
@@ -92,7 +92,7 @@ var replaceMD5 = function (obj) {
 			var	file = src.substring(src.lastIndexOf('/') + 1);
 			var md5 = map[file] || new Date().getTime();
 
-			src = src.replace("static/", "");
+			src = src.replace("../static/", "");
 
 			return a.replace(b, src + "?v=" + md5);
 		}))
