@@ -11,10 +11,11 @@
             return {
                 username: null,
                 password: null,
-                code: null,
-                title: "登陆"
+                code: null
             };            
         },
+
+        TITLE: "登陆",
 
         STATE: {
             LOGIN: "login",
@@ -28,7 +29,19 @@
 
         initEvents: function () {
 
+        },
+        login: function (options, context) {
+            WE.Api.Login({
+                data: options.data,
+                success: function (result) {
+                    options.success(result.data);
+                },
+                error: function () {
+                    options
+                }
+            })
         }
+
 
     }));
 
@@ -100,7 +113,7 @@
 
             this.ui.btnLogin.click(function () {
                 if(_this.validate()){
-
+                    _this.login();
                 }
             });
 
@@ -142,7 +155,7 @@
             this.ui.txtInput = this.$el.find(".txt-input");
 
             this.dialog.setContent(this.$el);
-            this.dialog.setTitle(this.model.get("title"));
+            this.dialog.setTitle(this.model.TITLE);
         },
 
         validate: function () {
@@ -179,6 +192,21 @@
             dom.nextAll(".error-tip").text("").css({
                 "display": "none"
             });
+        },
+        login: function () {
+            var options = {};
+
+            options.data = this.model.toJSON();
+
+            options.success = function (result) {
+                console.log(result);
+            };
+
+            options.error = function (result) {
+                console.log(result);
+            };
+
+            WE.Api.Login(options, this);
         }
     }));
 })(WE, jQuery, Backbone);

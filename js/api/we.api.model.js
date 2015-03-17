@@ -54,7 +54,7 @@
             return "{0}/api.php?m=user&a={1}".format(this.getHost, api);
         },
         getHost: function () {
-            return "http://www.jianlipro.com:8081";
+            return "http://www.jianlipro.com";
         }
     });
 
