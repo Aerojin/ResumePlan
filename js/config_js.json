@@ -146,5 +146,14 @@
 			"./js/kit/we.template.time.js",
 			"./js/kit/we.template.js"
 		]
+	},
+	"resume_control": {
+		"merge": true,
+		"compress": true,
+		"name": "we.resume.control.pack.js",
+		"src":[
+			"./js/kit/we.resume.control.model.js",
+			"./js/kit/we.resume.control.view.js"
+		]
 	}
 }
