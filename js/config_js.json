@@ -133,7 +133,15 @@
 		"compress": true,
 		"name": "we.resume.kit.pack.js",
 		"src":[
-			"./js/src/resume/*.js"
+			"./js/resume/*.js"
+		]
+	},
+	"resume_data": {
+		"merge": true,
+		"compress": true,
+		"name": "we.resume.data.pack.js",
+		"src":[
+			"./js/resume/data/*.js"
 		]
 	},
 	"template": {
