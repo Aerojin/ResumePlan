@@ -9,9 +9,8 @@
 
         defaults: function () {
             return {
-                username: null,
-                code: null,
-                title: "忘记密码"
+                email: null,
+                code: null
             };            
         },      
 
@@ -37,12 +36,12 @@
         
         name: _class,
 
-        el: 'body',
+        TITLE: "忘记密码",
 
         el: '<ul class="windowFrom">\
                 <li>\
                     <div class="inputBox">\
-                        <input type="text" placeholder="输入您的邮箱..."  class="input" id="txt-username" />\
+                        <input type="text" name="email" placeholder="输入您的邮箱..."  class="input" id="txt-email" />\
                         <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
                 </li>\
@@ -51,7 +50,7 @@
                         <input type="text"  placeholder="验证码" class="input" id="txt-code" />\
                         <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
-                    <img src="../images/yz.png" alt="" title="" id="img-code" class="inputBox_img" />\
+                    <img src="/api.php?m=user&a=verifyCode&type=forgetpw" alt="" title="" id="img-code" class="inputBox_img" />\
                     <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
                 </li>\
             </ul>\
@@ -65,6 +64,8 @@
                         <p>邮件已发送，请到邮箱查收。</p>\
                     </div>\
                     <span class="blackBackground"></span>',
+
+        verifyCode: "/api.php?m=user&a=verifyCode&type=forgetpw",
 
         initialize: function (options) {
             this.dialog = options.dialog;
@@ -84,13 +85,14 @@
             var _this = this;
 
             this.ui.btnRefresh.click(function(event) {
-                /* Act on the event */
+                _this.ui.imgCode.attr({
+                    src: _this.verifyCode + "&t=" + new Date().getTime()
+                });
             });
 
             this.ui.btnSend.click(function(event) {
                 if(_this.validate()){
-                    _this.trigger('send');
-                    _this.showSuccess();
+                    _this.forget();
                 }
             });
         },
@@ -101,13 +103,13 @@
             this.ui.html = $('html');
             this.ui.btnSend = this.$el.find("#btn-send");
             this.ui.btnRefresh = this.$el.find("#btn-refresh");
-            this.ui.txtUserName = this.$el.find("#txt-username");
+            this.ui.txtUserName = this.$el.find("#txt-email");
             this.ui.txtCode = this.$el.find("#txt-code");
             this.ui.imgCode = this.$el.find("#img-code");
             this.ui.txtInput = this.$el.find(".txt-input");
 
             this.dialog.setContent(this.$el);
-            this.dialog.setTitle(this.model.get("title"));
+            this.dialog.setTitle(this.TITLE);
         },
         showSuccess: function () {
             var template = _.template(this.template);
@@ -160,6 +162,22 @@
             dom.nextAll(".error-tip").text("").css({
                 "display": "none"
             });
+        },
+        forget: function () {
+            var options = {
+                data: this.model.toJSON()
+            };
+
+            options.success = function (result) {
+                this.trigger('send');
+                this.showSuccess();
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.Forget(options, this);
         }
 
     }));

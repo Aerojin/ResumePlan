@@ -9,7 +9,7 @@
 
         defaults: function () {
             return {
-                username: null,
+                email: null,
                 password: null,
                 code: null
             };            
@@ -66,7 +66,7 @@
         el: '<ul class="windowFrom">\
                 <li>\
                     <div class="inputBox">\
-                        <input type="text" data-key="username" placeholder="输入您的邮箱..." class="input txt-input" id="txt-username" />\
+                        <input type="text" data-key="email" placeholder="输入您的邮箱..." class="input txt-input" id="txt-email" />\
                         <i class="i_icoOk ico" style="display:none;"></i>\
                         <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
@@ -84,7 +84,7 @@
                         <input type="text"  data-key="code" placeholder="验证码" class="input txt-input" id="txt-code" />\
                         <p class="inputBox_p hide error-tip">密码格式有误</p>\
                     </div>\
-                    <img src="../images/yz.png" id="img-code" alt="" title="" class="inputBox_img" />\
+                    <img src="/api.php?m=user&a=verifyCode&type=login" id="img-code" alt="" title="" class="inputBox_img" />\
                     <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
                 </li>\
             </ul>\
@@ -92,6 +92,8 @@
                 <a href="javascript:void(0);" id="btn-login" class="btnF">登录</a>\
                 <a href="javascript:void(0);" id="btn-register" class="btnF btnRegist">注册</a>\
             </div>',
+
+        verifyCode: "/api.php?m=user&a=verifyCode&type=login",
 
         initialize: function (options) {
             this.dialog = options.dialog;
@@ -118,7 +120,9 @@
             });
 
             this.ui.btnRefresh.click(function () {
-
+                _this.ui.imgCode.attr({
+                    src: _this.verifyCode + "&t=" + new Date().getTime()
+                });
             });
 
             this.ui.btnForget.click(function () {
@@ -148,7 +152,7 @@
             this.ui.btnForget = this.$el.find("#btn-forget");
             this.ui.btnRefresh = this.$el.find("#btn-refresh");
             this.ui.btnRegister = this.$el.find("#btn-register");
-            this.ui.txtUserName = this.$el.find("#txt-username");
+            this.ui.txtUserName = this.$el.find("#txt-email");
             this.ui.txtCode = this.$el.find("#txt-code");
             this.ui.imgCode = this.$el.find("#img-code");
             this.ui.txtPassword = this.$el.find("#txt-password");
@@ -199,11 +203,29 @@
             options.data = this.model.toJSON();
 
             options.success = function (result) {
-                console.log(result);
+                $.cookie(WE.Constant.COOKIE_USER, result.data.u_email);
+                $.cookie(WE.Constant.COOKIE_USERID, result.data.u_id);
+                $.cookie(WE.Constant.COOKIE_PHOTO, result.data.logo);
+                $.cookie(WE.Constant.COOKIE_TOKEN, result.data.token);
+
+                window.location.reload();
             };
 
             options.error = function (result) {
-                console.log(result);
+                switch(result.code){
+                    case 2:
+                        this.showTip(this.ui.txtUserName, result.msg);
+                        break;
+                    case 3: 
+                        this.showTip(this.ui.txtPassword, result.msg);
+                        break;
+                    case 4: 
+                        this.showTip(this.ui.txtCode, result.msg);
+                        break;
+                    default:
+                        WE.UI.alert(result.msg, {type: "warn"});
+                        break;
+                }
             };
 
             WE.Api.Login(options, this);

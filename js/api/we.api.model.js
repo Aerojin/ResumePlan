@@ -18,6 +18,11 @@
             var client = new WE.Api.HttpClient({});
             var httpMethod = options.httpMethod || "post";
             var url = this.getUrl(api);
+            var token = $.cookie(WE.Constant.COOKIE_TOKEN) || ""
+
+            if(token.trim().length > 0 && !data.token){
+                data.token = token;
+            }
 
             client.on('error', function() {
                 if (options.error) {
@@ -33,11 +38,14 @@
                 data: data,
                 timeout: 20000,
             }, function (e) {
+                var data = $.parseJSON(e.responseText);
                 var result = new WE.WebStatus();
-                /*  result.set({
-                        code: null,
-                        data: null
-                    });*/
+                    result.set({
+                        code: data.status,
+                        data: data.data || {},
+                        msg: data.info || ""
+                    });
+
                 if(result.get("success")){
                     if(_.isFunction(options.success)){
                         options.success.call(context, result.toJSON());
@@ -51,7 +59,7 @@
             });
         },
         getUrl: function (api) {
-            return "{0}/api.php?m=user&a={1}".format(this.getHost, api);
+            return "{0}/api.php?m={1}&a={2}".format(this.getHost, api.model, api.command);
         },
         getHost: function () {
             return "http://www.jianlipro.com";
@@ -60,33 +68,74 @@
 
     WE.Api.Login = function (options, context) {
         var data = options.data || {};
-        var requestUrl = 'login';
+        var requestUrl = {model:'user', command:'login'};
         var requestBody = data;
 
-        options.httpMethod = "get";
+        //options.httpMethod = "get";
 
         this.call(requestUrl, requestBody, options, context);
     };
 
     WE.Api.Register = function (options, context) {
         var data = options.data || {};
-        var requestUrl = 'regist';
         var requestBody = data;
+        var requestUrl = {model:'user', command:'regist'};
 
-        options.httpMethod = "get";
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.Forget = function (options, context) {
+        var data = options.data || {};        
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'forgetpwd'};
+
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.Reset = function (options, context) {
+        var data = options.data || {};        
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'resetpwd'};
+
+        //options.httpMethod = "get";
 
         this.call(requestUrl, requestBody, options, context);
     };
 
     WE.Api.Logout = function (options, context) {
         var data = options.data || {};
-        var requestUrl = 'regist';
         var requestBody = data;
-
-        options.httpMethod = "get";
+        var requestUrl = {model:'user', command:'forgetpwd'};
+        
+        //options.httpMethod = "get";
 
         this.call(requestUrl, requestBody, options, context);
     }; 
+
+    WE.Api.Feedback = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'feedback'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.changePassword = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'uppwd'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+     
 	
 	
 })(WE, jQuery, Backbone);

@@ -34,6 +34,7 @@ a:hover{color:#333; text-decoration:none;}
 
 /*间距*/
 .mt_5{margin-top:5px;}
+.mt_11{margin-top:11px;}
 .mt_20{margin-top:20px;}
 .mt_25{margin-top:25px;}
 .mt_32{margin-top:32px;}
@@ -112,6 +113,7 @@ a:hover{color:#333; text-decoration:none;}
     -webkit-border-radius:20px;
     border-radius:20px;
 }
+.userImg img{width:35px; height:35px;}
 .i_icoColorOne{background-position:-1px -308px; width:35px; height:35px;}
 .i_icoColorTwo{background-position:-37px -308px; width:35px; height:35px;}
 .i_icoColorThree{background-position:-73px -308px; width:35px; height:35px;}
@@ -180,7 +182,8 @@ a:hover{color:#333; text-decoration:none;}
 .loginImgA{background-position:-105px -571px; width:136px; height:136px;}
 .loginImgA:hover{background-position:-242px -571px;}
 .i_icoPay{background-position:-379px -571px; width:39px; height:47px; overflow:visible;}
-.i_icoPicture{background-position:0 -708px; width:129px; height:184px;}
+.i_icoPicture{background-position:0 -708px; width:129px; height:184px; position:relative; zoom:1;}
+.i_icoPicture img{width:129px; height:184px;}
 .i_icoPoint{background-color:#d84b39; width:4px; height:4px; display:inline-block; vertical-align:middle;
 	-moz-border-radius:2px;
     -webkit-border-radius:2px;
@@ -821,7 +824,7 @@ a:hover{color:#333; text-decoration:none;}
 .fromListBox li{float:left; margin-right:24px; _display:inline;}
 .fromListBox li .clearfix{height:34px;}
 .windowBoxA_picture{float:left; border:3px solid #e8e8e8; width:129px; height:184px; overflow:hidden; margin:78px 0 0 26px;}
-.windowBoxA_picture input{font-size:200px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; cursor:pointer;}
+.windowBoxA_picture input{position:absolute; right:0; top:0; font-size:200px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; cursor:pointer;}
 .fromListBox_btn{padding:45px 0 42px; text-align:center;}
 .windowBoxA_from_one{float:left; width:650px;}
 .windowBoxA_from_one .fromListBox{width:626px; margin-left:24px;}
@@ -862,7 +865,8 @@ a:hover{color:#333; text-decoration:none;}
     -webkit-border-radius:68px;
     border-radius:68px;
 }
-.loginImg .loginImgA input{font-size:100px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; cursor:pointer;}
+.loginImg .loginImgA img{width:136px; height:136px; cursor:pointer;}
+.loginImg .loginImgA input{position:absolute; right:0; top:0; font-size:100px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; cursor:pointer; z-index:1; cursor:pointer;}
 .loginImg p{color:#bababa; font-size:14px; margin-top:30px;}
 
 /*支付*/

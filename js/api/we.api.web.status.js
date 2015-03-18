@@ -20,7 +20,7 @@
 			this.on("change:code", function () {
 				
 				var code = this.get("code");				
-				var success = code == "1";
+				var success = code == 1;
 				var msg = this.getMsgByCode(code);
 				
 				this.set({
@@ -30,7 +30,7 @@
 			});
 		},
 		getMsgByCode: function (code){
-			return MSG[code] || "";
+			return this.get("msg") || MSG[code] || "";
 		},
 		toJSON: function () {
 			var json = {

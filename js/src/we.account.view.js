@@ -141,7 +141,7 @@
 
             this.ui.btnSave.click(function () {
                 if(_this.model.isValid()){
-
+                    _this.changePassword();
                 }
             });
         },
@@ -162,6 +162,31 @@
         },
         byName: function(name){
             return $('input[name=' + name + ']');
+        },
+        changePassword: function () {
+            var options = {};
+            var data = this.model.toJSON();
+
+            options.data = {
+                oldpass: data.password,
+                newpass: data.newPassword,
+                newpass2: data.affirmPassword
+            };
+
+            options.success = function (result) {
+                WE.UI.alert("密码修改成功!", {
+                    type: "warn",
+                    callback: function () {
+                        window.location.reload();
+                    }
+                });
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.changePassword(options, this);
         }
 
 

@@ -45,7 +45,9 @@
 			</ul>\
 			<div class="window_btn"><a href="javascript:void(0);" id="btn-send" class="btnG">发送</a></div>',
 
-        template: "",
+        TIPS: {
+            SUCCESS: "您的意见已经传达,感谢您对我们的支持!"
+        },
 
         initialize: function (options) {
         	this.model = new WE.Feedback.Model();
@@ -68,7 +70,7 @@
         	});
 
         	this.ui.btnSend.click(function() {
-
+                _this.send();
         	});
 
         	this.ui.btnFeedback.click(function(event) {
@@ -93,6 +95,30 @@
             this.ui.txtContext = this.ui.wrap.find('#txt-context');
             this.ui.lblMsg = this.ui.wrap.find('#lbl-msg');
             this.ui.btnSend = this.ui.wrap.find('#btn-send');
+        },
+        send: function () {
+            var options = {};
+            var context = this.ui.txtContext.val().trim();
+
+            if(context.length == 0){
+                WE.UI.alert("反馈内容不能为空,请输入反馈内容!", {type: "warn"});
+                return;
+            }
+
+            options.data = {
+                text: context
+            };
+
+            options.success = function (result) {
+                this.dialog.close();
+                WE.UI.alert(this.TIPS.SUCCESS);
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.Feedback(options, this);
         }
 
     }));

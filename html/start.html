@@ -26,13 +26,16 @@
 					<li><a href="service.html">服务购买<i></i></a></li>
 					<li><a href="faq.html">FAQ<i></i></a></li>
 				</ul>
-				<div class="user" id="btn-user">
+				<a href="javascript:void(0);" id="app-login" class="btnLogin">登录 / 注册</a>
+				<div class="user" id="btn-user" style="display:none;">
 					<a href="javascript:void(0);" id="user-name" class="userName">Diso</a>
-					<a href="javascript:void(0);" id="user-photo" class="userImg"></a>
+					<a href="javascript:void(0);" id="user-photo" class="userImg">
+						<img style="display:none;" src="" alt="" title="" />
+					</a>
 					<span class="i_icoDowns"></span>
 					<ul class="userList" id="box-user" style="display:none;">
 						<li><a href="account.html">账户设置</a></li>
-						<li><a href="#">登出</a></li>
+						<li><a id="user-logout" href="javascript:void(0);">登出</a></li>
 					</ul>
 				</div>
 			</div>

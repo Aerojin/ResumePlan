@@ -9,10 +9,9 @@
 
         defaults: function () {
             return {
-                username: null,
+                email: null,
                 password: null,
-                code: null,
-                title: "注册"
+                code: null
             };            
         },
 
@@ -70,13 +69,13 @@
             }
 
             //验证用户名有效性
-            var key = 'username';
+            var key = 'email';
             if (_.has(data, key)) {
-                if (!data.username || !data.username.length) {
+                if (!data.email || !data.email.length) {
                     return getResult(key, self.TIPS.EMAIL_EMPTY);
                 }
 
-                if(data.username && !self.isEmail.test(data.username)){
+                if(data.email && !self.isEmail.test(data.email)){
                     return getResult(key, self.TIPS.EMAIL_ERROR);   
                 }
 
@@ -132,12 +131,12 @@
         
         name: _class,
 
-        el: 'body',
+        TITLE: "注册",
 
         el: '<ul class="windowFrom">\
                 <li>\
                     <div class="inputBox">\
-                        <input type="text" name="username" placeholder="输入您的邮箱..." class="input txt-input" id="txt-username" />\
+                        <input type="text" name="email" placeholder="输入您的邮箱..." class="input txt-input" id="txt-email" />\
                         <i class="i_icoOk ico" style="display:none;"></i>\
                         <p class="inputBox_p hide error-tip">邮箱已使用</p>\
                     </div>\
@@ -154,7 +153,7 @@
                         <input type="text"  name="code" placeholder="验证码" class="input txt-input" id="txt-code" />\
                         <p class="inputBox_p hide error-tip">密码格式有误</p>\
                     </div>\
-                    <img src="../images/yz.png" id="img-code" alt="" title="" class="inputBox_img" />\
+                    <img src="/api.php?m=user&a=verifyCode&type=reg" id="img-code" alt="" title="" class="inputBox_img" />\
                     <a href="javascript:void(0);" id="btn-refresh" class="i_icoRefresh"></a>\
                 </li>\
             </ul>\
@@ -162,6 +161,8 @@
                 <a href="javascript:void(0);" id="btn-register" class="btnF">注册</a>\
                 <a href="javascript:void(0);" id="btn-cancel" class="btnF">取消</a>\
             </div>',
+
+        verifyCode: "/api.php?m=user&a=verifyCode&type=reg",
 
         initialize: function (options) {
             this.dialog = options.dialog;
@@ -191,7 +192,9 @@
             });
 
             this.ui.btnRefresh.click(function () {
-
+                _this.ui.imgCode.attr({
+                    src: _this.verifyCode + "&t=" + new Date().getTime()
+                });
             });
 
             this.ui.btnRegister.click(function () {
@@ -221,14 +224,14 @@
             this.ui.btnCancel = this.$el.find("#btn-cancel");
             this.ui.btnRefresh = this.$el.find("#btn-refresh");
             this.ui.btnRegister = this.$el.find("#btn-register");
-            this.ui.txtUserName = this.$el.find("#txt-username");
+            this.ui.txtUserName = this.$el.find("#txt-email");
             this.ui.txtCode = this.$el.find("#txt-code");
             this.ui.imgCode = this.$el.find("#img-code");
             this.ui.txtPassword = this.$el.find("#txt-password");
             this.ui.txtInput = this.$el.find(".txt-input");
 
             this.dialog.setContent(this.$el);
-            this.dialog.setTitle(this.model.get("title"));
+            this.dialog.setTitle(this.TITLE);
         },
 
         showTip: function (dom, options) {
@@ -261,7 +264,7 @@
         getOptions: function () {
             return {
                 content: this.$el,
-                title: this.model.get("title"),
+                title: TITLE,
                 onClose: function () {
 
                 }
@@ -270,15 +273,36 @@
         register: function () {
             var _this = this;
             var options = {
-                success: function () {
+                data: this.model.toJSON()
+            };
 
-                },
-                error: function () {
+            options.success = function (result) {
+                $.cookie(WE.Constant.COOKIE_USER, result.data.u_email);
+                $.cookie(WE.Constant.COOKIE_USERID, result.data.u_id);
+                $.cookie(WE.Constant.COOKIE_PHOTO, result.data.logo);
+                $.cookie(WE.Constant.COOKIE_TOKEN, result.data.token);
 
+                window.location.reload();
+            };
+
+            options.error = function (result) {
+                switch(result.code){
+                    case 2:
+                        this.showTip(this.ui.txtUserName, result.msg);
+                        break;
+                    case 3: 
+                        this.showTip(this.ui.txtPassword, result.msg);
+                        break;
+                    case 4: 
+                        this.showTip(this.ui.txtCode, result.msg);
+                        break;
+                    default:
+                        WE.UI.alert(result.msg, {type: "warn"});
+                        break;
                 }
             };
 
-            this.model.register(options, this);
+            WE.Api.Register(options, this);
         }
 
     }));
