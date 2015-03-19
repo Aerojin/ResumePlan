@@ -84,6 +84,7 @@
 			"./js/kit/we.share.js",
 			"./js/kit/we.user.item.js",
 			"./js/kit/we.user.dialog.js",
+			"./js/src/we.user.center.model.js",
 			"./js/src/we.user.center.view.js"
 		]
 	},

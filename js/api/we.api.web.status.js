@@ -14,7 +14,7 @@
 			}
 		},
 		initialize: function () {
-			
+			this.initEvent();
 		},
 		initEvent: function () {
 			this.on("change:code", function () {

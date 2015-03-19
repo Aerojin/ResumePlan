@@ -3,12 +3,13 @@
     var superClass = WE.View.ViewBase;
     var _class = "WE.User.Item";
 
-    WE.namespace(_class, function (options) {
+    WE.namespace(_class, function (options, model) {
 
         this.id = options.id;
         this.image = options.image;
         this.title = options.title;
         this.direct = options.direct;
+        this.model = model;
 
         this.init = function () {
             var template = _.template(this.template);
@@ -50,8 +51,18 @@
             });
 
             this.ui.btnDirect.click(function() {
-                _this.direct = !_this.direct;
-                $(this).text(_this.getDirect());
+                _this.direct = !!_this.direct ? 0 : 1;
+
+                if(!_this.loading){
+                    _this.loading = true;
+                    _this.model.actionMain({
+                        id: _this.id,
+                        isMain: _this.direct 
+                    }, function () {
+                        _this.loading = false;
+                        _this.ui.btnDirect.text(_this.getDirect());
+                    });
+                }
             });
         };
 
@@ -65,7 +76,7 @@
         };
 
         this.edit = function () {
-            window.location.href="resume.html";
+            window.location.href="/resume.html?s_id=" + _this.id;
         };
 
         this.share = function () {
@@ -75,7 +86,12 @@
                 }
             });
 
-            this.shareDialog.show({});
+            this.shareDialog.show({
+                title: this.title,
+                summary: this.title,
+                imageUrl: this.image,
+                url: window.location.host
+            });
         };
 
         this.print = function () {
@@ -83,11 +99,11 @@
         };
 
         this.mail = function () {
-            WE.UI.alert("发送邮件");
+            this.model.sendMail(this.id);
         };
 
         this.down = function () {
-            WE.UI.alert("下载简历");
+            this.model.download(this.id);
         };
 
         this.getDirect = function () {

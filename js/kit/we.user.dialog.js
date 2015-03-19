@@ -17,6 +17,8 @@
 
         initialize: function (options) {
 
+            this.pageIndex = options.index || 0;
+            this.model = options.model;
             this.list = options.list || [];
             this.showButton = options.showButton || false;
 
@@ -105,7 +107,7 @@
             }
 
             var data = this.list[this.pageIndex];
-            var item = new WE.User.Item(data);
+            var item = new WE.User.Item(data, this.model);
 
             this.ui.content.empty().append(item.getElement());
             item.animation();

@@ -1,81 +1,5 @@
 ;(function (WE, jQuery, Backbone) {
 
-    var superClass = WE.Model.ModelBase;
-    var _class = "WE.User.Center.Model";  
-
-    WE.namespace(_class, superClass.extend({
-        
-        name: _class, 
-
-        defaults: function () {
-            return {
-                main: null,
-                data: null,
-                date: new Date(),
-                percent: 0
-            };
-        },
-
-        TIPS: {
-            CONFIRM_DELETE: "确定删除简历?",
-            DELETE_SUCCESS: "删除成功!"
-        },
-
-        initialize: function () {
-
-        },
-
-        initEvents: function () {
-
-        },
-
-        getUserResume: function () {
-            var options = {
-                data: {}
-            };
-
-            options.success = function (result) {
-                this.format(result.data);
-            };
-
-            options.error = function (result) {
-                WE.UI.alert(result.msg);
-            };
-
-            WE.Api.getUserResume(options, this);
-        },
-
-        format: function (data) {
-            var main = null;
-            var data = [];
-
-            _.each(data, function (e) {
-                if(e.is_main){
-                    main = e;
-                }else{
-                    data.push(e);
-                }
-            });
-
-            if(!main && data.length > 0){
-                main = data.splice(0,1);
-            }
-
-            this.model.set({
-                main: main,
-                data: data
-            })
-        }
-
-
-    }));
-
-
-})(WE, jQuery, Backbone);
-
-
-;(function (WE, jQuery, Backbone) {
-
     var superClass = WE.View.ViewBase;
     var _class = "WE.User.Center.View";  
 
@@ -97,21 +21,46 @@
             var _this= this;
 
             this.model.on("change:main", function () {
-
-            });
-
-            this.model.on("change:percent", function () {
-                var percent = this.get("percent");
-
-                _this.ui.lblPercent.text(percent + "%");
-                _this.ui.spanPercent.css({width: percent + "%"});
-            });
-
-            this.model.on("change:date", function () {
-                var date = this.get("date") || new Date();
+                var data = this.get("main");
+                var date = new Date(data.update_at);
                     date = WE.Date.format("yyyy-MM-dd", date);
-                
-                _this.ui.spanTime.text(date);
+
+                _this.ui.hoverNew.show();
+                _this.ui.nowContext.hide();
+                _this.ui.main.find(".hover-info").hide();
+
+                 if(data){
+                    _this.ui.hoverNew.show();
+                    _this.ui.nowContext.show();
+                    _this.ui.main.find(".hover-info").show();
+
+                    _this.ui.spanTime.text(date);
+                    _this.ui.mainTitle.text(data.title);
+                    _this.ui.lblPercent.text(data.percent + "%");
+                    _this.ui.spanPercent.css({width: data.percent + "%"});
+                    _this.ui.mainPhoto.attr({src: data.i_img}).parent().show();
+                }
+            });
+
+            this.model.on("change:data", function () {
+                var data = this.get("data");
+                var template = _.template(_this.template.resume);
+                var ul = _this.ui.otherMain.find("ul");
+                var last = ul.find("li").eq(-1);
+
+                ul.find("li.info-list").remove();
+
+                if(data && data.length > 0){
+                    _.each(data, function (e, index) {
+                        var item = template({
+                            index: index,
+                            image: e.i_img,
+                            title: e.title
+                        });
+
+                        last.before(item);
+                    });
+                }
             });
         },
 
@@ -123,7 +72,20 @@
             });
 
             this.ui.btnUpdate.click(function () {
-                //window.location.href="resume.html";                
+                var data = _this.model.get("main");
+                window.location.href="/resume.html?s_id=" + data.id;                
+            });
+
+            this.ui.btnMail.click(function () {
+                var data = _this.model.get("main");
+
+                _this.model.sendMail(data.id);
+            });
+
+            this.ui.btnDownload.click(function () {
+                var data = _this.model.get("main");
+
+                _this.model.download(data.id);
             });
 
             this.ui.hoverInfo.hover(function () {
@@ -135,63 +97,70 @@
             });
 
             this.ui.main.find(".ico-close").click(function () {
-                 var $this = $(this);
+                var $this = $(this);
+                var data = _this.model.get("main");
+
                 WE.UI.confirm(_this.model.TIPS.CONFIRM_DELETE,{
                     callback: function (bool) {
                          if(bool){
+                            _this.model.removeResume({id: data.id}, function () {
+                                WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
+                            });
+                            /*
                             _this.ui.hoverNew.show(); 
                             _this.ui.divAction.hide();
                             _this.ui.divPercent.hide();
                             $this.closest(".hover-info").remove();
-                            WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
+                            */
                          }
                     }
                 })
             });
 
             this.ui.main.find(".ico-look").click(function () {
+                var main = _this.model.get("main");
                 var data = {
                     list: [{
-                        id: "10001",
-                        direct: true,
-                        title: "张三的简历",
-                        image: "../images/pic_09.jpg"
+                        id: main.id,
+                        direct: main.is_main,
+                        title: main.title,
+                        image: main.i_url
                     }],
+                    model: _this.model,
                     showButton: false
                 };
 
                 var dialog = new WE.User.Dialog(data);
-
             });
 
 
-            this.ui.otherMain.find(".ico-close").click(function () {
+            this.ui.otherMain.delegate(".ico-close","click", function () {
                 var $this = $(this);
+                var index = $this.data("index");
+                var data = _this.model.get("data");
 
                 WE.UI.confirm(_this.model.TIPS.CONFIRM_DELETE,{
                     callback: function (bool) {
                          if(bool){
-                            $this.closest(".info-list").remove();
-                            WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
+                            _this.model.removeResume({id: data[index].id}, function () {
+                                WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
+                                $this.closest(".info-list").remove();
+                            });
                          }
                     }
                 })
             });
 
-            this.ui.otherMain.find(".ico-look").click(function () {
+            this.ui.otherMain.find(".ico-look", "click", function () {
+                var index = $(this).data("index");
+                var data = _this.model.getData();
+
                 var data = {
-                    list: [],
+                    list: data,
+                    index: index,
+                    model: _this.model,
                     showButton: true
                 };
-
-                for(var i = 0; i < 10; i++){
-                    data.list.push({
-                        direct: false,
-                        id: "10001" + i,
-                        title: "张三的简历",
-                        image: "../images/pic_09.jpg"
-                    });
-                }
 
                 var dialog = new WE.User.Dialog(data);
 
@@ -229,11 +198,15 @@
             this.ui.mainNew = this.ui.main.find("#main-new");
             this.ui.mainCollect = $("#main-collect");
             this.ui.collectWrap =  this.ui.mainCollect.find(".wrap");
+            this.ui.nowContext = $(".now-context");
+            this.ui.mainTitle = $("#main-title");
+            this.ui.btnMail = $("#btn-mail");
+            this.ui.btnDownload = $("#btn-download");
             
-            this.model.set({
-                percent: 33,
-                date: new Date()
-            });
+
+            this.getNewResume();
+            this.getCollectResume();
+            this.model.getUserResume();
         },
         openShare: function () {
             if(!this.share){
@@ -244,22 +217,14 @@
                 });
             }
 
-            this.share.show({});
-        },
-        getUserResume: function () {
-            var options = {
-                data: {}
-            };
+            var data = this.model.get("main");
 
-            options.success = function (result) {
-
-            };
-
-            options.error = function () {
-
-            };
-
-            WE.Api.getUserResume(options, this);
+            this.share.show({
+                title: data.title,
+                summary: data.title,
+                imageUrl: data.i_url,
+                url: window.location.host
+            });
         },
         getNewResume: function () {
             var options = {
@@ -308,7 +273,7 @@
             };
 
             WE.Api.getCollectResume(options, this);
-        },
+        }
 
         template: {
             news: ['<img src="<%-url%>" />',
@@ -320,6 +285,14 @@
                             '<img src="<%-url%>" />',
                         '</div>',
                         '<p class="userCenterList_name"><%-title%></p>',
+                    '</li>'].join("\n"),
+            resume: ['<li class="info-list">',
+                        '<div class="userInfo_img hover-info">',
+                            '<img src="<%=image%>" />',
+                            '<a href="javascript: void(0);" data-index="<%-index%>" class="i_icoCloseX ico-close" style="display:none;"></a>',
+                            '<a href="javascript: void(0);" data-index="<%-index%>" class="i_icoLook ico-look" style="display:none;"></a>',
+                        '</div>',
+                       '<p class="userCenterList_name"><%-title%></p>',
                     '</li>'].join("\n")
         }
 

@@ -165,7 +165,7 @@
 
             this.upload = new WE.Upload({
                 image: this.ui.imgPhoto,
-                upLoadFile:  this.ui.btnFile
+                upLoadFile:  this.ui.btnFile,
                 callback: function (data) {
                     _this.ui.imgPhoto.show();
                     _this.ui.userPhoto.attr({src: data.photo});

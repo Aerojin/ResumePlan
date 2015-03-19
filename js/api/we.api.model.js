@@ -209,6 +209,41 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*发送邮件*/
+    WE.Api.sendMail = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'sendMail'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*简历下载*/
+    WE.Api.download = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'download'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*主备简历切换*/
+    WE.Api.actionMain = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'actionMain'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    
+
     WE.Api.RemoveResume = function (options, context){
         var data = options.data || {};
         var requestBody = data;
