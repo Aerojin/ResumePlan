@@ -9,7 +9,12 @@
 
         defaults: function () {
             return {
-                
+                type: "",
+                money: "",
+                pageIndex: 0,
+                pageSize: 18,
+                pageCount: 0,
+                data: []
             };
         },      
 
@@ -57,6 +62,30 @@
             }
 
             return list;
+        },
+        parse: function (data) {
+            var array = [];
+
+            _.each(data, function (e) {
+                array.push({
+                    id: e.id,
+                    type: e.is_money,
+                    title: e.name,
+                    image: e.url,
+                    time: e.external,
+                    collect: e.iscollect,
+                    lock: 0,
+                    state: e.cid
+                });
+            });
+
+            return array;
+        },
+        getDateDiff: function (date1, date2){
+            var date3=date2.getTime() - date1.getTime()  //时间差的毫秒数
+
+            //计算出相差天数
+            return Math.floor(date3/(24*3600*1000))
         }
 
 

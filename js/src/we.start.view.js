@@ -10,14 +10,15 @@
         defaults: function () {
             return {
                 name: null,
+                title: null,
                 position: null,
-                language: null,
-                imports: null
+                language: "zh"
             };
         },  
 
         TIPS: {
             NAME_EMPTY: "姓名不能为空",
+            TITLE_EMPTY: "标题不能为空",
             POSITION_EMPTY: "求职意向不能为空",
             LANGUAGE_EMPTY: "请选择语言",
             IMPORTS_EMPTY: "请选择导入"
@@ -71,6 +72,14 @@
                 }
             }
 
+            //验证姓名有效性
+            var key = 'title';
+            if (_.has(data, key)) {
+                if (!data.title || !data.title.length) {
+                    return getResult(key, self.TIPS.TITLE_EMPTY);
+                }
+            }
+
             //验证职位有效性
             var key = 'position';
             if (_.has(data, key)) {
@@ -84,14 +93,6 @@
             if (_.has(data, key)) {
                 if (!data.language || !data.language.length) {
                     return getResult(key, self.TIPS.LANGUAGE_EMPTY);
-                }
-            }
-
-            //验证导入类型有效性
-            var key = 'imports';
-            if (_.has(data, key)) {
-                if (!data.imports || !data.imports.length) {
-                    return getResult(key, self.TIPS.IMPORTS_EMPTY);
                 }
             }
         }
@@ -117,6 +118,7 @@
 
             this.render();
             this.initEvents();
+            this.getUserResume();
         },
 
         initEvents: function () {
@@ -155,7 +157,7 @@
 
             this.ui.btnNext.click(function () {
                 if(_this.model.isValid()){
-                    window.location.href="selected.html"
+                   _this.next();
                 }
             });
         },
@@ -188,6 +190,62 @@
         },
         byName: function(name){
             return this.ui.main.find('[name=' + name + ']');
+        },
+        next: function () {
+            var options = {};
+            var data = this.model.toJSON();
+            var mID = this.getRequest().m_id;
+            var sID = this.ui.imports.val();
+
+            options.data = {
+                m_id: mID,
+                name: data.name,
+                title:  data.title,
+                direction: data.position,
+                language: data.language
+            };
+
+            options.success = function (result) {
+                var url = "/resume.html?m_id={0}&s_id={1}".format(mID,sID);
+                window.location.href = url;
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.start(options, this);
+        },
+        getUserResume: function () {
+            var _this = this;
+            var option = '<option value="{0}">{1}</option>';
+            var options = {
+                data: {}
+            };
+
+            options.success = function (result) {
+                _.each(result.data, function (e) {
+                    _this.ui.selImports.append(option.format(e.id, e.title));
+                });
+            };
+
+            options.error = function (result) {
+
+            };
+
+            WE.Api.getUserResume(options, this);
+        },
+        getRequest: function () {
+           var url = location.search; //获取url中"?"符后的字串
+           var theRequest = new Object();
+           if (url.indexOf("?") != -1) {
+              var str = url.substr(1);
+              strs = str.split("&");
+              for(var i = 0; i < strs.length; i ++) {
+                 theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+              }
+           }
+           return theRequest || {};
         }
 
     }));

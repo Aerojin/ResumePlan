@@ -11,7 +11,7 @@
         this.image = options.image;        
         this.callback = options.callback;
         this.upLoadFile = options.upLoadFile;
-        this.funName = options.funName || 'myPicture';
+        this.funName = options.funName || '_myPicture_';
 
         this.TIP = {
 			PICUPLOAD_ERROR :"图像格式不符合规范!",
@@ -38,26 +38,25 @@
         	var _this = this;
 
         	window[this.funName] = function(result) {
-        		var code = result.code || "";
-				var msg = result.msg || "";
-				
-				if (code == "S_OK") {
-					var url = '{0}?rd={1}'.format(msg, Math.random());	
-					var imageUrl = (new top.M2012.Contacts.ContactsInfo({ImageUrl: url})).ImageUrl;
+        		var code = result.status || "";
+				var msg = result.info || "";
+
+				if (code == 1) {
+					var url = '{0}?rd={1}'.format(result.data.photo, Math.random());
 					
 					if(_this.image){
-						_this.image.attr('src', imageUrl);
+						_this.image.attr('src', url);
 					}
 
 					if(_this.callback){
-						_this.callback({imagePath: msg, imageUrl: imageUrl});
+						_this.callback({photo: result.data.photo});
 					}
 					
 					_this.ui.parent.append(_this.ui.file);
-					top.M139.UI.TipMessage.show(_this.TIP.SUCCESS,{ delay : 2000});
+					WE.UI.alert(_this.TIP.SUCCESS);
 				} else {
                     _this.ui.parent.append(_this.ui.file);
-					top.M139.UI.TipMessage.show(msg,{ delay : 2000, className: 'msgYellow'});
+                    WE.UI.alert(msg);					
 				}
         	};
 
@@ -73,7 +72,7 @@
 
         this.check = function(fileName) {
         	if (!/\.(?:jpg|jpeg|gif|png|bmp)$/i.test(fileName)) {
-				top.M139.UI.TipMessage.show(this.TIP.PICUPLOAD_ERROR,{delay: 2000, className: 'msgYellow'});
+				WE.UI.alert(this.TIP.PICUPLOAD_ERROR);
 				this.ui.form.reset();
 				return false;
 			}
@@ -84,9 +83,10 @@
         //获取上传地址，测试环境与生产环境不同
         this.getUploadUrl = function() {
         	if(!this.url){
-	        	var domain = document.domain == "10086.cn" ? top.getDomain("rebuildDomain") : '';
-	        	this.url = "{0}/bmail/s?func=contact:uploadImage&sid={1}&serialId={2}&type=1&callback={3}";
-	        	this.url = this.url.format(domain, top.sid, this.serialId, this.funName);
+	        	var domain = document.domain;
+                var token = $.cookie(WE.Constant.COOKIE_TOKEN);
+	        	this.url = "{0}/api.php?m=common&a=upload&token={1}&fun_name={2}";
+	        	this.url = this.url.format(domain, token, this.funName);
 	        }
 
 			return this.url;

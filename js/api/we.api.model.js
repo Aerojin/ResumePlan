@@ -65,7 +65,8 @@
             return "http://www.jianlipro.com";
         }
     });
-
+    
+    /*登陆*/
     WE.Api.Login = function (options, context) {
         var data = options.data || {};
         var requestUrl = {model:'user', command:'login'};
@@ -76,6 +77,7 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*注册*/
     WE.Api.Register = function (options, context) {
         var data = options.data || {};
         var requestBody = data;
@@ -86,6 +88,7 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*忘记密码*/
     WE.Api.Forget = function (options, context) {
         var data = options.data || {};        
         var requestBody = data;
@@ -96,6 +99,7 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*重置密码*/
     WE.Api.Reset = function (options, context) {
         var data = options.data || {};        
         var requestBody = data;
@@ -106,6 +110,7 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*登出*/
     WE.Api.Logout = function (options, context) {
         var data = options.data || {};
         var requestBody = data;
@@ -116,6 +121,7 @@
         this.call(requestUrl, requestBody, options, context);
     }; 
 
+    /*意见反馈*/
     WE.Api.Feedback = function (options, context){
         var data = options.data || {};
         var requestBody = data;
@@ -126,6 +132,7 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
+    /*修改密码*/
     WE.Api.changePassword = function (options, context){
         var data = options.data || {};
         var requestBody = data;
@@ -135,7 +142,85 @@
 
         this.call(requestUrl, requestBody, options, context);
     };
-     
-	
+
+    /*获取模版列表*/
+    WE.Api.getTempList = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'getTempList'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*更新收藏标识*/
+    WE.Api.actionCollect  = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'liketem'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*简历开始*/
+    WE.Api.start  = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'main'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*获取用户所有的简历*/
+    WE.Api.getUserResume  = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'getlist'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*获取最新简历*/
+    WE.Api.getNewResume = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'getNewResume'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*获取收藏简历*/
+    WE.Api.getCollectResume = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'user', command:'getCollectResume'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    WE.Api.RemoveResume = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'del_all'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    
+
+    
 	
 })(WE, jQuery, Backbone);

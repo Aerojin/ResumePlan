@@ -144,15 +144,34 @@
                     _this.changePassword();
                 }
             });
+
+            this.ui.btnFile.change(function () {
+                _this.upload();
+            });
         },
 
         render: function () {
+            var _this = this;
+
             this.ui = {};
             this.ui.txtOld = $('#txt-old');
             this.ui.txtNew = $('#txt-new');
             this.ui.txtAffirm = $('#txt-affirm');
             this.ui.btnSave = $('#btn-save');
             this.ui.password = $('.password');
+            this.ui.btnFile = $("#btn-file");
+            this.ui.imgPhoto = $("#img-photo");
+            this.ui.userPhoto = $("#user-photo");
+
+            this.upload = new WE.Upload({
+                image: this.ui.imgPhoto,
+                upLoadFile:  this.ui.btnFile
+                callback: function (data) {
+                    _this.ui.imgPhoto.show();
+                    _this.ui.userPhoto.attr({src: data.photo});
+                    $.cookie(WE.Constant.COOKIE_PHOTO, data.photo);
+                }
+            });
         },
         showTip: function (dom, msg) {
             dom.closest("li").find(".error-tip").show().text(msg);
@@ -187,6 +206,9 @@
             };
 
             WE.Api.changePassword(options, this);
+        },
+        upload: function () {
+
         }
 
 

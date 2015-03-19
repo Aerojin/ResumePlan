@@ -27,6 +27,7 @@
 
         initialize: function (options) {
 
+            this.id = options.id;
         	this.title = options.title;
             this.image = options.image;
             this.state = options.state;
@@ -47,13 +48,11 @@
             });
 
             this.ui.btnUnlock.click(function () {
-                WE.UI.alert("解锁成功!");
+                window.location.href = "/pay.html?m_id=" + _this.id;
             });
 
             this.ui.btnCollect.click(function () {
-                _this.collect = !_this.collect;
-                
-                $(this).html(_this.getCollect());
+                _this.setCollect();
             });
         },
 
@@ -76,11 +75,32 @@
         },
 
         getSate: function () {
-        	if(this.state){
+        	if(this.state % 2){
         		return "单栏";
         	}
 
         	return "双栏";
+        },
+
+        setCollect: function () {
+            var options= {};
+            var collect = !!this.collect ? 0 : 1;
+
+            options.data = {
+                id: this.id,
+                collect: collect
+            };
+
+            options.success = function (result) {
+                this.collect = collect;
+                this.ui.btnCollect.html(this.getCollect());
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.actionCollect(options, this);
         },
 
         getCollect: function () {

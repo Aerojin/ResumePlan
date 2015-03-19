@@ -25,6 +25,7 @@
 
         initialize: function (options) {
 
+            this.id = options.id;
         	this.time = options.time;
         	this.title = options.title;
         	this.image = options.image;
@@ -45,13 +46,11 @@
             });
 
             this.ui.btnUnlock.click(function () {
-                WE.UI.alert("添加成功!");
+                window.location.href = "/start.html?m_id=" + _this.id;
             });
 
             this.ui.btnCollect.click(function () {
-                _this.collect = !_this.collect;
-
-                $(this).html(_this.getCollect());
+                _this.setCollect();
             });
         },
 
@@ -61,7 +60,7 @@
                     cid: this.cid,
                     image: this.image,
                     title: this.title,
-                    time: this.time,
+                    time: this.getDateDiff(this.time),
                     state:  this.getSate(),
                     collect: this.getCollect()
                 });
@@ -72,16 +71,35 @@
             this.ui.btnUnlock = this.ui.wrap.find(".btn-unlock");
             this.ui.btnCollect = this.ui.wrap.find(".btn-collect");
             this.ui.background = this.ui.wrap.find(".background");
-
-
         },
 
         getSate: function () {
-        	if(this.state){
+        	if(this.state % 2){
         		return "单栏";
         	}
 
         	return "双栏";
+        },
+
+        setCollect: function () {
+            var options= {};
+            var collect = !!this.collect ? 0 : 1;
+
+            options.data = {
+                id: this.id,
+                collect: collect
+            };
+
+            options.success = function (result) {
+                this.collect = collect;
+                this.ui.btnCollect.html(this.getCollect());
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.actionCollect(options, this);
         },
 
         getCollect: function () {
@@ -95,6 +113,13 @@
 
         getElement: function  (argument) {
             return this.ui.wrap;
+        },
+
+        getDateDiff: function (date){
+            var date3= new Date(date).getTime() - new Date().getTime()  //时间差的毫秒数
+
+            //计算出相差天数
+            return Math.floor(date3/(24*3600*1000))
         }
 
 
