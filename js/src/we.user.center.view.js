@@ -20,47 +20,11 @@
         initEvents: function () {
             var _this= this;
 
-            this.model.on("change:main", function () {
-                var data = this.get("main");
-                var date = new Date(data.update_at);
-                    date = WE.Date.format("yyyy-MM-dd", date);
-
-                _this.ui.hoverNew.show();
-                _this.ui.nowContext.hide();
-                _this.ui.main.find(".hover-info").hide();
-
-                 if(data){
-                    _this.ui.hoverNew.show();
-                    _this.ui.nowContext.show();
-                    _this.ui.main.find(".hover-info").show();
-
-                    _this.ui.spanTime.text(date);
-                    _this.ui.mainTitle.text(data.title);
-                    _this.ui.lblPercent.text(data.percent + "%");
-                    _this.ui.spanPercent.css({width: data.percent + "%"});
-                    _this.ui.mainPhoto.attr({src: data.i_img}).parent().show();
-                }
-            });
-
             this.model.on("change:data", function () {
-                var data = this.get("data");
-                var template = _.template(_this.template.resume);
-                var ul = _this.ui.otherMain.find("ul");
-                var last = ul.find("li").eq(-1);
+                var data = this.getData();
 
-                ul.find("li.info-list").remove();
-
-                if(data && data.length > 0){
-                    _.each(data, function (e, index) {
-                        var item = template({
-                            index: index,
-                            image: e.i_img,
-                            title: e.title
-                        });
-
-                        last.before(item);
-                    });
-                }
+                _this.renderMain(data.main);
+                _this.renderData(data.data);
             });
         },
 
@@ -88,82 +52,43 @@
                 _this.model.download(data.id);
             });
 
-            this.ui.hoverInfo.hover(function () {
+            this.ui.body.delegate(".hover-info", "mouseenter", function () {
                 $(this).find(".ico-look").show();
                 $(this).find(".ico-close").show();
-            },function () {
+            });
+
+            this.ui.body.delegate(".hover-info", "mouseleave", function () {
                 $(this).find(".ico-look").hide();
                 $(this).find(".ico-close").hide();
             });
 
-            this.ui.main.find(".ico-close").click(function () {
+            this.ui.body.delegate(".hover-info .ico-close", "click", function () {
                 var $this = $(this);
-                var data = _this.model.get("main");
+                var id = $this.data("id");
 
                 WE.UI.confirm(_this.model.TIPS.CONFIRM_DELETE,{
                     callback: function (bool) {
                          if(bool){
-                            _this.model.removeResume({id: data.id}, function () {
+                            _this.model.removeResume({id: id}, function () {
                                 WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
-                            });
-                            /*
-                            _this.ui.hoverNew.show(); 
-                            _this.ui.divAction.hide();
-                            _this.ui.divPercent.hide();
-                            $this.closest(".hover-info").remove();
-                            */
-                         }
-                    }
-                })
-            });
-
-            this.ui.main.find(".ico-look").click(function () {
-                var main = _this.model.get("main");
-                var data = {
-                    list: [{
-                        id: main.id,
-                        direct: main.is_main,
-                        title: main.title,
-                        image: main.i_url
-                    }],
-                    model: _this.model,
-                    showButton: false
-                };
-
-                var dialog = new WE.User.Dialog(data);
-            });
-
-
-            this.ui.otherMain.delegate(".ico-close","click", function () {
-                var $this = $(this);
-                var index = $this.data("index");
-                var data = _this.model.get("data");
-
-                WE.UI.confirm(_this.model.TIPS.CONFIRM_DELETE,{
-                    callback: function (bool) {
-                         if(bool){
-                            _this.model.removeResume({id: data[index].id}, function () {
-                                WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
-                                $this.closest(".info-list").remove();
                             });
                          }
                     }
-                })
+                });
             });
 
-            this.ui.otherMain.find(".ico-look", "click", function () {
+            this.ui.body.delegate(".hover-info .ico-look", "click", function () {
                 var index = $(this).data("index");
-                var data = _this.model.getData();
+                var data = _this.model.get("data");
 
                 var data = {
                     list: data,
                     index: index,
-                    model: _this.model,
-                    showButton: true
+                    showButton: true,
+                    model: _this.model
                 };
 
                 var dialog = new WE.User.Dialog(data);
-
             });
 
             this.ui.mainNew.click(function () {
@@ -189,8 +114,6 @@
             this.ui.spanTime = this.ui.main.find("#span-time");
             this.ui.spanPercent = this.ui.main.find("#span-percent");
             this.ui.lblPercent = this.ui.main.find("#lbl-percent");
-            this.ui.spanPercent = this.ui.main.find("#span-percent");
-            this.ui.hoverInfo = this.ui.body.find(".hover-info");
             this.ui.otherMain = this.ui.body.find("#other-main");
             this.ui.hoverNew = this.ui.main.find("#hover-new");
             this.ui.divPercent = this.ui.main.find("#div-percent");
@@ -207,6 +130,48 @@
             this.getNewResume();
             this.getCollectResume();
             this.model.getUserResume();
+        },
+        renderMain: function (data) {
+            var date = new Date(data.update_at);
+                date = WE.Date.format("yyyy-MM-dd", date);
+
+            this.ui.hoverNew.show();
+            this.ui.nowContext.hide();
+            this.ui.main.find(".hover-info").hide();
+
+             if(data){
+                this.ui.hoverNew.show();
+                this.ui.nowContext.show();
+                this.ui.main.find(".hover-info").show();
+                this.ui.main.find(".hover-info .ico-close").data("id", data.id);
+                this.ui.main.find(".hover-info .ico-look").data("index", data.index);
+
+                this.ui.spanTime.text(date);
+                this.ui.mainTitle.text(data.title);
+                this.ui.lblPercent.text(data.percent + "%");
+                this.ui.spanPercent.css({width: data.percent + "%"});
+                this.ui.mainPhoto.attr({src: data.i_img}).parent().show();
+            }
+        },
+        renderData: function (data) {
+            var template = _.template(this.template.resume);
+            var ul = this.ui.otherMain.find("ul");
+            var last = ul.find("li").eq(-1);
+
+            ul.find("li.info-list").remove();
+
+            if(data && data.length > 0){
+                _.each(data, function (e) {
+                    var item = template({
+                        id: e.id,
+                        index: e.index,
+                        image: e.i_img,
+                        title: e.title
+                    });
+
+                    last.before(item);
+                });
+            }
         },
         openShare: function () {
             if(!this.share){
@@ -227,53 +192,36 @@
             });
         },
         getNewResume: function () {
-            var options = {
-                data: {
-                    count: 1
-                }
-            };
+            var _this = this;
 
-            options.success = function (result) {
-                if(result.data && result.data.length > 0){
-                    var template = _.template(this.template.news);
-                        template = template(result.data[0]);
+            this.model.getNewResume(function(data) {
+                var template = _.template(_this.template.news);
+                    template = template(data[0]);
 
-                    this.ui.mainNew.html(template).data("m_id", result.data[0].id);
-                }
-            };
-
-            options.error = function (result) {
-
-            };
-
-            WE.Api.getNewResume(options, this);
+                _this.ui.mainNew.html(template).data("m_id", data[0].id);
+            });
         },
         getCollectResume: function () {
-            var options = {
-                data: {}
-            };
+            var _this = this;
 
-            options.success = function (result) {
-                if(result.data && result.data.length > 0){
+            this.model.getCollectResume(function(result) {
+                if(result.success && result.data && result.data.length > 0){
                     var html = [];
-                    var template = _.template(this.template.collect);
+                    var template = _.template(_this.template.collect);
 
                     _.each(result.data, function (e) {
                         html.push(template(e));
                     });
 
-                    this.ui.collectWrap.html(html.join("\n"));
-                }else{
-                    this.ui.mainCollect.hide();
+                    _this.ui.mainCollect.show();
+                    _this.ui.collectWrap.html(html.join("\n"));
+
+                    return;
                 }
-            };
 
-            options.error = function (result) {
-                this.ui.mainCollect.hide();
-            };
-
-            WE.Api.getCollectResume(options, this);
-        }
+                _this.ui.mainCollect.hide();
+            });
+        },
 
         template: {
             news: ['<img src="<%-url%>" />',
@@ -289,7 +237,7 @@
             resume: ['<li class="info-list">',
                         '<div class="userInfo_img hover-info">',
                             '<img src="<%=image%>" />',
-                            '<a href="javascript: void(0);" data-index="<%-index%>" class="i_icoCloseX ico-close" style="display:none;"></a>',
+                            '<a href="javascript: void(0);" data-id="<%-id%>" class="i_icoCloseX ico-close" style="display:none;"></a>',
                             '<a href="javascript: void(0);" data-index="<%-index%>" class="i_icoLook ico-look" style="display:none;"></a>',
                         '</div>',
                        '<p class="userCenterList_name"><%-title%></p>',

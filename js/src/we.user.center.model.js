@@ -46,6 +46,46 @@
             WE.Api.getUserResume(options, this);
         },
 
+        getNewResume: function (callback) {
+            var options = {
+                data: {
+                    count: 1
+                }
+            };
+
+            options.success = function (result) {
+               if(callback){
+                    callback(result.data);
+               }
+            };
+
+            options.error = function (result) {
+
+            };
+
+            WE.Api.getNewResume(options, this);
+        },
+
+        getCollectResume: function (callback) {
+            var options = {
+                data: {}
+            };
+
+            options.success = function (result) {
+                if(callback){
+                    callback(result);
+                }
+            };
+
+            options.error = function (result) {
+                if(callback){
+                    callback(result);
+                }
+            };
+
+            WE.Api.getCollectResume(options, this);
+        },
+
         sendMail: function (id, callback) {
             var options = {
                 data: {
@@ -129,45 +169,49 @@
         },
 
         format: function (data) {
-            var main = null;
-            var data = [];
+            //var main = null;
+            var array = [];
 
-            _.each(data, function (e) {
-                if(e.is_main){
-                    main = e;
-                }else{
-                    data.push(e);
-                }
+            _.each(data, function (e, index) {
+                e.index = index;
+                e.image = e.i_url;
+                e.direct = e.is_main;
+
+                array.push(e);
             });
 
-            if(!main && data.length > 0){
-                main = data.splice(0,1);
-            }
+            /*
+            if(!main && array.length > 0){
+                main = array.splice(0,1);
+            }*/
 
-            this.model.set({
-                main: main,
-                data: data
-            }, {silent: true});
 
-            this.model.trigger("change:main");
+            this.model.set({data: array}, {silent: true});
             this.model.trigger("change:data");
+            //this.model.trigger("change:main");
+            
         },
 
         getData: function () {
-        	var array = [];
         	var data = this.get("data") || [];
+            var result = {
+                main: null,
+                data: []
+            };
 
         	_.each(data, function (e, index) {
-        		array.push({
-        			index: index,
-        			direct: e.is_main,
-                    id: e.id,
-                    title: e.title,
-                    image: e.i_url
-        		})
+                if(e.is_main){
+                    result.main = e;
+                }else{
+            		result.data.push(e);
+                }
         	});
 
-        	return array;
+            if(!result.main && result.data.length > 0){                
+                result.main = result.data.splice(0,1);
+            }
+
+        	return result;
         }
 
     }));
