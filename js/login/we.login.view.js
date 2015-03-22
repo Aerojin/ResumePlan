@@ -203,8 +203,8 @@
             options.data = this.model.toJSON();
 
             options.success = function (result) {
-                $.cookie(WE.Constant.COOKIE_USER, result.data.u_email);
-                $.cookie(WE.Constant.COOKIE_USERID, result.data.u_id);
+                $.cookie(WE.Constant.COOKIE_USER, result.data.email);
+                $.cookie(WE.Constant.COOKIE_USERID, result.data.id);
                 $.cookie(WE.Constant.COOKIE_PHOTO, result.data.logo);
                 $.cookie(WE.Constant.COOKIE_TOKEN, result.data.token);
 

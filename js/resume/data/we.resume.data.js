@@ -72,6 +72,54 @@
                     gpa: "2.5/4.1"
                 }]
             });
+
+            //创建校园经历
+            this.school = new WE.Resume.Data.School({
+                isShow: true,
+                isDrag: true,
+                data: [{
+                    id: "s001",
+                    name: "人文系学生会",
+                    position: "学生会主席",
+                    startY: "2013",
+                    startM: "5",
+                    endY: "2013",
+                    endM: "7",
+                    context: "策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。"
+                }]
+            });
+
+            //创建工作经历
+            this.work = new WE.Resume.Data.Work({
+                isShow: true,
+                isDrag: true,
+                data: [{
+                    id: "s001",
+                    name: "人文系学生会",
+                    position: "学生会主席",
+                    startY: "2013",
+                    startM: "5",
+                    endY: "2013",
+                    endM: "7",
+                    context: "策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。"
+                }]
+            });
+
+            //创建工作经历
+            this.project = new WE.Resume.Data.Project({
+                isShow: true,
+                isDrag: true,
+                data: [{
+                    id: "s001",
+                    name: "人文系学生会",
+                    position: "学生会主席",
+                    startY: "2013",
+                    startM: "5",
+                    endY: "2013",
+                    endM: "7",
+                    context: "策划举办学院的院庆、毕业生晚会、新生晚会、学代会等各项活动与康师傅、雪碧、佳得乐等公司合作举办歌唱选秀、运动挑战赛(规模超过1000人)。"
+                }]
+            });
         },
 
         //创建基础信息
