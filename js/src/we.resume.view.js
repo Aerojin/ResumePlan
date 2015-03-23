@@ -20,6 +20,7 @@
             this.initDrog();
             this.initMenu();
             this.initSlideShow();
+            this.initControl();
         },
 
         initEvents: function () {
@@ -160,6 +161,15 @@
                 constant: this.constant
             });
         },
+
+        initControl: function () {
+            new WE.Resume.Control.View({
+                container: this.ui.resume,
+                template: $("#resume-tmpl").html()
+            });
+        },
+
+        
 
         setItem: function (data) {
             var id = _.template("#drag-<%-id%>");

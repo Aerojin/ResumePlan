@@ -1,7 +1,7 @@
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.Model.ModelBase;
-    var _class = "WE.Resume.Data";  
+    var _class = "WE.Resume.DataInstance";  
 
     WE.namespace(_class, superClass.extend({
         
@@ -46,17 +46,18 @@
             this.base = new WE.Resume.Data.Base({
                 isShow: true,
                 isDrag: false,
-                data: {
+                data: [{
+                    id: "b001",
                     sex: "1",
                     political: "党员",
                     moblie: "13926572774",
-                    email: "13926572774@139.com"
+                    email: "13926572774@139.com",
                     name: "金锐",
                     title: "金锐的工作简历",
                     job: "软件工程师",
                     pinyin: "jinrui",
                     photo: "../images/pic_10.jpg"
-                }
+                }]
             });
 
             //创建教育背景
@@ -234,7 +235,7 @@
     //单例,保证按钮和模板间的交互同步
     WE.Resume.getInstance = function () {
         if(!window._RESUME_DATA){
-            window._RESUME_DATA = new WE.Resume.Data();
+            window._RESUME_DATA = new WE.Resume.DataInstance();
         }
 
         return window._RESUME_DATA;

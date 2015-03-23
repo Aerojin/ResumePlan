@@ -16,7 +16,7 @@
 
             data.push(this.format(args));
 
-            this.model.set({data: data});
+            this.set({data: data});
         },
 
         update: function (args) {
@@ -25,7 +25,7 @@
 
             data[index] = this.format(args);
 
-            this.model.set({data: data});
+            this.set({data: data});
         },
 
         remove: function (id) {
@@ -34,7 +34,7 @@
 
             data.splice(index, 1);
 
-            this.model.set({data: data});
+            this.set({data: data});
         },
 
         setData: function (data) {

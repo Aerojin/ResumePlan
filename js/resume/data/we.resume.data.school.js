@@ -19,13 +19,13 @@
         },      
 
         initialize: function (args) {
-            this.model.set({
+            this.set({
                 sort: args.sort,
                 isShow: args.isShow,
                 isDrag: args.isDrag
             });
 
-            this.setData();
+            this.setData(args.data);
             this.master = args.master;
         },
 

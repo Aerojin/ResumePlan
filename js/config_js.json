@@ -7,7 +7,8 @@
 			"./js/lib/jquery-1.8.3.min.js",
 			"./js/lib/jquery.cookie.js",
 			"./js/lib/underscore-min.js",
-			"./js/lib/backbone-min.js"
+			"./js/lib/backbone-min.js",
+			"./js/lib/doT.min.js"
 		]
 	},
 	"drag":{
@@ -152,7 +153,21 @@
 		"compress": true,
 		"name": "we.resume.data.pack.js",
 		"src":[
-			"./js/resume/data/*.js"
+			"./js/resume/data/we.resume.superclass.js",
+			"./js/resume/data/we.resume.data.ability.js",
+			"./js/resume/data/we.resume.data.article.js",
+			"./js/resume/data/we.resume.data.base.js",
+			"./js/resume/data/we.resume.data.certificate.js",
+			"./js/resume/data/we.resume.data.education.js",
+			"./js/resume/data/we.resume.data.evaluation.js",
+			"./js/resume/data/we.resume.data.hobbies.js",
+			"./js/resume/data/we.resume.data.prize.js",
+			"./js/resume/data/we.resume.data.project.js",
+			"./js/resume/data/we.resume.data.research.js",
+			"./js/resume/data/we.resume.data.school.js",
+			"./js/resume/data/we.resume.data.subject.js",
+			"./js/resume/data/we.resume.data.work.js",
+			"./js/resume/data/we.resume.data.js"
 		]
 	},
 	"template": {

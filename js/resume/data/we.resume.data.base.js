@@ -17,7 +17,7 @@
                     sex: "1",
                     political: "党员",
                     moblie: "13926572774",
-                    email: "13926572774@139.com"
+                    email: "13926572774@139.com",
                     name: "金锐",
                     title: "",
                     job: "软件工程师",
@@ -30,22 +30,22 @@
         KEY: "base",      
 
         initialize: function (args) {
-            this.model.set({
+            this.set({
                 sort: args.sort,
                 isShow: args.isShow,
                 isDrag: args.isDrag
             });
 
-            this.setData();
+            this.setData(args.data);
             this.master = args.master;         
         },
 
         create: function (data) {
-            this.model.set({data: this.format(data)});
+            this.set({data: this.format(data)});
         },
 
         update: function (data) {
-            this.model.set({data: this.format(data)});
+            this.set({data: this.format(data)});
         },
 
         remove: function (id) {
