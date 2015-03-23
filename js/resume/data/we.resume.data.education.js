@@ -39,7 +39,8 @@
                 startM: args.startM,
                 endY: args.endY,
                 endM: args.endM,
-                gpa: args.gpa
+                gpa: args.gpa,
+                sort: args.sort
             };
         }
     }));

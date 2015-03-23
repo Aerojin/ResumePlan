@@ -33,7 +33,7 @@
             return {
                 id: args.id,
                 name: args.name,
-                title: args.position,
+                title: args.title,
                 dateY: args.dateY,
                 dateM: args.dateM
             };

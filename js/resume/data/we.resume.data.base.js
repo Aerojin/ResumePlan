@@ -13,11 +13,13 @@
                 isShow: true,
                 isDrag: true,
                 data: {
+                    id: "",
                     sex: "1",
                     political: "党员",
                     moblie: "13926572774",
                     email: "13926572774@139.com"
                     name: "金锐",
+                    title: "",
                     job: "软件工程师",
                     pinyin: "jinrui",
                     photo: "http://www.jianlipro.com/aeroji.jpg"
@@ -52,11 +54,13 @@
 
         format: function (args){
             return {
+                id: args.id,
                 sex: args.sex,
                 political: args.political,
                 moblie: args.moblie,
                 email: args.email,
                 name: args.name,
+                title: args.title,
                 job: args.job,
                 pinyin: args.pinyin,
                 photo: args.photo

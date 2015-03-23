@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>test</title>
+	<script src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+	<style type="text/css">
+		body{margin:0px; padding:0px;}
+		.drag{position:absolute; top: -100px;}
+		.box{width: 200px; height:200px;padding:5px; border: 1px #ccc solid; margin: 5px;}
+	</style>
+</head>
+<body>
+	
+<script type="text/javascript">
+	$(function() {
+		var div = $("<div class='box drag'></div>");
+		
+		div.appendTo("body");
+		
+		console.log("height:" + div.height());
+		
+		console.log("outerHeight:" + div.outerHeight());
+		
+		console.log("outerHeight(true):" + div.outerHeight(true));
+	});
+</script>
+</body>
+</html>
