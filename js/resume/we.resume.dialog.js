@@ -14,7 +14,7 @@
         	this.width = options.width;
         	this.title = options.text;
         	this.content = options.content;
-            this.constant = WE.Resume.getConstant();
+            this.instance = WE.Resume.getInstance();
 
         	this.render();
         	this.initEvents();
@@ -26,14 +26,14 @@
         initEvents: function () {
             var _this = this;
 
-            this.constant.on("change", this.setState, this);
+            this.instance.on("change:show", this.setState, this);
 
             this.ui.btnClose.click(function () {
             	_this.close();
             });
 
             this.ui.wrap.delegate(".btn-ico","click",function() {
-                _this.constant.setKey(_this.key);
+                _this.instance.setShow(_this.key);
             });
         },
 
@@ -68,7 +68,7 @@
         close: function () {
         	this.ui.wrap.remove();
             this.ui.background.remove();
-            this.constant.off("change", this.setState);
+            this.instance.off("change", this.setState);
 
         	this.onClose();
         },
@@ -83,8 +83,7 @@
         },
 
         setState: function () {
-            var ico = this.getState();
-            var data = this.constant.changed;
+            var ico = this.getState();            
             var element = this.ui.wrap.find(".btn-ico");
 
             element.after(ico).remove();
@@ -95,7 +94,7 @@
                 return this.stateTmpl.lock;
             }
 
-            if(this.constant.getKey(this.key)){
+            if(this.instance.getShow(this.key)){
                 return this.stateTmpl.look;
             }
 

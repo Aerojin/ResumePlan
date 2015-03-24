@@ -1,13 +1,13 @@
 ;(function (WE, jQuery, Backbone) {
 
     var superClass = WE.Resume.SuperClass;
-    var _class = "WE.Resume.Data.Ability";  
+    var _class = "WE.Resume.Data.Skill";  
 
     WE.namespace(_class, superClass.extend({
         
         name: _class, 
 
-        KEY: "ability",
+        KEY: "skill",
 
         defaults: function () {
             return {

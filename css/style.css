@@ -69,7 +69,7 @@ a:hover{color:#333; text-decoration:none;}
 .i_icoColorOne, .i_icoColorTwo, .i_icoColorThree, .i_icoColorFour, .i_icoColorFive, .i_icoColorSix, .i_icoColorSeven, .i_icoColorEight, .i_icoColorNine, .i_icoColorTen, .i_icoColorEleven,
 .btnC, .btnD, .btnE, .btnH,
 .i_icoSone, .i_icoStwo, .i_icoSthrere, .i_icoSfour, .i_icoSfive, .i_icoCloseW, .i_icoReplace, .i_icoExport, .i_icoSok, .i_icoLeft, .i_icoRight, .i_icoLeftNo, .i_icoRightNo,
-.i_icoInfo, .i_icoMone, .i_icoMtwo, .i_icoMthree, .i_icoMfour, .i_icoMfive, .i_icoMsix, .i_icoMseven, .i_icoMeight, .i_icoMnine, .i_icoMten, .i_icoMeleven, .i_icoMtwelve, .i_icoAdds, .i_icoCut, .i_icoThrough, .i_icoLoad, .i_icoWadd, .i_icoCloseSmall, .i_icoErrors, .loginImgA, .i_icoPay, .payTableGreen i, .payTableOrange i, .payCon_radio i, .payCon_radioGreen.on i, .payCon_radioOrange.on i, .i_icoPicture, .i_icoPoint, .i_icoPoints, .i_icoPointss, .i_icoLock, .i_icoLookB, .i_icoUnlook, .i_icoLooks, .i_icoUnlooks, .resumeMenu_list a:hover i
+.i_icoInfo, .i_icoMone, .i_icoMtwo, .i_icoMthree, .i_icoMfour, .i_icoMfive, .i_icoMsix, .i_icoMseven, .i_icoMeight, .i_icoMnine, .i_icoMten, .i_icoMeleven, .i_icoMtwelve, .i_icoAdds, .i_icoCut, .i_icoThrough, .i_icoLoad, .i_icoWadd, .i_icoCloseSmall, .i_icoErrors, .loginImgA, .i_icoPay, .payTableGreen i, .payTableOrange i, .payCon_radio i, .payCon_radioGreen.on i, .payCon_radioOrange.on i, .i_icoPicture, .i_icoPoint, .i_icoPoints, .i_icoPointss, .i_icoPointssss, .i_icoLock, .i_icoLookB, .i_icoUnlook, .i_icoLooks, .i_icoUnlooks, .resumeMenu_list a:hover i, .i_icoTime
 {background:url(../images/icon_01.png) no-repeat; _background:url(../images/icon_01_8.png) no-repeat; display:inline-block; vertical-align:middle; overflow:hidden;}
 .logo{background-position:-160px -226px; width:166px; height:40px;}
 .logoOther{background-position:-160px -226px; width:34px; height:40px;}
@@ -196,11 +196,14 @@ a:hover{color:#333; text-decoration:none;}
     border-radius:4px;
 }
 .i_icoPointsss{background-color:#3284bc; width:7px; height:7px; display:inline-block; vertical-align:middle;}
+.i_icoPointssss{background-position:-379px -668px; width:8px; height:8px;}
 .i_icoLock{background-position:-439px -591px !important; width:12px; height:16px;}
 .i_icoLookB{background-position:-452px -591px !important; width:16px; height:16px;}
 .i_icoUnlook{background-position:-469px -591px !important; width:16px; height:16px;}
 .i_icoLooks{background-position:-452px -608px; width:16px; height:18px;}
 .i_icoUnlooks{background-position:-469px -608px; width:16px; height:16px;}
+.i_icoTime{background-position:-388px -668px; width:14px; height:13px;}
+.i_icoYellow{background-color:#ffc739; width:4px; height:4px; display:inline-block; vertical-align:middle;}
 
 /*按钮*/
 .btnLogin{background-position:-214px -101px; width:106px; height:36px; text-align:center; line-height:36px; color:#fff; font-size:14px;}
@@ -676,7 +679,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll_left .i_icoLeft, .scroll_left .i_icoLeftNo{left:0;}
 .scroll_right .i_icoRight, .scroll_right .i_icoRightNo{right:0;}
 
-.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 35px 0 22px;}
+.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 28px 0 28px; position:relative; zoom:1;}
 .resumeCon_img{float:left; padding-left:10px;}
 .resumeCon_img span{width:103px; height:5px; border-bottom:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39;}
 .resumeCon_img img{margin-top:22px;}
@@ -687,6 +690,8 @@ a:hover{color:#333; text-decoration:none;}
 .resumeCon_right strong{background-color:#d94a39; border-bottom:1px solid #eca69e; line-height:20px; padding:44px 0 5px; color:#fff; font-size:14px; display:block; width:75px; margin-bottom:6px;}
 .resumeCon_right p{line-height:20px;}
 .resumeCon_right span{border-top:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39; width:75px; height:5px; margin-top:7px;}
+.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:100%; height:116px;}
+.resumeConBg_two{position:absolute; left:0; top:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:50%; height:100%;}
 
 .resumeConBox{padding-top:0;}
 
@@ -729,6 +734,51 @@ a:hover{color:#333; text-decoration:none;}
 .resumeRight_ul a{color:#5095c5; margin-left:17px;}
 .resumeRight_ulFloat li{float:left; width:170px;}
 
+.resumeCon_top img{width:106px; height:130px; float:left;
+	-moz-border-radius:35px;
+    -webkit-border-radius:35px;
+    border-radius:35px;
+}
+.resumeCon_topRight{float:left; color:#000; width:630px; margin:10px 0 0 20px; _display:inline;}
+.resumeCon_topRight h2{font-size:22px; line-height:24px;}
+.resumeCon_topRight li{float:left; margin:15px 20px 0 0; _display:inline;}
+.resumeCon_topRight_a{float:left; text-align:right; border-right:1px solid #dfdfdf; padding-right:4px; margin-right:4px;}
+.resumeCon_topRight_a strong{font-size:14px;}
+.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px;}
+.resumeCon_topRight_b{float:left; color:#757575;}
+.resumeCon_bottom{border-top:1px solid #bdbdbd; padding-top:4px; color:#bdbdbd; margin:60px auto 10px; width:50px; display:block;}
+
+.resumeConE{padding:7px 10px; font-family:Arial;}
+.resumeConE_header{background-color:#ffc739; padding:19px 42px; color:#fff;}
+.resumeConE_header img{float:left; width:118px;}
+.resumeConE_headerRight{float:left; margin-left:12px; width:723px; padding-top:15px;}
+.resumeConE_headerRight h2{ font-size:21px; line-height:26px; height:26px;}
+.resumeConE_headerRight ul{margin-top:5px;}
+.resumeConE_headerRight li{float:left; font-size:14px; line-height:22px; margin-right:10px;}
+
+.resumeConE_list{padding:0 50px;}
+.resumeConE_list h2{font-size:27px; color:#414141; line-height:30px;}
+.resumeConE_box{margin-top:24px;}
+.resumeConE_box_time{float:left; width:230px; padding-left:19px;}
+.resumeConE_box_time_line{border-left:2px solid #4f4f4f; position:relative; zoom:1; padding-left:53px; color:#6a6a6a; min-height:74px;}
+.resumeConE_box_time_line .i_icoTime{position:absolute; left:-7px; top:-6px;}
+.resumeConE_box_time_line span{color:#b6b6b6;}
+.resumeConE_box_info{float:left; width:437px;}
+.resumeConE_box_info li{margin-top:5px; font-size:13px;}
+.resumeConE_box_info strong{font-size:15px; color:#666; line-height:20px;}
+.resumeConE_box_info i{margin:-2px 6px 0 0;}
+.resumeConE_list_li{border-top:1px dashed #4b4b4b; padding:22px 0;}
+.resumeConE_list_title{display:block; color:#666; font-size:15px; position:relative; zoom:1; margin-top:10px;}
+.resumeConE_list_title em{border-left:1px solid #ffc739; margin-left:5px; padding-left:5px;  color:#6a6a6a; font-size:12px; font-weight:normal;}
+.resumeConE_list_title span{position:absolute; right:0; top:0; color:#6a6a6a; font-size:12px; font-weight:normal;}
+.resumeConE_lists{margin-top:5px;}
+.resumeConE_lists li{color:#919191; float:left; line-height:20px; margin-right:10px; _display:inline;}
+.resumeConE_listsOther li{margin-right:100px;}
+.resumeConE_lists span{color:#919191; margin-left:5px;}
+.resumeConE_lists em{border-left:1px solid #d2d2d2; color:#ffc739; padding-left:4px;}
+.resumeConE_footer{background-color:#ffc739; height:16px; overflow:hidden;}
+
+
 .infoBox{border:1px solid #fff; padding:10px;}
 .infoBox.focus{border:1px solid #16bb00;
 	-moz-box-shadow:0 0 4px #16bb00;
@@ -745,6 +795,9 @@ a:hover{color:#333; text-decoration:none;}
 .infoBoxList li{line-height:22px;}
 .infoBoxList strong{color:#dd5c4d; width:85px; border-right:2px dashed #bebebe; font-weight:normal; height:20px; display:inline-block; padding-left:16px;}
 .infoBoxList span{padding-left:22px;}
+
+.infoBox h3{color:#333; font-size:16px; color:#111; border-bottom:1px dotted #5e5e5e; padding-bottom:5px; line-height:18px;}
+.infoBox h3 p{font-size:12px; font-weight:normal; color:#7e7f7f;}
 
 .infoBoxListA{margin-top:10px; border-bottom:1px solid #c7c6c6;}
 .infoBoxListA i{width:6px; height:6px; background-color:#d84331; float:left; display:inline-block; margin:7px 20px 0 11px; overflow:hidden;}
@@ -771,6 +824,15 @@ a:hover{color:#333; text-decoration:none;}
 .infoBoxD_info li i{margin-right:8px;}
 
 .infoBoxE{line-height:24px; color:#545454; border-bottom:1px solid #9d9c9c; padding:10px 0 20px;}
+
+.infoBoxListF strong{font-size:14px; color:#2c2d2d; display:block; line-height:24px;}
+.infoBoxListF strong span{border-left:1px solid #a2a2a2; margin-left:6px; padding-left:6px; color:#acacac;}
+.infoBoxListF li{font-size:14px; margin-top:15px;}
+.infoBoxListF li p{margin-top:5px;}
+.infoBoxListF li p strong{display:inline-block;}
+.infoBoxListF li p span{display:block; margin-left:18px;}
+.infoBoxListF_a strong{text-align:center; border-bottom:1px solid #dfdfdf; font-size:14px; padding-bottom:4px; margin-bottom:4px;}
+.infoBoxListF_a p{letter-spacing:-1px; text-align:center;}
 
 /*制作菜单*/
 .resumeMenu{float:right; width:276px; background-color:#1a1a1a; padding:10px;}

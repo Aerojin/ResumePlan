@@ -29,6 +29,14 @@
             this.master = args.master;
         },
 
+        create: function (args) {
+            this.set({data: this.format(args)});
+        },
+
+        update: function (args) {
+            this.set({data: this.format(args)});
+        },
+
         format: function (args){
             return {
                 id: args.id,

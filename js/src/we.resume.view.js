@@ -11,13 +11,12 @@
 
         initialize: function (options) {
             this.model = options.model;
-            this.constant = options.constant;
+            this.instance = options.instance;
 
             this.render();
             this.initEvents();
 
             this.initZoom();
-            this.initDrog();
             this.initMenu();
             this.initSlideShow();
             this.initControl();
@@ -27,9 +26,10 @@
             var _this = this;
             var ui = this.ui;
 
+            /*
             this.constant.on("change", function () {
                 _this.setItem(this.getChanged());
-            });
+            });*/
 
             this.model.on("change:scroll", function () {
                 if(this.get("scroll")){
@@ -75,13 +75,6 @@
                     }, 50);
                 }
             });
-
-            $("body").click(function (event) {
-                console.log("event", event);
-                console.log("pageX", event.pageX);
-                console.log("pageY", event.pageY);
-            });
-
         },
 
         render: function () {
@@ -127,38 +120,9 @@
             });
         },
 
-        initDrog: function () {
-            var id = _.template("#drag-<%-id%>");
-            var array = ["base","education", "school", "work", "skill", "prize", "evaluation","research", "article", "subject", "hobbies"];
-
-            for(var i = 0; i < array.length; i++){
-                var newId = id({id: array[i]});
-
-                new WE.Drag({
-                    dragClass: ".dragDiv",
-                    dragTable: $("#dragTable"),
-                    dragElement: $(newId),
-                    moveElement: $(newId),
-                    onMouseUp: function (element) {
-                        element.css({cursor: "default"});
-                        element.removeClass("focus");
-                    },
-                    onMouseDown: function (element) {
-                        element.css({cursor: "move"});
-                        element.addClass("focus").removeClass("hover");
-                    }
-                });
-
-                this.setItem({
-                    key: array[i],
-                    value: this.constant.getKey(array[i])
-                });
-            }
-        },
-
         initMenu: function () {
             this.menuView = new WE.Resume.Menu.View({
-                constant: this.constant
+                instance: this.instance
             });
         },
 
@@ -169,18 +133,6 @@
             });
         },
 
-        
-
-        setItem: function (data) {
-            var id = _.template("#drag-<%-id%>");
-                id = id({id: data.key});
-
-            if(data.value){
-                $(id).show();    
-            }else{
-                $(id).hide();
-            }
-        }
 
     }));
 
@@ -188,7 +140,7 @@
         var model = new WE.Resume.Model();
         var view = new WE.Resume.View({
             model: model,
-            constant: WE.Resume.getConstant()
+            instance: WE.Resume.getInstance()
         });
     });
 

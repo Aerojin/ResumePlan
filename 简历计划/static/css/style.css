@@ -679,7 +679,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll_left .i_icoLeft, .scroll_left .i_icoLeftNo{left:0;}
 .scroll_right .i_icoRight, .scroll_right .i_icoRightNo{right:0;}
 
-.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 35px 0 22px;}
+.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 28px 0 28px; position:relative; zoom:1;}
 .resumeCon_img{float:left; padding-left:10px;}
 .resumeCon_img span{width:103px; height:5px; border-bottom:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39;}
 .resumeCon_img img{margin-top:22px;}
@@ -690,6 +690,11 @@ a:hover{color:#333; text-decoration:none;}
 .resumeCon_right strong{background-color:#d94a39; border-bottom:1px solid #eca69e; line-height:20px; padding:44px 0 5px; color:#fff; font-size:14px; display:block; width:75px; margin-bottom:6px;}
 .resumeCon_right p{line-height:20px;}
 .resumeCon_right span{border-top:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39; width:75px; height:5px; margin-top:7px;}
+
+/*补丁容器*/
+.resumeConOther{clear:both; border-top:1px solid #ccc; padding:0 28px;}
+.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:100%; height:186px;}
+.resumeConBg_two{position:absolute; left:0; top:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:50%; height:100%;}
 
 .resumeConBox{padding-top:0;}
 
@@ -742,7 +747,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeCon_topRight li{float:left; margin:15px 20px 0 0; _display:inline;}
 .resumeCon_topRight_a{float:left; text-align:right; border-right:1px solid #dfdfdf; padding-right:4px; margin-right:4px;}
 .resumeCon_topRight_a strong{font-size:14px;}
-.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px; font-size:9px;}
+.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px;}
 .resumeCon_topRight_b{float:left; color:#757575;}
 .resumeCon_bottom{border-top:1px solid #bdbdbd; padding-top:4px; color:#bdbdbd; margin:60px auto 10px; width:50px; display:block;}
 
@@ -765,7 +770,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConE_box_info li{margin-top:5px; font-size:13px;}
 .resumeConE_box_info strong{font-size:15px; color:#666; line-height:20px;}
 .resumeConE_box_info i{margin:-2px 6px 0 0;}
-.resumeConE_list_li{border-bottom:1px dashed #4b4b4b; padding:22px 0;}
+.resumeConE_list_li{border-top:1px dashed #4b4b4b; padding:22px 0;}
 .resumeConE_list_title{display:block; color:#666; font-size:15px; position:relative; zoom:1; margin-top:10px;}
 .resumeConE_list_title em{border-left:1px solid #ffc739; margin-left:5px; padding-left:5px;  color:#6a6a6a; font-size:12px; font-weight:normal;}
 .resumeConE_list_title span{position:absolute; right:0; top:0; color:#6a6a6a; font-size:12px; font-weight:normal;}

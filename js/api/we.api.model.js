@@ -243,11 +243,22 @@
     };
 
     
-
-    WE.Api.RemoveResume = function (options, context){
+    /*删除简历*/
+    WE.Api.removeResume = function (options, context){
         var data = options.data || {};
         var requestBody = data;
         var requestUrl = {model:'resume', command:'del_all'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*删除简历*/
+    WE.Api.getResumeDetail = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'getResumeDetail'};
         
         //options.httpMethod = "get";
 

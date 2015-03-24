@@ -52,6 +52,13 @@
 
         },
 
+        getData: function () {
+            var data = _.clone(this.get("data"));
+                data.sex = WE.Constant.SEX[data.sex || "0"];
+
+            return data;
+        },
+
         format: function (args){
             return {
                 id: args.id,

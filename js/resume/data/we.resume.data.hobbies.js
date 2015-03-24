@@ -14,7 +14,7 @@
                 sort:1,
                 isShow: true,
                 isDrag: true,
-                data: []
+                data: {}
             };
         }, 
 
@@ -27,6 +27,14 @@
 
             this.setData(args.data);
             this.master = args.master;
+        },
+
+        create: function (args) {
+            this.set({data: this.format(args)});
+        },
+
+        update: function (args) {
+            this.set({data: this.format(args)});
         },
 
         format: function (args){

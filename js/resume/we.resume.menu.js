@@ -129,7 +129,7 @@
         ],
 
         initialize: function (options) {
-            this.constant = options.constant;
+            this.instance = options.instance;
             this.model = new WE.Resume.Menu.Model();
 
         	this.render();
@@ -141,8 +141,7 @@
         initEvents: function () {
         	var _this = this;
 
-            this.constant.on("change", function () {
-                var changed = this.getChanged();
+            this.instance.on("change:show", function (changed) {                
                 var actionClass = changed.value ? "" : "not";
                 var element = _this.ui.sidebar.find("#" + changed.key);
                 var ico = changed.value ? "i_icoLookB" : "i_icoUnlook";
@@ -213,7 +212,7 @@
         	this.ui.sidebar.delegate(".btn-ico", "click", function () {
                 var key = $(this).closest("li").data("key");
 
-                _this.constant.setKey(key);
+                _this.instance.setShow(key);
                 return false;
         	});
 
@@ -302,7 +301,7 @@
 
         	for(var i = 0; i < page.length; i++){
                 var config = _.clone(this.model.get(page[i]));
-                var isShow = this.constant.getKey(config.key);
+                var isShow = !!this.instance.getShow(config.key);
 
         		config = _.extend(config, {
                     id: config.key,
@@ -348,7 +347,7 @@
                 return "i_icoLock";
             }
 
-            if(this.constant.getKey(data.key)){
+            if(this.instance.getShow(data.key)){
                 return "i_icoLookB btn-ico";
             }
 

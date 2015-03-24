@@ -13,17 +13,30 @@
             this.container = options.container;
             this.instance = WE.Resume.getInstance();
 
+            this.defaults = ["base", "education"];
+
             this.render();
             this.initEvents();
         },
 
         initEvents: function () {
+            var _this = this;
 
+            this.instance.on("change:show", function (args) {
+                var id = _this.getID(args.key);
+
+                if(args.value){
+                    _this.append(args.key);
+                    return;
+                }
+
+                _this.container.find(id).remove();
+            });
         },
 
         render: function () {
-            var template  = _.template(this.getID("wrap"));
-                template = template(this.getBase());
+            var template  = _.template(this.getModuleTemp("wrap"));
+                template = template(this.getDefault());
 
             this.ui = {};
             this.ui.wrap = $(template);
@@ -35,69 +48,67 @@
             this.ui.base = this.ui.wrap.find("#resume-base");
             this.ui.education = this.ui.wrap.find("#resume-education");
 
-
-
             this.container.empty().append(this.ui.wrap);
 
             this.setHeight();
             this.renderModule();
         },
 
-        getBase: function () {
+        getDefault: function () {
             var data = {};
 
-
-            data.base = this.instance.getData("base");
-            data.education = this.instance.getData("education");
+            for(var i = 0; i < this.defaults.length; i++){
+                var key = this.defaults[i];
+                data[key] = this.instance.getData(key);
+            }
 
             return data;
         },
 
         renderModule: function (){
-            var module = this.instance.getModule();
-            var len = module.length;
+            var array = this.getBySort();
+            var len = array.length;
 
             for(var i =0; i < len; i++){
-                var key = module[i];
-                if(key == "base" || key == "education"){
+                var obj = array[i];
+                var key = obj.key;
+
+                if(_.indexOf(this.defaults, key) > -1 || !obj.show){
                     continue;
                 }
-
-                var temp = _.template(this.getID(key));
-                var data = this.instance.getData(key);
-
-                if(key == "evaluation" || key == "hobbies"){
-                    data = data[0];
-                    temp = $(temp(data));
-                }else{
-                    temp = $(temp({data: data}));
-                }
-                    
-
-                this.ui.left.append(temp);
-
-                if(this.runHeight()){
-                    temp.appendTo(this.ui.right);
-                }
+                
+                this.append(key);
             }
         },
 
-        getElement: function () {
+        append: function (key) {
+            var data = this.instance.getData(key);
+            var temp = _.template(this.getModuleTemp(key));
+                temp = $(temp({data: data}));
 
+            this.ui.left.append(temp);
+
+            if(this.runHeight()){
+                temp.appendTo(this.ui.right);
+            }
+
+            this.appendDrag(key);
         },
 
-        getID: function (id) {
-            if(!this.tmpl){
+        getModuleTemp: function (id) {
+             if(!this.tmpl){
                this.tmpl = $(this.template); 
             }
 
-
-
-            return this.tmpl.find("#resume-" + id).text();
+            return this.tmpl.find(this.getID(id)).text();
         },
 
-        replace: function (str) {
-            return str.replace(new RegExp("{{","gi"), "<").replace(new RegExp("}}","gi"), ">");
+        getID: function (id) {
+            return "#resume-" + id;
+        },
+
+        getDragId: function (id) {
+            return "#drag-" + id;
         },
 
         setHeight: function () {
@@ -117,6 +128,39 @@
             });
 
             return height > this.maxHeight;
+        },
+        getBySort: function () {
+            var array = [];
+            var data = this.instance.getModule();
+
+            for(var key in data){
+                array[data[key].sort] = $.extend({key: key}, data[key]);
+            }
+
+            return array;
+        },
+
+        appendDrag: function (key) {
+            var newId = this.getID(key);
+
+            if(!this.drag){
+                this.drag = {};
+            }
+
+            this.drag[key] = new WE.Drag({
+                dragClass: ".dragDiv",
+                dragTable: $("#dragTable"),
+                dragElement: $(newId),
+                moveElement: $(newId),
+                onMouseUp: function (element) {
+                    element.css({cursor: "default"});
+                    element.removeClass("focus");
+                },
+                onMouseDown: function (element) {
+                    element.css({cursor: "move"});
+                    element.addClass("focus").removeClass("hover");
+                }
+            });
         }
 
     }));

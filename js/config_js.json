@@ -154,7 +154,7 @@
 		"name": "we.resume.data.pack.js",
 		"src":[
 			"./js/resume/data/we.resume.superclass.js",
-			"./js/resume/data/we.resume.data.ability.js",
+			"./js/resume/data/we.resume.data.skill.js",
 			"./js/resume/data/we.resume.data.article.js",
 			"./js/resume/data/we.resume.data.base.js",
 			"./js/resume/data/we.resume.data.certificate.js",
