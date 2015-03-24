@@ -107,10 +107,6 @@
             return "#resume-" + id;
         },
 
-        getDragId: function (id) {
-            return "#drag-" + id;
-        },
-
         setHeight: function () {
             var height = this.container.height();
             var header = this.ui.header.outerHeight(true);
