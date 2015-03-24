@@ -288,13 +288,13 @@
             options.error = function (result) {
                 switch(result.code){
                     case 2:
-                        this.showTip(this.ui.txtUserName, result.msg);
+                        this.showTip(this.ui.txtUserName, result);
                         break;
                     case 3: 
-                        this.showTip(this.ui.txtPassword, result.msg);
+                        this.showTip(this.ui.txtPassword, result);
                         break;
                     case 4: 
-                        this.showTip(this.ui.txtCode, result.msg);
+                        this.showTip(this.ui.txtCode, result);
                         break;
                     default:
                         WE.UI.alert(result.msg, {type: "warn"});

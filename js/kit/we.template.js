@@ -44,6 +44,7 @@
 
 
         this.options = {};
+        this.options.id = options.id;
         this.options.type = options.type || this.TYPE.FREE;
         this.options.title = options.title;
         this.options.image = options.image;

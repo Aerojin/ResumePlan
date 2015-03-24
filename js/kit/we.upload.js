@@ -85,7 +85,7 @@
         	if(!this.url){
 	        	var domain = document.domain;
                 var token = $.cookie(WE.Constant.COOKIE_TOKEN);
-	        	this.url = "{0}/api.php?m=common&a=upload&token={1}&fun_name={2}";
+	        	this.url = "http://{0}/api.php?m=common&a=upload&token={1}&fun_name={2}";
 	        	this.url = this.url.format(domain, token, this.funName);
 	        }
 

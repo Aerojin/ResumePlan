@@ -84,7 +84,7 @@
             this.ui.userName = $("#user-name");
             this.ui.boxUser = $("#box-user");
             this.ui.topHead = $("#top-head");
-            this.ui.userLogout = $("user-logout");
+            this.ui.userLogout = $("#user-logout");
 
             //设置新浪连接
             this.ui.btnSina.attr("href", this.getUrl());

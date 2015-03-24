@@ -165,7 +165,10 @@
         },
         forget: function () {
             var options = {
-                data: this.model.toJSON()
+                data: {
+                    email: this.ui.txtUserName.val().trim(),
+                    code: this.ui.txtCode.val().trim() 
+                }
             };
 
             options.success = function (result) {

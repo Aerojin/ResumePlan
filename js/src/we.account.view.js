@@ -144,10 +144,6 @@
                     _this.changePassword();
                 }
             });
-
-            this.ui.btnFile.change(function () {
-                _this.upload();
-            });
         },
 
         render: function () {
@@ -168,10 +164,12 @@
                 upLoadFile:  this.ui.btnFile,
                 callback: function (data) {
                     _this.ui.imgPhoto.show();
-                    _this.ui.userPhoto.attr({src: data.photo});
+                    _this.ui.userPhoto.find("img").attr({src: data.photo}).show();
                     $.cookie(WE.Constant.COOKIE_PHOTO, data.photo);
                 }
             });
+
+            this.setPhoto();
         },
         showTip: function (dom, msg) {
             dom.closest("li").find(".error-tip").show().text(msg);
@@ -207,7 +205,16 @@
 
             WE.Api.changePassword(options, this);
         },
-        upload: function () {
+        setPhoto: function () {
+            var photo = $.cookie(WE.Constant.COOKIE_PHOTO) || "";
+
+            if(photo.trim().length > 0){
+                this.ui.imgPhoto.show().attr({
+                    src: photo
+                });
+            }else{
+                this.ui.imgPhoto.hide() 
+            }
 
         }
 

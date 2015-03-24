@@ -23,6 +23,8 @@
         },
 
         initEvents: function () {
+            var _this = this;
+
             this.model.on("change:pageIndex", function () {
                 _this.loadData();
             });
@@ -120,7 +122,8 @@
             this.ui.body.append(ui.wrap);
         },
         append: function () {
-             var data = this.model.get("data");
+            var _this = this;
+            var data = this.model.get("data");
 
             for(var i = 0; i < data.length; i++){
                 var item = new WE.Template.Main(data[i]);
