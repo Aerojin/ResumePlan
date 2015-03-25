@@ -87,14 +87,6 @@
                     return getResult(key, self.TIPS.POSITION_EMPTY);
                 }
             }
-
-            //验证语言有效性
-            var key = 'language';
-            if (_.has(data, key)) {
-                if (!data.language || !data.language.length) {
-                    return getResult(key, self.TIPS.LANGUAGE_EMPTY);
-                }
-            }
         }
 
     }));
@@ -176,11 +168,14 @@
             var win = $(window).height();
             var footer = this.ui.footer.height(); 
             var header = this.ui.header.height();
-            var context = this.ui.main.find(".context").height();
-            var height = win - footer - header - 115;
+            var context = this.ui.main.outerHeight(true);
+            var height = win - footer - header;
             
             this.ui.main.height(height);
-            this.ui.main.css({top: (height - context - 50) / 2});
+
+            if(height > context){
+                this.ui.main.css({top: (height - context) / 2});
+            }
         },
         showTip: function (dom, msg) {
             dom.closest("li").find(".error-tip").show().text(msg);
@@ -194,11 +189,11 @@
         next: function () {
             var options = {};
             var data = this.model.toJSON();
-            var mID = this.getRequest().m_id;
-            var sID = this.ui.imports.val();
+            var tID = this.getRequest().t_id;
+            var importsID = this.ui.selImports.val();
 
             options.data = {
-                m_id: mID,
+                tid: tID,
                 name: data.name,
                 title:  data.title,
                 direction: data.position,
@@ -206,7 +201,7 @@
             };
 
             options.success = function (result) {
-                var url = "/resume.html?m_id={0}&s_id={1}".format(mID,sID);
+                var url = "/resume.html?m_id={0}t_id&importsID={2}".format(result.data, tID, importsID);
                 window.location.href = url;
             };
 
@@ -224,9 +219,11 @@
             };
 
             options.success = function (result) {
-                _.each(result.data, function (e) {
-                    _this.ui.selImports.append(option.format(e.id, e.title));
-                });
+                if(result.data && result.data.length > 0){
+                    _.each(result.data, function (e) {
+                        _this.ui.selImports.append(option.format(e.id, e.title));
+                    });
+                }
             };
 
             options.error = function (result) {

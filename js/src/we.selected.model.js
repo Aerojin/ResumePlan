@@ -69,7 +69,7 @@
             _.each(data, function (e) {
                 array.push({
                     id: e.id,
-                    type: e.is_money,
+                    type: parseInt(e.is_money),
                     title: e.name,
                     image: e.url,
                     time: e.external,

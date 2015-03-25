@@ -30,6 +30,10 @@
 			});
 		},
 		getMsgByCode: function (code){
+			if(code == 999){
+				return "您还未登陆, 请登陆后再操作!";
+			}
+
 			return this.get("msg") || MSG[code] || "";
 		},
 		toJSON: function () {

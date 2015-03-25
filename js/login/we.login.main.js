@@ -61,14 +61,18 @@
             });
 
             this.ui.appLogin.click(function () {
-                _this.createDialog();
-                _this.master.set({state: _this.master.STATE.LOGIN});
+                _this.showLogin();
             });
         },
 
         render: function () {
             this.ui = {};
             this.ui.appLogin = $("#app-login");
+        },
+
+        showLogin: function () {
+            this.createDialog();
+            this.master.set({state: this.master.STATE.LOGIN});
         },
 
         createDialog: function () {
@@ -132,7 +136,7 @@
 
     $(function() {
         var master = new WE.Login.Main.Model();
-        var view = new WE.Login.Main.View({
+        window.$App.Login = new WE.Login.Main.View({
             master: master
         });
     });

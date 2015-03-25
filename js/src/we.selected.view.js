@@ -50,7 +50,9 @@
                     type: type,
                     money: money,
                     pageIndex: 1
-                });
+                },{silent:true});
+
+                _this.model.trigger("change:pageIndex");
             });
 
             this.ui.document.scroll(function () {
@@ -124,6 +126,11 @@
         append: function () {
             var _this = this;
             var data = this.model.get("data");
+            var pageIndex = this.model.get("pageIndex");
+
+            if(pageIndex == 1){
+                this.ui.wrap.empty();
+            }
 
             for(var i = 0; i < data.length; i++){
                 var item = new WE.Template.Main(data[i]);

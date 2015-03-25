@@ -90,20 +90,34 @@
             this.ui.btnSina.attr("href", this.getUrl());
         },
         initLogin: function () {
-            var photo = $.cookie(WE.Constant.COOKIE_PHOTO) || "";
-            var username = $.cookie(WE.Constant.COOKIE_USER) || "";
-            var token = $.cookie(WE.Constant.COOKIE_TOKEN) || "";
+            if(this.isLogin()){
+                var info = this.getUserInfo();
 
-            if(token.trim().length > 0 && username.trim().length > 0){
-                this.ui.userName.text(username);
+                this.ui.userName.text(info.username);
 
-                if(photo.trim().length > 0){
-                    this.ui.userPhoto.find("img").attr("src", photo).show();
+                if(info.photo.trim().length > 0){
+                    this.ui.userPhoto.find("img").attr("src", info.photo).show();
                 }
 
                 this.ui.appLogin.hide();
                 this.ui.btnUser.show();
             }
+        },
+        isLogin: function () {
+            var info = this.getUserInfo();
+
+            return info.token.trim().length > 0 && info.username.trim().length > 0;
+        },
+        getUserInfo: function () {
+            var photo = $.cookie(WE.Constant.COOKIE_PHOTO) || "";
+            var username = $.cookie(WE.Constant.COOKIE_USER) || "";
+            var token = $.cookie(WE.Constant.COOKIE_TOKEN) || "";
+
+            return {
+                token: token,
+                photo: photo,
+                username: username
+            };
         },
         logout: function () {
             var options = {
@@ -137,7 +151,7 @@
     }));
 
     $(function () {
-        new WE.Common.View();
+        window.$App.User = new WE.Common.View();
     });
 
 })(WE, jQuery, Backbone);

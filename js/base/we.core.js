@@ -1,6 +1,7 @@
 var WE;
 ;(function (jQuery, Backbone) {
 	WE = {};
+	window.$App = {};
 	WE.BaseCore = Backbone.Model.extend({
 		initialize: function () {
 			

@@ -1,0 +1,214 @@
+<!--简历主容器-->
+<textarea id="resume-wrap">
+	<div class="resumeConSize" id="resume-main">
+		<div class="resumeCon_header clearfix" id="resume-header">
+			<div class="resumeCon_img">
+				<span></span>
+				<img src="<%-base.photo%>" alt="" title="" />
+			</div>
+			<div class="resumeCon_name">
+				<strong><%-base.name%></strong>
+				<span><%-base.pinyin%></span>
+			</div>
+			<div class="resumeCon_right">
+				<strong>求职意向</strong>
+				<p><%-base.job%></p>
+				<span></span>
+			</div>
+		</div>
+		<div class="resume_body clearfix mt_20"  id="resume-body">
+			<table id="dragTable" cellpadding="2"  style=" border:solid 0px green;width:98%;">
+				<tr>
+					<td valign="top" style="width:50%" id="resume-left">
+						<div class="infoBox" id="resume-base">
+							<h2>基本信息</h2>
+							<ul class="infoBoxList">
+								<li><strong>性别</strong><span><%-base.sex%></span></li>
+								<li><strong>政治面貌</strong><span><%-base.political%></span></li>
+								<li><strong>电话</strong><span><%-base.moblie%></span></li>
+								<li><strong>电子邮箱</strong><span><%-base.email%></span></li>
+							</ul>
+						</div>
+					</td>
+					<td valign="top" style="width:50%" id="resume-right">
+						<div class="infoBox" id="resume-education">
+							<h2>教育背景</h2>
+							<ul class="infoBoxD">
+								<% for(var i = 0; i < education.length; i++ ) { %>
+								<li class="infoBoxD_li clearfix">
+									<span class="infoBoxD_time">
+										<%-education[i].startY%>/<%-education[i].startM%>—<%-education[i].endY%>/<%-education[i].endM%>
+									</span>
+									<div class="infoBoxD_info">
+										<strong><%-education[i].name%></strong>
+										<p><%-education[i].academic%> <%-education[i].professional%></p>
+										<ul>
+											<li><i class="i_icoPoints"></i>GPA：<%-education[i].gpa%></li>
+											<li><i class="i_icoPoints"></i>专业排名：<%-education[i].sort%></li>
+										</ul>
+									</div>
+								</li>
+								<% } %>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</textarea>
+
+<!--校园经历-->
+<textarea id="resume-school">
+	<div class="infoBox dragDiv" id="resume-school">
+		<h2>校园经历</h2>
+		<ul class="infoBoxListB">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li>
+				<strong><%-data[i].position%><span><%-data[i].startY%>.<%-data[i].startM%>-<%-data[i].endY%>.<%-data[i].endM%></span></strong>
+				<span><%-data[i].name%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--发表文章-->
+<textarea id="resume-article">
+	<div class="infoBox dragDiv" id="resume-article">
+		<h2>发表文章</h2>
+		<ul class="infoBoxListA">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li class="clearfix mb_10">
+				<i></i>
+				<span>
+					<%-data[i].name%>
+					<p><%-data[i].dateY%>.<%-data[i].dateM%>  <%-data[i].title%></p>
+				</span>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--获奖经历-->
+<textarea id="resume-prize">
+	<div class="infoBox dragDiv" id="resume-prize">
+		<h2>获奖经历</h2>
+		<ul class="infoBoxListA">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+				<li class="clearfix mb_10">
+					<i></i>
+					<span><%-data[i].name%>
+					<p><%-data[i].dateY%>.<%-data[i].dateM%>  <%-data[i].jibie%></p>
+					</span>
+				</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--技能-->
+<textarea id="resume-skill">
+	<div class="infoBox dragDiv" id="resume-skill">
+		<h2>技能</h2>
+		<ul class="infoBoxListA">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li class="clearfix mb_10"><i></i><span><%-data[i].name%></span></li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--证书-->
+<textarea id="resume-certificate">
+	<div class="infoBox dragDiv" id="resume-certificate">
+		<h2>证书</h2>
+		<ul class="infoBoxListA">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li class="clearfix mb_10"><i></i><span><%-data[i].name%></span></li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--工作经历-->
+<textarea id="resume-work">
+	<div class="infoBox dragDiv" id="resume-work">
+		<h2>工作经历</h2>
+		<ul class="infoBoxListB">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li>
+				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
+				<span><%-data[i].name%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--项目经历-->
+<textarea id="resume-project">
+	<div class="infoBox dragDiv" id="resume-project">
+		<h2>项目经历</h2>
+		<ul class="infoBoxListB">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li>
+				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
+				<span><%-data[i].name%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--科研经历-->
+<textarea id="resume-research">
+	<div class="infoBox dragDiv" id="resume-research">
+		<h2>科研经历</h2>
+		<ul class="infoBoxListB">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li>
+				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
+				<span><%-data[i].name%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>
+
+<!--自我评价-->
+<textarea id="resume-evaluation">
+	<div class="infoBox dragDiv" id="resume-evaluation">
+		<h2>自我评价</h2>
+		<div class="infoBoxE"><%-data.context%></div>
+	</div>
+</textarea>
+
+<!--爱好-->
+<textarea id="resume-hobbies">
+	<div class="infoBox dragDiv" id="resume-hobbies">
+		<h2>爱好</h2>
+		<div class="infoBoxE">
+			<%-data.context%>
+		</div>
+	</div>
+</textarea>
+
+<!--主修课程-->
+<textarea id="resume-subject">
+	<div class="infoBox dragDiv" id="resume-subject">
+		<h2>主修课程</h2>
+		<ul class="infoBoxListB">
+			<% for(var i = 0; i < data.length; i++ ) { %>
+			<li>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+			</li>
+			<% } %>
+		</ul>
+	</div>
+</textarea>

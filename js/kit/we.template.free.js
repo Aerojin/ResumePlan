@@ -44,11 +44,21 @@
             });
 
             this.ui.btnAdd.click(function () {
-                window.location.href = "/start.html?m_id=" + _this.id;
+                if(window.$App.User.isLogin()){
+                    window.location.href = "/start.html?t_id=" + _this.id;
+                    return;
+                }
+
+                window.$App.Login.showLogin();
             });
 
             this.ui.btnCollect.click(function () {
-                _this.setCollect();
+                if(window.$App.User.isLogin()){
+                    _this.setCollect();
+                    return;
+                }
+
+                window.$App.Login.showLogin();
             });
         },
 
