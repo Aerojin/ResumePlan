@@ -20,6 +20,9 @@
             this.initMenu();
             this.initSlideShow();
             this.initControl();
+            this.getResumeDetail();
+            this.getTemplate();
+            this.resumeSelect();
         },
 
         initEvents: function () {
@@ -133,7 +136,77 @@
             });
         },
 
+        getResumeDetail: function () {
+            var options = {};
+            var request = this.getRequest();
 
+            options.data = {
+                mid: request.m_id
+            };
+
+            options.success = function (result) {
+                console.log(result);
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.getResumeDetail(options, this);
+
+        },
+
+        getTemplate: function () {
+            var options = {};
+            var request = this.getRequest();
+
+            options.data = {
+                id: request.t_id
+            };
+
+            options.success = function (result) {
+                console.log(result);
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.getTemplate(options, this);
+        },
+
+        resumeSelect: function () {
+            var options = {};
+            var request = this.getRequest();
+
+            options.data = {
+                mid: request.m_id,
+                module: "Info"
+            };
+
+            options.success = function (result) {
+                console.log(result);
+            };
+
+            options.error = function (result) {
+                WE.UI.alert(result.msg, {type: "warn"});
+            };
+
+            WE.Api.resumeSelect(options, this);
+        },
+
+        getRequest: function () {
+           var url = location.search; //获取url中"?"符后的字串
+           var theRequest = new Object();
+           if (url.indexOf("?") != -1) {
+              var str = url.substr(1);
+              strs = str.split("&");
+              for(var i = 0; i < strs.length; i ++) {
+                 theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+              }
+           }
+           return theRequest || {};
+        }
     }));
 
     $(function () {

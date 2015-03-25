@@ -201,7 +201,7 @@
             };
 
             options.success = function (result) {
-                var url = "/resume.html?m_id={0}t_id&importsID={2}".format(result.data, tID, importsID);
+                var url = "/resume.html?m_id={0}&t_id={1}&importsID={2}".format(result.data, tID, importsID);
                 window.location.href = url;
             };
 

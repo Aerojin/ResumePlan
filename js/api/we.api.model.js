@@ -303,7 +303,7 @@
     WE.Api.getUserResume  = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'resume', command:'getlist'};
+        var requestUrl = {model:'resume', command:'getList'};
         
         //options.httpMethod = "get";
 
@@ -495,13 +495,13 @@
         *@param {Object} context 上下文
 
         *@param {Object} options.data 提交数据
-        *@param {Int} options.data.mid 模版ID  
+        *@param {Int} options.data.mid 简历ID  
         *@param {Int} options.data.module 模块名  
     */
-    WE.Api.remsumeSelect = function (options, context){
+    WE.Api.resumeSelect = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'resume', command:'remsumeSelect'};
+        var requestUrl = {model:'resume', command:'resumeSelect'};
         
         //options.httpMethod = "get";
 
