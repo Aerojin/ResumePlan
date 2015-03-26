@@ -32,6 +32,10 @@
 
                 _this.container.find(id).remove();
             });
+
+            this.instance.on("change:ui", function (args) {
+
+            });
         },
 
         render: function () {

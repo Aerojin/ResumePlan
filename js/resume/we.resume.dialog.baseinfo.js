@@ -133,6 +133,8 @@
         
         name: _class,
 
+        KEY: "base",
+
         initialize: function (options) {
             this.key = options.key;
             this.title = options.text;
@@ -187,6 +189,7 @@
             });
 
         	this.show();
+            this.setValue();
         },
 
         save: function () {
@@ -196,7 +199,9 @@
             options.data.m_id = this.getRequest().m_id;
 
             options.success = function (result) {
+                this.close();
                 WE.UI.show(this.model.TIPS.SAVE_SUCCESS);
+                this.instance.trgger("change:data", {key: this.KEY});
             };
 
             options.error = function (result) {
@@ -206,6 +211,22 @@
             WE.Api.baseInfo(options, this);
         },
 
+        setValue: function () {
+            var data = this.getData();
+
+            for(var key in data){
+                var value = data[key] || "";
+                var input = this.byName(key);
+
+                if(input && input.length > 0){
+                    input.val(value);
+                }
+            }
+
+            if(data.i_photo && data.i_photo.length > 0){
+                this.ui.photo.attr({src: data.i_photo}).show();
+            }
+        },
 
 
         onClose: function () {

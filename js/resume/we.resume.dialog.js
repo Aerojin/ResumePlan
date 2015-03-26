@@ -116,6 +116,10 @@
             return this.stateTmpl.unLook;
         },
 
+        getData: function () {
+            return this.instance.getData(this.KEY);
+        },
+
         showTip: function (dom, msg) {
             var _this = this;
             var template = _.template(this.tip);

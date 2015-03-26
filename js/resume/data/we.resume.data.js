@@ -35,9 +35,14 @@
         },
 
         initEvents: function () {
-            this.on("changeShow", function (args) {
-                //args.key
-                //args.value
+            var _this = this;
+
+            this.on("change:data", function (args) {
+                if(this[args.key]){
+                    this[args.key].reset(function(data){
+                        _this.trigger("change:ui", data);
+                    });
+                }
             });
         },
 

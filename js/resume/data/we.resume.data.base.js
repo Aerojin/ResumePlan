@@ -55,9 +55,13 @@
 
         getData: function () {
             var data = _.clone(this.get("data"));
-                data.sex = WE.Constant.SEX[data.sex || "0"];
+                //data.sex = WE.Constant.SEX[data.sex || "0"];
 
             return data;
+        },
+
+        getTableName: function () {
+            return "Info";
         },
 
         format: function (args){

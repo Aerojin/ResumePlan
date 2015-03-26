@@ -29,6 +29,10 @@
             this.master = args.master;
         },
 
+        getTableName: function () {
+            return "InfoPrize";
+        },
+
         format: function (args){
             return {
                 id: args.id,

@@ -37,6 +37,10 @@
             this.set({data: this.format(args)});
         },
 
+        getTableName: function () {
+            return "InfoAihao";
+        },
+
         format: function (args){
             return {
                 id: args.id,

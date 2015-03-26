@@ -501,7 +501,7 @@
     WE.Api.resumeSelect = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'resume', command:'resumeSelect'};
+        var requestUrl = {model:'resume', command:'select_one'};
         
         //options.httpMethod = "get";
 

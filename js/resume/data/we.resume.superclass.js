@@ -41,10 +41,12 @@
             var _this = this;
 
             if(_.isArray(data)){
+                _this.set({data: []});
                 _.each(data, function (e) {
                     _this.create(_this.format(e));
                 });
             }else{
+                _this.set({data: {}});
                 _this.create(_this.format(data));
             }
         },
@@ -69,6 +71,25 @@
 
         getDrag: function () {
             return this.get("isDrag");
+        },
+
+        reset: function () {
+            var options = {
+                data: {
+                    id: this.get("mid"),
+                    table: this.getTableName()
+                }
+            };
+
+            options.success = function (result) {
+                this.setData(result.data);
+            };
+
+            options.error = function (result) {
+                WE.UI.show(result.msg, {className: "msgRed", delay: 2000});
+            }; 
+
+            WE.Api.resumeSelect(options, this);
         },
 
         format: function (){

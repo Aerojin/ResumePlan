@@ -151,6 +151,7 @@
 			"./js/resume/we.resume.zoom.js",
 			"./js/resume/we.resume.dialog.js",
 			"./js/resume/we.resume.slideshow.js",
+			"./js/resume/we.resume.dialog.list.js",
 			"./js/resume/we.resume.dialog.article.js",
 			"./js/resume/we.resume.dialog.baseinfo.js",
 			"./js/resume/we.resume.dialog.education.js",
