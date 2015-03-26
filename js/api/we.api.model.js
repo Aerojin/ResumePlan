@@ -479,7 +479,7 @@
     WE.Api.autoSave = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'resume', command:'autoSave'};
+        var requestUrl = {model:'resume', command:'sort'};
         
         //options.httpMethod = "get";
 
@@ -507,6 +507,359 @@
 
         this.call(requestUrl, requestBody, options, context);
     };
+
+    /*
+        *基础信息新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.i_name 姓名 
+        *@param {String} options.data.i_photo 头像
+        *@param {Int} options.data.i_sex 性别
+        *@param {Int} options.data.i_age 年龄
+        *@param {String} options.data.i_email 邮件
+        *@param {String} options.data.i_phone 手机
+        *@param {String} options.data.i_gov 政治面貌
+        *@param {String} options.data.i_nat 民族
+        *@param {String} options.data.i_address 所在地
+    */
+    WE.Api.baseInfo = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'info'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *教育经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.xuewei 学位 
+        *@param {String} options.data.xuexiao 学校
+        *@param {Int} options.data.zhuanye 专业
+        *@param {Int} options.data.e_start_y 开始时间-年
+        *@param {String} options.data.e_start_m 开始时间-月
+        *@param {String} options.data.e_end_y 结束时间-年
+        *@param {String} options.data.e_end_m 结束时间-月
+        *@param {String} options.data.gpa gpa
+        *@param {String} options.data.zhuanyesort 专业排名
+        *@param {String} options.data.e_context 描述
+    */
+    WE.Api.education = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'jiaoyu'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *校园经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.name 社团货活动名称 
+        *@param {String} options.data.e_position 职责
+        *@param {Int} options.data.e_start_y 开始时间-年
+        *@param {String} options.data.e_start_m 开始时间-月
+        *@param {String} options.data.e_end_y 结束时间-年
+        *@param {String} options.data.e_end_m 结束时间-月
+        *@param {String} options.data.e_context 描述
+    */
+    WE.Api.school = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'xiaoyuan'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *工作经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.e_company 公司名称 
+        *@param {String} options.data.e_position 职责
+        *@param {Int} options.data.e_start_y 开始时间-年
+        *@param {String} options.data.e_start_m 开始时间-月
+        *@param {String} options.data.e_end_y 结束时间-年
+        *@param {String} options.data.e_end_m 结束时间-月
+        *@param {String} options.data.e_context 描述
+    */
+    WE.Api.work = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'gongzuo'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *项目经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.e_company 项目名称 
+        *@param {String} options.data.e_position 职责
+        *@param {Int} options.data.e_start_y 开始时间-年
+        *@param {String} options.data.e_start_m 开始时间-月
+        *@param {String} options.data.e_end_y 结束时间-年
+        *@param {String} options.data.e_end_m 结束时间-月
+        *@param {String} options.data.e_context 描述
+    */
+    WE.Api.project = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'xiangmu'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+
+    /*
+        *技能新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.name 技能名称 
+    */
+    WE.Api.skill = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'jieneng'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *证书新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.name 证书名称 
+    */
+    WE.Api.certificate = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'zhengshu'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *获奖经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.name 奖项名称 
+        *@param {Int} options.data.p_date_y 开始时间-年
+        *@param {String} options.data.p_date_m 开始时间-月
+        *@param {String} options.data.jibie 级别
+    */
+    WE.Api.prize = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'prize'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *获奖经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.context 内容
+    */
+    WE.Api.evaluation = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'zwpingjia'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *科研经历新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.e_company 课题名称 
+        *@param {String} options.data.e_position 职责
+        *@param {Int} options.data.e_start_y 开始时间-年
+        *@param {String} options.data.e_start_m 开始时间-月
+        *@param {String} options.data.e_end_y 结束时间-年
+        *@param {String} options.data.e_end_m 结束时间-月
+        *@param {String} options.data.e_context 描述
+    */
+    WE.Api.research = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'keyan'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *爱好新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.context 内容
+    */
+    WE.Api.hobbies = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'aihao'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *主修课程新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.context 内容
+    */
+    WE.Api.subject = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'Course'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *发表文章新增/保存
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.m_id 简历ID  
+        *@param {Int} options.data.id 信息ID
+        *@param {String} options.data.title 奖项名称 
+        *@param {Int} options.data.p_date_y 开始时间-年
+        *@param {String} options.data.p_date_m 开始时间-月
+        *@param {String} options.data.paper_name 刊物名称
+    */
+    WE.Api.article = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'Article'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    
+
+    
+
+    
 
     
 

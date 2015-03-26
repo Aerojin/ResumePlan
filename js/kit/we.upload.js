@@ -8,7 +8,8 @@
     WE.namespace("WE.Upload", function (options) {
         var _this = this;
 
-        this.image = options.image;        
+        this.image = options.image;
+        this.isSave = options.isSave || 0;
         this.callback = options.callback;
         this.upLoadFile = options.upLoadFile;
         this.funName = options.funName || '_myPicture_';
@@ -85,8 +86,8 @@
         	if(!this.url){
 	        	var domain = document.domain;
                 var token = $.cookie(WE.Constant.COOKIE_TOKEN);
-	        	this.url = "http://{0}/api.php?m=common&a=upload&token={1}&fun_name={2}";
-	        	this.url = this.url.format(domain, token, this.funName);
+	        	this.url = "http://{0}/api.php?m=common&a=upload&token={1}&fun_name={2}&is_save={3}";
+	        	this.url = this.url.format(domain, token, this.funName, this.isSave);
 	        }
 
 			return this.url;

@@ -29,6 +29,37 @@
 
         },
 
+        show: function (text, options) {
+            options = options || {}
+
+            var _this = this;
+            var template = _.template(this.template.tip);
+                template = template({
+                    cid: this.cid,
+                    text: text,
+                    className: options.className || ""
+                });
+
+            this.hide();
+            this.tipMessage = $(template);
+
+            if(options.delay){
+                setTimeout(function () {
+                    _this.hide();
+                }, options.delay);
+            }
+
+            $("body").append(this.tipMessage);
+        },
+
+        hide: function () {
+            if(this.tipMessage){
+                this.tipMessage.fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }
+        },
+
         alert: function (text, options) {
             options = options || {};
 
@@ -130,6 +161,8 @@
                     '</p>',
                 '</div>'
            ].join("\n"),
+
+           tip: '<span id="<%-cid%>-tip" class="msg <%-className%>"><%-text%></span>'
 
         }
 

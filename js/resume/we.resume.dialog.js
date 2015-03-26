@@ -9,65 +9,75 @@
 
         initialize: function (options) {
 
-            this.key = options.key;
-            this.isLock = options.isLock;
-        	this.width = options.width;
-        	this.title = options.text;
-        	this.content = options.content;
-            this.instance = WE.Resume.getInstance();
-
-        	this.render();
-        	this.initEvents();
-        	this.setPosition();
-
-            window.dialog = this;
+           
         },
 
-        initEvents: function () {
+        regEvents: function () {
             var _this = this;
 
             this.instance.on("change:show", this.setState, this);
 
-            this.ui.btnClose.click(function () {
+            this.UI.btnClose.click(function () {
             	_this.close();
             });
 
-            this.ui.wrap.delegate(".btn-ico","click",function() {
+            this.UI.wrap.delegate(".btn-ico","click",function() {
                 _this.instance.setShow(_this.key);
             });
+
+            if(this.ui.txtInput && this.ui.txtInput.length > 0){
+                this.ui.txtInput.focus(function () {
+                    var name = $(this).attr('name');
+                    _this.hideTip(_this.byName(name));
+                });
+
+                this.ui.txtInput.blur(function () {
+                    var obj = {};
+                    var name = $(this).attr('name');
+                    var value = $(this).val().trim();
+
+                    obj[name] = value;
+                    _this.model.set(obj, {validate: true, target: name});              
+                });
+
+                this.model.on('invalid', function(model, error){
+                    for(var key in error){
+                        _this.showTip(_this.byName(key), error[key]);
+                    }                
+                });
+            }
         },
 
-        render: function () {
-            var template = _.template(this.template);
-            	template = template({
+        initUI: function () {
+            var template = _.template(this.container);
+                template = template({
                     cid: this.cid,
                     title: this.title,
                     state: this.getState()
                 });
 
-            this.el = $(template);
-            this.ui = {};
-            this.ui.wrap = this.el;
-            this.ui.body = $("body");
-            this.ui.background = $(this.background);
-            this.ui.btnClose = this.getCidEl("close", this.ui.wrap);
-            this.ui.container = this.getCidEl("container", this.ui.wrap);
+            this.UI = {};
+            this.UI.wrap = $(template);
+            this.UI.body = $("body");
+            this.UI.background = $(this.background);
+            this.UI.btnClose = this.getCidEl("close", this.UI.wrap);
+            this.UI.container = this.getCidEl("container", this.UI.wrap);
 
-            this.ui.background.appendTo(this.ui.body) ;
-            this.ui.container.empty().append(this.content);
-            this.ui.wrap.width(this.width).appendTo(this.ui.body);
+            this.UI.background.appendTo(this.UI.body) ;
+            this.UI.container.empty().append(this.ui.context);
+            this.UI.wrap.width(this.width).appendTo(this.UI.body);
         },
 
         setPosition: function () {
         	var winWidth = $(window).width();
         	var left = (winWidth - this.width) / 2;
 
-        	this.ui.wrap.css({"left": left, "margin-left": 0, "top": "10%"});
+        	this.UI.wrap.css({"left": left, "margin-left": 0, "top": "10%"});
         },
 
         close: function () {
-        	this.ui.wrap.remove();
-            this.ui.background.remove();
+        	this.UI.wrap.remove();
+            this.UI.background.remove();
             this.instance.off("change", this.setState);
 
         	this.onClose();
@@ -79,12 +89,17 @@
                 window.dialog.close();
             }
 
-        	this.render();
+            window.dialog = this;
+            this.instance = WE.Resume.getInstance();
+
+            this.initUI();
+            this.regEvents();
+            this.setPosition();
         },
 
         setState: function () {
             var ico = this.getState();            
-            var element = this.ui.wrap.find(".btn-ico");
+            var element = this.UI.wrap.find(".btn-ico");
 
             element.after(ico).remove();
         },
@@ -101,17 +116,57 @@
             return this.stateTmpl.unLook;
         },
 
+        showTip: function (dom, msg) {
+            var _this = this;
+            var template = _.template(this.tip);
+                template = template({msg: msg});
+
+            this.hideTip(dom);
+            dom.after(template);
+            dom.closest("li").addClass("on");
+
+            setTimeout(function () {
+                _this.hideTip(dom);
+            }, 2000);
+        },
+
+        hideTip: function (dom) {
+            dom.nextAll(".tips").fadeOut("slow", function () {
+                $(this).remove();
+                $(this).closest("li").removeClass("on");
+            });
+        },
+
+        byName: function(name){
+            return this.ui.wrap.find('[name=' + name + ']');
+        },
+
+        getRequest: function () {
+           var url = location.search; //获取url中"?"符后的字串
+           var theRequest = new Object();
+           if (url.indexOf("?") != -1) {
+              var str = url.substr(1);
+              strs = str.split("&");
+              for(var i = 0; i < strs.length; i ++) {
+                 theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+              }
+           }
+           return theRequest || {};
+        },
+
         onClose: function () {
 
         },
 
-        template: ['<div class="windowBoxA" id="<%-cid%>-dialog">',
-			'<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
-			'<h2><%-title%> <%=state%></h2>',
-			'<div id="<%-cid%>-container"></div>',
-		'</div>'].join("\n"),
+        container: ['<div class="windowBoxA" id="<%-cid%>-dialog">',
+            			'<a href="javascript:void(0);" id="<%-cid%>-close" class="i_icoCloseW i_icoCloseWBtn"></a>',
+            			'<h2><%-title%> <%=state%></h2>',
+            			'<div id="<%-cid%>-container"></div>',
+            		'</div>'].join("\n"),
 
         background: '<span class="blackBackground"></span>',
+
+        tip: '<div class="tips"><%-msg%></div>',
 
         stateTmpl: {
             lock: '<span>必填板块无法隐藏</span>',

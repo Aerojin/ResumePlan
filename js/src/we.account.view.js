@@ -160,6 +160,7 @@
             this.ui.userPhoto = $("#user-photo");
 
             this.upload = new WE.Upload({
+                isSave: 1,
                 image: this.ui.imgPhoto,
                 upLoadFile:  this.ui.btnFile,
                 callback: function (data) {

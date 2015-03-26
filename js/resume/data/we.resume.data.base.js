@@ -14,15 +14,16 @@
                 isDrag: true,
                 data: {
                     id: "",
-                    sex: "1",
-                    political: "党员",
-                    moblie: "13926572774",
-                    email: "13926572774@139.com",
-                    name: "金锐",
+                    i_sex: "1",
+                    i_gov: "党员",
+                    i_phone: "13926572774",
+                    i_email: "13926572774@139.com",
+                    i_name: "金锐",
+                    i_address: "",
                     title: "",
-                    job: "软件工程师",
-                    pinyin: "jinrui",
-                    photo: "http://www.jianlipro.com/aeroji.jpg"
+                    job: "",
+                    i_nat: "软件工程师",
+                    i_photo: "http://www.jianlipro.com/aeroji.jpg"
                 }
             };
         },
@@ -62,15 +63,16 @@
         format: function (args){
             return {
                 id: args.id,
-                sex: args.sex,
-                political: args.political,
-                moblie: args.moblie,
-                email: args.email,
-                name: args.name,
+                i_sex: args.i_sex,
+                i_gov: args.i_gov,
+                i_phone: args.i_phone,
+                i_email: args.i_email,
+                i_name: args.i_name,
                 title: args.title,
                 job: args.job,
-                pinyin: args.pinyin,
-                photo: args.photo
+                i_nat: args.i_nat,
+                i_photo: args.i_photo,
+                i_address: args.i_address
             };
         }
     }));

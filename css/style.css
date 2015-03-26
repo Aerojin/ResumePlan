@@ -990,3 +990,14 @@ a:hover{color:#333; text-decoration:none;}
 /*错误提示*/
 .tips{position:absolute; left:0; top:65px; background-color:#8d8f91\9; width:268px; min-height:40px; color:#fff; font-size:14px; padding:5px 10px; line-height:20px;}
 :root .tips{background-color:rgba(0, 0, 0, 0.5);}
+
+.msg{  position: fixed; z-index: 9999; top: 0px; left: 45%; opacity: 1;  display: block;
+text-align:center;padding:4px 15px;display:inline-block;background-color:#68af02;color:#FFF;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;_font-family:"\5b8b\4f53";
+    -webkit-animation: menus .2s ease-out;
+    -moz-animation: menus .2s ease-out;
+    animation: menus .2s ease-out;
+}
+
+.msgRed{text-align:center;padding:4px 15px;display:inline-block;background-color:#de0202;color:#FFF;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;_font-family:"\5b8b\4f53";}
+
+.msgYellow{background-color:#ffffaa;border:1px solid #ffffaa;color:#444;_font-family:"\5b8b\4f53";}

@@ -145,7 +145,27 @@
 		"compress": true,
 		"name": "we.resume.kit.pack.js",
 		"src":[
-			"./js/resume/*.js"
+			"./js/resume/we.resume.date.js",
+			"./js/resume/we.resume.control.js",
+			"./js/resume/we.resume.menu.js",
+			"./js/resume/we.resume.zoom.js",
+			"./js/resume/we.resume.dialog.js",
+			"./js/resume/we.resume.slideshow.js",
+			"./js/resume/we.resume.dialog.article.js",
+			"./js/resume/we.resume.dialog.baseinfo.js",
+			"./js/resume/we.resume.dialog.education.js",
+			"./js/resume/we.resume.dialog.evaluation.js",
+			"./js/resume/we.resume.dialog.hobbies.js",
+			"./js/resume/we.resume.dialog.prize.js",
+			"./js/resume/we.resume.dialog.research.js",
+			"./js/resume/we.resume.dialog.school.js",
+			"./js/resume/we.resume.dialog.skill.js",
+			"./js/resume/we.resume.dialog.skill.ability.js",
+			"./js/resume/we.resume.dialog.skill.certificate.js",
+			"./js/resume/we.resume.dialog.work.js",
+			"./js/resume/we.resume.dialog.work.job.js",
+			"./js/resume/we.resume.dialog.work.project.js",
+			"./js/resume/we.resume.dialog.subject.js"
 		]
 	},
 	"resume_data": {
