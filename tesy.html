@@ -1,0 +1,204 @@
+﻿
+
+Start页
+<form action="http://www.jianlipro.com/api.php?m=resume&a=main" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>name: <input type="text" name="name" /></p>
+  <p>title: <input type="text" name="title" /></p>
+  <p>direction: <input type="text" name="direction" /></p>
+  <p>language: <input type="text" name="language" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+简历中照片上传
+<form action="http://www.jianlipro.com/api.php?m=resume&a=baseUpload" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_photo: <input type="file" name="u_photo" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+基本信息
+<form action="http://www.jianlipro.com/api.php?m=resume&a=info" method="post">
+  <p>模板id: <input type="text" name="m_id" /></p>
+  <p>uid: <input type="text" name="u_id" /></p>
+  <p>姓名: <input type="text" name="i_name" /></p>
+  <p>照片: <input type="text" name="i_photo" /></p>
+  <p>手机: <input type="text" name="i_phone" /></p>
+  <p>性别: <input type="text" name="i_sex" /></p>
+  <p>政治面貌: <input type="text" name="i_gov" /></p>
+  <p>年龄: <input type="text" name="i_age" /></p>
+  <p>民族: <input type="text" name="i_nat" /></p>
+  <p>邮箱: <input type="text" name="i_email" /></p>
+  <p>所在地: <input type="text" name="i_address" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+	教育经历保存(简历制作)
+<form action="http://www.jianlipro.com/api.php?m=resume&a=jiaoyu" method="post">
+  <p>mid: <input type="text" name="m_id" /></p>
+  <p>uid: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>学位: <input type="text" name="xuewei" /></p>
+  <p>学校: <input type="text" name="xuexiao" /></p>
+  <p>专业: <input type="text" name="zhuanye" /></p>
+  <p>开始年: <input type="text" name="e_start_y" /></p>
+  <p>开始月: <input type="text" name="e_start_m" /></p>
+  <p>结束年: <input type="text" name="e_end_y" /></p>
+  <p>结束月: <input type="text" name="e_end_m" /></p>
+  <p>gpa: <input type="text" name="gpa" /></p>
+  <p>专业排名: <input type="text" name="zhuanyesort" /></p>
+  <p>描述: <input type="text" name="e_context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+	校园经历保存(简历制作)
+<form action="http://www.jianlipro.com/api.php?m=resume&a=xiaoyuan" method="post">
+  <p>mid: <input type="text" name="m_id" /></p>
+  <p>uid: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>sort: <input type="text" name="sort" /></p>
+  <p>社团/活动: <input type="text" name="name" /></p>
+  <p>职位: <input type="text" name="e_position" /></p>
+  <p>开始年: <input type="text" name="e_start_y" /></p>
+  <p>开始月: <input type="text" name="e_start_m" /></p>
+  <p>结束年: <input type="text" name="e_end_y" /></p>
+  <p>结束月: <input type="text" name="e_end_m" /></p>
+  <p>描述: <input type="text" name="e_context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+
+	工作经历保存(简历制作)
+<form action="http://www.jianlipro.com/api.php?m=resume&a=gongzuo" method="post">
+  <p>mid: <input type="text" name="m_id" /></p>
+  <p>uid: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>社团/活动: <input type="text" name="e_company" /></p>
+  <p>职位: <input type="text" name="e_position" /></p>
+  <p>部门: <input type="text" name="bumen" /></p>
+  <p>开始年: <input type="text" name="e_start_y" /></p>
+  <p>开始月: <input type="text" name="e_start_m" /></p>
+  <p>结束年: <input type="text" name="e_end_y" /></p>
+  <p>结束月: <input type="text" name="e_end_m" /></p>
+  <p>描述: <input type="text" name="e_context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+	项目经历保存(简历制作)
+<form action="http://www.jianlipro.com/api.php?m=resume&a=xiangmu" method="post">
+  <p>mid: <input type="text" name="m_id" /></p>
+  <p>uid: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>社团/活动: <input type="text" name="e_company" /></p>
+  <p>职位: <input type="text" name="e_position" /></p>
+  <p>部门: <input type="text" name="bumen" /></p>
+  <p>开始年: <input type="text" name="e_start_y" /></p>
+  <p>开始月: <input type="text" name="e_start_m" /></p>
+  <p>结束年: <input type="text" name="e_end_y" /></p>
+  <p>结束月: <input type="text" name="e_end_m" /></p>
+  <p>描述: <input type="text" name="e_context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+技能
+<form action="http://www.jianlipro.com/api.php?m=resume&a=jineng" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>name: <input type="text" name="name" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+证书
+<form action="http://www.jianlipro.com/api.php?m=resume&a=zhengshu" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>name: <input type="text" name="name" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+
+
+获奖经历
+<form action="http://www.jianlipro.com/api.php?m=resume&a=prize" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>name: <input type="text" name="name" /></p>
+  <p>p_date_y: <input type="text" name="p_date_y" /></p>
+  <p>p_date_m: <input type="text" name="p_date_m" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+
+
+
+自我评价
+<form action="http://www.jianlipro.com/api.php?m=resume&a=zwpingjia" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>内容: <input type="text" name="context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+科研信息保存
+<form action="http://www.jianlipro.com/api.php?m=resume&a=keyan" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>课题名称: <input type="text" name="e_company" /></p>
+  <p>职责: <input type="text" name="e_position" /></p>
+  <p>开始年: <input type="text" name="e_start_y" /></p>
+  <p>开始月: <input type="text" name="e_start_m" /></p>
+  <p>结束年: <input type="text" name="e_end_y" /></p>
+  <p>结束月: <input type="text" name="e_end_m" /></p>
+  <p>描述: <input type="text" name="e_context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+发表文章保存
+<form action="http://www.jianlipro.com/api.php?m=resume&a=Article" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>文章名称: <input type="text" name="title" /></p>
+  <p>年: <input type="text" name="e_date_y" /></p>
+  <p>月: <input type="text" name="e_date_m" /></p>
+  <p>刊物名称: <input type="text" name="paper_name" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+主修课题保存
+<form action="http://www.jianlipro.com/api.php?m=resume&a=Course" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>内容: <input type="text" name="title" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
+
+爱好保存
+<form action="http://www.jianlipro.com/api.php?m=resume&a=aihao" method="post">
+  <p>m_id: <input type="text" name="m_id" /></p>
+  <p>u_id: <input type="text" name="u_id" /></p>
+  <p>id: <input type="text" name="id" /></p>
+  <p>内容: <input type="text" name="context" /></p>
+  <p>token: <input type="text" name="token" /></p>
+  <input type="submit" value="Submit" />
+</form>
