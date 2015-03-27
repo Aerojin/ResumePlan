@@ -11,22 +11,17 @@
 
         defaults: function () {
             return {
-                sort:1,
-                isShow: true,
-                isDrag: true,
                 data: []
             };
         },      
 
         initialize: function (args) {
-            this.set({
-                sort: args.sort,
-                isShow: args.isShow,
-                isDrag: args.isDrag
-            });
-
-            this.setData(args.data);
             this.master = args.master;
+            superClass.prototype.initialize.apply(this, arguments);
+        },
+
+        getTableName: function () {
+            return "InfoJineng";
         },
 
         format: function (args){

@@ -9,7 +9,9 @@
 
         defaults: function () {
             return {
-                scroll: false
+                scroll: false,
+                data: null,
+                template: null
             };
         },      
 
@@ -21,21 +23,41 @@
 
         },
 
-        getTemplate: function () {
-        	var list = [];
+        getResumeDetail: function (mid, callback) {
+            var options = {};
 
-        	for(var i = 0; i < 20; i++){
-        		var item = {
-        			id: i,
-        			type: Math.floor(Math.random() * 4),
-        			image: "",
-        			title: "river"
-        		};
+            options.data = {
+                mid: mid
+            };
 
-        		list.push(item);
-        	}
+            options.success = function (result) {
+                this.set({data: result.data});
+            };
 
-        	return list;
+            options.error = function (result) {
+                WE.UI.show(result.msg, {className: "msgRed", delay: 3000});
+            };
+
+            WE.Api.getResumeDetail(options, this);
+
+        },
+
+        getTemplate: function (tid, callback) {
+            var options = {};
+
+            options.data = {
+                id: tid
+            };
+
+            options.success = function (result) {
+                this.set({template: result.data});
+            };
+
+            options.error = function (result) {
+                WE.UI.show(result.msg, {className: "msgRed", delay: 3000});
+            };
+
+            WE.Api.getTemplate(options, this);
         }
 
     }));

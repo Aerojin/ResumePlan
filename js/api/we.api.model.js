@@ -35,7 +35,7 @@
             client.request({
                 url: url,
                 method: httpMethod,
-                data: data,
+                data: this.checkData(data),
                 timeout: 20000,
             }, function (e) {
                 var data = $.parseJSON(e.responseText);
@@ -63,6 +63,17 @@
         },
         getHost: function () {
             return "http://www.jianlipro.com";
+        },
+        checkData: function (data) {
+            if(_.isObject(data)){
+                for(var key in data){
+                    if(_.isEmpty(data[key])){
+                        data[key] = "";
+                    }
+                }
+            }
+
+            return data;
         }
     });
     
@@ -697,7 +708,7 @@
     WE.Api.skill = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'resume', command:'jieneng'};
+        var requestUrl = {model:'resume', command:'jineng'};
         
         //options.httpMethod = "get";
 
@@ -876,17 +887,4 @@
 
         this.call(requestUrl, requestBody, options, context);
     };
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-	
 })(WE, jQuery, Backbone);

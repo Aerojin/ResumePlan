@@ -10,8 +10,8 @@
         initialize: function (options) {
             
             this.template = options.template;
+            this.instance = options.instance;
             this.container = options.container;
-            this.instance = WE.Resume.getInstance();
 
             this.defaults = ["base", "education"];
 

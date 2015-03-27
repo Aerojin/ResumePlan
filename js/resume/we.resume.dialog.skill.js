@@ -103,7 +103,7 @@
             '<div class="windowBoxA_from_two">',
                 '<ul class="fromList fromListBox clearfix" id="<%-cid%>-context">',
                 '</ul>',
-                '<div class="windowBoxA_from_bottom" style="left:380px;">',
+                '<div class="windowBoxA_from_bottom" style="left:225px;">',
                     '<a href="javascript:void(0);" id="<%-cid%>-save" class="btnM">保存</a>',
                 '</div>',
             '</div>',

@@ -9,21 +9,18 @@
 
         defaults: function () {
             return {
-                sort:1,
-                isShow: true,
-                isDrag: true,
                 data: {
                     id: "",
-                    i_sex: "1",
-                    i_gov: "党员",
-                    i_phone: "13926572774",
-                    i_email: "13926572774@139.com",
-                    i_name: "金锐",
+                    i_sex: "",
+                    i_gov: "",
+                    i_phone: "",
+                    i_email: "",
+                    i_name: "",
                     i_address: "",
                     title: "",
                     job: "",
-                    i_nat: "软件工程师",
-                    i_photo: "http://www.jianlipro.com/aeroji.jpg"
+                    i_nat: "",
+                    i_photo: ""
                 }
             };
         },
@@ -31,14 +28,8 @@
         KEY: "base",      
 
         initialize: function (args) {
-            this.set({
-                sort: args.sort,
-                isShow: args.isShow,
-                isDrag: args.isDrag
-            });
-
-            this.setData(args.data);
-            this.master = args.master;         
+            this.master = args.master;
+            superClass.prototype.initialize.apply(this, arguments);
         },
 
         create: function (data) {

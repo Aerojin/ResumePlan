@@ -11,22 +11,13 @@
 
         defaults: function () {
             return {
-                sort:1,
-                isShow: true,
-                isDrag: true,
                 data: []
             };
         }, 
 
         initialize: function (args) {
-            this.set({
-                sort: args.sort,
-                isShow: args.isShow,
-                isDrag: args.isDrag
-            });
-
-            this.setData(args.data);
             this.master = args.master;
+            superClass.prototype.initialize.apply(this, arguments);
         },
 
         create: function (args) {
@@ -35,6 +26,10 @@
 
         update: function (args) {
             this.set({data: this.format(args)});
+        },
+
+        getTableName: function () {
+            return "InfoZwpingjia";
         },
 
         format: function (args){

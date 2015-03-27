@@ -160,7 +160,7 @@
                 });
 
                 this.list.onRemove = function (data) {
-                    _this.instance.trgger("remove:data", {
+                    _this.instance.trigger("remove:data", {
                         id: data.id,
                         key: _this.key
                     });
@@ -196,7 +196,7 @@
 
                 options.success = function (result) {
                     this.reset();
-                    this.instance.trgger("change:data", {key: this.key});
+                    this.instance.trigger("change:data", {key: this.key});
                     WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
                 };
 
@@ -249,7 +249,7 @@
                             '<input type="text" id="<%-cid%>-jibie" name="jibie" class="input mt_5" />',
                        '</li>',
                     '</ul>',
-                    '<div class="windowBoxA_from_bottom" style="left:300px;">',
+                    '<div class="windowBoxA_from_bottom" style="left:115px;">',
                         '<a href="javascript:void(0);" id="<%-cid%>-save" class="btnM"> 保存</a>',
                     '</div>',
                 '</div>',

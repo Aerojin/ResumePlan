@@ -17,7 +17,8 @@
         this.TIP = {
 			PICUPLOAD_ERROR :"图像格式不符合规范!",
 			SUCCESS : "您的头像已保存",
-			FIAL : "您的头像保存失败"
+			FIAL : "您的头像保存失败",
+            UPLOADING: "头像上传中..."
         };
 
         this.init = function() {
@@ -54,15 +55,17 @@
 					}
 					
 					_this.ui.parent.append(_this.ui.file);
-					WE.UI.alert(_this.TIP.SUCCESS);
+					WE.UI.show(_this.TIP.SUCCESS, {delay: 2000});
 				} else {
                     _this.ui.parent.append(_this.ui.file);
-                    WE.UI.alert(msg);					
+                    WE.UI.show(msg);
 				}
         	};
 
         	this.ui.file.change(function(){
         		var fileName = $(this).val();
+
+                WE.UI.show(_this.TIP.UPLOADING, {delay: 2000});
 
         		if(_this.check(fileName)){
         			_this.ui.form.append(_this.ui.file);

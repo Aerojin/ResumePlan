@@ -40,6 +40,10 @@
         setData: function (data) {
             var _this = this;
 
+            if(!data){
+                return;
+            }
+
             if(_.isArray(data)){
                 _this.set({data: []});
                 _.each(data, function (e) {
@@ -74,11 +78,11 @@
         },
 
         reset: function (callback) {
-            var options = {
-                data: {
-                    id: this.get("mid"),
-                    table: this.getTableName()
-                }
+            var options = {};
+
+            options.data = {
+                id: this.get("mid") || "6",
+                table: this.getTableName()
             };
 
             options.success = function (result) {

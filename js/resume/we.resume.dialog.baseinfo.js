@@ -197,12 +197,12 @@
 
             options.success = function (result) {
                 this.close();
-                this.instance.trgger("change:data", {key: this.key});
+                this.instance.trigger("change:data", {key: this.key});
                 WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
             };
 
             options.error = function (result) {
-                WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                WE.UI.show(result.msg, {className: "msgRed", delay: 2000});
             };
 
             WE.Api.baseInfo(options, this);

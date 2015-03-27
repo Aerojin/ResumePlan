@@ -13,12 +13,17 @@
             };
         },      
 
-        initialize: function () {
-
+        initialize: function (args) {
+            this.sort = args.sort;
+            this.type = args.type;
         },
 
-        getConfig: function (type) {
-            switch(type){
+        getConfig: function () {
+            if(this.sort){
+                return this.sort;
+            }
+
+            switch(this.type){
                 case "0":
                     return this.getSingle();
                     break;

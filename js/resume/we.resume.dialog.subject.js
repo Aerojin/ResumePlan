@@ -125,7 +125,7 @@
 
                 options.success = function (result) {
                     this.close();
-                    this.instance.trgger("change:data", {key: this.key});
+                    this.instance.trigger("change:data", {key: this.key});
                     WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
                 };
 

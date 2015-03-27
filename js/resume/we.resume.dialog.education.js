@@ -87,7 +87,7 @@
             //验证学位有效性
             var key = 'xuewei';
             if (_.has(data, key)) {
-                if (!data.xuewei || !data.sex.xuewei) {
+                if (!data.xuewei || !data.xuewei) {
                     return getResult(key, self.TIPS.ACADEMIC_EMPTY);
                 }
             }
@@ -107,7 +107,7 @@
                     return getResult(key, self.TIPS.GPA_EMPTY);
                 }
 
-                if (!_.isNumber(data.gpa) || Number(data.gpa) < 0 || Number(data.gpa) > 4) {
+                if (_.isNaN(data.gpa) || Number(data.gpa) < 0 || Number(data.gpa) > 4) {
                     return getResult(key, self.TIPS.GPA_ERROR);
                 }
             }
@@ -217,7 +217,7 @@
             });
 
             this.list.onRemove = function (data) {
-                _this.instance.trgger("remove:data", {
+                _this.instance.trigger("remove:data", {
                     id: data.id,
                     key: _this.key
                 });
@@ -256,7 +256,7 @@
 
             options.success = function (result) {
                 this.reset();
-                this.instance.trgger("change:data", {key: this.key});
+                this.instance.trigger("change:data", {key: this.key});
                 WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
             };
 
@@ -315,16 +315,16 @@
 				'</li>',
 				'<li>',
 					'<label>GPA*</label>',
-                    '<input type="text" name="gpa" id="<%-cid%>-gpa" class="input mt_5" />',
+                    '<input type="text" name="gpa" id="<%-cid%>-gpa" class="input mt_5" style="width:120px;" />',
 				'</li>',
-				'<li>',
-					'<label>专业排名*</label>',
-					'<input type="text" name="zhuanyesort" id="<%-cid%>-zhuanyesort" class="input mt_5" style="width:120px;" />',
-				'</li>',
-				'<li>',
-					'<label>专业*</label>',
-					'<input type="text" name="zhuanye" id="<%-cid%>-zhuanye" class="input mt_5" />',
-				'</li>',
+                '<li>',
+                    '<label>专业排名*</label>',
+                    '<input type="text" name="zhuanyesort" id="<%-cid%>-zhuanyesort" class="input mt_5" style="width:120px;" />',
+                '</li>',
+                '<li>',
+                    '<label>专业*</label>',
+                    '<input type="text" name="zhuanye" id="<%-cid%>-zhuanye" class="input mt_5" />',
+                '</li>',
 				'<li class="fromList_no"></li>',
 				'<li>',
 					'<label>入学*</label>',

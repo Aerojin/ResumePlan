@@ -13,27 +13,18 @@
             this.model = options.model;
             this.instance = options.instance;
 
-            this.render();
             this.initEvents();
+            this.render();
+            this.initPageEvents();
 
-            this.initZoom();
-            this.initMenu();
-            this.initSlideShow();
-            this.initControl();
-            this.getResumeDetail();
-            this.getTemplate();
-            this.resumeSelect();
+            var args = this.getRequest();
+
+            this.model.getTemplate(args.t_id);
+            this.model.getResumeDetail(args.m_id);
         },
 
         initEvents: function () {
             var _this = this;
-            var ui = this.ui;
-
-            /*
-            this.constant.on("change", function () {
-                _this.setItem(this.getChanged());
-            });*/
-
             this.model.on("change:scroll", function () {
                 if(this.get("scroll")){
                     _this.ui.divScroll.show("fast", function () {
@@ -45,18 +36,25 @@
                 }
             });
 
+            this.model.on("change", function() {
+                var data = this.get("data");
+                var template = this.get("template");
+
+                if(data && template){
+                    _this.pageLoad(data, template);
+                }
+            });
+
+        },
+
+        initPageEvents: function () {
+            var _this = this;
+            var ui = this.ui;
+
             ui.infoBox.hover(function() {
                 $(this).addClass('hover');
             }, function() {
                 $(this).removeClass('hover');
-            });
-
-            ui.infoBox.mousedown(function () {
-               // $(this).addClass("focus").removeClass("hover");
-            });
-
-            ui.infoBox.mouseup(function () {
-                //$(this).removeClass("focus");
             });
 
             ui.btnReplace.click(function () {
@@ -114,6 +112,18 @@
             };
         },
 
+        pageLoad: function (data, template) {
+            this.instance = WE.Resume.getInstance({
+                data: data,
+                sort: data.sort,
+                type: template.cid
+            });
+
+            this.initZoom();
+            this.initMenu();
+            this.initControl(template);
+        },
+
         initZoom: function () {
             this.zoom = new WE.Resume.Zoom({
                 add: this.ui.btnAdd,
@@ -129,66 +139,14 @@
             });
         },
 
-        initControl: function () {
-            var options = {};
+        initControl: function (result) {
 
-            options.data = {
-                tid: this.getRequest().t_id
-            };
-
-            options.success = function (result) {
-                new WE.Resume.Control.View({
-                    type: result.data.cid,
-                    container: this.ui.resume,
-                    template: result.data.temp
-                });
-            };
-
-            options.error = function () {
-                WE.UI.show("模版加载失败", {className: "msgRed", delay: 2000});
-            };
-
-            WE.Api.getTemplate(options, this);
-        },
-
-        getResumeDetail: function () {
-            var options = {};
-            var request = this.getRequest();
-
-            options.data = {
-                mid: request.m_id
-            };
-
-            options.success = function (result) {
-                console.log(result);
-            };
-
-            options.error = function (result) {
-                WE.UI.alert(result.msg, {type: "warn"});
-            };
-
-            WE.Api.getResumeDetail(options, this);
-
-        },
-
-        resumeSelect: function () {
-            var options = {};
-            var request = this.getRequest();
-
-            options.data = {
-                mid: request.m_id,
-                module: "Info"
-            };
-
-            options.success = function (result) {
-                console.log(result);
-            };
-
-            options.error = function (result) {
-                WE.UI.alert(result.msg, {type: "warn"});
-            };
-
-            WE.Api.resumeSelect(options, this);
+             new WE.Resume.Control.View({
+                type: result.cid,
+                container: this.ui.resume,
+                template: result.temp,
+                instance: this.instance
+            });
         },
 
         getRequest: function () {
@@ -208,8 +166,7 @@
     $(function () {
         var model = new WE.Resume.Model();
         var view = new WE.Resume.View({
-            model: model,
-            instance: WE.Resume.getInstance()
+            model: model
         });
     });
 

@@ -194,7 +194,7 @@
             });
 
             this.list.onRemove = function (data) {
-                _this.master.instance.trgger("remove:data", {
+                _this.master.instance.trigger("remove:data", {
                     id: data.id,
                     key: _this.key
                 });
@@ -229,7 +229,7 @@
 
                 options.success = function (result) {
                     this.reset();
-                    this.master.instance.trgger("change:data", {key: this.key});
+                    this.master.instance.trigger("change:data", {key: this.key});
                     WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
                 };
 

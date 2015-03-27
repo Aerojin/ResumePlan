@@ -290,6 +290,7 @@
         	for(var i = 0; i < page.length; i++){
                 var config = _.clone(this.model.get(page[i]));
                 var isShow = !!this.instance.getShow(config.key);
+                var isLock = !!this.instance.getLock(config.key);
 
         		config = _.extend(config, {
                     id: config.key,
@@ -297,7 +298,7 @@
                     actionClass: isShow ? "" : "not"
                 });
 
-                if(_.isUndefined(config.isLock)){
+                if(_.isUndefined(isLock)){
                     config.actionClass = "";
                 }
 
@@ -319,10 +320,6 @@
         },
 
         getIcoHtml: function (data) {
-            if(_.isUndefined(data.isLock)){
-                return "";
-            }
-
             var template = _.template('<i class="<%-ico%> btn-hover" style="display:none;"></i>');
 
             return template({
@@ -331,7 +328,7 @@
         },
 
         getIcoClass: function (data) {
-            if(data.isLock){
+            if(this.instance.getLock(data.key)){
                 return "i_icoLock";
             }
 
