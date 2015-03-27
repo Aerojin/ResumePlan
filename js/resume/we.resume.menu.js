@@ -16,77 +16,66 @@
                     key: "base",
                     text: "基本信息",
                     className: "i_icoInfo",
-                    isLock: true,
                     width: 818
                 },
     			education: {
     				key: "education",
     				text: "教育背景",
     				className: "i_icoMone",
-                    isLock: true,
                     width: 863
     			},
     			school: {
     				key: "school",
     				text: "校园经历",
     				className: "i_icoMtwo",
-                    isLock: true,
                     width: 863
     			},
     			work: {
     				key: "work",
     				text: "工作经历",
     				className: "i_icoMthree",
-                    isLock: true,
                     width: 978
     			},
     			skill: {
     				key: "skill",
     				text: "技能",
     				className: "i_icoMfour",
-                    isLock: true,
                     width: 665
     			},
     			prize: {
     				key: "prize",
     				text: "获奖经历",
     				className: "i_icoMfive",
-                    isLock: false,
                     width: 551
     			},
     			evaluation: {
     				key: "evaluation",
     				text: "自我评价",
     				className: "i_icoMsix",
-                    isLock: false,
                     width: 338
     			},
     			research: {
     				key: "research",
     				text: "科研经历",
     				className: "i_icoMseven",
-                    isLock: false,
                     width: 863
     			},
     			article: {
     				key: "article",
     				text: "发表文章",
     				className: "i_icoMeight",
-                    isLock: false,
                     width: 551
     			},
     			subject: {
     				key: "subject",
     				text: "主修课程",
     				className: "i_icoMnine",
-                    isLock: false,
                     width: 338
     			},
     			hobbies: {
     				key: "hobbies",
     				text: "爱好",
     				className: "i_icoMten",
-                    isLock: false,
                     width: 338
     			},
     			exports: {
@@ -255,7 +244,6 @@
         },
 
         showDialog: function (key, data) {
-
             switch(key){
                 case "base":
                     this.dialog = new WE.Resume.Base.View(data);

@@ -10,19 +10,21 @@
             defaults: function () {
                 return {
                     name: null,
-                    position: null,
-                    startY: null,
-                    startM: null,
-                    endY: null,
-                    endM: null,
-                    context: null
+                    e_position: null,
+                    e_start_y: null,
+                    e_start_m: null,
+                    e_end_y: null,
+                    e_end_m: null,
+                    e_context: null
                 };
             },
 
             TIPS: {
                 NAME_EMPTY: "请输入社团/活动",
                 POSITION_EMPTY: "请输入职位",
-                CONTEXT_EMPTY: "请输入工作描述"
+                CONTEXT_EMPTY: "请输入工作描述",
+                SAVE_SUCCESS: "保存成功",
+                SAVE_FAIL: "保存失败"
             },
 
             initialize: function () {
@@ -74,17 +76,17 @@
                 }
 
                 //验证职位有效性
-                var key = 'position';
+                var key = 'e_position';
                 if (_.has(data, key)) {
-                    if (!data.position || !data.position.length) {
+                    if (!data.e_position || !data.e_position.length) {
                         return getResult(key, self.TIPS.POSITION_EMPTY);
                     }
                 }
 
                 //验证工作描述有效性
-                var key = 'context';
+                var key = 'e_context';
                 if (_.has(data, key)) {
-                    if (!data.context || !data.context.length) {
+                    if (!data.e_context || !data.e_context.length) {
                         return getResult(key, self.TIPS.CONTEXT_EMPTY);
                     }
                 }
@@ -95,7 +97,7 @@
 
     ;(function (WE, jQuery, Backbone) {
 
-        var superClass = WE.View.ViewBase;
+        var superClass = WE.Resume.Dialog;
         var _class = "WE.Resume.School.View";  
 
         WE.namespace(_class, superClass.extend({
@@ -104,41 +106,26 @@
 
             initialize: function (options) {
 
-                this.options = options;
+                this.key = options.key;
+                this.title = options.text;
+                this.width = options.width;
             	this.model = new WE.Resume.School.Model();
 
             	this.render();
-            	this.initEvents();
+                this.initEvents();
             },
 
             initEvents: function () {
-            	var _this = this;
+                this.instance.on("change:ui", this.changeUI, this);
+            },
 
+            initPageEvents: function () {
+                var _this = this;
 
-            	this.ui.btnSave.click(function () {
+                this.ui.btnSave.click(function () {
                     if(_this.model.isValid()){
-
+                        _this.save();
                     }
-            	});
-
-            	this.ui.txtInput.focus(function () {
-                    var name = $(this).attr('name');
-                    _this.hideTip(_this.byName(name));
-                });
-
-                this.ui.txtInput.blur(function () {
-                    var obj = {};
-                    var name = $(this).attr('name');
-                    var value = $(this).val().trim();
-
-                    obj[name] = value;
-                    _this.model.set(obj, {validate: true, target: name});              
-                });
-
-                this.model.on('invalid', function(model, error){
-                    for(var key in error){
-                        _this.showTip(_this.byName(key), error[key]);
-                    }                
                 });
             },
 
@@ -158,24 +145,10 @@
                 this.ui.divMenu =  this.getCidEl("menu", this.ui.wrap);
             	this.ui.txtInput = this.ui.wrap.find("input[type='text'],textarea");
 
+                this.show();
                 this.createMenu();
                 this.createDate();
-            	this.showDialog();
-            },
-
-            showDialog: function () {
-            	if(!this.dialog){
-    	        	this.options.content = this.ui.wrap;
-                    this.dialog = new WE.Resume.Dialog(this.options);
-
-    	        	this.dialog.onClose = function () {
-
-    	        	};
-
-    	        	return;
-    	        }
-
-    	        this.dialog.show();
+            	this.initPageEvents();
             },
 
             createDate: function () {
@@ -185,8 +158,8 @@
                     container: this.ui.divStart,
                     onChange: function (data) {
                         _this.model.set({
-                            startY: data.year,
-                            startM: data.month
+                            e_start_y: data.year,
+                            e_start_m: data.month
                         });
                     } 
                 });
@@ -195,8 +168,8 @@
                     container: this.ui.divEnd,
                     onChange: function (data) {
                         _this.model.set({
-                            endY: data.year,
-                            endM: data.month
+                            e_end_y: data.year,
+                            e_end_m: data.month
                         });
                     } 
                 });
@@ -207,38 +180,87 @@
 
                 this.list = new WE.Resume.List({
                     container: this.ui.divMenu,
-                    data: [{
-                        title: 111
-                    },{
-                        title: 222
-                    }]
+                    data: this.getMenuData()
                 });
 
-                this.list.onRemove = function () {
-
+                this.list.onRemove = function (data) {
+                    _this.instance.trgger("remove:data", {
+                        id: data.id,
+                        key: _this.key
+                    });
                 };
 
-                this.list.onChange = function () {
-
+                this.list.onChange = function (data) {
+                    _this.model.set(data);
+                    _this.setValue(data);
                 };
             },
 
-            showTip: function (dom, msg) {
-                var template = _.template(this.tip);
-                    template = template({msg: msg});
+            getMenuData: function () {
+                var data = this.getData() || [];
 
-                this.hideTip(dom);
-                dom.after(template);
-                dom.closest("li").addClass("on");
+                for(var i = 0; i < data.length; i++){
+                    data[i].title = data[i].name;
+                }
+
+                return data;
             },
 
-            hideTip: function (dom) {
-                dom.nextAll(".tips").remove();
-                dom.closest("li").removeClass("on");
+            save: function () {
+                var options = {};
+                var end = this.end.getData();
+                var start = this.start.getData();
+
+                this.model.set({
+                    e_end_y: end.year,
+                    e_end_m: end.month,
+                    e_start_y: start.year,
+                    e_start_m: start.month
+                });
+
+                options.data = this.model.toJSON();
+                options.data.m_id = this.getMid();
+
+                options.success = function (result) {
+                    this.reset();
+                    this.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
+
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
+
+                WE.Api.school(options, this);
             },
 
-            byName: function(name){
-                return this.ui.wrap.find('[name=' + name + ']');
+            setValue: function (data) {
+
+                for(var key in data){
+                    var value = data[key] || "";
+                    var input = this.byName(key);
+
+                    if(input && input.length > 0){
+                        input.val(value);
+                    }
+                }
+
+                this.start.setData({
+                    year: data.e_start_y,
+                    month: data.e_start_m
+                });
+
+                this.end.setData({
+                    year: data.e_end_y,
+                    month: data.e_end_m
+                });
+            },
+            changeUI: function (args) {
+                this.list.render(args);
+            },
+
+            onClose: function () {
+                this.instance.off("change:ui", this.changeUI);
             },
 
             template: ['<div class="clearfix">',
@@ -251,11 +273,11 @@
                     '<li class="fromList_no"></li>',
                     '<li>',
                         '<label>职位*</label>',
-                        '<input type="text" id="<%-cid%>-position" name="position" class="input mt_5" />',
+                        '<input type="text" id="<%-cid%>-position" name="e_position" class="input mt_5" />',
                     '</li>',
                     '<li style="margin-top:-62px;">',
                         '<label>工作描述*</label>',
-                        '<textarea id="<%-cid%>-context" name="context" rows="" cols="" class="textarea mt_5"></textarea>',
+                        '<textarea id="<%-cid%>-context" name="e_context" rows="" cols="" class="textarea mt_5"></textarea>',
                     '</li>',
                     '<li>',
                         '<label>开始*</label>',
@@ -276,11 +298,8 @@
             '<div class="windowBoxA_menu">',
                 '<ul id="<%-cid%>-menu"></ul>',
             '</div>',
-        '</div>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
-        }));
+        '</div>'].join("\n")
+    }));
 
 
     })(WE, jQuery, Backbone);

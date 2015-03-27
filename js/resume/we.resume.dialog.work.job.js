@@ -9,20 +9,22 @@
 
         defaults: function () {
             return {
-                company: null,
-                position: null,
-                startY: null,
-                startM: null,
-                endY: null,
-                endM: null,
-                context: null
+                e_company: null,
+                e_position: null,
+                e_start_y: null,
+                e_start_m: null,
+                e_end_y: null,
+                e_end_m: null,
+                e_context: null
             };
         },
 
         TIPS: {
             COMMPANY_EMPTY: "请输入公司名称",
             POSITION_EMPTY: "请输入职位",
-            CONTEXT_EMPTY: "请输入工作描述"
+            CONTEXT_EMPTY: "请输入工作描述",
+            SAVE_SUCCESS: "保存成功",
+            SAVE_FAIL: "保存失败"
         },
 
         initialize: function () {
@@ -66,25 +68,25 @@
             }
 
             //验证名称有效性
-            var key = 'company';
+            var key = 'e_company';
             if (_.has(data, key)) {
-                if (!data.company || !data.company.length) {
+                if (!data.e_company || !data.e_company.length) {
                     return getResult(key, self.TIPS.COMMPANY_EMPTY);
                 }
             }
 
             //验证职位有效性
-            var key = 'position';
+            var key = 'e_position';
             if (_.has(data, key)) {
-                if (!data.position || !data.position.length) {
+                if (!data.e_position || !data.e_position.length) {
                     return getResult(key, self.TIPS.POSITION_EMPTY);
                 }
             }
 
             //验证工作描述有效性
-            var key = 'context';
+            var key = 'e_context';
             if (_.has(data, key)) {
-                if (!data.context || !data.context.length) {
+                if (!data.e_context || !data.e_context.length) {
                     return getResult(key, self.TIPS.CONTEXT_EMPTY);
                 }
             }
@@ -102,9 +104,12 @@
         
         name: _class,
 
+        key: "work",
+
         initialize: function (options) {
 
             this.menu = options.menu;
+            this.master = options.master;
             this.container = options.container;
         	this.model = new WE.Resume.Job.Model();
 
@@ -117,7 +122,7 @@
 
         	this.ui.txtInput.focus(function () {
                 var name = $(this).attr('name');
-                _this.hideTip(_this.byName(name));
+                _this.master.hideTip(_this.master.byName(name));
             });
 
             this.ui.txtInput.blur(function () {
@@ -131,7 +136,7 @@
 
             this.model.on('invalid', function(model, error){
                 for(var key in error){
-                    _this.showTip(_this.byName(key), error[key]);
+                    _this.master.showTip(_this.master.byName(key), error[key]);
                 }                
             });
         },
@@ -163,8 +168,8 @@
                 container: this.ui.divStart,
                 onChange: function (data) {
                     _this.model.set({
-                        startY: data.year,
-                        startM: data.month
+                        e_start_y: data.year,
+                        e_start_m: data.month
                     });
                 } 
             });
@@ -173,8 +178,8 @@
                 container: this.ui.divEnd,
                 onChange: function (data) {
                     _this.model.set({
-                        endY: data.year,
-                        endM: data.month
+                        e_end_y: data.year,
+                        e_end_m: data.month
                     });
                 } 
             });
@@ -185,49 +190,92 @@
 
             this.list = new WE.Resume.List({
                 container: this.ui.divMenu,
-                data: [{
-                    title: 111
-                },{
-                    title: 222
-                }]
+                data: this.getMenuData()
             });
 
-            this.list.onRemove = function () {
-
+            this.list.onRemove = function (data) {
+                _this.master.instance.trgger("remove:data", {
+                    id: data.id,
+                    key: _this.key
+                });
             };
 
-            this.list.onChange = function () {
-
+            this.list.onChange = function (data) {
+                _this.model.set(data);
+                _this.setValue(data);
             };
+        },
+
+        getMenuData: function () {
+            var data = this.getData() || [];
+
+            for(var i = 0; i < data.length; i++){
+                data[i].title = data[i].e_company;
+            }
+
+            return data;
+        },
+
+        getData: function () {
+            return this.master.instance.getData(this.key);
         },
 
         save: function () {
             if(this.model.isValid()){
+                var options = {};
 
+                options.data = this.model.toJSON();
+                options.data.m_id = this.master.getMid();
+
+                options.success = function (result) {
+                    this.reset();
+                    this.master.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
+
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
+
+                WE.Api.work(options, this);
             }
         },
 
-        showTip: function (dom, msg) {
-            var template = _.template(this.tip);
-                template = template({msg: msg});
+        setValue: function () {
+            var data = this.getData();
 
-            this.hideTip(dom);
-            dom.after(template);
-            dom.closest("li").addClass("on");
+            for(var key in data){
+                var value = data[key] || "";
+                var input = this.byName(key);
+
+                if(input && input.length > 0){
+                    input.val(value);
+                }
+            }
+
+            this.start.setData({
+                year: data.e_start_y,
+                month: data.e_start_m
+            });
+
+            this.end.setData({
+                year: data.e_end_y,
+                month: data.e_end_m
+            });
         },
 
-        hideTip: function (dom) {
-            dom.nextAll(".tips").remove();
-            dom.closest("li").removeClass("on");
+        reset: function () {
+            this.model.clear();
+            this.ui.txtInput.val("");
         },
 
-        byName: function(name){
-            return this.ui.wrap.find('[name=' + name + ']');
+        changeUI: function () {
+            this.list.render(args);
         },
 
         template: ['<li>',
                         '<label>公司名称**</label>',
-                        '<input type="text" id="<%-cid%>-cpmpany" name="company" class="input mt_5" />',
+                        '<input type="text" id="<%-cid%>-cpmpany" name="e_company" class="input mt_5" />',
                     '</li>',
                     '<li>',
                         '<label>离职时间*</label>',
@@ -236,7 +284,7 @@
                     '</li>',
                     '<li>',
                         '<label>职位*</label>',
-                        '<input type="text" id="<%-cid%>-position" name="position" class="input mt_5" />',
+                        '<input type="text" id="<%-cid%>-position" name="e_position" class="input mt_5" />',
                     '</li>',
                     '<li class="fromList_no"></li>',
                     '<li>',
@@ -246,11 +294,8 @@
                     '</li>',
                     '<li style="margin-top:-62px;">',
                         '<label>工作描述*</label>',
-                        '<textarea id="<%-cid%>-context" name="context" rows="" cols="" class="textarea mt_5"></textarea>',
-                    '</li>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
+                        '<textarea id="<%-cid%>-context" name="e_context" rows="" cols="" class="textarea mt_5"></textarea>',
+                    '</li>'].join("\n")
     }));
 
 })(WE, jQuery, Backbone);

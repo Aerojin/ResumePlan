@@ -9,38 +9,41 @@
 
         defaults: function () {
             return {
-                module: [
-                    "base",
-                    "education",
-                    "school",
-                    "work",
-                    "project",
-                    "ability",
-                    "certificate",
-                    "prize",
-                    "evaluation",
-                    "research",
-                    "article",
-                    "subject",
-                    "hobbies"
-                ]
+                module: {}
             };
         },
 
         initialize: function () {
            
            this.render();
-           this.setModule();
            this.initEvents();
         },
 
         initEvents: function () {
             var _this = this;
 
+            this.on("change:templateType", function (args) {
+                this.set({module: args.data});
+            });
+
             this.on("change:data", function (args) {
                 if(this[args.key]){
                     this[args.key].reset(function(data){
-                        _this.trigger("change:ui", data);
+                        _this.trigger("change:ui", {
+                            key: args.key,
+                            data: data
+                        });
+                    });
+                }
+            });
+
+            this.on("remove:data", function (args) {
+                if(this[args.key]){
+                    this[args.key].remove(args.id, function (data) {
+                        _this.trigger("change:ui", {
+                            key: args.key,
+                            data: data
+                        });
                     });
                 }
             });
@@ -232,104 +235,7 @@
 
             return [];
         },
-
-        setModule: function () {
-            var obj = {};
-
-            obj.base = {
-                lock: 1,
-                sort: 0,
-                show: 1,
-                drag: 0
-            };
-
-            obj.education = {
-                lock: 1,
-                sort: 1,
-                show: 1,
-                drag: 0
-            };
-
-            obj.school = {
-                lock: 1,
-                sort: 2,
-                show: 1,
-                drag: 1
-            };
-
-            obj.work = {
-                lock: 1,
-                sort: 3,
-                show: 2,
-                drag: 1
-            };
-
-            obj.project = {
-                lock: 1,
-                sort: 4,
-                show: 2,
-                drag: 1
-            };
-
-            obj.skill = {
-                lock: 1,
-                sort: 5,
-                show: 2,
-                drag: 1
-            };
-
-            obj.certificate = {
-                lock: 1,
-                sort: 6,
-                show: 2,
-                drag: 1
-            };
-
-            obj.prize = {
-                lock: 0,
-                sort: 7,
-                show: 1,
-                drag: 1
-            };
-
-            obj.evaluation = {
-                lock: 0,
-                sort: 8,
-                show: 1,
-                drag: 1
-            };
-
-            obj.research = {
-                lock: 0,
-                sort: 9,
-                show: 0,
-                drag: 1
-            };
-
-            obj.article = {
-                lock: 0,
-                sort: 10,
-                show: 0,
-                drag: 1
-            };
-
-            obj.subject = {
-                lock: 0,
-                sort: 11,
-                show: 0,
-                drag: 1
-            };
-
-            obj.hobbies = {
-                lock: 0,
-                sort: 12,
-                show: 1,
-                drag: 1
-            };
-
-            this.set({module: obj});
-        },
-
+        
         getModule: function () {
             return this.get("module");
         },
@@ -359,6 +265,14 @@
 
             return data.show;
         },
+
+        getLock: function (key) {
+            var data = this.getModuleByKey(key);
+
+            return data.lock;
+        },
+
+
         getDrag: function () {
             var array = [];
             var data = this.get("module");

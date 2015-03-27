@@ -14,8 +14,12 @@
         },
 
         TIPS: {
-            NAME_EMPTY: "请输入证书名称"
+            NAME_EMPTY: "请输入证书名称",
+            SAVE_SUCCESS: "保存成功",
+            SAVE_FAIL: "保存失败"
         },
+
+        key: "certificate",
 
         initialize: function () {
 
@@ -81,6 +85,7 @@
         initialize: function (options) {
 
             this.menu = options.menu;
+            this.master = options.master;
             this.container = options.container;
             this.model = new WE.Resume.Certificate.Model();
 
@@ -93,7 +98,7 @@
 
             this.ui.txtInput.focus(function () {
                 var name = $(this).attr('name');
-                _this.hideTip(_this.byName(name));
+                _this.master.hideTip(_this.master.byName(name));
             });
 
             this.ui.txtInput.blur(function () {
@@ -107,7 +112,7 @@
 
             this.model.on('invalid', function(model, error){
                 for(var key in error){
-                    _this.showTip(_this.byName(key), error[key]);
+                    _this.master.showTip(_this.master.byName(key), error[key]);
                 }                
             });
         },
@@ -132,53 +137,83 @@
 
             this.list = new WE.Resume.List({
                 container: this.ui.divMenu,
-                data: [{
-                    title: 111
-                },{
-                    title: 222
-                }]
+                data: this.getMenuData()
             });
 
-            this.list.onRemove = function () {
-
+            this.list.onRemove = function (data) {
+                _this.master.instance.trgger("remove:data", {
+                    id: data.id,
+                    key: _this.key
+                });
             };
 
-            this.list.onChange = function () {
-
+            this.list.onChange = function (data) {
+                _this.model.set(data);
+                _this.setValue(data);
             };
+        },
+
+        getMenuData: function () {
+            var data = this.getData() || [];
+
+            for(var i = 0; i < data.length; i++){
+                data[i].title = data[i].name;
+            }
+
+            return data;
         },
 
         save: function () {
             if(this.model.isValid()){
+                var options = {};
 
+                options.data = this.model.toJSON();
+                options.data.m_id = this.master.getMid();
+
+                options.success = function (result) {
+                    this.reset();
+                    this.master.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
+
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
+
+                WE.Api.certificate(options, this);
             }
         },
 
-        showTip: function (dom, msg) {
-            var template = _.template(this.tip);
-                template = template({msg: msg});
-
-            this.hideTip(dom);
-            dom.after(template);
-            dom.closest("li").addClass("on");
+        getData: function () {
+            return this.master.instance.getData(this.key);
         },
 
-        hideTip: function (dom) {
-            dom.nextAll(".tips").remove();
-            dom.closest("li").removeClass("on");
+        setValue: function () {
+            var data = this.getData();
+
+            for(var key in data){
+                var value = data[key] || "";
+                var input = this.byName(key);
+
+                if(input && input.length > 0){
+                    input.val(value);
+                }
+            }
         },
 
-        byName: function(name){
-            return this.ui.wrap.find('[name=' + name + ']');
+        reset: function () {
+            this.model.clear();
+            this.ui.txtInput.val("");
+        },
+
+        changeUI: function () {
+            this.list.render(args);
         },
 
         template: ['<li>',
                         '<label>证书名称**</label>',
                         '<input type="text" id="<%-cid%>-name" name="name" class="input mt_5" />',
-                    '</li>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
+                    '</li>'].join("\n")
     }));
 
 })(WE, jQuery, Backbone);

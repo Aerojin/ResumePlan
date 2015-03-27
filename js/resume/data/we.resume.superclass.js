@@ -14,7 +14,7 @@
         create: function (args) {
             var data = this.get("data") || [];
 
-            data.push(this.format(args));
+            data.push(args);
 
             this.set({data: data});
         },
@@ -23,7 +23,7 @@
             var data = this.get("data");
             var index = _.findIndex(data, {id: args.id});
 
-            data[index] = this.format(args);
+            data[index] = args;
 
             this.set({data: data});
         },
@@ -73,7 +73,7 @@
             return this.get("isDrag");
         },
 
-        reset: function () {
+        reset: function (callback) {
             var options = {
                 data: {
                     id: this.get("mid"),
@@ -82,14 +82,40 @@
             };
 
             options.success = function (result) {
+                WE.UI.hide();
                 this.setData(result.data);
+
+                if(callback){
+                    callback(this.getData());
+                }
             };
 
             options.error = function (result) {
                 WE.UI.show(result.msg, {className: "msgRed", delay: 2000});
             }; 
 
+            WE.UI.show("数据加载中...");
             WE.Api.resumeSelect(options, this);
+        },
+
+        remove: function (id, callback) {
+            var options = {
+                data: {
+                    id: id,
+                    table: this.getTableName()
+                }
+            };
+
+            options.success = function (result) {
+                this.reset(callback);
+                WE.UI.show("删除成功", {delay: 2000});
+            };
+
+            options.error = function (result) {
+                WE.UI.show(result.msg, {className: "msgRed", delay: 2000});
+            }; 
+
+            WE.Api.resumeRemove(options, this);
         },
 
         format: function (){

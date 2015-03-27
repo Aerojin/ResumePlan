@@ -130,10 +130,25 @@
         },
 
         initControl: function () {
-            new WE.Resume.Control.View({
-                container: this.ui.resume,
-                template: $("#resume-tmpl").html()
-            });
+            var options = {};
+
+            options.data = {
+                tid: this.getRequest().t_id
+            };
+
+            options.success = function (result) {
+                new WE.Resume.Control.View({
+                    type: result.data.cid,
+                    container: this.ui.resume,
+                    template: result.data.temp
+                });
+            };
+
+            options.error = function () {
+                WE.UI.show("模版加载失败", {className: "msgRed", delay: 2000});
+            };
+
+            WE.Api.getTemplate(options, this);
         },
 
         getResumeDetail: function () {
@@ -154,25 +169,6 @@
 
             WE.Api.getResumeDetail(options, this);
 
-        },
-
-        getTemplate: function () {
-            var options = {};
-            var request = this.getRequest();
-
-            options.data = {
-                id: request.t_id
-            };
-
-            options.success = function (result) {
-                console.log(result);
-            };
-
-            options.error = function (result) {
-                WE.UI.alert(result.msg, {type: "warn"});
-            };
-
-            WE.Api.getTemplate(options, this);
         },
 
         resumeSelect: function () {

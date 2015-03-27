@@ -1,7 +1,7 @@
     ;(function (WE, jQuery, Backbone) {
 
         var superClass = WE.Model.ModelBase;
-        var _class = "WE.Resume.Hobbies.Model";  
+        var _class = "WE.Resume.Evaluation.Model";  
 
         WE.namespace(_class, superClass.extend({
             
@@ -74,19 +74,18 @@
     ;(function (WE, jQuery, Backbone) {
 
         var superClass = WE.Resume.Dialog;
-        var _class = "WE.Resume.Hobbies.View";  
+        var _class = "WE.Resume.Evaluation.View";  
 
         WE.namespace(_class, superClass.extend({
             
             name: _class,
-
 
             initialize: function (options) {
 
                 this.key = options.key;
                 this.title = options.text;
                 this.width = options.width;
-            	this.model = new WE.Resume.Hobbies.Model();
+            	this.model = new WE.Resume.Evaluation.Model();
 
             	this.render();
             	this.initEvents();
@@ -133,7 +132,7 @@
                     WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
                 };
 
-                WE.Api.hobbies(options, this);
+                WE.Api.evaluation(options, this);
             },
 
             setValue: function () {

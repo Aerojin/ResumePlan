@@ -133,13 +133,10 @@
         
         name: _class,
 
-        KEY: "base",
-
         initialize: function (options) {
             this.key = options.key;
             this.title = options.text;
             this.width = options.width;
-            this.isLock = options.isLock;
         	this.model = new WE.Resume.Base.Model();
 
         	this.render();
@@ -196,16 +193,16 @@
             var options = {};
 
             options.data = this.model.toJSON();
-            options.data.m_id = this.getRequest().m_id;
+            options.data.m_id = this.getMid();
 
             options.success = function (result) {
                 this.close();
-                WE.UI.show(this.model.TIPS.SAVE_SUCCESS);
-                this.instance.trgger("change:data", {key: this.KEY});
+                this.instance.trgger("change:data", {key: this.key});
+                WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
             };
 
             options.error = function (result) {
-                WE.UI.show(this.model.TIPS.SAVE_FAIL);
+                WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
             };
 
             WE.Api.baseInfo(options, this);

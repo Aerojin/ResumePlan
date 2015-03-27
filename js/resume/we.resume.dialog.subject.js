@@ -9,12 +9,14 @@
 
             defaults: function () {
                 return {
-                    context: null
+                    title: null
                 };
             },
 
             TIPS: {
-                CONTEXT_EMPTY: "请输入描述"
+                CONTEXT_EMPTY: "请输入描述",
+                SAVE_SUCCESS: "保存成功",
+                SAVE_FAIL: "保存失败"
             },
 
             initialize: function () {
@@ -58,9 +60,9 @@
                 }
 
                 //验证名称有效性
-                var key = 'context';
+                var key = 'title';
                 if (_.has(data, key)) {
-                    if (!data.context || !data.context.length) {
+                    if (!data.title || !data.title.length) {
                         return getResult(key, self.TIPS.CONTEXT_EMPTY);
                     }
                 }
@@ -71,7 +73,7 @@
 
     ;(function (WE, jQuery, Backbone) {
 
-        var superClass = WE.View.ViewBase;
+        var superClass = WE.Resume.Dialog;
         var _class = "WE.Resume.Subject.View";  
 
         WE.namespace(_class, superClass.extend({
@@ -81,7 +83,9 @@
 
             initialize: function (options) {
 
-                this.options = options;
+                this.key = options.key;
+                this.title = options.text;
+                this.width = options.width;
             	this.model = new WE.Resume.Subject.Model();
 
             	this.render();
@@ -91,32 +95,11 @@
             initEvents: function () {
             	var _this = this;
 
-
             	this.ui.btnSave.click(function () {
                     if(_this.model.isValid()){
-
+                        _this.save();
                     }
             	});
-
-            	this.ui.txtInput.focus(function () {
-                    var name = $(this).attr('name');
-                    _this.hideTip(_this.byName(name));
-                });
-
-                this.ui.txtInput.blur(function () {
-                    var obj = {};
-                    var name = $(this).attr('name');
-                    var value = $(this).val().trim();
-
-                    obj[name] = value;
-                    _this.model.set(obj, {validate: true, target: name});              
-                });
-
-                this.model.on('invalid', function(model, error){
-                    for(var key in error){
-                        _this.showTip(_this.byName(key), error[key]);
-                    }                
-                });
             },
 
             render: function () {
@@ -130,41 +113,40 @@
                 this.ui.txtContext = this.getCidEl("context", this.ui.wrap);
             	this.ui.txtInput = this.ui.wrap.find("input[type='text'],textarea");
 
-            	this.showDialog();
+            	this.show();
+                this.setValue();
             },
 
-            showDialog: function () {
-            	if(!this.dialog){
-    	        	this.options.content = this.ui.wrap;
-                    this.dialog = new WE.Resume.Dialog(this.options);
+            save: function () {
+                var options = {};
 
-    	        	this.dialog.onClose = function () {
+                options.data = this.model.toJSON();
+                options.data.m_id = this.getMid();
 
-    	        	};
+                options.success = function (result) {
+                    this.close();
+                    this.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
 
-    	        	return;
-    	        }
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
 
-    	        this.dialog.show();
+                WE.Api.subject(options, this);
             },
 
+            setValue: function () {
+                var data = this.getData();
 
-            showTip: function (dom, msg) {
-                var template = _.template(this.tip);
-                    template = template({msg: msg});
+                for(var key in data){
+                    var value = data[key] || "";
+                    var input = this.byName(key);
 
-                this.hideTip(dom);
-                dom.after(template);
-                dom.closest("li").addClass("on");
-            },
-
-            hideTip: function (dom) {
-                dom.nextAll(".tips").remove();
-                dom.closest("li").removeClass("on");
-            },
-
-            byName: function(name){
-                return this.ui.wrap.find('[name=' + name + ']');
+                    if(input && input.length > 0){
+                        input.val(value);
+                    }
+                }
             },
 
             template: ['<div class="clearfix">',
@@ -172,17 +154,14 @@
                             '<ul class="fromList">',
                                 '<li>',
                                     '<label>描述*</label>',
-                                    '<textarea id="<%-cid%>-context" name="context" rows="" cols="" class="textarea mt_5"></textarea>',
+                                    '<textarea id="<%-cid%>-context" name="title" rows="" cols="" class="textarea mt_5"></textarea>',
                                 '</li>',
                             '</ul>',
                         '</div>',
                     '</div>',
                     '<p class="fromListBox_btn">',
                         '<a href="javascript:void(0);" id="<%-cid%>-save" class="btnM"> 保存</a>',
-                    '</p>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
+                    '</p>'].join("\n")
         }));
 
 

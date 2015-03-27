@@ -9,16 +9,17 @@
 
         defaults: function () {
             return {
-            	state: null,
             	id: null,
-                academic: null,
-                graduate: null,
-                name: null,
+                xuewei: null,
+                xuexiao: null,
                 gpa: null,
-                sort: null,
-                professional: null,
-                entrance: null,
-                list: []
+                zhuanyesort: null,
+                e_start_y: null,
+                e_start_m: null,
+                e_end_y: null,
+                e_end_m: null,
+                zhuanye: null,
+                e_context: null
             };
         },
 
@@ -27,10 +28,12 @@
             GRADUATE_EMPTY: "毕业时间不能为空",
             NAME_EMPTY: "学校名称不能为空",
             GPA_EMPTY: "GPA不能为空",
+            GPA_ERROR: "GPA范围必须在0-4之间",
             SORT_EMPTY: "专业排名不能为空",
             PROFESSIONAL_ERROR: "专业不能为空",
-          	ENTRANCE_EMPTY: "入学时间不能为空"
-
+          	ENTRANCE_EMPTY: "入学时间不能为空",
+            SAVE_SUCCESS: "保存成功",
+            SAVE_FAIL: "保存失败"
         },
 
         initialize: function () {
@@ -73,47 +76,47 @@
                 return value;
             }
 
-            //验证姓名有效性
-            var key = 'name';
+            //验证名称有效性
+            var key = 'xuexiao';
             if (_.has(data, key)) {
-                if (!data.name || !data.name.length) {
+                if (!data.xuexiao || !data.xuexiao.length) {
                     return getResult(key, self.TIPS.NAME_EMPTY);
                 }
             }
 
-            //验证性别有效性
-            var key = 'sex';
+            //验证学位有效性
+            var key = 'xuewei';
             if (_.has(data, key)) {
-                if (!data.sex || !data.sex.length) {
-                    return getResult(key, self.TIPS.SEX_EMPTY);
+                if (!data.xuewei || !data.sex.xuewei) {
+                    return getResult(key, self.TIPS.ACADEMIC_EMPTY);
                 }
             }
 
-            //验证年龄有效性
-            var key = 'age';
+            //验证专业有效性
+            var key = 'zhuanye';
             if (_.has(data, key)) {
-                if (!data.age || !data.age.length) {
-                    return getResult(key, self.TIPS.AGE_EMPTY);
+                if (!data.zhuanye || !data.zhuanye.length) {
+                    return getResult(key, self.TIPS.PROFESSIONAL_ERROR);
                 }
             }
 
-            //验证邮件有效性
-            var key = 'email';
+            //验证装也排名有效性
+            var key = 'gpa';
             if (_.has(data, key)) {
-                if (!data.email || !data.email.length) {
-                    return getResult(key, self.TIPS.EMAIL_EMPTY);
+                if (!data.gpa || !data.gpa.length) {
+                    return getResult(key, self.TIPS.GPA_EMPTY);
                 }
 
-                if(data.email && !self.isEmail.test(data.email)){
-                    return getResult(key, self.TIPS.EMAIL_ERROR);   
+                if (!_.isNumber(data.gpa) || Number(data.gpa) < 0 || Number(data.gpa) > 4) {
+                    return getResult(key, self.TIPS.GPA_ERROR);
                 }
             }
 
-            //验证手机有效性
-            var key = 'moblie';
+            //验证gpa有效性
+            var key = 'zhuanyesort';
             if (_.has(data, key)) {
-                if (!data.moblie || !data.moblie.length) {
-                    return getResult(key, self.TIPS.MOBLIE_EMPTY);
+                if (!data.zhuanyesort || !data.zhuanyesort.length) {
+                    return getResult(key, self.TIPS.SORT_EMPTY);
                 }
             }
         }
@@ -123,103 +126,35 @@
 
 ;(function (WE, jQuery, Backbone) {
 
-    var superClass = WE.View.ViewBase;
+    var superClass = WE.Resume.Dialog;
     var _class = "WE.Resume.Education.View";  
 
     WE.namespace(_class, superClass.extend({
         
         name: _class,
 
-
-        STATE: {
-        	ADD: "add",
-        	UPDATE: "update"
-        },
-
         initialize: function (options) {
 
-            this.options = options;
+            this.key = options.key;
+            this.title = options.text;
+            this.width = options.width;
         	this.model = new WE.Resume.Education.Model();
-        	this.collection = new Backbone.Collection();
 
-        	this.initEvents()
         	this.render();
-        	this.initPageEvents();
+            this.initEvents();
         },
 
         initEvents: function () {
-        	var _this = this;
-
-        	 this.collection.on("add", function () {
-        	 	_this.renderMenu();
-        	 });
-
-        	 this.collection.on("change", function () {
-        	 	_this.renderMenu();
-        	 });
-
-        	 this.collection.on("remove", function () {
-        	 	_this.renderMenu();
-        	 });
-
-        	 this.model.on("change:state", function () {
-        	 	var state = this.get("state");
-        	 	var cid = this.get("id");
-
-        	 	_this[state].render.call(_this, _this.collection.get(cid));
-        	 });
+            this.instance.on("change:ui", this.changeUI, this);
         },
 
         initPageEvents: function () {
         	var _this = this;
 
-        	this.ui.txtInput.focus(function () {
-                var name = $(this).attr('name');
-                _this.hideTip(_this.byName(name));
-            });
-
-            this.ui.txtInput.blur(function () {
-                var obj = {};
-                var name = $(this).attr('name');
-                var value = $(this).val().trim();
-
-                obj[name] = value;
-                _this.model.set(obj, {validate: true, target: name});              
-            });
-
-            this.model.on('invalid', function(model, error){
-                for(var key in error){
-                    _this.showTip(_this.byName(key), error[key]);
-                }                
-            });
-
             this.ui.btnSave.click(function () {
-            	var state = _this.model.get("state") || _this.STATE.ADD;
-
-            	_this[state].update.call(_this);
-            });
-
-            this.ui.menu.delegate(".close", "click", function () {
-            	var id = $(this).data("id");
-
-            	_this.collection.remove(id);
-            });
-
-            this.ui.menu.delegate("li", "mouseenter", function () {
-            	$(this).addClass('hover');
-            });
-
-            this.ui.menu.delegate("li", "mouseleave", function () {
-            	$(this).removeClass('hover');
-            });
-
-            this.ui.menu.delegate("li", "click", function () {
-            	_this.ui.menu.find("li").removeClass('focus');
-            	$(this).addClass('focus');
-
-            	_this.model.set({id: $(this).data("id")});
-            	_this.model.set({state: _this.STATE.UPDATE});
-            	_this.model.trigger('change:state')
+                if(_this.model.isValid()){
+                    _this.save();
+                }
             });
         },
 
@@ -231,8 +166,8 @@
         	this.ui = {};
         	this.ui.wrap = this.el;
         	this.ui.btnSave = this.getCidEl("save", this.ui.wrap);
-        	this.ui.graduate = this.getCidEl("graduate", this.ui.wrap);
-        	this.ui.entrance = this.getCidEl("entrance", this.ui.wrap);
+        	this.ui.divStart = this.getCidEl("start", this.ui.wrap);
+        	this.ui.divEnd = this.getCidEl("end", this.ui.wrap);
         	this.ui.txtAcademic = this.getCidEl("academic", this.ui.wrap);
         	this.ui.txtName = this.getCidEl("name", this.ui.wrap);
         	this.ui.txtGpa = this.getCidEl("gpa", this.ui.wrap);
@@ -242,134 +177,124 @@
         	this.ui.menu = this.getCidEl("menu", this.ui.wrap);
 
 
+            this.show();
         	this.createDate();
-        	this.showDialog();
-        },
-
-        showDialog: function () {
-        	if(!this.dialog){
-                this.options.content = this.ui.wrap;
-	        	this.dialog = new WE.Resume.Dialog(this.options);
-	        	this.dialog.onClose = function () {
-
-	        	};
-
-	        	return;
-	        }
-
-	        this.dialog.show();
+            this.createMenu();
+            this.initPageEvents();
         },
 
         createDate: function () {
         	var _this = this;
 
-        	this.graduate = new WE.Resume.Date({
-        		container: this.ui.graduate,
+        	this.start = new WE.Resume.Date({
+        		container: this.ui.divStart,
         		onChange: function (data) {
-        			_this.model.set({graduate: data});
+        			_this.model.set({
+                        e_start_y: data.year,
+                        e_start_m: data.month
+                    });
         		} 
         	});
 
-        	this.entrance = new WE.Resume.Date({
-        		container: this.ui.entrance,
+        	this.end = new WE.Resume.Date({
+        		container: this.ui.divEnd,
         		onChange: function (data) {
-        			_this.model.set({entrance: data});
+        			_this.model.set({
+                        e_end_y: data.year,
+                        e_end_m: data.month
+                    });
         		} 
         	});
 
         },
 
-        add: function () {
-        	var options = {
-        		id: new Date().getTime(),
-        		academic: this.ui.txtAcademic.val(),
-        		graduate: this.graduate.getData(),
-        		entrance: this.entrance.getData(),
-        		name: this.ui.txtName.val(),
-        		gpa: this.ui.txtGpa.val(),
-        		sort: this.ui.txtSort.val(),
-        		professional: this.ui.txtProfessional.val()
-        	}
+        createMenu: function () {
+            var _this = this;
 
-		    this.collection.add(options);
+            this.list = new WE.Resume.List({
+                container: this.ui.menu,
+                data: this.getMenuData()
+            });
+
+            this.list.onRemove = function (data) {
+                _this.instance.trgger("remove:data", {
+                    id: data.id,
+                    key: _this.key
+                });
+            };
+
+            this.list.onChange = function (data) {
+                _this.model.set(data);
+                _this.setValue(data);
+            };
         },
 
-        renderMenu: function () {
-        	var html = [];
-        	var len = this.collection.length;
-        	var array = this.collection.toArray();
-        	var template = _.template(this.listTmpl);
+        getMenuData: function () {
+            var data = this.getData() || [];
 
-        	for(var i = 0; i < len; i++){
-        		html.push(template({
-        			id: array[i].cid,
-        			num: i + 1,
-        			title: array[i].get("name")
-        		}));
-        	}
+            for(var i = 0; i < data.length; i++){
+                data[i].title = data[i].xuexiao;
+            }
 
-        	this.ui.menu.html(html.join("\n"));
+            return data;
         },
 
-        showTip: function () {
+        save: function (data) {
+            var options = {};
+            var end = this.end.getData();
+            var start = this.start.getData();
 
+            this.model.set({
+                e_end_y: end.year,
+                e_end_m: end.month,
+                e_start_y: start.year,
+                e_start_m: start.month
+            });
+
+            options.data = this.model.toJSON();
+            options.data.m_id = this.getMid();
+
+            options.success = function (result) {
+                this.reset();
+                this.instance.trgger("change:data", {key: this.key});
+                WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+            };
+
+            options.error = function (result) {
+                WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+            };
+
+            WE.Api.education(options, this);
         },
 
-        hideTip: function () {
+        setValue: function () {
 
+            for(var key in data){
+                var value = data[key] || "";
+                var input = this.byName(key);
+
+                if(input && input.length > 0){
+                    input.val(value);
+                }
+            }
+
+            this.start.setData({
+                year: data.e_start_y,
+                month: data.e_start_m
+            });
+
+            this.end.setData({
+                year: data.e_end_y,
+                month: data.e_end_m
+            });
         },
 
-        byName: function(name){
-            return this.$el.find('[name=' + name + ']');
+        changeUI: function (args) {
+            this.list.render(args);
         },
 
-        add: {
-        	render: function () {
-
-        	},
-        	update: function () {
-        		var options = {
-	        		id: new Date().getTime(),
-	        		academic: this.ui.txtAcademic.val(),
-	        		graduate: this.graduate.getData(),
-	        		entrance: this.entrance.getData(),
-	        		name: this.ui.txtName.val(),
-	        		gpa: this.ui.txtGpa.val(),
-	        		sort: this.ui.txtSort.val(),
-	        		professional: this.ui.txtProfessional.val()
-	        	}
-
-			    this.collection.add(options);
-        	}
-        },
-
-        update: {
-        	render: function (model) {
-        		this.ui.txtGpa.val(model.get("gpa"));
-        		this.ui.txtName.val(model.get("name"));
-        		this.ui.txtSort.val(model.get("sort"));
-        		this.ui.txtAcademic.val(model.get("academic"));
-        		this.ui.txtProfessional.val(model.get("professional"));
-
-        		this.graduate.setData(model.get("graduate"));
-        		this.entrance.setData(model.get("entrance"));
-        	},
-        	update: function () {
-        		var cid = this.model.get("id");
-        		var model = this.collection.get(cid);
-
-        		model.set({
-        			academic: this.ui.txtAcademic.val(),
-	        		graduate: this.graduate.getData(),
-	        		entrance: this.entrance.getData(),
-	        		name: this.ui.txtName.val(),
-	        		gpa: this.ui.txtGpa.val(),
-	        		sort: this.ui.txtSort.val(),
-	        		professional: this.ui.txtProfessional.val()
-        		});
-
-        		this.model.set({state: this.STATE.ADD});
-        	}	
+        onClose: function () {
+            this.instance.off("change:ui", this.changeUI);
         },
 
         template: ['<div class="clearfix">',
@@ -377,39 +302,33 @@
 			'<ul class="fromList fromListBox clearfix">',
 				'<li>',
 					'<label>学位*</label>',
-					'<input type="text" name="academic" id="<%-cid%>-academic" class="input mt_5" />',
+					'<input type="text" name="xuewei" id="<%-cid%>-xuewei" class="input mt_5" />',
 				'</li>',
 				'<li>',
 					'<label>毕业*</label>',
-					'<div class="clearfix mt_5" id="<%-cid%>-graduate">',
+					'<div class="clearfix mt_5" id="<%-cid%>-end">',
 					'</div>',
 				'</li>',
 				'<li>',
 					'<label>学校名称*</label>',
-					'<input type="text" name="name" id="<%-cid%>-name" class="input mt_5" />',
+					'<input type="text" name="xuexiao" id="<%-cid%>-xuexiao" class="input mt_5" />',
 				'</li>',
 				'<li>',
 					'<label>GPA*</label>',
-					'<div class="clearfix mt_5">',
-						'<select name="gpa" id="<%-cid%>-gpa" class="select gray" style="width:134px">',
-							'<option value="1">2.5/4.1</option>',
-							'<option value="2">2.5/4.2</option>',
-							'<option value="3">2.5/4.3</option>',
-						'</select>',
-					'</div>',
+                    '<input type="text" name="gpa" id="<%-cid%>-gpa" class="input mt_5" />',
 				'</li>',
 				'<li>',
 					'<label>专业排名*</label>',
-					'<input type="text" name="sort" id="<%-cid%>-sort" class="input mt_5" style="width:120px;" />',
+					'<input type="text" name="zhuanyesort" id="<%-cid%>-zhuanyesort" class="input mt_5" style="width:120px;" />',
 				'</li>',
 				'<li>',
 					'<label>专业*</label>',
-					'<input type="text" name="professional" id="<%-cid%>-professional" class="input mt_5" />',
+					'<input type="text" name="zhuanye" id="<%-cid%>-zhuanye" class="input mt_5" />',
 				'</li>',
 				'<li class="fromList_no"></li>',
 				'<li>',
 					'<label>入学*</label>',
-					'<div class="clearfix mt_5" id="<%-cid%>-entrance">',
+					'<div class="clearfix mt_5" id="<%-cid%>-start">',
 					'</div>',
 				'</li>',
 			'</ul>',

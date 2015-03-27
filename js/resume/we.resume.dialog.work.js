@@ -1,6 +1,6 @@
 ;(function (WE, jQuery, Backbone) {
 
-    var superClass = WE.View.ViewBase;
+    var superClass = WE.Resume.Dialog;
     var _class = "WE.Resume.Work.View";  
 
     WE.namespace(_class, superClass.extend({
@@ -15,7 +15,9 @@
         },
 
         initialize: function (options) {
-            this.options = options;
+            this.key = options.key;
+            this.title = options.text;
+            this.width = options.width;
 
         	this.render();
         	this.initEvents();
@@ -23,6 +25,8 @@
 
         initEvents: function () {
         	var _this = this;
+
+             this.instance.on("change:ui", this.changeUI, this);
         	
             this.ui.btnCut.click(function() {
                 var state = $(this).data("state");
@@ -53,28 +57,22 @@
             this.ui.divMenu =  this.getCidEl("menu", this.ui.wrap);
             this.ui.divContext =  this.getCidEl("context", this.ui.wrap);
 
-        	this.showDialog();
+        	this.show();
             this[this.state].render.call(this);
         },
 
-        showDialog: function () {
-        	if(!this.dialog){
-	        	this.options.content = this.ui.wrap;
-                this.dialog = new WE.Resume.Dialog(this.options);
+        changeUI: function (args) {
+            this.context.changeUI(args);
+        },
 
-	        	this.dialog.onClose = function () {
-
-	        	};
-
-	        	return;
-	        }
-
-	        this.dialog.show();
+        onClose: function () {
+            this.instance.off("change:ui", this.changeUI);
         },
 
         work: {
             render: function () {
                 this.context = new WE.Resume.Job.View({
+                    master: this,
                     menu: this.ui.divMenu,
                     container: this.ui.divContext
                 });
@@ -84,6 +82,7 @@
         project: {
             render: function () {
                 this.context = new WE.Resume.Project.View({
+                    master: this,
                     menu: this.ui.divMenu,
                     container: this.ui.divContext
                 });

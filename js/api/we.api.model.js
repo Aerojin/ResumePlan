@@ -495,13 +495,35 @@
         *@param {Object} context 上下文
 
         *@param {Object} options.data 提交数据
-        *@param {Int} options.data.mid 简历ID  
-        *@param {Int} options.data.module 模块名  
+        *@param {Int} options.data.id 简历ID  
+        *@param {Int} options.data.table 模块名  
     */
     WE.Api.resumeSelect = function (options, context){
         var data = options.data || {};
         var requestBody = data;
         var requestUrl = {model:'resume', command:'select_one'};
+        
+        //options.httpMethod = "get";
+
+        this.call(requestUrl, requestBody, options, context);
+    };
+
+    /*
+        *模块删除
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.id 简历ID  
+        *@param {Int} options.data.table 模块名  
+    */
+    WE.Api.resumeRemove = function (options, context){
+        var data = options.data || {};
+        var requestBody = data;
+        var requestUrl = {model:'resume', command:'del_one'};
         
         //options.httpMethod = "get";
 

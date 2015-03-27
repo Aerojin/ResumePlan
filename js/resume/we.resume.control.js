@@ -34,7 +34,7 @@
             });
 
             this.instance.on("change:ui", function (args) {
-
+                _this.before(args)
             });
         },
 
@@ -97,6 +97,21 @@
             }
 
             this.appendDrag(key);
+        },
+
+        before: function (args) {
+            var show = this.instance.getShow(args.key)
+
+            if(!show){
+                return;
+            }
+
+            var dom = $(this.getID(args.key));
+            var temp = _.template(this.getModuleTemp(args.key));
+                temp = $(temp({data: args.data}));
+
+            dom.before(temp).remove();
+            this.appendDrag(args.key);
         },
 
         getModuleTemp: function (id) {

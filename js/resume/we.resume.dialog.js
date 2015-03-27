@@ -64,7 +64,7 @@
             this.UI.container = this.getCidEl("container", this.UI.wrap);
 
             this.UI.background.appendTo(this.UI.body) ;
-            this.UI.container.empty().append(this.ui.context);
+            this.UI.container.empty().append(this.ui.wrap);
             this.UI.wrap.width(this.width).appendTo(this.UI.body);
         },
 
@@ -105,7 +105,7 @@
         },
 
         getState: function () {
-            if(this.isLock){
+            if(this.instance.getLock(this.key)){
                 return this.stateTmpl.lock;
             }
 
@@ -117,7 +117,7 @@
         },
 
         getData: function () {
-            return this.instance.getData(this.KEY);
+            return this.instance.getData(this.key);
         },
 
         showTip: function (dom, msg) {
@@ -145,6 +145,10 @@
             return this.ui.wrap.find('[name=' + name + ']');
         },
 
+        getMid: function () {
+            return  this.getRequest().m_id;
+        },
+
         getRequest: function () {
            var url = location.search; //获取url中"?"符后的字串
            var theRequest = new Object();
@@ -156,6 +160,11 @@
               }
            }
            return theRequest || {};
+        },
+
+        reset: function () {
+            this.model.clear();
+            this.ui.txtInput.val("");
         },
 
         onClose: function () {

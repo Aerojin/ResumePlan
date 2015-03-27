@@ -10,15 +10,17 @@
             defaults: function () {
                 return {
                     title: null,
-                    name: null,
-                    dateY: null,
-                    dateM: null
+                    paper_name: null,
+                    e_date_y: null,
+                    e_date_m: null
                 };
             },
 
             TIPS: {
                 TITLE_EMPTY: "请输入文章名称",
-                NAME_EMPTY: "报刊名称／刊号"
+                NAME_EMPTY: "报刊名称／刊号",
+                SAVE_SUCCESS: "保存成功",
+                SAVE_FAIL: "保存失败"
             },
 
             initialize: function () {
@@ -70,9 +72,9 @@
                 }
 
                 //验证名称有效性
-                var key = 'name';
+                var key = 'paper_name';
                 if (_.has(data, key)) {
-                    if (!data.name || !data.name.length) {
+                    if (!data.paper_name || !data.paper_name.length) {
                         return getResult(key, self.TIPS.NAME_EMPTY);
                     }
                 }
@@ -83,7 +85,7 @@
 
     ;(function (WE, jQuery, Backbone) {
 
-        var superClass = WE.View.ViewBase;
+        var superClass = WE.Resume.Dialog;
         var _class = "WE.Resume.Article.View";  
 
         WE.namespace(_class, superClass.extend({
@@ -92,41 +94,25 @@
 
             initialize: function (options) {
 
-                this.options = options;
+                this.key = options.key;
+                this.title = options.text;
+                this.width = options.width;
             	this.model = new WE.Resume.Article.Model();
 
             	this.render();
             	this.initEvents();
             },
-
             initEvents: function () {
-            	var _this = this;
+                this.instance.on("change:ui", this.changeUI, this);
+            },
 
+            initPageEvents: function () {
+                var _this = this;
 
-            	this.ui.btnSave.click(function () {
+                this.ui.btnSave.click(function () {
                     if(_this.model.isValid()){
-
+                        _this.save();
                     }
-            	});
-
-            	this.ui.txtInput.focus(function () {
-                    var name = $(this).attr('name');
-                    _this.hideTip(_this.byName(name));
-                });
-
-                this.ui.txtInput.blur(function () {
-                    var obj = {};
-                    var name = $(this).attr('name');
-                    var value = $(this).val().trim();
-
-                    obj[name] = value;
-                    _this.model.set(obj, {validate: true, target: name});              
-                });
-
-                this.model.on('invalid', function(model, error){
-                    for(var key in error){
-                        _this.showTip(_this.byName(key), error[key]);
-                    }                
                 });
             },
 
@@ -144,23 +130,10 @@
                 this.ui.divMenu =  this.getCidEl("menu", this.ui.wrap);
             	this.ui.txtInput = this.ui.wrap.find("input[type='text'],textarea");
 
+                this.show();
                 this.createMenu();
                 this.createDate();
-            	this.showDialog();
-            },
-
-            showDialog: function () {
-            	if(!this.dialog){
-    	        	this.options.content = this.ui.wrap;
-                    this.dialog = new WE.Resume.Dialog(this.options);
-    	        	this.dialog.onClose = function () {
-
-    	        	};
-
-    	        	return;
-    	        }
-
-    	        this.dialog.show();
+                this.initPageEvents();
             },
 
             createDate: function () {
@@ -170,8 +143,8 @@
                     container: this.ui.divDate,
                     onChange: function (data) {
                         _this.model.set({
-                            dateY: data.year,
-                            dateM: data.month
+                            e_date_y: data.year,
+                            e_date_m: data.month
                         });
                     } 
                 });
@@ -182,38 +155,70 @@
 
                 this.list = new WE.Resume.List({
                     container: this.ui.divMenu,
-                    data: [{
-                        title: 111
-                    },{
-                        title: 222
-                    }]
+                    data: this.getData()
                 });
 
-                this.list.onRemove = function () {
-
+                this.list.onRemove = function (data) {
+                    _this.instance.trgger("remove:data", {
+                        id: data.id,
+                        key: _this.key
+                    });
                 };
 
-                this.list.onChange = function () {
-
+                this.list.onChange = function (data) {
+                    _this.model.set(data);
+                    _this.setValue(data);
                 };
             },
 
-            showTip: function (dom, msg) {
-                var template = _.template(this.tip);
-                    template = template({msg: msg});
+            save: function (data) {
+                var options = {};
+                var date = this.date.getData();
 
-                this.hideTip(dom);
-                dom.after(template);
-                dom.closest("li").addClass("on");
+                this.model.set({
+                    e_date_y: date.year,
+                    e_date_m: date.month
+                })
+
+                options.data = this.model.toJSON();
+                options.data.m_id = this.getMid();
+
+                options.success = function (result) {
+                    this.reset();
+                    this.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
+
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
+
+                WE.Api.article(options, this);
             },
 
-            hideTip: function (dom) {
-                dom.nextAll(".tips").remove();
-                dom.closest("li").removeClass("on");
+            setValue: function () {
+
+                for(var key in data){
+                    var value = data[key] || "";
+                    var input = this.byName(key);
+
+                    if(input && input.length > 0){
+                        input.val(value);
+                    }
+                }
+
+                this.date.setData({
+                    year: data.e_date_y,
+                    month: data.e_date_m
+                });
             },
 
-            byName: function(name){
-                return this.ui.wrap.find('[name=' + name + ']');
+            changeUI: function (args) {
+                this.list.render(args);
+            },
+
+            onClose: function () {
+                this.instance.off("change:ui", this.changeUI);
             },
 
             template: ['<div class="clearfix">',
@@ -230,7 +235,7 @@
                     '</li>',
                     '<li>',
                         '<label>报刊名称／刊号*</label>',
-                        '<input type="text" id="<%-cid%>-name" name="name" class="input mt_5" />',
+                        '<input type="text" id="<%-cid%>-name" name="paper_name" class="input mt_5" />',
                     '</li>',
                 '</ul>',
                 '<div class="windowBoxA_from_bottom" style="left:300px;">',
@@ -240,10 +245,7 @@
             '<div class="windowBoxA_menu">',
                 '<ul id="<%-cid%>-menu"></ul>',
             '</div>',
-        '</div>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
+        '</div>'].join("\n")
     }));
 })(WE, jQuery, Backbone);
 

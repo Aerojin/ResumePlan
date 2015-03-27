@@ -446,6 +446,43 @@
 	</div>
 </textarea>
 
+<!--基本信息-->
+<textarea id="resume-base">
+	<div class="infoBox" id="resume-base">
+		<h2>基本信息</h2>
+		<ul class="infoBoxList">
+			<li><strong>性别</strong><span><%-i_sex%></span></li>
+			<li><strong>政治面貌</strong><span><%-i_gov%></span></li>
+			<li><strong>电话</strong><span><%-i_phone%></span></li>
+			<li><strong>电子邮箱</strong><span><%-i_email%></span></li>
+		</ul>
+	</div>
+</textarea>
+
+<!--教育背景-->
+<textarea id="resume-education">
+<div class="infoBox" id="resume-education">
+	<h2>教育背景</h2>
+	<ul class="infoBoxD">
+		<% for(var i = 0; i < data.length; i++ ) { %>
+		<li class="infoBoxD_li clearfix">
+			<span class="infoBoxD_time">
+				<%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%>
+			</span>
+			<div class="infoBoxD_info">
+				<strong><%-data[i].name%></strong>
+				<p><%-data[i].academic%> <%-data[i].professional%></p>
+				<ul>
+					<li><i class="i_icoPoints"></i>GPA：<%-data[i].gpa%></li>
+					<li><i class="i_icoPoints"></i>专业排名：<%-data[i].sort%></li>
+				</ul>
+			</div>
+		</li>
+		<% } %>
+	</ul>
+</div>
+</textarea>
+
 <!--校园经历-->
 <textarea id="resume-school">
 	<div class="infoBox dragDiv" id="resume-school">

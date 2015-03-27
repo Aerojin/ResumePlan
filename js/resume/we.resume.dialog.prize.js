@@ -10,15 +10,17 @@
             defaults: function () {
                 return {
                     name: null,
-                    dateY: null,
-                    dateM: null,
+                    p_date_y: null,
+                    p_date_m: null,
                     jibie: null
                 };
             },
 
             TIPS: {
                 NAME_EMPTY: "请输入奖项名称",
-                JIBIE_EMPTY: "请输入奖项级别"
+                JIBIE_EMPTY: "请输入奖项级别",
+                SAVE_SUCCESS: "保存成功",
+                SAVE_FAIL: "保存失败"
             },
 
             initialize: function () {
@@ -76,14 +78,6 @@
                         return getResult(key, self.TIPS.JIBIE_EMPTY);
                     }
                 }
-
-                //验证工作描述有效性
-                var key = 'context';
-                if (_.has(data, key)) {
-                    if (!data.context || !data.context.length) {
-                        return getResult(key, self.TIPS.CONTEXT_EMPTY);
-                    }
-                }
             }
 
         }));
@@ -91,7 +85,7 @@
 
     ;(function (WE, jQuery, Backbone) {
 
-        var superClass = WE.View.ViewBase;
+        var superClass = WE.Resume.Dialog;
         var _class = "WE.Resume.Prize.View";  
 
         WE.namespace(_class, superClass.extend({
@@ -99,7 +93,10 @@
             name: _class,
 
             initialize: function (options) {
-                this.options = options;
+
+                this.key = options.key;
+                this.title = options.text;
+                this.width = options.width;
             	this.model = new WE.Resume.Prize.Model();
 
             	this.render();
@@ -107,33 +104,16 @@
             },
 
             initEvents: function () {
-            	var _this = this;
+                this.instance.on("change:ui", this.changeUI, this);
+            },
 
+            initPageEvents: function () {
+                var _this = this;
 
-            	this.ui.btnSave.click(function () {
+                this.ui.btnSave.click(function () {
                     if(_this.model.isValid()){
-
+                        _this.save();
                     }
-            	});
-
-            	this.ui.txtInput.focus(function () {
-                    var name = $(this).attr('name');
-                    _this.hideTip(_this.byName(name));
-                });
-
-                this.ui.txtInput.blur(function () {
-                    var obj = {};
-                    var name = $(this).attr('name');
-                    var value = $(this).val().trim();
-
-                    obj[name] = value;
-                    _this.model.set(obj, {validate: true, target: name});              
-                });
-
-                this.model.on('invalid', function(model, error){
-                    for(var key in error){
-                        _this.showTip(_this.byName(key), error[key]);
-                    }                
                 });
             },
 
@@ -151,34 +131,21 @@
                 this.ui.divMenu =  this.getCidEl("menu", this.ui.wrap);
             	this.ui.txtInput = this.ui.wrap.find("input[type='text'],textarea");
 
-                this.createMenu();
+                this.show();
                 this.createDate();
-            	this.showDialog();
-            },
-
-            showDialog: function () {
-            	if(!this.dialog){
-    	        	this.options.content = this.ui.wrap;
-                    this.dialog = new WE.Resume.Dialog(this.options);
-    	        	this.dialog.onClose = function () {
-
-    	        	};
-
-    	        	return;
-    	        }
-
-    	        this.dialog.show();
+                this.createMenu();
+                this.initPageEvents();
             },
 
             createDate: function () {
                 var _this = this;
 
-                this.start = new WE.Resume.Date({
+                this.date = new WE.Resume.Date({
                     container: this.ui.divDate,
                     onChange: function (data) {
                         _this.model.set({
-                            dateY: data.year,
-                            dateM: data.month
+                            p_date_y: data.year,
+                            p_date_m: data.month
                         });
                     } 
                 });
@@ -189,38 +156,80 @@
 
                 this.list = new WE.Resume.List({
                     container: this.ui.divMenu,
-                    data: [{
-                        title: 111
-                    },{
-                        title: 222
-                    }]
+                    data: this.getMenuData()
                 });
 
-                this.list.onRemove = function () {
-
+                this.list.onRemove = function (data) {
+                    _this.instance.trgger("remove:data", {
+                        id: data.id,
+                        key: _this.key
+                    });
                 };
 
-                this.list.onChange = function () {
-
+                this.list.onChange = function (data) {
+                    _this.model.set(data);
+                    _this.setValue(data);
                 };
             },
 
-            showTip: function (dom, msg) {
-                var template = _.template(this.tip);
-                    template = template({msg: msg});
+            getMenuData: function () {
+                var data = this.getData() || [];
 
-                this.hideTip(dom);
-                dom.after(template);
-                dom.closest("li").addClass("on");
+                for(var i = 0; i < data.length; i++){
+                    data[i].title = data[i].name;
+                }
+
+                return data;
             },
 
-            hideTip: function (dom) {
-                dom.nextAll(".tips").remove();
-                dom.closest("li").removeClass("on");
+            save: function (data) {
+                var options = {};
+                var date = this.date.getData();
+
+                this.model.set({
+                    p_date_y: date.year,
+                    p_date_m: date.month
+                });
+
+                options.data = this.model.toJSON();
+                options.data.m_id = this.getMid();
+
+                options.success = function (result) {
+                    this.reset();
+                    this.instance.trgger("change:data", {key: this.key});
+                    WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                };
+
+                options.error = function (result) {
+                    WE.UI.show(this.model.TIPS.SAVE_FAIL, {delay: 2000});
+                };
+
+                WE.Api.prize(options, this);
             },
 
-            byName: function(name){
-                return this.ui.wrap.find('[name=' + name + ']');
+            setValue: function () {
+
+                for(var key in data){
+                    var value = data[key] || "";
+                    var input = this.byName(key);
+
+                    if(input && input.length > 0){
+                        input.val(value);
+                    }
+                }
+
+                this.date.setData({
+                    year: data.p_date_y,
+                    month: data.p_date_m
+                });
+            },
+
+            changeUI: function (args) {
+                this.list.render(args);
+            },
+
+            onClose: function () {
+                this.instance.off("change:ui", this.changeUI);
             },
 
             template: ['<div class="clearfix">',
@@ -248,9 +257,6 @@
                     '<ul id="<%-cid%>-menu"></ul>',
                 '</div>',
             '</div>'].join("\n"),
-
-        tip: '<div class="tips"><%-msg%></div>'
-
         }));
 
 
