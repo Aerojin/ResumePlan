@@ -10,6 +10,7 @@
         defaults: function () {
             return {
                 id: null,
+                m_id: null,
                 i_name: null,
                 i_sex: null,
                 i_age: null,
@@ -85,12 +86,13 @@
             }
 
             //验证性别有效性
+            /*
             var key = 'i_sex';
             if (_.has(data, key)) {
                 if (!data.i_sex || !data.i_sex.length) {
                     return getResult(key, self.TIPS.SEX_EMPTY);
                 }
-            }
+            }*/
 
             //验证年龄有效性
             var key = 'i_age';
@@ -141,11 +143,12 @@
 
         	this.render();
         	this.initEvents();
+            this.show();
+            this.setValue();
         },
 
         initEvents: function () {
         	var _this = this;
-
 
         	this.ui.btnSave.click(function () {
                 if(_this.model.isValid()){
@@ -174,7 +177,7 @@
         	this.ui.txtAddress = this.getCidEl("address", this.ui.wrap);
         	this.ui.file = this.getCidEl("file", this.ui.wrap);
             this.ui.photo = this.getCidEl("photo", this.ui.wrap);
-        	this.ui.txtInput = this.ui.wrap.find("input[type='text']");
+        	this.ui.txtInput = this.ui.wrap.find("input[type='text'],select");
 
             this.upload = new WE.Upload({
                 image: this.ui.photo,
@@ -184,9 +187,6 @@
                     _this.ui.photo.attr({src: data.photo}).show();
                 }
             });
-
-        	this.show();
-            this.setValue();
         },
 
         save: function () {
@@ -194,6 +194,7 @@
 
             options.data = this.model.toJSON();
             options.data.m_id = this.getMid();
+            options.data.i_sex = this.ui.txtSex.val();
 
             options.success = function (result) {
                 this.close();
@@ -209,20 +210,7 @@
         },
 
         setValue: function () {
-            var data = this.getData();
-
-            for(var key in data){
-                var value = data[key] || "";
-                var input = this.byName(key);
-
-                if(input && input.length > 0){
-                    input.val(value);
-                }
-            }
-
-            if(data.i_photo && data.i_photo.length > 0){
-                this.ui.photo.attr({src: data.i_photo}).show();
-            }
+            this.model.set(this.getData());
         },
 
 
@@ -233,14 +221,14 @@
         template: ['<div class="clearfix" id="<%-cid%>-content">',
 			'<div class="windowBoxA_picture">',
 				'<a href="javascript:void(0);" class="i_icoPicture">',
-                '<img src="" id="<%-cid%>-photo" style="display:none;">',
+                '<img src="" id="<%-cid%>-photo" name="i_photo" style="display:none;">',
 				'<input type="file" id="<%-cid%>-file" name="" class="" />',
 				'</a>',
 			'</div>',
 			'<ul class="fromList fromListBox clearfix">',
 				'<li>',
 					'<label>姓名*</label>',
-					'<input type="text" id="<%-cid%>-name" name="i_name" class="input mt_5" />',
+					'<input type="text" disabled="disabled" id="<%-cid%>-name" name="i_name" class="input mt_5" />',
 				'</li>',
 				'<li>',
 					'<label>手机*</label>',
@@ -248,11 +236,14 @@
 				'</li>',
 				'<li>',
 					'<label>性别*</label>',
-					'<input type="text"  id="<%-cid%>-sex" name="i_sex" class="input mt_5" />',
+                    '<select id="<%-cid%>-sex" name="i_sex" style="width: 288px;" class="select gray">',
+                        '<option value="0">男</option>',
+                        '<option value="1">女</option>',
+                    '</select>',
 				'</li>',
 				'<li>',
 					'<label>政治面貌</label>',
-					'<input type="text" id="<%-cid%>-political" name="i_gov" class="input mt_5 fromListEm gray" placeholder="投往外企不建议填写政治面貌" />',
+					'<input type="text" id="<%-cid%>-political" name="i_gov" class="input mt_5" placeholder="投往外企不建议填写政治面貌" />',
 				'</li>',
 				'<li>',
 					'<label>年龄*</label>',
@@ -260,11 +251,11 @@
 				'</li>',
 				'<li>',
 					'<label>名族</label>',
-					'<input type="text" id="<%-cid%>-nation" name="i_nat" class="input mt_5 fromListEm gray" placeholder="如投递企业有特殊需要否则不建议填写" />',
+					'<input type="text" id="<%-cid%>-nation" name="i_nat" class="input mt_5" placeholder="如投递企业有特殊需要否则不建议填写" />',
 				'</li>',
 				'<li>',
 					'<label>邮箱*</label>',
-					'<input type="text" id="<%-cid%>-email" name="i_email" class="input mt_5 fromListEm gray" placeholder="建议使用私人邮箱以便及时查收" />',
+					'<input type="text" id="<%-cid%>-email" name="i_email" class="input mt_5" placeholder="建议使用私人邮箱以便及时查收" />',
 				'</li>',
 				'<li>',
 					'<label>所在地</label>',

@@ -9,9 +9,8 @@
         COOKIE_PHOTO: "resume_photo",
         COOKIE_TOKEN: "resume_token",
         SEX: {
-            "0": "保密",
-            "1": "男",
-            "2": "女"
+            "0": "男",
+            "1": "女"
         }
     });
 })(WE, jQuery, Backbone);

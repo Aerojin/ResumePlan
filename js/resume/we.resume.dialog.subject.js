@@ -139,14 +139,7 @@
             setValue: function () {
                 var data = this.getData();
 
-                for(var key in data){
-                    var value = data[key] || "";
-                    var input = this.byName(key);
-
-                    if(input && input.length > 0){
-                        input.val(value);
-                    }
-                }
+                this.model.set(data);
             },
 
             template: ['<div class="clearfix">',

@@ -139,6 +139,19 @@
                     _this.master.showTip(_this.master.byName(key), error[key]);
                 }                
             });
+
+            this.model.on("change", function () {
+                var changed = this.changed;
+
+                for(var key in changed){
+                    var value = changed[key];
+                    var dom = _this.master.byName(key);
+
+                    if(dom.is("input") || dom.is("textarea")){
+                        dom.val(value);
+                    }
+                }
+            });
         },
 
         render: function () {
@@ -241,18 +254,7 @@
             }
         },
 
-        setValue: function () {
-            var data = this.getData();
-
-            for(var key in data){
-                var value = data[key] || "";
-                var input = this.byName(key);
-
-                if(input && input.length > 0){
-                    input.val(value);
-                }
-            }
-
+        setValue: function (data) {
             this.start.setData({
                 year: data.e_start_y,
                 month: data.e_start_m
@@ -269,8 +271,8 @@
             this.ui.txtInput.val("");
         },
 
-        changeUI: function () {
-            this.list.render(args);
+        changeUI: function (args) {
+            this.list.render({data: this.getMenuData()});
         },
 
         template: ['<li>',

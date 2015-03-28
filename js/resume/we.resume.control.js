@@ -13,7 +13,7 @@
             this.instance = options.instance;
             this.container = options.container;
 
-            this.defaults = ["base", "education"];
+            this.defaults = ["main","base", "education"];
 
             this.render();
             this.initEvents();
@@ -88,30 +88,46 @@
         append: function (key) {
             var data = this.instance.getData(key);
             var temp = _.template(this.getModuleTemp(key));
+
+            if(!_.isEmpty(data)){
+                
                 temp = $(temp({data: data}));
+            
+                this.ui.left.append(temp);
 
-            this.ui.left.append(temp);
+                if(this.runHeight()){
+                    temp.appendTo(this.ui.right);
+                }
 
-            if(this.runHeight()){
-                temp.appendTo(this.ui.right);
+                this.appendDrag(key);
             }
-
-            this.appendDrag(key);
         },
 
         before: function (args) {
-            var show = this.instance.getShow(args.key)
+            var show = this.instance.getShow(args.key);
+            var data = this.instance.getData(args.key);
 
             if(!show){
                 return;
             }
 
+
+
             var dom = $(this.getID(args.key));
             var temp = _.template(this.getModuleTemp(args.key));
-                temp = $(temp({data: args.data}));
+                temp = $(temp({data: data}));
+
+            if(_.isEmpty(data)){
+                dom.remove();
+                return;
+            }
 
             dom.before(temp).remove();
             this.appendDrag(args.key);
+
+            if(args.key == "base"){
+                this.ui.header.find("img").attr({src: data.i_photo});
+            }
         },
 
         getModuleTemp: function (id) {

@@ -19,8 +19,6 @@
             SAVE_FAIL: "保存失败"
         },
 
-        key: "certificate",
-
         initialize: function () {
 
         },
@@ -82,6 +80,8 @@
         
         name: _class,
 
+        key: "certificate",
+
         initialize: function (options) {
 
             this.menu = options.menu;
@@ -95,6 +95,19 @@
 
         initEvents: function () {
             var _this = this;
+
+            this.model.on("change", function () {
+                var changed = this.changed;
+
+                for(var key in changed){
+                    var value = changed[key];
+                    var dom = _this.master.byName(key);
+
+                    if(dom.is("input")){
+                        dom.val(value);
+                    }
+                }
+            });
 
             this.ui.txtInput.focus(function () {
                 var name = $(this).attr('name');
@@ -142,14 +155,13 @@
 
             this.list.onRemove = function (data) {
                 _this.master.instance.trigger("remove:data", {
-                    id: data.id,
+                    id: data.s_id,
                     key: _this.key
                 });
             };
 
             this.list.onChange = function (data) {
                 _this.model.set(data);
-                _this.setValue(data);
             };
         },
 
@@ -188,26 +200,13 @@
             return this.master.instance.getData(this.key);
         },
 
-        setValue: function () {
-            var data = this.getData();
-
-            for(var key in data){
-                var value = data[key] || "";
-                var input = this.byName(key);
-
-                if(input && input.length > 0){
-                    input.val(value);
-                }
-            }
-        },
-
         reset: function () {
             this.model.clear();
             this.ui.txtInput.val("");
         },
 
-        changeUI: function () {
-            this.list.render(args);
+        changeUI: function (args) {
+            this.list.render({data: this.getMenuData()});
         },
 
         template: ['<li>',

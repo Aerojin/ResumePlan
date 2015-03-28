@@ -90,6 +90,7 @@
             this.ui.span = $("#span-text");
             this.ui.btnReplace = $("#btn-replace");
             this.ui.divScroll = $("#scroll");
+            this.ui.title = $("#resume-title");
 
             this.ui.infoBox = $(".infoBox");
         },
@@ -122,6 +123,8 @@
             this.initZoom();
             this.initMenu();
             this.initControl(template);
+
+            this.ui.title.text(this.instance.getData("main").title);
         },
 
         initZoom: function () {

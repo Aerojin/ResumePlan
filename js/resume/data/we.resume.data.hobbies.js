@@ -21,11 +21,11 @@
         },
 
         create: function (args) {
-            this.set({data: this.format(args)});
+            this.set({data: args});
         },
 
         update: function (args) {
-            this.set({data: this.format(args)});
+            this.set({data: args});
         },
 
         getTableName: function () {

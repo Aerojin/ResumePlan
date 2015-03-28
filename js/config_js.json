@@ -176,6 +176,7 @@
 		"src":[
 			"./js/resume/data/we.resume.data.config.js",
 			"./js/resume/data/we.resume.superclass.js",
+			"./js/resume/data/we.resume.data.main.js",
 			"./js/resume/data/we.resume.data.skill.js",
 			"./js/resume/data/we.resume.data.article.js",
 			"./js/resume/data/we.resume.data.base.js",

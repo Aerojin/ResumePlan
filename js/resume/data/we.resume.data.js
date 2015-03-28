@@ -54,57 +54,52 @@
 
         render: function () {
 
+            var parameter = {
+                master: this,
+                data: this.data
+            };
+
+            //创建主信息
+            this.main = new WE.Resume.Data.Main(parameter);
+
             //创建基础信息
-            this.base = new WE.Resume.Data.Base({master: this});
-            this.base.setData(this.data[this.base.getTableName]);
+            this.base = new WE.Resume.Data.Base(parameter);
 
             //创建教育背景
-            this.education = new WE.Resume.Data.Education({master: this});
-            this.education.setData(this.data[this.education.getTableName]);
+            this.education = new WE.Resume.Data.Education(parameter);
 
             //创建校园经历
-            this.school = new WE.Resume.Data.School({master: this});
-            this.school.setData(this.data[this.school.getTableName]);
+            this.school = new WE.Resume.Data.School(parameter);
 
             //创建工作经历
-            this.work = new WE.Resume.Data.Work({master: this});
-            this.work.setData(this.data[this.work.getTableName]);
+            this.work = new WE.Resume.Data.Work(parameter);
 
             //创建项目经历
-            this.project = new WE.Resume.Data.Project({master: this});
-            this.project.setData(this.data[this.project.getTableName]);
+            this.project = new WE.Resume.Data.Project(parameter);
 
             //创建技能信息
-            this.skill = new WE.Resume.Data.Skill({master: this});
-            this.skill.setData(this.data[this.skill.getTableName]);
+            this.skill = new WE.Resume.Data.Skill(parameter);
 
             //创建证书信息
-            this.certificate = new WE.Resume.Data.Certificate({master: this});
-            this.certificate.setData(this.data[this.certificate.getTableName]);
+            this.certificate = new WE.Resume.Data.Certificate(parameter);
 
             //创建获奖经历
-            this.prize = new WE.Resume.Data.Prize({master: this});
-            this.prize.setData(this.data[this.prize.getTableName]);
+            this.prize = new WE.Resume.Data.Prize(parameter);
 
             //创建科研经历
-            this.research = new WE.Resume.Data.Research({master: this});
-            this.research.setData(this.data[this.research.getTableName]);
+            this.research = new WE.Resume.Data.Research(parameter);
 
             //创建发表文章
-            this.article = new WE.Resume.Data.Article({master: this});
-            this.article.setData(this.data[this.article.getTableName]);
+            this.article = new WE.Resume.Data.Article(parameter);
 
             //创建自我评价
-            this.evaluation = new WE.Resume.Data.Evaluation({master: this});
-            this.evaluation.setData(this.data[this.evaluation.getTableName]);
+            this.evaluation = new WE.Resume.Data.Evaluation(parameter);
 
             //创建主修课程
-            this.subject = new WE.Resume.Data.Subject({master: this});
-            this.subject.setData(this.data[this.subject.getTableName]);
+            this.subject = new WE.Resume.Data.Subject(parameter);
 
             //创建爱好
-            this.hobbies = new WE.Resume.Data.Hobbies({master: this});
-            this.hobbies.setData(this.data[this.hobbies.getTableName]);
+            this.hobbies = new WE.Resume.Data.Hobbies(parameter);
 
             this.set({module: this.config.getConfig()});
         },

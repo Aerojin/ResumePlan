@@ -11,6 +11,7 @@
             return {
                 data: {
                     id: "",
+                    m_id: "",
                     i_sex: "",
                     i_gov: "",
                     i_phone: "",
@@ -30,14 +31,16 @@
         initialize: function (args) {
             this.master = args.master;
             superClass.prototype.initialize.apply(this, arguments);
+
+            this.set({name: args.data["InfoMain"][0].name});
         },
 
         create: function (data) {
-            this.set({data: this.format(data)});
+            this.set({data: data});
         },
 
         update: function (data) {
-            this.set({data: this.format(data)});
+            this.set({data: data});
         },
 
         remove: function (id) {
@@ -46,7 +49,7 @@
 
         getData: function () {
             var data = _.clone(this.get("data"));
-                //data.sex = WE.Constant.SEX[data.sex || "0"];
+                data.sex = WE.Constant.SEX[data.i_sex || "0"];
 
             return data;
         },

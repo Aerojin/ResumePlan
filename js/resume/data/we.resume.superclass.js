@@ -7,8 +7,8 @@
         
         name: _class,    
 
-        initialize: function () {
-
+        initialize: function (args) {
+            this.setData(args.data[this.getTableName()]);
         },
 
         create: function (args) {
@@ -41,17 +41,18 @@
             var _this = this;
 
             if(!data){
+                this.set({data: null});
                 return;
             }
 
             if(_.isArray(data)){
                 _this.set({data: []});
                 _.each(data, function (e) {
-                    _this.create(_this.format(e));
+                    _this.create(e);
                 });
             }else{
                 _this.set({data: {}});
-                _this.create(_this.format(data));
+                _this.create(data);
             }
         },
 
@@ -87,7 +88,7 @@
 
             options.success = function (result) {
                 WE.UI.hide();
-                this.setData(result.data);
+                this.setData(result.data.list);
 
                 if(callback){
                     callback(this.getData());

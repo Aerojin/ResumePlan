@@ -200,7 +200,7 @@
                 var data = this.getData() || [];
 
                 for(var i = 0; i < data.length; i++){
-                    data[i].title = data[i].name;
+                    data[i].title = data[i].e_company;
                 }
 
                 return data;
@@ -235,16 +235,6 @@
             },
 
             setValue: function (data) {
-
-                for(var key in data){
-                    var value = data[key] || "";
-                    var input = this.byName(key);
-
-                    if(input && input.length > 0){
-                        input.val(value);
-                    }
-                }
-
                 this.start.setData({
                     year: data.e_start_y,
                     month: data.e_start_m
@@ -256,7 +246,7 @@
                 });
             },
             changeUI: function (args) {
-                this.list.render(args);
+                this.list.render({data: this.getMenuData()});
             },
 
             onClose: function () {

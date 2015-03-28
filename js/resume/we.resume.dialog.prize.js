@@ -207,17 +207,7 @@
                 WE.Api.prize(options, this);
             },
 
-            setValue: function () {
-
-                for(var key in data){
-                    var value = data[key] || "";
-                    var input = this.byName(key);
-
-                    if(input && input.length > 0){
-                        input.val(value);
-                    }
-                }
-
+            setValue: function (data) {
                 this.date.setData({
                     year: data.p_date_y,
                     month: data.p_date_m
@@ -225,7 +215,7 @@
             },
 
             changeUI: function (args) {
-                this.list.render(args);
+                this.list.render({data: this.getMenuData()});
             },
 
             onClose: function () {

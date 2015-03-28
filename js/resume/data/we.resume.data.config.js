@@ -20,7 +20,7 @@
 
         getConfig: function () {
             if(this.sort){
-                return this.sort;
+                //return this.sort;
             }
 
             switch(this.type){

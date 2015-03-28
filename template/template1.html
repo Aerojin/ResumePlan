@@ -1,18 +1,18 @@
+<div>
 <!--简历主容器-->
 <textarea id="resume-wrap">
 	<div class="resumeConSize" id="resume-main">
 		<div class="resumeCon_header clearfix" id="resume-header">
 			<div class="resumeCon_img">
 				<span></span>
-				<img src="<%-base.photo%>" alt="" title="" />
+				<img src="<%-base.i_photo%>" id="resume-photo" style="width:103px; height: 141px;" />
 			</div>
 			<div class="resumeCon_name">
-				<strong><%-base.name%></strong>
-				<span><%-base.pinyin%></span>
+				<strong><%-main.name%></strong>
 			</div>
 			<div class="resumeCon_right">
 				<strong>求职意向</strong>
-				<p><%-base.job%></p>
+				<p><%-main.direction%></p>
 				<span></span>
 			</div>
 		</div>
@@ -24,9 +24,10 @@
 							<h2>基本信息</h2>
 							<ul class="infoBoxList">
 								<li><strong>性别</strong><span><%-base.sex%></span></li>
-								<li><strong>政治面貌</strong><span><%-base.political%></span></li>
-								<li><strong>电话</strong><span><%-base.moblie%></span></li>
-								<li><strong>电子邮箱</strong><span><%-base.email%></span></li>
+								<li><strong>民族</strong><span><%-base.i_nat%></span></li>
+								<li><strong>政治面貌</strong><span><%-base.i_gov%></span></li>
+								<li><strong>电话</strong><span><%-base.i_phone%></span></li>
+								<li><strong>电子邮箱</strong><span><%-base.i_email%></span></li>
 							</ul>
 						</div>
 					</td>
@@ -37,14 +38,14 @@
 								<% for(var i = 0; i < education.length; i++ ) { %>
 								<li class="infoBoxD_li clearfix">
 									<span class="infoBoxD_time">
-										<%-education[i].startY%>/<%-education[i].startM%>—<%-education[i].endY%>/<%-education[i].endM%>
+										<%-education[i].e_start_y%>/<%-education[i].e_start_m%>—<%-education[i].e_end_y%>/<%-education[i].e_end_m%>
 									</span>
 									<div class="infoBoxD_info">
-										<strong><%-education[i].name%></strong>
-										<p><%-education[i].academic%> <%-education[i].professional%></p>
+										<strong><%-education[i].xuexiao%></strong>
+										<p><%-education[i].xuewei%> <%-education[i].zhuanye%></p>
 										<ul>
 											<li><i class="i_icoPoints"></i>GPA：<%-education[i].gpa%></li>
-											<li><i class="i_icoPoints"></i>专业排名：<%-education[i].sort%></li>
+											<li><i class="i_icoPoints"></i>专业排名：<%-education[i].zhuanyesort%></li>
 										</ul>
 									</div>
 								</li>
@@ -57,6 +58,42 @@
 		</div>
 	</div>
 </textarea>
+<!--教育背景-->
+<textarea id="resume-base">
+<div class="infoBox" id="resume-base">
+	<h2>基本信息</h2>
+	<ul class="infoBoxList">
+		<li><strong>性别</strong><span><%-data.sex%></span></li>
+		<li><strong>民族</strong><span><%-data.i_nat%></span></li>
+		<li><strong>政治面貌</strong><span><%-data.i_gov%></span></li>
+		<li><strong>电话</strong><span><%-data.i_phone%></span></li>
+		<li><strong>电子邮箱</strong><span><%-data.i_email%></span></li>
+	</ul>
+</div>
+</textarea>	
+<!--教育背景-->
+<textarea id="resume-education">
+<div class="infoBox" id="resume-education">
+	<h2>教育背景</h2>
+	<ul class="infoBoxD">
+		<% for(var i = 0; i < data.length; i++ ) { %>
+		<li class="infoBoxD_li clearfix">
+			<span class="infoBoxD_time">
+				<%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%>
+			</span>
+			<div class="infoBoxD_info">
+				<strong><%-data[i].xuexiao%></strong>
+				<p><%-data[i].xuewei%> <%-data[i].zhuanye%></p>
+				<ul>
+					<li><i class="i_icoPoints"></i>GPA：<%-data[i].gpa%></li>
+					<li><i class="i_icoPoints"></i>专业排名：<%-data[i].zhuanyesort%></li>
+				</ul>
+			</div>
+		</li>
+		<% } %>
+	</ul>
+</div>
+</textarea>						
 
 <!--校园经历-->
 <textarea id="resume-school">
@@ -65,9 +102,9 @@
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
 			<li>
-				<strong><%-data[i].position%><span><%-data[i].startY%>.<%-data[i].startM%>-<%-data[i].endY%>.<%-data[i].endM%></span></strong>
+				<strong><%-data[i].e_position%><span><%-data[i].e_start_y%>.<%-data[i].e_start_m%>-<%-data[i].e_end_y%>.<%-data[i].e_end_m%></span></strong>
 				<span><%-data[i].name%></span>
-				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].e_context%></p>
 			</li>
 			<% } %>
 		</ul>
@@ -83,8 +120,8 @@
 			<li class="clearfix mb_10">
 				<i></i>
 				<span>
-					<%-data[i].name%>
-					<p><%-data[i].dateY%>.<%-data[i].dateM%>  <%-data[i].title%></p>
+					<%-data[i].title%>
+					<p><%-data[i].e_date_y%>.<%-data[i].e_date_m%>  <%-data[i].paper_name%></p>
 				</span>
 			</li>
 			<% } %>
@@ -101,7 +138,7 @@
 				<li class="clearfix mb_10">
 					<i></i>
 					<span><%-data[i].name%>
-					<p><%-data[i].dateY%>.<%-data[i].dateM%>  <%-data[i].jibie%></p>
+					<p><%-data[i].p_date_y%>.<%-data[i].p_date_m%>  <%-data[i].jibie%></p>
 					</span>
 				</li>
 			<% } %>
@@ -140,9 +177,9 @@
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
 			<li>
-				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
-				<span><%-data[i].name%></span>
-				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+				<strong><%-data[i].e_position%><span><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></span></strong>
+				<span><%-data[i].e_company%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].e_context%></p>
 			</li>
 			<% } %>
 		</ul>
@@ -156,9 +193,9 @@
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
 			<li>
-				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
-				<span><%-data[i].name%></span>
-				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+				<strong><%-data[i].e_position%><span><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></span></strong>
+				<span><%-data[i].e_company%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].e_context%></p>
 			</li>
 			<% } %>
 		</ul>
@@ -172,9 +209,9 @@
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
 			<li>
-				<strong><%-data[i].position%><span><%-data[i].startY%>/<%-data[i].startM%>—<%-data[i].endY%>/<%-data[i].endM%></span></strong>
-				<span><%-data[i].name%></span>
-				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+				<strong><%-data[i].e_position%><span><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></span></strong>
+				<span><%-data[i].e_company%></span>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].e_context%></p>
 			</li>
 			<% } %>
 		</ul>
@@ -204,11 +241,10 @@
 	<div class="infoBox dragDiv" id="resume-subject">
 		<h2>主修课程</h2>
 		<ul class="infoBoxListB">
-			<% for(var i = 0; i < data.length; i++ ) { %>
 			<li>
-				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data[i].context%></p>
+				<p><i class="i_icoPoint mr_5 ml_5"></i><%-data.title%></p>
 			</li>
-			<% } %>
 		</ul>
 	</div>
 </textarea>
+</div>

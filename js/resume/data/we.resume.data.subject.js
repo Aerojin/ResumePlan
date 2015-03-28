@@ -20,8 +20,16 @@
             superClass.prototype.initialize.apply(this, arguments);
         },
 
+        create: function (args) {
+            this.set({data: args});
+        },
+
+        update: function (args) {
+            this.set({data: args});
+        },
+
         getTableName: function () {
-            return "InfoCours";
+            return "InfoCourse";
         },
 
         format: function (args){

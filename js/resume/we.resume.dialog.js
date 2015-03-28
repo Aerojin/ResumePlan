@@ -15,6 +15,30 @@
         regEvents: function () {
             var _this = this;
 
+            if(this.model){
+                this.model.on("change", function () {
+                    var changed = this.changed;
+
+                    for(var key in changed){
+                        var value = changed[key];
+                        var dom = _this.byName(key);
+
+                        if(!dom || dom.length == 0){
+                            continue;
+                        }
+
+                        if(dom.is("input") || dom.is("select") || dom.is("textarea")){
+                            dom.val(value);
+                            continue;
+                        }
+
+                        if(dom.is("img")){
+                            dom.attr({src: value}).show();
+                        }
+                    }
+                });
+            }
+
             this.instance.on("change:show", this.setState, this);
 
             this.UI.btnClose.click(function () {
