@@ -104,24 +104,26 @@
         },
 
         before: function (args) {
+            var dom = $(this.getID(args.key));
             var show = this.instance.getShow(args.key);
             var data = this.instance.getData(args.key);
+            var temp = _.template(this.getModuleTemp(args.key));
 
             if(!show){
                 return;
             }
-
-
-
-            var dom = $(this.getID(args.key));
-            var temp = _.template(this.getModuleTemp(args.key));
-                temp = $(temp({data: data}));
 
             if(_.isEmpty(data)){
                 dom.remove();
                 return;
             }
 
+            if(dom.length == 0){
+                this.append(args.key);
+                return;
+            }
+
+            temp = $(temp({data: data}));
             dom.before(temp).remove();
             this.appendDrag(args.key);
 

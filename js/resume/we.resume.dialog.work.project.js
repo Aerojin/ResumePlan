@@ -236,6 +236,15 @@
         save: function () {
             if(this.model.isValid()){
                 var options = {};
+                var end = this.end.getData();
+                var start = this.start.getData();
+
+                this.model.set({
+                    e_end_y: end.year,
+                    e_end_m: end.month,
+                    e_start_y: start.year,
+                    e_start_m: start.month
+                });
 
                 options.data = this.model.toJSON();
                 options.data.m_id = this.master.getMid();

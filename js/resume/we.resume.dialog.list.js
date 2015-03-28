@@ -44,6 +44,8 @@
                 var data = _this.data[index];
 
                 _this.onRemove(data, index);
+
+                return false;
             });
 
             this.ui.li.click(function () {

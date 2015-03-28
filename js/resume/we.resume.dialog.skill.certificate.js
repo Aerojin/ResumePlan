@@ -155,7 +155,7 @@
 
             this.list.onRemove = function (data) {
                 _this.master.instance.trigger("remove:data", {
-                    id: data.s_id,
+                    id: data.id,
                     key: _this.key
                 });
             };
