@@ -83,6 +83,7 @@
             this.ui.btnWhite = $("#btn-white");
             this.ui.whiteTmpl = $("#white-tmpl");
             this.ui.wrap = $("#wrap");
+            this.ui.empty = $("#empty");
             this.ui.btnSearch = this.ui.main.find(".btn-search");
 
             //this.ui.wrap.empty();
@@ -138,6 +139,8 @@
                 this.ui.wrap.append(item.getElement());
             }
 
+            
+
             this.isLoading = false;
 
             setTimeout(function () {
@@ -155,9 +158,19 @@
             };
 
             options.success = function (result) {
+                var data = result.data.list;
+
+                if(_.isEmpty(data)){
+                    this.ui.wrap.hide();
+                    this.ui.empty.show();
+                }else{
+                    this.ui.wrap.show();
+                    this.ui.empty.hide();
+                }
+
                 this.model.set({
-                    pageCount: result.data.pageCount,
-                    data: this.model.parse(result.data.list)
+                    pageCount: result.data.pageCount || 1,
+                    data: this.model.parse(data)
                 },{silent:true});
 
                 this.model.trigger("change:data");
