@@ -67,7 +67,7 @@
         checkData: function (data) {
             if(_.isObject(data)){
                 for(var key in data){
-                    if(_.isEmpty(data[key])){
+                    if(_.isNull(data[key]) || _.isUndefined(data[key])){
                         data[key] = "";
                     }
                 }
