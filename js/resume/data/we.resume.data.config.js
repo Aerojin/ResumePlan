@@ -18,6 +18,8 @@
             this.type = args.type;
 
             if(this.sort && this.sort.length > 0){
+                console.log("sort");
+                console.log($.parseJSON(this.sort[0].ser_sot));
                 //this.sort = $.parseJSON(this.sort[0].ser_sot);
             }
         },

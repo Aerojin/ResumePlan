@@ -55,10 +55,14 @@
             this.on("change:module", function () {
                 var mid = this.mid;
                 var data = this.get("module");
-                    data.mid = mid;
+
+                console.log("module", data);
 
                 var options = {
-                    data: data
+                    data: {
+                        m_id:mid,
+                        sort: data
+                    }
                 };
 
                 options.success = function () {
@@ -66,7 +70,7 @@
                 };
 
                 options.error = function () {
-                    WE.UI.show("简历正在失败", {className: "msgRed", delay: 3000});
+                    WE.UI.show("简历保存失败", {className: "msgRed", delay: 3000});
                 };
 
                 WE.UI.show("简历正在保存...");

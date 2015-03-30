@@ -197,7 +197,7 @@
                 title:  data.title,
                 direction: data.position,
                 language: data.language,
-                importId: importsID
+                mid: importsID
             };
 
             options.success = function (result) {
