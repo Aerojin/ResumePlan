@@ -494,6 +494,9 @@
         var requestUrl = {model:'resume', command:'sort'};
 
             requestBody.sort = JSON.stringify(requestBody.sort);
+            //requestBody.sort = requestBody.sort.replace(new RegExp("\"","gi"), "'");
+
+            
         
         //options.httpMethod = "get";
 

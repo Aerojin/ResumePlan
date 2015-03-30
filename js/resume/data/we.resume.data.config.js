@@ -19,7 +19,11 @@
 
             if(this.sort && this.sort.length > 0){
                 console.log("sort");
-                console.log($.parseJSON(this.sort[0].ser_sot));
+                var sort = $.parseJSON(this.sort[0].ser_sot);
+                //var sort1 = sort.sort.replace(new RegExp("'","gi"), "\"");
+
+                window._sort= sort;
+                console.log("sort",sort);
                 //this.sort = $.parseJSON(this.sort[0].ser_sot);
             }
         },
