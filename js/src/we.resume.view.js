@@ -115,6 +115,7 @@
 
         pageLoad: function (data, template) {
             this.instance = WE.Resume.getInstance({
+                mid: this.getRequest().m_id,
                 data: data,
                 sort: data.sort,
                 type: template.cid

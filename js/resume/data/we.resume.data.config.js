@@ -16,6 +16,10 @@
         initialize: function (args) {
             this.sort = args.sort;
             this.type = args.type;
+
+            if(this.sort && this.sort.length > 0){
+                //this.sort = $.parseJSON(this.sort[0].ser_sot);
+            }
         },
 
         getConfig: function () {

@@ -13,8 +13,6 @@
             this.instance = options.instance;
             this.container = options.container;
 
-            this.defaults = ["main","base", "education"];
-
             this.render();
             this.initEvents();
         },
@@ -60,6 +58,7 @@
 
         getDefault: function () {
             var data = {};
+            this.defaults = this.instance.getDefaultModule();
 
             for(var i = 0; i < this.defaults.length; i++){
                 var key = this.defaults[i];
@@ -86,34 +85,45 @@
         },
 
         append: function (key) {
-            var data = this.instance.getData(key);
-            var temp = _.template(this.getModuleTemp(key));
+            var data = this.getElement(key);
 
-            if(!_.isEmpty(data)){
-                
-                temp = $(temp({data: data}));
-            
-                this.ui.left.append(temp);
+            if(data.add){
+                this.ui.left.append(data.element);
 
                 if(this.runHeight()){
-                    temp.appendTo(this.ui.right);
+                    data.element.appendTo(this.ui.right);
                 }
 
                 this.appendDrag(key);
             }
         },
 
-        before: function (args) {
-            var dom = $(this.getID(args.key));
-            var show = this.instance.getShow(args.key);
-            var data = this.instance.getData(args.key);
-            var temp = _.template(this.getModuleTemp(args.key));
+        getElement: function (key) {
+            var args = {};
+            var data = this.instance.getData(key)
+            var config = this.instance.getModuleByKey(key);
+            var temp = _.template(this.getModuleTemp(key));
 
-            if(!show){
+            args.show = config.show;
+            args.add = !_.isEmpty(data);
+            args.element = args.add ? $(temp({data: data})) : "";
+
+            if(args.add){
+                args.element.data({key: key});
+            }
+
+            return args;
+        },
+
+        before: function (args) {
+            var data = this.getElement(key);
+            var dom = $(this.getID(args.key));
+
+            if(!data.show){
                 return;
             }
 
-            if(_.isEmpty(data)){
+            if(!data.add){
                 dom.remove();
                 return;
             }
@@ -123,8 +133,7 @@
                 return;
             }
 
-            temp = $(temp({data: data}));
-            dom.before(temp).remove();
+            dom.before(data.element).remove();
             this.appendDrag(args.key);
 
             if(args.key == "base"){
@@ -174,10 +183,16 @@
         },
 
         appendDrag: function (key) {
+            var _this = this;
             var newId = this.getID(key);
+            var config = this.instance.getModuleByKey(key);
 
             if(!this.drag){
                 this.drag = {};
+            }
+
+            if(!config.drag){
+                return;
             }
 
             this.drag[key] = new WE.Drag({
@@ -192,8 +207,21 @@
                 onMouseDown: function (element) {
                     element.css({cursor: "move"});
                     element.addClass("focus").removeClass("hover");
+                    _this.instance.setSort(_this.getModuleSort());
                 }
             });
+        },
+        getModuleSort: function () {
+            var array = [];
+            var element = this.ui.wrap.find(".infoBox");
+
+            _.each(element, function (e) {
+                var key = e.attr(id).replace("resume-", "");
+
+                array.push(key);
+            });
+
+            return key;
         }
 
     }));

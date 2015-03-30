@@ -35,23 +35,18 @@
             this.set({name: args.data["InfoMain"][0].name});
         },
 
-        create: function (data) {
-            this.set({data: data});
-        },
-
-        update: function (data) {
-            this.set({data: data});
-        },
-
-        remove: function (id) {
-
-        },
-
         getData: function () {
-            var data = _.clone(this.get("data"));
+            var data = this.get("data") || []; 
+
+            if(data.length){
+                data = data[data.length - 1];
+                data = _.clone(data);
                 data.sex = WE.Constant.SEX[data.i_sex || "0"];
 
-            return data;
+                return data;
+            }
+
+            return {};
         },
 
         getTableName: function () {

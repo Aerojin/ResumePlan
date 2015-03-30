@@ -40,18 +40,17 @@
         setData: function (data) {
             var _this = this;
 
+            this.set({data: []});
+            
             if(!data){
-                this.set({data: null});
                 return;
             }
 
             if(_.isArray(data)){
-                _this.set({data: []});
                 _.each(data, function (e) {
                     _this.create(e);
                 });
             }else{
-                _this.set({data: {}});
                 _this.create(data);
             }
         },

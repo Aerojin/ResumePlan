@@ -20,12 +20,16 @@
             superClass.prototype.initialize.apply(this, arguments);
         },
 
-        create: function (args) {
-            this.set({data: args});
-        },
+        getData: function () {
+            var data = this.get("data") || []; 
 
-        update: function (args) {
-            this.set({data: args});
+            if(data.length){
+                data = data[data.length - 1];
+
+                return _.clone(data);
+            }
+
+            return {};
         },
 
         getTableName: function () {

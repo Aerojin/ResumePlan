@@ -101,7 +101,7 @@
                 var changed = this.changed;
 
                 for(var key in changed){
-                    var value = changed[key];
+                    var value = changed[key] || "";
                     var dom = _this.master.byName(key);
 
                     if(dom.is("input")){
@@ -159,6 +159,8 @@
                     id: data.id,
                     key: _this.key
                 });
+
+                _this.model.clear();
             };
 
             this.list.onChange = function (data) {

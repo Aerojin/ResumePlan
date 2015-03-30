@@ -25,16 +25,16 @@
             superClass.prototype.initialize.apply(this, arguments);
         },
 
-        create: function (data) {
-            this.set({data: data});
-        },
+        getData: function () {
+            var data = this.get("data") || []; 
 
-        update: function (data) {
-            this.set({data: data});
-        },
+            if(data.length){
+                data = data[data.length - 1];
 
-        remove: function (id) {
+                return _.clone(data);
+            }
 
+            return {};
         },
 
         getData: function () {

@@ -221,6 +221,7 @@
                     id: data.id,
                     key: _this.key
                 });
+                _this.model.clear();
             };
 
             this.list.onChange = function (data) {

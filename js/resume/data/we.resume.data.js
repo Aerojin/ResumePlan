@@ -14,12 +14,13 @@
         },
 
         initialize: function (args, config) {
-           
+
+           this.mid = args.mid;
            this.data = args.data;
            this.config = config; 
 
-           this.render();
            this.initEvents();
+           this.render();
         },
 
         initEvents: function () {
@@ -49,6 +50,27 @@
                         });
                     });
                 }
+            });
+
+            this.on("change:module", function () {
+                var mid = this.mid;
+                var data = this.get("module");
+                    data.mid = mid;
+
+                var options = {
+                    data: data
+                };
+
+                options.success = function () {
+                    WE.UI.show("简历保存成功", {delay: 3000});
+                };
+
+                options.error = function () {
+                    WE.UI.show("简历正在失败", {className: "msgRed", delay: 3000});
+                };
+
+                WE.UI.show("简历正在保存...");
+                WE.Api.autoSave(options, this);
             });
         },
 
@@ -129,11 +151,13 @@
                 show: !data[key].show
             });
 
-            this.set({module: data});
+            this.set({module: data}, {silent: true});
+            this.trigger("change:module");
             this.trigger("change:show", {
                 key: key,
                 value: data[key].show
             });
+
         },
 
         getShow: function (key) {
@@ -155,6 +179,39 @@
 
             for(var key in data){
                 if(data[key].drag){
+                    array.push(key);
+                }
+            }
+
+            return array;
+        },
+
+        setSort: function (array){
+            var len = array.length;
+            var module = this.getModule();
+
+            for(var key in module){
+                var index = _.indexOf(array, key);
+
+                if(index > -1){
+                    module[key].sort = index;
+                }else{
+                    module[key].sort = len;
+                    ++len;
+                }
+            }
+
+            this.set({module: module}, {silent: true});
+            this.trigger("change:module");
+        },
+
+
+        getDefaultModule: function () {
+            var array = ["main"];
+            var module = this.getModule();
+
+            for(var key in module){
+                if(!module[key].drag){
                     array.push(key);
                 }
             }

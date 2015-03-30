@@ -166,14 +166,13 @@
             this.ui.header = $("#header");
 
             var win = $(window).height();
-            var footer = this.ui.footer.height(); 
-            var header = this.ui.header.height();
+            var footer = this.ui.footer.outerHeight(true); 
+            var header = this.ui.header.outerHeight(true);
             var context = this.ui.main.outerHeight(true);
             var height = win - footer - header;
-            
-            this.ui.main.height(height);
 
             if(height > context){
+                this.ui.main.height(height);
                 this.ui.main.css({top: (height - context) / 2});
             }
         },
@@ -197,11 +196,12 @@
                 name: data.name,
                 title:  data.title,
                 direction: data.position,
-                language: data.language
+                language: data.language,
+                importId: importsID
             };
 
             options.success = function (result) {
-                var url = "/resume.html?m_id={0}&t_id={1}&importsID={2}".format(result.data, tID, importsID);
+                var url = "/resume.html?m_id={0}&t_id={1}".format(result.data, tID);
                 window.location.href = url;
             };
 

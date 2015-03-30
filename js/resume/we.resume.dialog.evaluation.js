@@ -136,9 +136,7 @@
             },
 
             setValue: function () {
-                var data = this.getData();
-            
-                this.model.set(data);
+                this.model.set(this.getData());
             },
 
             template: ['<div class="clearfix">',

@@ -308,6 +308,10 @@
 		    return arrDragDivs;
 		};
 
+        this.getElement = function () {
+            return this.moveElement;
+        };
+
 		this.getElementPos = function (dom) {
 			var id = dom.attr("id");
 			var offset = dom.offset();

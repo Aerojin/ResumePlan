@@ -94,9 +94,10 @@
         },
 
         setData: function (data) {
+            var now = new Date();
 
-        	this.ui.year.val(data.year);
-        	this.ui.month.val(data.month);
+        	this.ui.year.val(data.year || now.getFullYear());
+        	this.ui.month.val(data.month || now.getMonth());
         },
 
         onChange: function () {

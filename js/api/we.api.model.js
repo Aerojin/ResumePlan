@@ -290,6 +290,7 @@
         *@param {String} options.data.title 标题
         *@param {String} options.data.direction 求职意向
         *@param {String} options.data.language 语言
+        *@param {String} options.data.importId 导入简历的ID
     */
     WE.Api.start  = function (options, context){
         var data = options.data || {};
