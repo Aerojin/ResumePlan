@@ -1,0 +1,325 @@
+
+<div>
+<!--主容器-->
+<textarea id="resume-wrap">
+<div class="resumeConF resumeCon813" id="resume-main">
+	<div class="resumeConF_header" id="resume-header">
+		<img src="<%-base.i_photo%>" id="resume-photo"/>
+		<h2><%-main.name%></h2>
+		<div id="resume-base" class="resume-box" data-key="base">
+			 <p>
+				 <span>性   别：<%-base.sex%></span> | 
+				 <span>民族：<%-base.i_nat%></span> | 
+				 <span>政治面貌：<%-base.i_gov%></span> | 
+				 <span>年龄：<%-base.i_age%></span> | 
+				 <span>所在地：<%-base.i_address%></span>
+			 </p>
+			 <div class="resumeConF_header_nav">
+				  <span>电话：+ <%-base.i_phone%></span>
+				  <span>邮箱：<%-base.i_email%></span>
+			 </div>
+		</div>
+	 </div>
+	<div class="resumeConF_body clearfix"  id="resume-body">
+				<table  id="dragTable" cellpadding="2"  style=" border:solid 0px green;width:100%;">
+					<tr>
+					<td valign="top" style="width:50%" id="resume-left">
+					
+			     	</td>
+					<td valign="top" style="width:50%" id="resume-right">
+					     <div class="infoBox resume-box" id="resume-education" data-key="education">
+					 	     <strong class="titleOne"><span><i class="i_icoBnine"></i>教育背景</span></strong>
+					 	     <% for(var i = 0; i < education.length; i++ ) { %>
+							 <div class="resumeConF_con clearfix">
+					 	     	<p class="fl"><%-education[i].e_start_y%>/<%-education[i].e_start_m%>—<%-education[i].e_end_y%>/<%-education[i].e_end_m%></p>
+					 	     	<div class="fr">
+					 	     		<p><strong><%-education[i].xuexiao%></strong> | <span><%-education[i].xuewei%> | <%-education[i].zhuanye%></span></p>
+					 	     		<p>GPA：<%-education[i].gpa%> | 专业排名：<%-education[i].zhuanyesort%></p>
+					 	     	</div>
+					 	     </div>
+							 <% } %>
+					    </div>
+					 </td>
+					</tr>
+		        </table>
+				</div>
+</div>
+</textarea>
+<!--基本信息-->	
+<textarea id="resume-base">		
+<div id="resume-base" class="resume-box" data-key="base">
+     <p>
+         <span>性   别：<%-base.sex%></span> | 
+         <span>民族：<%-base.i_nat%></span> | 
+         <span>政治面貌：<%-base.i_gov%></span> | 
+         <span>年龄：<%-base.i_age%></span> | 
+         <span>所在地：<%-base.i_address%></span>
+     </p>
+     <div class="resumeConF_header_nav">
+          <span>电话：+ <%-base.i_phone%></span>
+          <span>邮箱：<%-base.i_email%></span>
+     </div>
+</div>
+</textarea>
+<!--教育背景-->
+<textarea id="resume-education">
+ <div class="infoBox resume-box" id="resume-education" data-key="education">
+     <strong class="titleOne"><span><i class="i_icoBnine"></i>教育背景</span></strong>
+     <% for(var i = 0; i < education.length; i++ ) { %>
+	 <div class="resumeConF_con clearfix">
+     	<p class="fl"><%-education[i].e_start_y%>/<%-education[i].e_start_m%>—<%-education[i].e_end_y%>/<%-education[i].e_end_m%></p>
+     	<div class="fr">
+     		<p><strong><%-education[i].xuexiao%></strong> | <span><%-education[i].xuewei%> | <%-education[i].zhuanye%></span></p>
+     		<p>GPA：<%-education[i].gpa%> | 专业排名：<%-education[i].zhuanyesort%></p>
+     	</div>
+     </div>
+	 <% } %>
+</div>
+</textarea>
+	
+<!--校园经历-->
+<textarea id="resume-school">
+<div class="infoBox resume-box" id="resume-school" data-key="school">
+	<strong class="titleOne"><span><i class="i_icoBthree"></i>校园经历</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<strong><i class="i_icoBtwelve"></i><%-data[i].name%> | <%-data[i].e_position%></strong>
+		<p><%-data[i].e_start_y%>.<%-data[i].e_start_m%>-<%-data[i].e_end_y%>.<%-data[i].e_end_m%></p>
+		<p><%-data[i].e_context%></p>
+	</div>
+	<%}%>
+</div>
+</textarea>
+	
+<!--发表文章-->
+<textarea id="resume-article">
+<div class="infoBox resume-box" id="drag-base" id="resume-article" data-key="article">
+	<strong class="titleOne"><span><i class="i_icoBone"></i>发表文章</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<strong><i class="i_icoBtwelve"></i><%-data[i].title%></strong>
+		<p><%-data[i].e_date_y%>.<%-data[i].e_date_m%>  <%-data[i].paper_name%></p>
+	</div>
+	<%}%>
+</div>
+</textarea>
+
+<!--获奖经历-->
+<textarea id="resume-prize">
+<div class="infoBox resume-box" id="resume-prize" data-key="prize">
+	<strong class="titleOne"><span><i class="i_icoBtwo"></i>获奖经历</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<i class=""></i>
+		<div class="resumeConF_con_info">
+			<strong><%-data[i].name%> <span><%-data[i].p_date_y%>.<%-data[i].p_date_m%></span></strong>
+			<p><%-data[i].jibie%></p>
+		</div>
+	</div>
+	<%}%>
+</div>
+</textarea>
+
+
+<!--技能-->
+<textarea id="resume-skill">
+<div class="infoBox resume-box" id="resume-skill" data-key="skill">
+	<strong class="titleOne"><span><i class="i_icoBfive"></i>相关技能</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<p><i class="i_icoBtwelve"></i><%-data[i].name%></p>
+	</div>
+	<% } %>
+</div>
+</textarea>
+
+<!--证书-->
+<textarea id="resume-certificate">
+<div class="infoBox resume-box" id="resume-certificate" data-key="certificate">
+	<strong class="titleOne"><span><i class="i_icoBfive"></i>证书</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<p><i class="i_icoBtwelve"></i><%-data[i].name%></p>
+	</div>
+	<% } %>
+</div>
+</textarea>
+
+<!--工作经历-->
+<textarea id="resume-work">
+<div class="infoBox resume-box" id="resume-work" data-key="work">
+	<strong class="titleOne"><span><i class="i_icoBfour"></i>工作经历</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<strong><i class="i_icoBtwelve"></i><%-data[i].e_company%> | <%-data[i].e_position%></strong>
+		<p><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></p>
+		<p><i class="i_icoBthirteen"></i><%-data[i].e_context%></p>
+		<!-- <p><i class="i_icoBthirteen"></i>呼叫中心部门：进行客户回访、整理2013年度河北省经纪人回访记录表。</p> -->
+	</div>
+	<%}%>
+</div>
+</textarea>
+
+<!--项目经历-->
+<textarea id="resume-project">
+<div class="infoBox resume-box" id="resume-project" data-key="project">
+	<strong class="titleOne"><span><i class="i_icoBfour"></i>项目经历</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<strong><i class="i_icoBtwelve"></i><%-data[i].e_company%> | <%-data[i].e_position%></strong>
+		<p><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></p>
+		<p><i class="i_icoBthirteen"></i><%-data[i].e_context%></p>
+	</div>
+	<% } %>
+</div>
+</textarea>
+
+<!--科研经历-->
+<textarea id="resume-research">
+<div class="infoBox resume-box" id="resume-research" data-key="research">
+	<strong class="titleOne"><span><i class="i_icoBten"></i>科研经历</span></strong>
+	<% for(var i = 0; i < data.length; i++ ) { %>
+	<div class="resumeConF_con clearfix">
+		<strong><i class="i_icoBtwelve"></i><%-data[i].e_company%> | <%-data[i].e_position%></strong>
+		<span><%-data[i].e_start_y%>/<%-data[i].e_start_m%>—<%-data[i].e_end_y%>/<%-data[i].e_end_m%></span>
+		<p><%-data[i].e_context%></p>
+	</div>
+	<%}%>
+</div>
+</textarea>
+
+<!--自我评价-->
+<textarea id="resume-evaluation">
+<div class="infoBox resume-box" id="resume-evaluation" data-key="evaluation">
+	<strong class="titleOne"><span><i class="i_icoBeight"></i>自我评价</span></strong>
+	<div class="resumeConF_con clearfix">
+		<p><i class="i_icoBtwelve"></i><%-data.context%></p>
+	</div>
+</div>
+</textarea>
+
+<!--爱好-->
+<textarea id="resume-hobbies">
+<div class="infoBox resume-box" id="resume-hobbies" data-key="hobbies">
+	<strong class="titleOne"><span><i class="i_icoBsix"></i>兴趣爱好</span></strong>
+	<div class="resumeConF_con clearfix">
+		<p><i class="i_icoBtwelve"></i><%-data.context%></p>
+	</div>
+</div>
+</textarea>
+
+<!--主修课程-->
+<textarea id="resume-subject">
+<div class="infoBox resume-box" id="resume-subject" data-key="subject">
+	<strong class="titleOne"><span><i class="i_icoBseven"></i>主修课程</span></strong>
+	<div class="resumeConF_con clearfix">
+		<p><i class="i_icoBtwelve"></i><%-data.title%></p>
+	</div>
+</div>
+</textarea>
+</div>
+<!-- <div class="resumeConF_body clearfix">
+				<table cellpadding="3"  style=" border:solid 0px green;width:100%;">
+					<tr>
+						<td valign="top" style="width:50%">
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBone"></i>发表文章</span></strong>
+								<% for(var i = 0; i < data.length; i++ ) { %>
+								<div class="resumeConF_con clearfix">
+									<strong><i class="i_icoBtwelve"></i><%-data[i].title%></strong>
+									<p><%-data[i].e_date_y%>.<%-data[i].e_date_m%>  <%-data[i].paper_name%></p>
+								</div>
+								<%}%>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBtwo"></i>获奖经历</span></strong>
+								<% for(var i = 0; i < data.length; i++ ) { %>
+								<div class="resumeConF_con clearfix">
+									<i class=""></i>
+									<div class="resumeConF_con_info">
+										<strong><%-data[i].name%> <span><%-data[i].p_date_y%>.<%-data[i].p_date_m%></span></strong>
+										<p>校级</p>
+									</div>
+								</div>
+								<%}%>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBthree"></i>校园经历</span></strong>
+								<% for(var i = 0; i < data.length; i++ ) { %>
+								<div class="resumeConF_con clearfix">
+									<strong><i class="i_icoBtwelve"></i>国家基本公共卫生服务项目 | 中国健康教育中心</strong>
+									<p>2014.01-2014.04</p>
+									<p>职责：健康传播材料制作与效果评价，整理关于如何设计平面健康传播的相关材料、撰写如何评价传播材料的传播效果和健康素养的论文。</p>
+								</div>
+								<%}%>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBfour"></i>工作经历</span></strong>
+								<div class="resumeConF_con clearfix">
+									<strong><i class="i_icoBtwelve"></i>国泰君安证券石家庄建华南大街营业部 | 实习客户经理</strong>
+									<p>2014.01-2014.04</p>
+									<p><i class="i_icoBthirteen"></i>预约开户预审与常规业务咨询部门：指导客户填写相关材料和使用相关软件；</p>
+									<p><i class="i_icoBthirteen"></i>呼叫中心部门：进行客户回访、整理2013年度河北省经纪人回访记录表。</p>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBfive"></i>相关技能</span></strong>
+								<div class="resumeConF_con clearfix">
+									<p><i class="i_icoBtwelve"></i>英语CET-4:584分  CET-6:548分</p>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBsix"></i>兴趣爱好</span></strong>
+								<div class="resumeConF_con clearfix">
+									<p><i class="i_icoBtwelve"></i>喜爱音乐、旅游、动漫、看电影、读书</p>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBseven"></i>主修课程</span></strong>
+								<div class="resumeConF_con clearfix">
+									<p><i class="i_icoBtwelve"></i>艺术设计、平面设计、工业设计、基础素描、基础色彩、色彩心理学、视觉结构</p>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBeight"></i>自我评价</span></strong>
+								<div class="resumeConF_con clearfix">
+									<p><i class="i_icoBtwelve"></i>工作积极认真，细心负责，熟练运用办公自动化软件，具有较好的内外协作能力，有八年以上工作经验。对企业行政管理有较为丰富的经验和独到的见解。</p>
+								</div>
+							</div>
+						</td>
+						<td valign="top" style="width:50%">
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBnine"></i>教育背景</span></strong>
+								<div class="resumeConF_con clearfix">
+									<p class="fl">2012.09-2012.07</p>
+									<div class="fr">
+										<p><strong>天津财经大学</strong> | <span>硕士 | 金融管理</span></p>
+										<p>成绩：86.26分 | 专业排名：12/100</p>
+									</div>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBten"></i>科研经历</span></strong>
+								<div class="resumeConF_con clearfix">
+									<strong><i class="i_icoBtwelve"></i>关于宜林反人类进化的研究 | 主导人</strong>
+									<span>2014.01-2014.04</span>
+									<p>健康传播材料制作与效果评价，整理关于如何设计平面健康传播的相关材料、撰写如何评价传播材料的传播效果和健康素养的论文。</p>
+								</div>
+							</div>
+							<div class="infoBox" id="drag-base">
+								<strong class="titleOne"><span><i class="i_icoBeleven"></i>培训经历</span></strong>
+								<div class="resumeConF_con clearfix">
+									<strong><i class="i_icoBtwelve"></i>ADOBE实用基础培训 | ADOBE中国</strong>
+									<span>2014.01-2014.04</span>
+									<p>Photoshop的专长在于图像处理，而不是图形创作。图像处理是对已有的位图图像进行编辑加工处理以及运用一些特殊效果，其重点在于对图像的处理加工；图形创作软件是按照自己的构思创意，使用矢量图形来设计图形。</p>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="static/js/common.js"></script>
+</div>
+ -->
