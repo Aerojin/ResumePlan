@@ -47,9 +47,11 @@
             });
 
             this.ui.btnDownload.click(function () {
-                var data = _this.model.get("main");
+                var data = _this.model.getData();
 
-                _this.model.download(data.id);
+                window.open("/preview.html?m_id=" + data.main.id);
+                //window.location.href="/preview.html?s_id=" + data.main.id; 
+                ///_this.model.download(data.id);
             });
 
             this.ui.body.delegate(".hover-info", "mouseenter", function () {
@@ -70,7 +72,7 @@
                     callback: function (bool) {
                          if(bool){
                             _this.model.removeResume({id: id}, function () {
-                                WE.UI.alert(_this.model.TIPS.DELETE_SUCCESS);
+                                WE.UI.show(_this.model.TIPS.DELETE_SUCCESS, {delay: 2000});
                             });
                          }
                     }
@@ -92,15 +94,15 @@
             });
 
             this.ui.mainNew.click(function () {
-                var mID = $(this).data("m_id");
+                var mID = $(this).data("t_id");
 
-                window.location.href = "/start.html?m_id=" + mID;
+                window.location.href = "/start.html?t_id=" + mID;
             });
 
             this.ui.collectWrap.delegate("li", "click", function () {
-                var mID = $(this).data("m_id");
+                var mID = $(this).data("t_id");
 
-                window.location.href = "/start.html?m_id=" + mID;
+                window.location.href = "/start.html?t_id=" + mID;
             });
         },
 
@@ -125,6 +127,7 @@
             this.ui.mainTitle = $("#main-title");
             this.ui.btnMail = $("#btn-mail");
             this.ui.btnDownload = $("#btn-download");
+            this.ui.mainPhoto = $("#main-photo");
             
 
             this.getNewResume();
@@ -132,7 +135,7 @@
             this.model.getUserResume();
         },
         renderMain: function (data) {
-            var date = new Date(data.update_at);
+            var date = this.model.getDate(data.update_at);
                 date = WE.Date.format("yyyy-MM-dd", date);
 
             this.ui.hoverNew.show();
@@ -140,7 +143,7 @@
             this.ui.main.find(".hover-info").hide();
 
              if(data){
-                this.ui.hoverNew.show();
+                this.ui.hoverNew.hide();
                 this.ui.nowContext.show();
                 this.ui.main.find(".hover-info").show();
                 this.ui.main.find(".hover-info .ico-close").data("id", data.id);
@@ -150,7 +153,8 @@
                 this.ui.mainTitle.text(data.title);
                 this.ui.lblPercent.text(data.percent + "%");
                 this.ui.spanPercent.css({width: data.percent + "%"});
-                this.ui.mainPhoto.attr({src: data.i_img}).parent().show();
+                this.ui.mainPhoto.attr({src: data.image}).parent().show();
+                this.ui.btnUpdate.attr({href: "resume.html?m_id=" + data.id});
             }
         },
         renderData: function (data) {
@@ -194,11 +198,15 @@
         getNewResume: function () {
             var _this = this;
 
-            this.model.getNewResume(function(data) {
-                var template = _.template(_this.template.news);
-                    template = template(data[0]);
+            this.model.getNewResume(function(result) {
+                var data = result.list || [];
 
-                _this.ui.mainNew.html(template).data("m_id", data[0].id);
+                if(data.length > 0){
+                    var template = _.template(_this.template.news);
+                        template = template(data[0]);
+
+                    _this.ui.mainNew.html(template).data("t_id", data[0].id);
+                }
             });
         },
         getCollectResume: function () {
@@ -213,30 +221,27 @@
                         html.push(template(e));
                     });
 
-                    _this.ui.mainCollect.show();
                     _this.ui.collectWrap.html(html.join("\n"));
 
                     return;
                 }
-
-                _this.ui.mainCollect.hide();
             });
         },
 
         template: {
-            news: ['<img src="<%-url%>" />',
+            news: ['<img src="<%-url%>" style="width:190px; height:270px;cursor: pointer;" />',
                     '<span class="userInfo_imgBg"></span>',
-                    '<p class="userInfo_imgP"><%-title%></p>'
+                    '<p class="userInfo_imgP"><%-name%></p>'
                 ].join("\n"),
-            collect: ['<li data-m_id="<%id%>">',
+            collect: ['<li data-t_id="<%-id%>">',
                         '<div class="userInfo_img">',
-                            '<img src="<%-url%>" />',
+                            '<img src="<%-url%>" style="width:191px; height:270px;cursor: pointer;" />',
                         '</div>',
-                        '<p class="userCenterList_name"><%-title%></p>',
+                        '<p class="userCenterList_name"><%-name%></p>',
                     '</li>'].join("\n"),
             resume: ['<li class="info-list">',
                         '<div class="userInfo_img hover-info">',
-                            '<img src="<%=image%>" />',
+                            '<img src="<%=image%>" style="width:190px; height:270px;" />',
                             '<a href="javascript: void(0);" data-id="<%-id%>" class="i_icoCloseX ico-close" style="display:none;"></a>',
                             '<a href="javascript: void(0);" data-index="<%-index%>" class="i_icoLook ico-look" style="display:none;"></a>',
                         '</div>',

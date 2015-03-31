@@ -60,6 +60,7 @@
                         isMain: _this.direct 
                     }, function () {
                         _this.loading = false;
+                        WE.UI.show("主备简历修改成功", {delay: 2000});
                         _this.ui.btnDirect.text(_this.getDirect());
                     });
                 }
@@ -76,7 +77,7 @@
         };
 
         this.edit = function () {
-            window.location.href="/resume.html?s_id=" + _this.id;
+            window.location.href="/resume.html?m_id=" + this.id;
         };
 
         this.share = function () {
@@ -103,7 +104,9 @@
         };
 
         this.down = function () {
-            this.model.download(this.id);
+            //window.location.href="/preview.html?m_id=" + this.id;
+            //this.model.download(this.id);
+            window.open("/preview.html?m_id=" + this.id);
         };
 
         this.getDirect = function () {

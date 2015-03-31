@@ -148,7 +148,7 @@
         removeResume: function (args, callback) {
         	var options = {
                 data: {
-                    id: args.id
+                    m_id: args.id
                 }
             };
 
@@ -161,10 +161,10 @@
             };
 
             options.error = function (result) {
-                WE.UI.alert(result.msg);
+                WE.UI.show(result.msg, {className:"msgRed", delay: 2000});
             };
 
-            WE.Api.RemoveResume(options, this);
+            WE.Api.removeResume(options, this);
 
         },
 
@@ -174,8 +174,9 @@
 
             _.each(data, function (e, index) {
                 e.index = index;
-                e.image = e.i_url;
-                e.direct = e.is_main;
+                e.image = e.i_img;
+                e.percent = e.percent || 80;
+                e.direct = !!parseInt(e.isMain);
 
                 array.push(e);
             });
@@ -185,9 +186,8 @@
                 main = array.splice(0,1);
             }*/
 
-
-            this.model.set({data: array}, {silent: true});
-            this.model.trigger("change:data");
+            this.set({data: array}, {silent: true});
+            this.trigger("change:data");
             //this.model.trigger("change:main");
             
         },
@@ -200,7 +200,7 @@
             };
 
         	_.each(data, function (e, index) {
-                if(e.is_main){
+                if(!!parseInt(e.isMain || 0)){
                     result.main = e;
                 }else{
             		result.data.push(e);
@@ -209,9 +209,13 @@
 
             if(!result.main && result.data.length > 0){                
                 result.main = result.data.splice(0,1);
+                result.main = result.main[0];
             }
 
         	return result;
+        },
+        getDate: function (tm) {
+            return new Date(parseInt(tm) * 1000); 
         }
 
     }));

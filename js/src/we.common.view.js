@@ -101,6 +101,9 @@
 
                 this.ui.appLogin.hide();
                 this.ui.btnUser.show();
+
+                this.ui.userName.attr({href: "user_center.html"});
+                this.ui.userPhoto.attr({href: "user_center.html"});
             }
         },
         isLogin: function () {

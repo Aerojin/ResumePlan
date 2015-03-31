@@ -10,6 +10,7 @@
 
         initialize: function (options) {
             this.model = options.model;
+            this.request = this.getRequest();
 
             this.initEvents();
             this.render();
@@ -37,13 +38,15 @@
         render: function () {
             this.ui = {};
             this.ui.main = $("#main");
+
+            this.model.getResumeDetail(this.request.m_id);
         },
 
         loadInstance: function (data) {
             this.instance = WE.Resume.getInstance({
                 data: data,
-                sort: data.sort
-                mid: this.getRequest().m_id
+                sort: data.sort,
+                mid: this.request.m_id
             });
         },
 
@@ -53,7 +56,7 @@
                 type: result.cid,
                 template: result.temp,
                 instance: this.instance,
-                container: this.ui.resume
+                container: this.ui.main
             });
         },
 

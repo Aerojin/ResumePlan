@@ -147,7 +147,7 @@
                 model.set(obj);                
             });
 
-            this.ui.txtInput.keyup(function () {
+            this.ui.txtInput.keyup(function (e) {
                 if (e.which == _this.keys.enter) {
                     $(this).blur();
                     _this.ui.btnLogin.click();

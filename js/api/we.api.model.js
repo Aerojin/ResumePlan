@@ -335,7 +335,7 @@
     WE.Api.getNewResume = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'user', command:'getNewResume'};
+        var requestUrl = {model:'resume', command:'getNewResume'};
         
         //options.httpMethod = "get";
 
@@ -355,7 +355,7 @@
     WE.Api.getCollectResume = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'user', command:'getCollectResume'};
+        var requestUrl = {model:'user', command:'likelist'};
         
         //options.httpMethod = "get";
 
@@ -384,7 +384,17 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
-    /*主备简历切换*/
+    /*
+        *切换主备简历
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.id 简历ID
+    */
     WE.Api.actionMain = function (options, context){
         var data = options.data || {};
         var requestBody = data;
