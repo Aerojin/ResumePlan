@@ -134,7 +134,7 @@
         },
 
         before: function (args) {
-            var data = this.getElement(key);
+            var data = this.getElement(args.key);
             var dom = $(this.getID(args.key));
 
             if(!data.show){

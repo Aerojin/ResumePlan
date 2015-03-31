@@ -85,6 +85,7 @@
 
             var parameter = {
                 master: this,
+                mid: this.mid,
                 data: this.data
             };
 

@@ -31,6 +31,11 @@
 		},
 		getMsgByCode: function (code){
 			if(code == 999){
+				$.cookie(WE.Constant.COOKIE_USER, null);
+                $.cookie(WE.Constant.COOKIE_USERID, null);
+                $.cookie(WE.Constant.COOKIE_PHOTO, null);
+                $.cookie(WE.Constant.COOKIE_TOKEN, null);
+                
 				return "您还未登陆, 请登陆后再操作!";
 			}
 

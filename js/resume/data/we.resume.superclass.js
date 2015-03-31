@@ -8,6 +8,7 @@
         name: _class,    
 
         initialize: function (args) {
+            this.set({mid: args.mid});
             this.setData(args.data[this.getTableName()]);
         },
 

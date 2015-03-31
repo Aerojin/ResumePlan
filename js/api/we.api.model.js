@@ -167,7 +167,7 @@
     };
 
     /*
-        *重置密码
+        *登出
         *@param {Object} options 初始化参数集
         *@param {Function} options.fail 业务错误回调函数
         *@param {Function} options.error 接口错误回调函数
@@ -179,7 +179,7 @@
     WE.Api.Logout = function (options, context) {
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'user', command:'forgetpwd'};
+        var requestUrl = {model:'user', command:'logout'};
         
         //options.httpMethod = "get";
 
@@ -366,7 +366,7 @@
     WE.Api.sendMail = function (options, context){
         var data = options.data || {};
         var requestBody = data;
-        var requestUrl = {model:'user', command:'sendMail'};
+        var requestUrl = {model:'resume', command:'sendmail'};
         
         //options.httpMethod = "get";
 

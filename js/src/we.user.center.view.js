@@ -36,14 +36,14 @@
             });
 
             this.ui.btnUpdate.click(function () {
-                var data = _this.model.get("main");
-                window.location.href="/resume.html?s_id=" + data.id;                
+               var data = _this.model.getData();
+                window.location.href="/resume.html?s_id=" + data.main.id;                
             });
 
             this.ui.btnMail.click(function () {
-                var data = _this.model.get("main");
+                var data = _this.model.getData();
 
-                _this.model.sendMail(data.id);
+                _this.model.sendMail(data.main.id);
             });
 
             this.ui.btnDownload.click(function () {
