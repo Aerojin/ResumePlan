@@ -688,7 +688,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll .scrollWindow{width:1168px; height:209px; padding:20px 0; overflow:hidden; margin:0 auto; position:relative; zoom:1;}
 .scroll .scroll_ul{width:5000000px;}
 .scroll li{float:left; margin:0 15px; _display:inline; width:127px;}
-.scroll li .scrollBox{position:relative; zoom:1; background-color:#fff; border:1px solid #ededed; width:125px; height:177px; cursor:pointer;}
+.scroll li .scrollBox{position:relative; zoom:1; background-color:#fff; border:0px solid #ededed; width:125px; height:177px; cursor:pointer;}
 .scroll li .i_icoSok{position:absolute; top:59px; left:33px;}
 .scroll li.focus .scrollBox{border:1px solid #23b510;
 	-moz-box-shadow:0 0 4px #23b510;
@@ -1195,5 +1195,5 @@ text-align:center;padding:7px 15px;display:inline-block;background-color:#68af02
     -moz-animation: menus .2s ease-out;
     animation: menus .2s ease-out;
 }
-.msgRed{text-align:center;padding:4px 15px;display:inline-block;background-color:#de0202;color:#FFF;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;_font-family:"\5b8b\4f53";}
+.msgRed{text-align:center;padding:7px 15px;display:inline-block;background-color:#de0202;color:#FFF;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;_font-family:"\5b8b\4f53";}
 .msgYellow{background-color:#ffffaa;border:1px solid #ffffaa;color:#444;_font-family:"\5b8b\4f53";}

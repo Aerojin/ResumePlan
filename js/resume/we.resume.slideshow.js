@@ -40,19 +40,9 @@
 		};
 
 		this.init = function(){
-			var html = [];
-			var template = _.template(this.template);
 
-			for(var i = 0; i < this.data.length; i++){
-				html.push(template({
-					title: this.data[i].title,
-					type: this.getType(this.data[i].type)
-				}));
-			}
-
-			this.parentElements.html(html.join("\n")).css({"margin-left": this.range});
-			this.regEvent();
-			this.setButton(this.pageIndex);
+			this.getData();
+			
 		};
 
 		this.regEvent = function(){
@@ -64,6 +54,12 @@
 
 			this.btnNext.find('.enabled').click(function () {
 				_this.next();
+			});
+
+			this.parentElements.find("li").click(function () {
+				var id = $(this).data("id");
+
+				_this.onChange(id);
 			});
 		};
 
@@ -111,7 +107,7 @@
 			this.parentElements.animate({
 				"margin-left":moveRange
 			}, this.time, function () {
-				_this.onChange(_this.pageIndex);
+				//_this.onChange(_this.pageIndex);
 			});	
 		};
 
@@ -132,13 +128,58 @@
 			}
 		};
 
+		this.append = function (data) {
+			var html = [];
+			var template = _.template(this.template);
+
+			for(var i = 0; i < data.length; i++){
+				html.push(template({
+					id: data[i].id,
+					url: data[i].url,
+					title: data[i].name
+				}));
+			}
+
+			this.parentElements.html(html.join("\n")).css({"margin-left": this.range});
+			
+		};
+
+
+		this.getData = function () {
+			var options = {};
+
+			options.data = {
+                type: "",
+                is_money: "",
+                pageIndex: 1,
+                pageSize: 18
+            };
+
+			options.success = function (result) {
+				this.pageIndex = 0;
+				this.data = result.data.list;
+				this.pageCount = this.data.length - 5;
+				this.pageCount = this.pageCount <= 0 ? 1 : this.pageCount;
+
+				this.append(this.data);
+				this.setButton(this.pageIndex);
+				this.regEvent();
+			};
+
+			options.error = function (result) {
+
+			};
+
+			WE.Api.getTempList(options, this);
+		},
+
 		this.onChange = function( index ){
 			
 		};
 
 		this.template = [
-			'<li>',
-				'<div class="scrollBox"><%=type%></div>',
+			'<li data-id="<%-id%>">',
+				'<div class="scrollBox" style="border-width:0px;"><img width="125px" height="177px" src="<%-url%>"/></div>',
 				'<p class="scroll_li_name"><%-title%></p>',
 			'</li>'
 		].join("\n");

@@ -9,7 +9,8 @@
 
         defaults: function () {
             return {
-                module: {}
+                module: {},
+                templateType: null
             };
         },
 
@@ -27,7 +28,10 @@
             var _this = this;
 
             this.on("change:templateType", function (args) {
-                this.set({module: args.data});
+                var type = this.get("templateType");
+                var module = this.config.getConfig({type:type});
+
+                this.set({module: module},{silent:true});
             });
 
             this.on("change:data", function (args) {
@@ -56,7 +60,6 @@
                 var mid = this.mid;
                 var data = this.get("module");
 
-                console.log("module", data);
 
                 var options = {
                     data: {
@@ -126,8 +129,6 @@
 
             //创建爱好
             this.hobbies = new WE.Resume.Data.Hobbies(parameter);
-
-            this.set({module: this.config.getConfig()});
         },
 
         getData: function (key) {

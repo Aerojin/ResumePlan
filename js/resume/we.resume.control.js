@@ -7,14 +7,17 @@
         
         name: _class,
 
+
         initialize: function (options) {
             
+            this.notDrag = options.notDrag || false;
             this.template = options.template;
             this.instance = options.instance;
             this.container = options.container;
 
             this.render();
             this.initEvents();
+            this.initPageEvent();
         },
 
         initEvents: function () {
@@ -33,6 +36,18 @@
 
             this.instance.on("change:ui", function (args) {
                 _this.before(args)
+            });
+        },
+
+        initPageEvent: function () {
+            var _this = this;
+
+            this.container.delegate(".infoBox", "mouseenter", function () {
+                $(this).addClass('hover');
+            });
+
+            this.container.delegate(".infoBox", "mouseleave", function () {
+                $(this).removeClass('hover');
             });
         },
 
@@ -74,13 +89,16 @@
 
             for(var i =0; i < len; i++){
                 var obj = array[i];
-                var key = obj.key;
 
-                if(_.indexOf(this.defaults, key) > -1 || !obj.show){
-                    continue;
+                if(obj){
+                    var key = obj.key;
+
+                    if(_.indexOf(this.defaults, key) > -1 || !obj.show){
+                        continue;
+                    }
+                    
+                    this.append(key);
                 }
-                
-                this.append(key);
             }
         },
 
@@ -94,7 +112,7 @@
                     data.element.appendTo(this.ui.right);
                 }
 
-                this.appendDrag(key);
+                this.appendDrag(key, data.element);
             }
         },
 
@@ -134,7 +152,7 @@
             }
 
             dom.before(data.element).remove();
-            this.appendDrag(args.key);
+            this.appendDrag(args.key, data.element);
 
             if(args.key == "base"){
                 this.ui.header.find("img").attr({src: data.i_photo});
@@ -182,7 +200,7 @@
             return array;
         },
 
-        appendDrag: function (key) {
+        appendDrag: function (key, element) {
             var _this = this;
             var newId = this.getID(key);
             var config = this.instance.getModuleByKey(key);
@@ -191,9 +209,11 @@
                 this.drag = {};
             }
 
-            if(!config.drag){
+            if(!config.drag || this.notDrag){
                 return;
             }
+
+            element.addClass("dragDiv");
 
             this.drag[key] = new WE.Drag({
                 dragClass: ".dragDiv",
@@ -203,11 +223,11 @@
                 onMouseUp: function (element) {
                     element.css({cursor: "default"});
                     element.removeClass("focus");
+                    _this.instance.setSort(_this.getModuleSort());
                 },
                 onMouseDown: function (element) {
                     element.css({cursor: "move"});
                     element.addClass("focus").removeClass("hover");
-                    _this.instance.setSort(_this.getModuleSort());
                 }
             });
         },
@@ -216,12 +236,10 @@
             var element = this.ui.wrap.find(".infoBox");
 
             _.each(element, function (e) {
-                var key = e.attr(id).replace("resume-", "");
-
-                array.push(key);
+                array.push($(e).data("key"));
             });
 
-            return key;
+            return array;
         }
 
     }));

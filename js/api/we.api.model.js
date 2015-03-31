@@ -448,7 +448,8 @@
         *@param {Object} context 上下文
 
         *@param {Object} options.data 提交数据
-        *@param {Int} options.data.tid 模版ID        
+        *@param {Int} options.data.tid 模版ID 
+        *@param {Int} options.data.isPreview 模版类型 
     */
     WE.Api.getTemplate = function (options, context){
         var data = options.data || {};
@@ -492,11 +493,7 @@
         var data = options.data || {};
         var requestBody = data;
         var requestUrl = {model:'resume', command:'sort'};
-
             requestBody.sort = JSON.stringify(requestBody.sort);
-            //requestBody.sort = requestBody.sort.replace(new RegExp("\"","gi"), "'");
-
-            
         
         //options.httpMethod = "get";
 

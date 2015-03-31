@@ -63,6 +63,8 @@
             REGISTER: "register"
         },
 
+        keys: { up: 38, down: 40, enter: 13, tab: 9 },
+
         el: '<ul class="windowFrom">\
                 <li>\
                     <div class="inputBox">\
@@ -143,6 +145,13 @@
                     obj[key] = $(this).val().trim();                
 
                 model.set(obj);                
+            });
+
+            this.ui.txtInput.keyup(function () {
+                if (e.which == _this.keys.enter) {
+                    $(this).blur();
+                    _this.ui.btnLogin.click();
+                }
             });
         },
 

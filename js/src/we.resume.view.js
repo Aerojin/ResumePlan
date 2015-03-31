@@ -11,15 +11,12 @@
 
         initialize: function (options) {
             this.model = options.model;
-            this.instance = options.instance;
 
             this.initEvents();
             this.render();
             this.initPageEvents();
 
             var args = this.getRequest();
-
-            this.model.getTemplate(args.t_id);
             this.model.getResumeDetail(args.m_id);
         },
 
@@ -36,13 +33,20 @@
                 }
             });
 
-            this.model.on("change", function() {
+            this.model.on("change:data", function() {
                 var data = this.get("data");
+                var infoMain = data.InfoMain[0];
+
+                _this.loadInstance(data);
+                _this.ui.title.text(infoMain.title);
+                _this.model.getTemplate(infoMain.tid);
+            });
+
+            this.model.on("change:template", function () {
                 var template = this.get("template");
 
-                if(data && template){
-                    _this.pageLoad(data, template);
-                }
+                _this.instance.set({templateType: template.cid});
+                _this.pageLoad(template);
             });
 
         },
@@ -50,12 +54,6 @@
         initPageEvents: function () {
             var _this = this;
             var ui = this.ui;
-
-            ui.infoBox.hover(function() {
-                $(this).addClass('hover');
-            }, function() {
-                $(this).removeClass('hover');
-            });
 
             ui.btnReplace.click(function () {
                 var scroll = _this.model.get("scroll");
@@ -91,8 +89,6 @@
             this.ui.btnReplace = $("#btn-replace");
             this.ui.divScroll = $("#scroll");
             this.ui.title = $("#resume-title");
-
-            this.ui.infoBox = $(".infoBox");
         },
 
         initSlideShow: function () {
@@ -101,31 +97,29 @@
                 next: this.ui.btnRight,
                 pageSize: 1,
                 range: 157,
-                parentElements: this.ui.wrapSlide,
-                data: this.model.getTemplate()
+                parentElements: this.ui.wrapSlide
             };
-
 
             this.slideShow = new WE.Resume.SlidesShow(options);
 
-            this.slideShow.onChange = function (index) {
-
+            this.slideShow.onChange = function (id) {
+                console.log("id", id)
             };
         },
 
-        pageLoad: function (data, template) {
+        pageLoad: function (template) {
+            this.initZoom();
+            this.initMenu();
+            this.initSlideShow();
+            this.initControl(template);
+        },
+
+        loadInstance: function (data) {
             this.instance = WE.Resume.getInstance({
                 mid: this.getRequest().m_id,
                 data: data,
-                sort: data.sort,
-                type: template.cid
+                sort: data.sort
             });
-
-            this.initZoom();
-            this.initMenu();
-            this.initControl(template);
-
-            this.ui.title.text(this.instance.getData("main").title);
         },
 
         initZoom: function () {

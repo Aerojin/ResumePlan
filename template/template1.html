@@ -20,7 +20,7 @@
 			<table id="dragTable" cellpadding="2"  style=" border:solid 0px green;width:98%;">
 				<tr>
 					<td valign="top" style="width:50%" id="resume-left">
-						<div class="infoBox" id="resume-base">
+						<div class="infoBox resume-box" id="resume-base" data-key="base">
 							<h2>基本信息</h2>
 							<ul class="infoBoxList">
 								<li><strong>性别</strong><span><%-base.sex%></span></li>
@@ -32,7 +32,7 @@
 						</div>
 					</td>
 					<td valign="top" style="width:50%" id="resume-right">
-						<div class="infoBox" id="resume-education">
+						<div class="infoBox resume-box" id="resume-education" data-key="education">
 							<h2>教育背景</h2>
 							<ul class="infoBoxD">
 								<% for(var i = 0; i < education.length; i++ ) { %>
@@ -58,9 +58,9 @@
 		</div>
 	</div>
 </textarea>
-<!--教育背景-->
+<!--基本信息-->
 <textarea id="resume-base">
-<div class="infoBox" id="resume-base">
+<div class="infoBox resume-box" id="resume-base" data-key="base">
 	<h2>基本信息</h2>
 	<ul class="infoBoxList">
 		<li><strong>性别</strong><span><%-data.sex%></span></li>
@@ -73,7 +73,7 @@
 </textarea>	
 <!--教育背景-->
 <textarea id="resume-education">
-<div class="infoBox" id="resume-education">
+<div class="infoBox resume-box" id="resume-education" data-key="education">
 	<h2>教育背景</h2>
 	<ul class="infoBoxD">
 		<% for(var i = 0; i < data.length; i++ ) { %>
@@ -97,7 +97,7 @@
 
 <!--校园经历-->
 <textarea id="resume-school">
-	<div class="infoBox dragDiv" id="resume-school">
+	<div class="infoBox resume-box" id="resume-school" data-key="school">
 		<h2>校园经历</h2>
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -113,7 +113,7 @@
 
 <!--发表文章-->
 <textarea id="resume-article">
-	<div class="infoBox dragDiv" id="resume-article">
+	<div class="infoBox resume-box" id="resume-article" data-key="article">
 		<h2>发表文章</h2>
 		<ul class="infoBoxListA">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -131,7 +131,7 @@
 
 <!--获奖经历-->
 <textarea id="resume-prize">
-	<div class="infoBox dragDiv" id="resume-prize">
+	<div class="infoBox resume-box" id="resume-prize" data-key="prize">
 		<h2>获奖经历</h2>
 		<ul class="infoBoxListA">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -148,7 +148,7 @@
 
 <!--技能-->
 <textarea id="resume-skill">
-	<div class="infoBox dragDiv" id="resume-skill">
+	<div class="infoBox resume-box" id="resume-skill" data-key="skill">
 		<h2>技能</h2>
 		<ul class="infoBoxListA">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -160,7 +160,7 @@
 
 <!--证书-->
 <textarea id="resume-certificate">
-	<div class="infoBox dragDiv" id="resume-certificate">
+	<div class="infoBox resume-box" id="resume-certificate" data-key="certificate">
 		<h2>证书</h2>
 		<ul class="infoBoxListA">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -172,7 +172,7 @@
 
 <!--工作经历-->
 <textarea id="resume-work">
-	<div class="infoBox dragDiv" id="resume-work">
+	<div class="infoBox resume-box" id="resume-work" data-key="work">
 		<h2>工作经历</h2>
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -188,7 +188,7 @@
 
 <!--项目经历-->
 <textarea id="resume-project">
-	<div class="infoBox dragDiv" id="resume-project">
+	<div class="infoBox resume-box" id="resume-project" data-key="project">
 		<h2>项目经历</h2>
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -204,7 +204,7 @@
 
 <!--科研经历-->
 <textarea id="resume-research">
-	<div class="infoBox dragDiv" id="resume-research">
+	<div class="infoBox resume-box" id="resume-research" data-key="research">
 		<h2>科研经历</h2>
 		<ul class="infoBoxListB">
 			<% for(var i = 0; i < data.length; i++ ) { %>
@@ -220,7 +220,7 @@
 
 <!--自我评价-->
 <textarea id="resume-evaluation">
-	<div class="infoBox dragDiv" id="resume-evaluation">
+	<div class="infoBox resume-box" id="resume-evaluation" data-key="evaluation">
 		<h2>自我评价</h2>
 		<div class="infoBoxE"><%-data.context%></div>
 	</div>
@@ -228,7 +228,7 @@
 
 <!--爱好-->
 <textarea id="resume-hobbies">
-	<div class="infoBox dragDiv" id="resume-hobbies">
+	<div class="infoBox resume-box" id="resume-hobbies" data-key="hobbies">
 		<h2>爱好</h2>
 		<div class="infoBoxE">
 			<%-data.context%>
@@ -238,7 +238,7 @@
 
 <!--主修课程-->
 <textarea id="resume-subject">
-	<div class="infoBox dragDiv" id="resume-subject">
+	<div class="infoBox resume-box" id="resume-subject" data-key="subject">
 		<h2>主修课程</h2>
 		<ul class="infoBoxListB">
 			<li>

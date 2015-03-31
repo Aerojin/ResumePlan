@@ -212,5 +212,14 @@
 			"./js/kit/we.resume.control.model.js",
 			"./js/kit/we.resume.control.view.js"
 		]
+	},
+	"preview":{
+		"merge": true,
+		"compress": true,
+		"name": "we.preview.pack.js",
+		"src":[
+			"./js/kit/we.preview.model.js",
+			"./js/kit/we.preview.view.js"
+		]
 	}
 }

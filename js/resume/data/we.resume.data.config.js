@@ -15,22 +15,20 @@
 
         initialize: function (args) {
             this.sort = args.sort;
-            this.type = args.type;
 
             if(this.sort && this.sort.length > 0){
-                console.log("sort");
-                var sort = $.parseJSON(this.sort[0].ser_sot);
-                //var sort1 = sort.sort.replace(new RegExp("'","gi"), "\"");
-
-                window._sort= sort;
-                console.log("sort",sort);
-                //this.sort = $.parseJSON(this.sort[0].ser_sot);
+                this.sort = $.parseJSON(this.sort[0].ser_sot);
+                this.sort = $.parseJSON(this.sort.sort);
             }
         },
 
-        getConfig: function () {
+        getConfig: function (args) {
             if(this.sort){
-                //return this.sort;
+                return this.sort;
+            }
+
+            if(!this.type){
+                this.type = args.type;
             }
 
             switch(this.type){
