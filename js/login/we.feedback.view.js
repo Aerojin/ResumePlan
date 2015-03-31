@@ -106,7 +106,7 @@
             }
 
             options.data = {
-                text: context
+                f_context: context
             };
 
             options.success = function (result) {
