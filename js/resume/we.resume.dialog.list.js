@@ -10,6 +10,7 @@
             }];
         */
 
+        this.key = options.key;
         this.data = options.data;
         this.container = options.container;
 

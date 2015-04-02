@@ -191,7 +191,7 @@
         		_this.model.set({pageIndex: pageIndex});
         	});
 
-            this.ui.sidebar.delegate("li", "click", function () {
+            this.ui.sidebar.delegate("li.action", "click", function () {
                 var key = $(this).data("key");
                 var options = _this.getOptions(key);
                 
@@ -205,20 +205,20 @@
                 return false;
         	});
 
-            this.ui.sidebar.delegate("li", "mouseenter", function () {
+            this.ui.sidebar.delegate("li.action", "mouseenter", function () {
                 $(this).find(".btn-hover").show();
             });
 
-            this.ui.sidebar.delegate("li", "mouseleave", function () {
+            this.ui.sidebar.delegate("li.action", "mouseleave", function () {
                 $(this).find(".btn-hover").hide();
             });
 
         	this.ui.sidebar.delegate("#btn-back", "click", function () {
-
+                window.location.href = "user_center.html";
         	});
 
         	this.ui.sidebar.delegate("#btn-exports", "click", function () {
-        		window.location.href = "user_center.html";
+        		console.log("正在导出中...")
         	});
 
             $(window).resize(function () {
@@ -227,7 +227,7 @@
                 var wrapWidth = _this.ui.wrap.width();
                 var width = maxWidth - offset.left - wrapWidth - 815;
                 
-                _this.ui.wrap.css({right: width / 2});
+                _this.ui.wrap.css({right: width / 2}).show();
             });
 
             $(window).resize();
@@ -285,6 +285,7 @@
         gotoPage: function (pageIndex) {
             var html = []
         	var page = this.page[pageIndex];
+            var pageCount = this.page.length - 1;
         	var template = _.template(this.template);
 
         	for(var i = 0; i < page.length; i++){
@@ -300,6 +301,12 @@
 
                 if(_.isUndefined(isLock)){
                     config.actionClass = "";
+                }
+
+                if(pageIndex == pageCount){
+                    config.actionClass= "on";
+                }else{
+                    config.actionClass = config.actionClass + " action"
                 }
 
                 html.push(template(config));

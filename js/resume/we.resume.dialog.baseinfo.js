@@ -250,7 +250,7 @@
 					'<input type="text" id="<%-cid%>-age" name="i_age" class="input mt_5" />',
 				'</li>',
 				'<li>',
-					'<label>名族</label>',
+					'<label>民族</label>',
 					'<input type="text" id="<%-cid%>-nation" name="i_nat" class="input mt_5" placeholder="如投递企业有特殊需要否则不建议填写" />',
 				'</li>',
 				'<li>',

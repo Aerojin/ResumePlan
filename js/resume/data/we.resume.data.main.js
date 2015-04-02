@@ -37,10 +37,6 @@
             return {};
         },
 
-        getData: function () {
-            return _.clone(this.get("data"));
-        },
-
         getTableName: function () {
             return "InfoMain";
         }

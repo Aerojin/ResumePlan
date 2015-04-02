@@ -59,6 +59,21 @@
                 _this.logout();
             });
 
+            this.ui.btnScroll.click(function () {
+                $("body").animate({scrollTop: 0}, 500);
+            });
+
+            $(window).scroll(function () {
+                var scrollTop = $(this).scrollTop();
+
+                if(scrollTop > 150){
+                    _this.ui.btnScroll.show();
+                    return;
+                }
+                
+                _this.ui.btnScroll.hide();
+            });
+
             if(this.ui.topHead.length > 0){
                 $(window).scroll(function () {
                     var scrollTop = $(this).scrollTop();
@@ -68,7 +83,9 @@
                         _this.ui.topHead.addClass("headerTopFixed");
                     }else{
                         _this.ui.topHead.removeClass("headerTopFixed");
-                    } 
+                    }
+
+                    
                 });
             }
         },
@@ -85,9 +102,12 @@
             this.ui.boxUser = $("#box-user");
             this.ui.topHead = $("#top-head");
             this.ui.userLogout = $("#user-logout");
+            this.ui.btnScroll = $("#btn-scroll-top");
 
             //设置新浪连接
             this.ui.btnSina.attr("href", this.getUrl());
+
+            this.ui.btnScroll.hide();
         },
         initLogin: function () {
             if(this.isLogin()){

@@ -154,8 +154,8 @@
                 var _this = this;
 
                 this.list = new WE.Resume.List({
-                    container: this.ui.divMenu,
-                    data: this.getData()
+                    data: this.getData(),
+                    container: this.ui.divMenu
                 });
 
                 this.list.onRemove = function (data) {

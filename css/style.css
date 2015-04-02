@@ -170,8 +170,8 @@ a:hover{color:#333; text-decoration:none;}
 .i_icoMeight{background-position:-255px -503px; width:35px; height:37px;}
 .i_icoMnine{background-position:-291px -503px; width:25px; height:37px;}
 .i_icoMten{background-position:-317px -503px; width:35px; height:37px;}
-.i_icoMeleven{background-position:-353px -503px; width:30px; height:37px;}
-.i_icoMtwelve{background-position:-384px -503px; width:32px; height:37px;}
+.i_icoMeleven{background-position:-353px -503px !important; width:30px; height:37px;}
+.i_icoMtwelve{background-position:-384px -503px !important; width:32px; height:37px;}
 .i_icoAdds{background-position:0 -541px; width:30px; height:30px;}
 .i_icoAdds:hover{background-position:-62px -541px;}
 .i_icoCut{background-position:-31px -541px; width:30px; height:30px;}
@@ -688,7 +688,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll .scrollWindow{width:1168px; height:209px; padding:20px 0; overflow:hidden; margin:0 auto; position:relative; zoom:1;}
 .scroll .scroll_ul{width:5000000px;}
 .scroll li{float:left; margin:0 15px; _display:inline; width:127px;}
-.scroll li .scrollBox{position:relative; zoom:1; background-color:#fff; border:0px solid #ededed; width:125px; height:177px; cursor:pointer;}
+.scroll li .scrollBox{position:relative; zoom:1; background-color:#fff; border:1px solid #ededed; width:125px; height:177px; cursor:pointer;}
 .scroll li .i_icoSok{position:absolute; top:59px; left:33px;}
 .scroll li.focus .scrollBox{border:1px solid #23b510;
 	-moz-box-shadow:0 0 4px #23b510;
@@ -1033,8 +1033,9 @@ a:hover{color:#333; text-decoration:none;}
 .resumeMenu_list li{float:left; width:85px; height:85px; margin:10px 0 0 10px; _display:inline;}
 .resumeMenu_list li.not a, .resumeMenu_list li.not a:hover{background-color:#222322;}
 .resumeMenu_list a{background-color:#16bb00; color:#fff; width:85px; height:73px; display:inline-block; text-align:center; padding-top:12px; position:relative; zoom:1;}
-.resumeMenu_list a:hover .i_icoInfo, .resumeMenu_list a:hover .i_icoMone, .resumeMenu_list a:hover .i_icoMtwo, .resumeMenu_list a:hover .i_icoMthree, .resumeMenu_list a:hover .i_icoMfour, .resumeMenu_list a:hover .i_icoMfive, .resumeMenu_list a:hover .i_icoMsix, .resumeMenu_list a:hover .i_icoMseven, .resumeMenu_list a:hover .i_icoMeight, .resumeMenu_list a:hover .i_icoMnine, .resumeMenu_list a:hover .i_icoMten, .resumeMenu_list a:hover .i_icoMten, .resumeMenu_list a:hover .i_icoMeleven, .resumeMenu_list a:hover .i_icoMtwelve{background-position:-459px -631px; width:32px !important; height:37px !important; margin-top:13px;}
+.resumeMenu_list a:hover .i_icoInfo, .resumeMenu_list a:hover .i_icoMone, .resumeMenu_list a:hover .i_icoMtwo, .resumeMenu_list a:hover .i_icoMthree, .resumeMenu_list a:hover .i_icoMfour, .resumeMenu_list a:hover .i_icoMfive, .resumeMenu_list a:hover .i_icoMsix, .resumeMenu_list a:hover .i_icoMseven, .resumeMenu_list a:hover .i_icoMeight, .resumeMenu_list a:hover .i_icoMnine, .resumeMenu_list a:hover .i_icoMten, .resumeMenu_list a:hover .i_icoMten{background-position:-459px -631px; width:32px !important; height:37px !important; margin-top:13px;}
 .resumeMenu_list a:hover p{display:none;}
+.resumeMenu_list .on a:hover p{display:block;}
 .resumeMenu_list a .i_icoLock, .resumeMenu_list a .i_icoLookB, .resumeMenu_list a .i_icoUnlook{position:absolute; right:2px; bottom:2px;}
 .resumeMenu_list p{margin-top:12px;}
 .resumeMenuBtn{text-align:center; margin-top:46px;}
