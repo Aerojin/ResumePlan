@@ -105,8 +105,8 @@
 
         this.down = function () {
             //window.location.href="/preview.html?m_id=" + this.id;
-            //this.model.download(this.id);
-            window.open("/preview.html?m_id=" + this.id);
+            this.model.download(this.id);
+            //window.open("/preview.html?m_id=" + this.id);
         };
 
         this.getDirect = function () {

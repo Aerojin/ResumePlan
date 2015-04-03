@@ -70,7 +70,7 @@
             this.ui.body.append(this.ui.mask);
             this.ui.body.append(this.ui.wrap);
             this.ui.body.append(this.ui.close);
-            this.ui.wrap.css({width: $(window).width(), height: $(window).height()});
+            this.ui.wrap.css({width: $(window).width() + 17, height: $(window).height()});
             this.ui.html.css({'padding-right': '17px','margin': '0px', 'overflow-y': 'hidden'});
             //this.ui.container.css({"z-index": 10, "width": "100%", "position": "relative", "text-align": "center"});
         },
@@ -120,8 +120,8 @@
             this.ui.html.css({'padding-right': '0px', 'margin': '0px', 'overflow-y': 'auto'});
         },
 
-        template: ['<div class="windowPreview" id="<%-cid%>-dialog">',
-                    '<div class="imgnav"> ',
+        template: ['<div class="windowPreview" id="<%-cid%>-dialog" style="padding-top:0px;">',
+                    '<div class="imgnav" style="margin: 30px 0;"> ',
                         '<div class="img">',
                             '<ul id="<%-cid%>-content"></ul>',
                             '<div class="button front btn-prev" title="上一张" style="display:none;">',

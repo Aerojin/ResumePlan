@@ -373,7 +373,18 @@
         this.call(requestUrl, requestBody, options, context);
     };
 
-    /*简历下载*/
+    /*
+        *简历下载
+        *@param {Object} options 初始化参数集
+        *@param {Function} options.fail 业务错误回调函数
+        *@param {Function} options.error 接口错误回调函数
+        *@param {Function} options.success 业务成功回调函数
+        *@param {Object} context 上下文
+
+        *@param {Object} options.data 提交数据
+        *@param {Int} options.data.id 简历ID
+        *@param {String} options.data.url 简历预览URL
+            */
     WE.Api.download = function (options, context){
         var data = options.data || {};
         var requestBody = data;

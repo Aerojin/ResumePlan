@@ -49,9 +49,9 @@
             this.ui.btnDownload.click(function () {
                 var data = _this.model.getData();
 
-                window.open("/preview.html?m_id=" + data.main.id);
+                //window.open("/preview.html?m_id=" + data.main.id);
                 //window.location.href="/preview.html?s_id=" + data.main.id; 
-                ///_this.model.download(data.id);
+                _this.model.download(data.main.id);
             });
 
             this.ui.body.delegate(".hover-info", "mouseenter", function () {

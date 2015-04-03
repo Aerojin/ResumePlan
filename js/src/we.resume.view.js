@@ -16,8 +16,8 @@
             this.render();
             this.initPageEvents();
 
-            var args = this.getRequest();
-            this.model.getResumeDetail(args.m_id);
+            this.request = this.getRequest();
+            this.model.getResumeDetail(this.request.m_id);
         },
 
         initEvents: function () {
@@ -116,7 +116,7 @@
 
         loadInstance: function (data) {
             this.instance = WE.Resume.getInstance({
-                mid: this.getRequest().m_id,
+                mid: this.request.m_id,
                 data: data,
                 sort: data.sort
             });
@@ -133,6 +133,7 @@
 
         initMenu: function () {
             this.menuView = new WE.Resume.Menu.View({
+                mid: this.request.m_id,
                 instance: this.instance
             });
         },

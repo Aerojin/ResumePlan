@@ -22,6 +22,8 @@
             MAIL_SUCCESS: "邮件发送成功!"
         },
 
+        IFRAME_NAME: "{0}_iframe",
+
         initialize: function () {
 
         },
@@ -105,21 +107,20 @@
         },
 
         download: function (id) {
-            var options = {
+            var api = "http://www.jianlipro.com/api.php?m=user&a=download";
+            var url = "{0}/preview.html?id={1}".format(window.location.origin, id);
+
+            this.ajaxForm({
+                url: api,
+                formName: this.IFRAME_NAME.format(this.cid),
+                iframeName: this.IFRAME_NAME.format(this.cid),
                 data: {
-                    id: id
+                   id: id,
+                   url: url
                 }
-            };
+            });
 
-            options.success = function (result) {
-                console.log("下载成功")
-            };
-
-            options.error = function (result) {
-                WE.UI.alert(result.msg);
-            };
-
-            WE.Api.sendMail(options, this);
+            WE.UI.show("简历正在下载...", {delay: 3000});
         },
 
         actionMain: function (args, callback) {
@@ -214,8 +215,64 @@
 
         	return result;
         },
+
         getDate: function (tm) {
             return new Date(parseInt(tm) * 1000); 
+        },
+
+        /**
+         * 构建表单请求
+         * @param {Object} options 配置对象
+         * @param {String} options.formName 表单名称
+         * @param {String} options.iframeName iframe名称         
+         * @param {String} options.url 请求地址
+         * @param {String} options.data 数据
+         */
+        ajaxForm : function(options) {
+            var doc = document, 
+                body = doc.body, 
+                form = doc.createElement("form"), 
+                o = options, 
+                data = options.data || {};
+
+            form.name = o.formName;
+            form.method = "post";
+            form.action = o.url;
+
+            if (!document.getElementById(o.iframeName)) {
+                body.appendChild(createIframe(o.iframeName));
+            }
+
+            form.target = o.iframeName;
+            
+            for(var key in data){                
+                form.appendChild(createInput(key, data[key]));
+            }
+            
+            body.appendChild(form);
+            form.submit();
+            body.removeChild(form);
+
+            function createInput(name, value) {
+                var input = document.createElement("input");
+                input.value = value;
+                input.name = name;
+                input.type = "hidden";
+                return input;
+            }
+
+            function createIframe(name) {
+                var iframe;
+                try {
+                    iframe = document.createElement('<iframe name="' + name + '"></iframe>');
+                } catch (ex) {
+                    iframe = document.createElement("iframe");
+                    iframe.name = name;
+                }
+                iframe.id = name;
+                iframe.style.display = "none";
+                return iframe;
+            }
         }
 
     }));
