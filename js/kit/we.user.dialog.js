@@ -59,6 +59,7 @@
             this.ui.button = this.ui.wrap.find(".button");
             this.ui.btnPrev = this.ui.wrap.find(".btn-prev");
             this.ui.btnNext = this.ui.wrap.find(".btn-next");
+
             this.ui.content = this.getCidEl("content", this.ui.wrap);
             //this.ui.container = this.getCidEl("container", this.ui.wrap);
             
@@ -123,7 +124,8 @@
         template: ['<div class="windowPreview" id="<%-cid%>-dialog" style="padding-top:0px;">',
                     '<div class="imgnav" style="margin: 30px 0;"> ',
                         '<div class="img">',
-                            '<ul id="<%-cid%>-content"></ul>',
+                            '<ul class="img_ul" id="<%-cid%>-content">',
+                            '</ul>',
                             '<div class="button front btn-prev" title="上一张" style="display:none;">',
                                 '<a href="javaScript:void(0);" class="pngFix enabled" style="display:none;"></a>',
                                 '<a href="javaScript:void(0);" class="pngFix No disabled"></a>',

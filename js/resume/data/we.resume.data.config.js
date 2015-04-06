@@ -66,28 +66,28 @@
             };
 
             obj.work = {
-                lock: 0,
+                lock: 1,
                 sort: 3,
                 show: 2,
                 drag: 1
             };
 
             obj.project = {
-                lock: 0,
+                lock: 1,
                 sort: 4,
                 show: 2,
                 drag: 1
             };
 
             obj.skill = {
-                lock: 0,
+                lock: 1,
                 sort: 5,
                 show: 2,
                 drag: 1
             };
 
             obj.certificate = {
-                lock: 0,
+                lock: 1,
                 sort: 6,
                 show: 2,
                 drag: 1
@@ -156,7 +156,7 @@
             };
 
             obj.school = {
-                lock: 1,
+                lock: 0,
                 sort: 2,
                 show: 1,
                 drag: 1

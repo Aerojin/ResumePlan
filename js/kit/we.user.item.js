@@ -23,6 +23,7 @@
             this.ui.btnMail = this.ui.wrap.find(".btn-mail");
             this.ui.btnDown = this.ui.wrap.find(".btn-down");
             this.ui.btnDirect = this.ui.wrap.find(".btn-direct");
+            this.ui.content = this.ui.wrap.find(".content");
 
             this.initEvents();
         };
@@ -72,8 +73,16 @@
         };
 
         this.animation = function () {
+            this.render();
             this.ui.wrap.fadeIn();
             this.ui.wrap.css({"display": "list-item"});
+        };
+
+        this.render = function () {
+            new WE.User.Resume.View({
+                id: this.id,
+                container: this.ui.content
+            });
         };
 
         this.edit = function () {
@@ -118,9 +127,13 @@
         };
 
         this.template = [
-            '<li style="display: none;">',
-                '<img src="<%-image%>" width="469" height="664">',
-                '<div class="windowPreview_btn clearfix">',
+            '<li class="img_li clearfix" style="display: none;">',
+                '<div class="resumeCon img_liBox content" style="height:1260px;">',
+                    '<div style="width:100%;height:600px; line-height:630px; overflow:hidden; text-align:center;font-size: 30px;">',
+                        '内容正在加载中...',
+                    '</div>',
+                '</div>',
+                '<div class="windowPreview_btn btn-box clearfix">',
                     '<p class="windowPreview_btnL">',
                         '<a href="javaScript:void(0);" class="i_icoWindOne btn-edit"></a>',
                         '<a href="javaScript:void(0);" class="i_icoWindTwo btn-print"></a>',
