@@ -3,12 +3,13 @@
     var superClass = WE.View.ViewBase;
     var _class = "WE.User.Item";
 
-    WE.namespace(_class, function (options, model) {
+    WE.namespace(_class, function (options, model, container) {
 
         this.id = options.id;
         this.image = options.image;
         this.title = options.title;
         this.direct = options.direct;
+        this.container = container;
         this.model = model;
 
         this.init = function () {
@@ -26,6 +27,9 @@
             this.ui.content = this.ui.wrap.find(".content");
 
             this.initEvents();
+
+            this.container.append(this.getElement());
+            this.animation();
         };
 
         this.initEvents = function () {

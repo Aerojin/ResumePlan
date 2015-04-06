@@ -107,11 +107,10 @@
                 this.ui.btnPrev.find(".disabled").hide();
             }
 
-            var data = this.list[this.pageIndex];
-            var item = new WE.User.Item(data, this.model);
+            this.ui.content.empty();
 
-            this.ui.content.empty().append(item.getElement());
-            item.animation();
+            var data = this.list[this.pageIndex];
+            var item = new WE.User.Item(data, this.model, this.ui.content);
         },
 
         close: function () {

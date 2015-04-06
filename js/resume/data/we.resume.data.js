@@ -228,7 +228,7 @@
 
     //单例,保证按钮和模板间的交互同步
     WE.Resume.getInstance = function (args) {
-        if(!window._RESUME_DATA){
+        if(!window._RESUME_DATA || args.isNew){
             var config = new WE.Resume.Data.Config(args);
             window._RESUME_DATA = new WE.Resume.DataInstance(args, config);
         }

@@ -678,7 +678,7 @@ a:hover{color:#333; text-decoration:none;}
 .next a, .next a.No{position:fixed; right:30px; top:50%; margin-top:-77px; display:block; width:56px; height:154px;}
 .next a{background-position:-444px -344px;}
 .next a.No{background-position:-187px -708px; cursor:default;}
-.windowPreview_btn{ position:fixed; left:50%; bottom:0; width:800px; margin-left:-415px; padding:9px 6px; background-color:#fff;}
+.windowPreview_btn{ position:fixed; left:50%; bottom:0; width:800px; margin-left:-414px; padding:9px 6px; background-color:#fff;}
 .windowPreview_btnL{float:left;}
 .windowPreview_btnL a{margin-right:18px;}
 .windowPreview_btnR{float:right; color:#757575; font-size:20px; font-weight:normal; line-height:36px;}
