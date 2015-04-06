@@ -139,6 +139,12 @@
 
             return [];
         },
+
+        setData: function (key, data) {
+            if(this[key]){
+                this[key].setData(data);
+            }
+        },
         
         getModule: function () {
             return this.get("module");

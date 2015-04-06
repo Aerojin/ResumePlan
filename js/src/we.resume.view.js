@@ -92,6 +92,8 @@
         },
 
         initSlideShow: function () {
+            var _this = this;
+            var data = this.instance.getData("main");
             var options = {
                 prev: this.ui.btnLeft,
                 next: this.ui.btnRight,
@@ -103,7 +105,16 @@
             this.slideShow = new WE.Resume.SlidesShow(options);
 
             this.slideShow.onChange = function (id) {
-                console.log("id", id)
+                var tid = parseInt(data.tid);
+
+                if(id != tid){
+                    data.tid = id;
+                    data.m_id = id;
+
+                    _this.model.replaceTmplate(data, function (result) {
+                        _this.instance.setData("main", result);
+                    });
+                }
             };
         },
 
