@@ -15,6 +15,10 @@
             this.instance = options.instance;
             this.container = options.container;
 
+            this.other = new WE.Resume.Other({
+                type: options.type
+            });
+
             this.render();
             this.initEvents();
             this.initPageEvent();
@@ -108,8 +112,12 @@
             if(data.add){
                 this.ui.left.append(data.element);
 
-                if(this.runHeight()){
+                if(this.runLeft()){
                     data.element.appendTo(this.ui.right);
+                }
+
+                if(this.runRight()){
+                    this.other.add(data.element);
                 }
 
                 this.appendDrag(key, data.element);
@@ -122,6 +130,7 @@
             var config = this.instance.getModuleByKey(key);
             var temp = _.template(this.getModuleTemp(key));
 
+            args.data = data;
             args.show = config.show;
             args.add = !_.isEmpty(data);
             args.element = args.add ? $(temp({data: data})) : "";
@@ -155,7 +164,7 @@
             this.appendDrag(args.key, data.element);
 
             if(args.key == "base"){
-                this.ui.header.find("img").attr({src: data.i_photo});
+                this.ui.header.find("img").attr({src: data.data.i_photo});
             }
         },
 
@@ -179,7 +188,7 @@
             this.maxHeight = height - header - margin;
         },
 
-        runHeight: function () {
+        runLeft: function () {
             var height = 0;
             var infoBox = this.ui.left.find(".infoBox");
 
@@ -189,6 +198,18 @@
 
             return height > this.maxHeight;
         },
+
+        runRight: function () {
+            var height = 0;
+            var infoBox = this.ui.right.find(".infoBox");
+
+            $.each(infoBox, function () {
+                height += $(this).outerHeight(true);
+            });
+
+            return height > this.maxHeight;
+        },
+
         getBySort: function () {
             var array = [];
             var data = this.instance.getModule();

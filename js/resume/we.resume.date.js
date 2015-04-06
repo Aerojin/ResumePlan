@@ -76,7 +76,7 @@
         },
 
         getNowYear: function () {
-        	return new Date().getFullYear();
+        	return 2025;
         },
 
         getNowMonth: function () {

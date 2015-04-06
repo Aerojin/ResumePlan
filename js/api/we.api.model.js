@@ -62,7 +62,7 @@
             return "{0}/api.php?m={1}&a={2}".format(this.getHost, api.model, api.command);
         },
         getHost: function () {
-            return "http://www.jianlipro.com";
+            return location.origin;
         },
         checkData: function (data) {
             if(_.isObject(data)){

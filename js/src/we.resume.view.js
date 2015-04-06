@@ -9,6 +9,8 @@
 
         template: "",
 
+        IFRAME_NAME: "{0}_iframe",
+
         initialize: function (options) {
             this.model = options.model;
 
@@ -62,6 +64,10 @@
                 _this.model.set({scroll: !scroll});
             });
 
+            ui.btnExport2.click(function () {
+                _this.exports();
+            });
+
             $(document).scroll(function() {
                 if(_this.model.get("scroll")){
 
@@ -89,6 +95,7 @@
             this.ui.btnReplace = $("#btn-replace");
             this.ui.divScroll = $("#scroll");
             this.ui.title = $("#resume-title");
+            this.ui.btnExport2 = $("#btn-export2");
         },
 
         initSlideShow: function () {
@@ -157,6 +164,25 @@
                 template: result.temp,
                 instance: this.instance
             });
+        },
+
+        exports: function () {
+            var id = this.request.m_id;
+            var origin = location.origin;
+            var api = "{0}/api.php?m=user&a=download".format(origin);
+            var url = "{0}/preview.html?id={1}".format(window.location.origin, id);
+
+            this.model.ajaxForm({
+                url: api,
+                formName: this.IFRAME_NAME.format(this.cid),
+                iframeName: this.IFRAME_NAME.format(this.cid),
+                data: {
+                   id: id,
+                   url: url
+                }
+            });
+
+            WE.UI.show("简历正在导出中...", {delay: 3000});
         },
 
         getRequest: function () {

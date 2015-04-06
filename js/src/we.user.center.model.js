@@ -107,7 +107,8 @@
         },
 
         download: function (id) {
-            var api = "http://www.jianlipro.com/api.php?m=user&a=download";
+			var origin = location.origin;
+            var api = "{0}/api.php?m=user&a=download".format(origin);
             var url = "{0}/preview.html?id={1}".format(window.location.origin, id);
 
             this.ajaxForm({
