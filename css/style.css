@@ -727,7 +727,7 @@ a:hover{color:#333; text-decoration:none;}
 
 /*补丁容器*/
 .resumeConOther{clear:both; border-top:1px solid #ccc; padding:0 28px;}
-.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:100%; height:186px;}
+.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.8; -khtml-opacity:0.8; opacity:0.8; width:100%; height:186px;}
 .resumeConBg_two{position:absolute; left:0; top:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:50%; height:100%;}
 
 .resumeConBox{padding-top:0;}

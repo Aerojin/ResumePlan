@@ -5,7 +5,11 @@
 		<div class="resumeCon_header clearfix" id="resume-header">
 			<div class="resumeCon_img">
 				<span></span>
-				<img src="<%-base.i_photo%>" id="resume-photo" style="width:103px; height: 141px;" />
+				<%if(_.isEmpty(base.i_photo)){%>
+					<img src="images/face_813_1.jpg" id="resume-photo" style="width:103px; height: 141px;" />
+				<%}else{%>
+					<img src="<%-base.i_photo%>" id="resume-photo" style="width:103px; height: 141px;" />
+				<%}%>
 			</div>
 			<div class="resumeCon_name">
 				<strong><%-main.name%></strong>
@@ -24,8 +28,12 @@
 							<h2>基本信息</h2>
 							<ul class="infoBoxList">
 								<li><strong>性别</strong><span><%-base.sex%></span></li>
+								<%if(!_.isEmpty(base.i_nat)) {%>
 								<li><strong>民族</strong><span><%-base.i_nat%></span></li>
+								<% } %>
+								<%if(!_.isEmpty(base.i_gov)) {%>
 								<li><strong>政治面貌</strong><span><%-base.i_gov%></span></li>
+								<% } %>
 								<li><strong>电话</strong><span><%-base.i_phone%></span></li>
 								<li><strong>电子邮箱</strong><span><%-base.i_email%></span></li>
 							</ul>
@@ -44,8 +52,12 @@
 										<strong><%-education[i].xuexiao%></strong>
 										<p><%-education[i].xuewei%> <%-education[i].zhuanye%></p>
 										<ul>
+											<%if(!_.isEmpty(education[i].gpa)) {%>
 											<li><i class="i_icoPoints"></i>GPA：<%-education[i].gpa%></li>
+											<% } %>
+											<%if(!_.isEmpty(education[i].zhuanyesort)) {%>
 											<li><i class="i_icoPoints"></i>专业排名：<%-education[i].zhuanyesort%></li>
+											<% } %>
 										</ul>
 									</div>
 								</li>
@@ -64,8 +76,12 @@
 	<h2>基本信息</h2>
 	<ul class="infoBoxList">
 		<li><strong>性别</strong><span><%-data.sex%></span></li>
+		<%if(!_.isEmpty(data.i_nat)) {%>
 		<li><strong>民族</strong><span><%-data.i_nat%></span></li>
+		<% } %>
+		<%if(!_.isEmpty(data.i_gov)) {%>
 		<li><strong>政治面貌</strong><span><%-data.i_gov%></span></li>
+		<% } %>
 		<li><strong>电话</strong><span><%-data.i_phone%></span></li>
 		<li><strong>电子邮箱</strong><span><%-data.i_email%></span></li>
 	</ul>
@@ -85,8 +101,12 @@
 				<strong><%-data[i].xuexiao%></strong>
 				<p><%-data[i].xuewei%> <%-data[i].zhuanye%></p>
 				<ul>
+					<%if(!_.isEmpty(data[i].gpa)) {%>
 					<li><i class="i_icoPoints"></i>GPA：<%-data[i].gpa%></li>
+					<% } %>
+					<%if(!_.isEmpty(data[i].zhuanyesort)) {%>
 					<li><i class="i_icoPoints"></i>专业排名：<%-data[i].zhuanyesort%></li>
+					<% } %>
 				</ul>
 			</div>
 		</li>

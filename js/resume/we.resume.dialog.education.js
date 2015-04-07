@@ -101,6 +101,7 @@
             }
 
             //验证装也排名有效性
+            /*
             var key = 'gpa';
             if (_.has(data, key)) {
                 if (!data.gpa || !data.gpa.length) {
@@ -118,7 +119,7 @@
                 if (!data.zhuanyesort || !data.zhuanyesort.length) {
                     return getResult(key, self.TIPS.SORT_EMPTY);
                 }
-            }
+            }*/
         }
 
     }));
@@ -305,11 +306,11 @@
 					'<input type="text" name="xuexiao" id="<%-cid%>-xuexiao" class="input mt_5" />',
 				'</li>',
 				'<li>',
-					'<label>GPA*</label>',
+					'<label>GPA</label>',
                     '<input type="text" name="gpa" id="<%-cid%>-gpa" class="input mt_5" style="width:120px;" />',
 				'</li>',
                 '<li>',
-                    '<label>专业排名*</label>',
+                    '<label>专业排名</label>',
                     '<input type="text" name="zhuanyesort" id="<%-cid%>-zhuanyesort" class="input mt_5" style="width:120px;" />',
                 '</li>',
                 '<li>',

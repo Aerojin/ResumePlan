@@ -148,6 +148,8 @@
 		"src":[
 			"./js/resume/we.resume.date.js",
 			"./js/resume/we.resume.other.js",
+			"./js/resume/we.resume.control.double.js",
+			"./js/resume/we.resume.control.single.js",
 			"./js/resume/we.resume.control.js",
 			"./js/resume/we.resume.menu.js",
 			"./js/resume/we.resume.zoom.js",

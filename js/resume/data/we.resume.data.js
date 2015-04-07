@@ -22,6 +22,8 @@
 
            this.initEvents();
            this.render();
+
+           superClass.prototype.initialize.apply(this, arguments);
         },
 
         initEvents: function () {

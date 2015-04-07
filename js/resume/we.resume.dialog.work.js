@@ -26,7 +26,7 @@
         initEvents: function () {
         	var _this = this;
 
-             this.instance.on("change:ui", this.changeUI, this);
+            this.instance.on("change:ui", this.changeUI, this);
         	
             this.ui.btnCut.click(function() {
                 var state = $(this).data("state");

@@ -132,7 +132,7 @@
 
         this.template = [
             '<li class="img_li clearfix" style="display: none;">',
-                '<div class="resumeCon img_liBox content" style="height:1260px;">',
+                '<div class="resumeCon img_liBox content" style="min-height:1150px;">',
                     '<div style="width:100%;height:600px; line-height:630px; overflow:hidden; text-align:center;font-size: 30px;">',
                         '内容正在加载中...',
                     '</div>',

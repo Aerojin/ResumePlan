@@ -101,6 +101,7 @@
         	this.UI.wrap.remove();
             this.UI.background.remove();
             this.instance.off("change", this.setState);
+            this.instance.off("change:show", this.setState);
 
         	this.onClose();
         },

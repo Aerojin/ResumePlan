@@ -197,9 +197,9 @@
             options.data.i_sex = this.ui.txtSex.val();
 
             options.success = function (result) {
-                this.close();
                 this.instance.trigger("change:data", {key: this.key});
                 WE.UI.show(this.model.TIPS.SAVE_SUCCESS, {delay: 2000});
+                this.close();
             };
 
             options.error = function (result) {

@@ -38,15 +38,16 @@
             this.model.on("change:data", function() {
                 var data = this.get("data");
                 var infoMain = data.InfoMain[0];
-
-                _this.loadInstance(data);
+                
                 _this.ui.title.text(infoMain.title);
                 _this.model.getTemplate(infoMain.tid);
             });
 
             this.model.on("change:template", function () {
+                var data = this.get("data");
                 var template = this.get("template");
 
+                _this.loadInstance(data);
                 _this.instance.set({templateType: template.cid});
                 _this.pageLoad(template);
             });
@@ -96,6 +97,7 @@
             this.ui.divScroll = $("#scroll");
             this.ui.title = $("#resume-title");
             this.ui.btnExport2 = $("#btn-export2");
+            this.ui.exceed = $("#exceed");
         },
 
         initSlideShow: function () {
@@ -109,20 +111,22 @@
                 parentElements: this.ui.wrapSlide
             };
 
-            this.slideShow = new WE.Resume.SlidesShow(options);
+            if(!this.slideShow){
+                this.slideShow = new WE.Resume.SlidesShow(options);
 
-            this.slideShow.onChange = function (id) {
-                var tid = parseInt(data.tid);
+                this.slideShow.onChange = function (id) {
+                    var tid = parseInt(data.tid);
 
-                if(id != tid){
-                    data.tid = id;
-                    data.m_id = id;
+                    if(id != tid){
+                        data.tid = id;
+                        data.m_id = id;
 
-                    _this.model.replaceTmplate(data, function (result) {
-                        _this.instance.setData("main", result);
-                    });
-                }
-            };
+                        _this.model.replaceTmplate(data, function (result) {
+                            _this.instance.setData("main", result);
+                        });
+                    }
+                };
+            }
         },
 
         pageLoad: function (template) {
@@ -136,24 +140,29 @@
             this.instance = WE.Resume.getInstance({
                 mid: this.request.m_id,
                 data: data,
-                sort: data.sort
+                sort: data.sort,
+                isNew: true
             });
         },
 
         initZoom: function () {
-            this.zoom = new WE.Resume.Zoom({
-                add: this.ui.btnAdd,
-                cut: this.ui.btnCut,
-                span: this.ui.span,
-                element: this.ui.resume
-            });
+            if(!this.zoom){
+                this.zoom = new WE.Resume.Zoom({
+                    add: this.ui.btnAdd,
+                    cut: this.ui.btnCut,
+                    span: this.ui.span,
+                    element: this.ui.resume
+                });
+            }
         },
 
         initMenu: function () {
-            this.menuView = new WE.Resume.Menu.View({
-                mid: this.request.m_id,
-                instance: this.instance
-            });
+            if(!this.menuView){
+                this.menuView = new WE.Resume.Menu.View({
+                    mid: this.request.m_id,
+                    instance: this.instance
+                });
+            }
         },
 
         initControl: function (result) {
@@ -161,8 +170,10 @@
              new WE.Resume.Control.View({
                 type: result.cid,
                 container: this.ui.resume,
+                context: this.ui.resume.find(".context"),
                 template: result.temp,
-                instance: this.instance
+                instance: this.instance,
+                exceed: this.ui.exceed
             });
         },
 

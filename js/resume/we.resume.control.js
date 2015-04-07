@@ -14,10 +14,10 @@
             this.template = options.template;
             this.instance = options.instance;
             this.container = options.container;
-
-            this.other = new WE.Resume.Other({
-                type: options.type
-            });
+            this.context = options.context;
+            this.exceed = options.exceed;
+            this.type = options.type;
+            this.isRemove = !this.exceed;
 
             this.render();
             this.initEvents();
@@ -36,6 +36,8 @@
                 }
 
                 _this.container.find(id).remove();
+                _this.runExceed();
+                _this.action.remove();
             });
 
             this.instance.on("change:ui", function (args) {
@@ -61,17 +63,25 @@
 
             this.ui = {};
             this.ui.wrap = $(template);
-            this.ui.left = this.ui.wrap.find("#resume-left");
-            this.ui.right = this.ui.wrap.find("#resume-right");
-            this.ui.main = this.ui.wrap.find("#resume-main");
-            this.ui.header = this.ui.wrap.find("#resume-header");
-            this.ui.body = this.ui.wrap.find("#resume-body");
-            this.ui.base = this.ui.wrap.find("#resume-base");
-            this.ui.education = this.ui.wrap.find("#resume-education");
+            this.context.empty().append(this.ui.wrap);
+            
+            switch(this.type){
+                case "0":
+                    this.action =  new WE.Resume.Control.Single({
+                        master: this,
+                        isRemove: this.isRemove,
+                        container: this.context
+                    });
+                    break;
+                case "1":
+                    this.action =  new WE.Resume.Control.Double({
+                        master: this,
+                        isRemove: this.isRemove,
+                        container: this.context
+                    });
+                    break;
+            }
 
-            this.container.empty().append(this.ui.wrap);
-
-            this.setHeight();
             this.renderModule();
         },
 
@@ -110,17 +120,9 @@
             var data = this.getElement(key);
 
             if(data.add){
-                this.ui.left.append(data.element);
-
-                if(this.runLeft()){
-                    data.element.appendTo(this.ui.right);
-                }
-
-                if(this.runRight()){
-                    this.other.add(data.element);
-                }
-
+                this.action.append(data);
                 this.appendDrag(key, data.element);
+                this.runExceed();
             }
         },
 
@@ -146,26 +148,9 @@
             var data = this.getElement(args.key);
             var dom = $(this.getID(args.key));
 
-            if(!data.show){
-                return;
-            }
-
-            if(!data.add){
-                dom.remove();
-                return;
-            }
-
-            if(dom.length == 0){
-                this.append(args.key);
-                return;
-            }
-
-            dom.before(data.element).remove();
+            this.action.before(data, dom, args.key);
             this.appendDrag(args.key, data.element);
-
-            if(args.key == "base"){
-                this.ui.header.find("img").attr({src: data.data.i_photo});
-            }
+            this.runExceed();
         },
 
         getModuleTemp: function (id) {
@@ -178,36 +163,6 @@
 
         getID: function (id) {
             return "#resume-" + id;
-        },
-
-        setHeight: function () {
-            var height = this.container.height();
-            var header = this.ui.header.outerHeight(true);
-            var margin = this.ui.body.outerHeight(true) - this.ui.body.outerHeight();
-
-            this.maxHeight = height - header - margin;
-        },
-
-        runLeft: function () {
-            var height = 0;
-            var infoBox = this.ui.left.find(".infoBox");
-
-            $.each(infoBox, function () {
-                height += $(this).outerHeight(true);
-            });
-
-            return height > this.maxHeight;
-        },
-
-        runRight: function () {
-            var height = 0;
-            var infoBox = this.ui.right.find(".infoBox");
-
-            $.each(infoBox, function () {
-                height += $(this).outerHeight(true);
-            });
-
-            return height > this.maxHeight;
         },
 
         getBySort: function () {
@@ -261,6 +216,20 @@
             });
 
             return array;
+        },
+
+        runExceed: function () {
+            if(this.exceed){
+                var top = 1170;
+                var height = this.container.outerHeight(true);
+                    height = height - top;
+
+                if(height <= 0){
+                    this.exceed.hide();    
+                }else{
+                    this.exceed.show().css({top: top});
+                }
+            }
         }
 
     }));
