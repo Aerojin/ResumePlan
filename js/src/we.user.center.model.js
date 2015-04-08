@@ -19,7 +19,8 @@
         TIPS: {
             CONFIRM_DELETE: "确定删除简历?",
             DELETE_SUCCESS: "删除成功!",
-            MAIL_SUCCESS: "邮件发送成功!"
+            MAIL_SUCCESS: "邮件发送成功!",
+            SEND_MAILING: "邮件正在发送中..."
         },
 
         IFRAME_NAME: "{0}_iframe",
@@ -96,13 +97,14 @@
             };
 
             options.success = function (result) {
-                WE.UI.alert(this.TIPS.MAIL_SUCCESS);
+                WE.UI.show(this.TIPS.MAIL_SUCCESS, {delay: 2000});
             };
 
             options.error = function (result) {
-                WE.UI.alert(result.msg);
+                WE.UI.show(this.TIPS.result.msg, {className: "msgRed", delay: 2000});
             };
 
+            WE.UI.show(this.TIPS.SEND_MAILING);
             WE.Api.sendMail(options, this);
         },
 

@@ -56,7 +56,8 @@
                 type: result.cid,
                 template: result.temp,
                 instance: this.instance,
-                container: this.ui.main
+                container: this.ui.main,
+                context: this.ui.main
             });
         },
 

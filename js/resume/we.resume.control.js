@@ -200,6 +200,7 @@
                     element.css({cursor: "default"});
                     element.removeClass("focus");
                     _this.instance.setSort(_this.getModuleSort());
+                    _this.runExceed();
                 },
                 onMouseDown: function (element) {
                     element.css({cursor: "move"});
