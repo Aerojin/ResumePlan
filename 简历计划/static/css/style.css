@@ -727,7 +727,7 @@ a:hover{color:#333; text-decoration:none;}
 
 /*补丁容器*/
 .resumeConOther{clear:both; border-top:1px solid #ccc; padding:0 28px;}
-.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:100%; height:186px;}
+.resumeConBg_one{position:absolute; left:0; bottom:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.8; -khtml-opacity:0.8; opacity:0.8; width:100%; height:186px;}
 .resumeConBg_two{position:absolute; left:0; top:0; background:#ff1c1c; filter:alpha(opacity=15); -moz-opacity:0.15; -khtml-opacity:0.15; opacity:0.15; width:50%; height:100%;}
 
 .resumeConBox{padding-top:0;}
@@ -781,7 +781,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeCon_topRight li{float:left; margin:15px 20px 0 0; _display:inline;}
 .resumeCon_topRight_a{float:left; text-align:right; border-right:1px solid #dfdfdf; padding-right:7px; margin-right:7px;}
 .resumeCon_topRight_a strong{font-size:14px;}
-.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px;}
+.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px; font-size:10px;}
 .resumeCon_topRight_b{float:left; color:#757575;}
 .resumeCon_bottom{border-top:1px solid #bdbdbd; padding-top:4px; color:#bdbdbd; margin:60px auto 10px; width:50px; display:block;}
 
@@ -832,7 +832,8 @@ a:hover{color:#333; text-decoration:none;}
 .titleOne i{margin-right:7px; position:relative; top:-3px;}
 
 .resumeConF_con{margin-top:20px; color:#000;}
-.resumeConF_con strong, .resumeConF_con p{position:relative; display:block; line-height:22px; margin-top:4px;}
+.resumeConF_con strong, .resumeConF_con p{position:relative; display:block; line-height:22px; margin-top:4px; font-size:15px;}
+.resumeConF_con p{color:#848484;}
 .resumeConF_con strong i, .resumeConF_con p i{position:absolute; top:4px; left:-14px;}
 .resumeConF_con strong span{position:absolute; right:0; top:0; font-weight:normal; margin-top:0;}
 .resumeConF_con span{margin-top:4px; display:inline-block;}
@@ -874,7 +875,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConG_listBox_list li span{font-size:12px; margin-left:10px; color:#0d6c40; vertical-align:middle;}
 .resumeConG_listBox_list li p{font-size:12px; line-height:20px; color:#575757; margin-top:0; margin-left:17px;}
 .resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:47px; width:532px;}
-.resumeConG_listBox_right strong{font-size:18px; font-weight:normal; margin-bottom:10px; display:block;}
+.resumeConG_listBox_right strong{font-size:18px; font-weight:normal; margin-bottom:10px; display:block; color:#353535;}
 .resumeConG_listBox_right p{line-height:20px;}
 
 .resumeConHBox{width:813px; margin:0 auto;}
@@ -994,7 +995,7 @@ a:hover{color:#333; text-decoration:none;}
 .infoBoxList span{padding-left:22px;}
 
 .infoBox h3{color:#333; font-size:16px; color:#111; border-bottom:1px dotted #5e5e5e; padding-bottom:5px; line-height:18px;}
-.infoBox h3 p{font-size:12px; font-weight:normal; color:#7e7f7f;}
+.infoBox h3 p{font-size:10px; font-weight:normal; color:#7e7f7f;}
 
 .infoBoxListA{margin-top:10px; border-bottom:1px solid #c7c6c6;}
 .infoBoxListA i{width:6px; height:6px; background-color:#d84331; float:left; display:inline-block; margin:7px 20px 0 11px; overflow:hidden;}
@@ -1022,13 +1023,13 @@ a:hover{color:#333; text-decoration:none;}
 
 .infoBoxE{line-height:24px; color:#545454; border-bottom:1px solid #9d9c9c; padding:10px 0 20px;}
 
-.infoBoxListF strong{font-size:14px; color:#2c2d2d; display:block; line-height:24px;}
+.infoBoxListF strong{font-size:15px; color:#2c2d2d; display:block; line-height:24px;}
 .infoBoxListF strong span{border-left:1px solid #a2a2a2; margin-left:6px; padding-left:6px; color:#acacac;}
 .infoBoxListF li{font-size:14px; margin-top:15px;}
-.infoBoxListF li p{margin-top:5px;}
+.infoBoxListF li p{margin-top:5px; line-height:20px;}
 .infoBoxListF li p strong{display:inline-block;}
 .infoBoxListF li p span{display:block; margin-left:18px;}
-.infoBoxListF_a strong{text-align:center; border-bottom:1px solid #dfdfdf; font-size:14px; padding-bottom:4px; margin-bottom:4px;}
+.infoBoxListF_a strong{text-align:center; border-bottom:1px solid #dfdfdf; font-size:15px; padding-bottom:4px; margin-bottom:4px;}
 .infoBoxListF_a p{letter-spacing:-1px; text-align:center;}
 
 /*制作菜单*/

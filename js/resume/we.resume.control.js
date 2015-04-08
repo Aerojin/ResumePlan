@@ -149,7 +149,7 @@
             var dom = $(this.getID(args.key));
 
             this.action.before(data, dom, args.key);
-            this.appendDrag(args.key, data.element);
+            this.appendDrag(args.key, data.element, data.add);
             this.runExceed();
         },
 
@@ -180,6 +180,10 @@
             var _this = this;
             var newId = this.getID(key);
             var config = this.instance.getModuleByKey(key);
+
+            if(element.length == 0){
+                return;
+            }
 
             if(!this.drag){
                 this.drag = {};

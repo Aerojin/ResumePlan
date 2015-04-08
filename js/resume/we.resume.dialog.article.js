@@ -163,6 +163,7 @@
                         id: data.id,
                         key: _this.key
                     });
+                    _this.model.clear();
                 };
 
                 this.list.onChange = function (data) {
@@ -204,7 +205,7 @@
             },
 
             changeUI: function (args) {
-                this.list.render({data: this.getMenuData()});
+                this.list.render({data: this.getData()});
             },
 
             onClose: function () {
