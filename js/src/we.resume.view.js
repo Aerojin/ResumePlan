@@ -180,8 +180,9 @@
         exports: function () {
             var id = this.request.m_id;
             var origin = location.origin;
+            var token = $.cookie(WE.Constant.COOKIE_TOKEN);
             var api = "{0}/api.php?m=user&a=download".format(origin);
-            var url = "{0}/preview.html?id={1}".format(window.location.origin, id);
+            var url = "{0}/preview.html?m_id={1}".format(window.location.origin, id);
 
             this.model.ajaxForm({
                 url: api,
@@ -189,7 +190,8 @@
                 iframeName: this.IFRAME_NAME.format(this.cid),
                 data: {
                    id: id,
-                   url: url
+                   url: url,
+                   token: token
                 }
             });
 
