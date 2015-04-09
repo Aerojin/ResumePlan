@@ -158,7 +158,7 @@
 			options.success = function (result) {
 				this.pageIndex = 0;
 				this.data = result.data.list;
-				this.pageCount = this.data.length - 5;
+				this.pageCount = this.data.length - 4;
 				this.pageCount = this.pageCount <= 0 ? 1 : this.pageCount;
 
 				this.append(this.data);
