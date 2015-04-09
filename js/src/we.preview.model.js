@@ -45,8 +45,8 @@
             var options = {};
 
             options.data = {
-                id: tid,
-                isPreview: 1
+                id: tid
+                //isPreview: 0
             };
 
             options.success = function (result) {

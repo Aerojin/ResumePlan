@@ -90,9 +90,13 @@
         },
 
         sendMail: function (id, callback) {
+            var origin = location.origin;
+            var url = "{0}/preview.html?m_id={1}".format(origin, id);
+            
             var options = {
                 data: {
-                    id: id
+                    id: id,
+                    url: url,
                 }
             };
 
@@ -112,7 +116,7 @@
 			var origin = location.origin;
             var token = $.cookie(WE.Constant.COOKIE_TOKEN);
             var api = "{0}/api.php?m=user&a=download".format(origin);
-            var url = "{0}/preview.html?m_id={1}".format(window.location.origin, id);
+            var url = "{0}/preview.html?m_id={1}".format(origin, id);
 
             this.ajaxForm({
                 url: api,

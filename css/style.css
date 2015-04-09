@@ -713,7 +713,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll_left .i_icoLeft, .scroll_left .i_icoLeftNo{left:0;}
 .scroll_right .i_icoRight, .scroll_right .i_icoRightNo{right:0;}
 
-.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 28px 0 28px; position:relative; zoom:1;}
+.resumeCon{float:left; width:790px; background-color:#fff; padding:7px 11px 0 11px; position:relative; zoom:1;}
 .resumeCon_img{float:left; padding-left:10px;}
 .resumeCon_img span{width:103px; height:5px; border-bottom:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39;}
 .resumeCon_img img{margin-top:22px;}
