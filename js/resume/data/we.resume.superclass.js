@@ -104,10 +104,10 @@
         },
 
         remove: function (id, callback) {
-            if(this.isRemove()){
-                WE.UI.show("该栏目必须要保留一条记录", {className: "msgRed", delay: 3000});
-                return;
-            }
+            //if(this.isRemove()){
+            //    WE.UI.show("该栏目必须要保留一条记录", {className: "msgRed", delay: 3000});
+            //    return;
+            //}
 
             var options = {
                 data: {

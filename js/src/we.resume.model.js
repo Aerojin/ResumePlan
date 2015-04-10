@@ -27,11 +27,12 @@
             var options = {};
 
             options.data = {
-                mid: mid
+                mid: this.get("mid")
             };
 
             options.success = function (result) {
-                this.set({data: result.data});
+                this.set({data: result.data}, {silent: true});
+                this.trigger("change:data");
             };
 
             options.error = function (result) {
@@ -67,7 +68,7 @@
             options.data = data;
 
             options.success = function (result) {
-                this.getTemplate(data.tid);
+                this.getResumeDetail();
                 WE.UI.show("模版切换成功", { delay: 3000});
                 if(callback){
                     callback([data]);

@@ -186,7 +186,8 @@
                 });
             }
 
-            var data = this.model.get("main");
+            var data = this.model.getData();
+                data = data.main;
 
             this.share.show({
                 title: data.title,

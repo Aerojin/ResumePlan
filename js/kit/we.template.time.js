@@ -84,7 +84,7 @@
         },
 
         getSate: function () {
-        	if(this.state % 2){
+        	if(this.state == 0){
         		return "单栏";
         	}
 

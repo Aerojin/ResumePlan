@@ -713,7 +713,7 @@ a:hover{color:#333; text-decoration:none;}
 .scroll_left .i_icoLeft, .scroll_left .i_icoLeftNo{left:0;}
 .scroll_right .i_icoRight, .scroll_right .i_icoRightNo{right:0;}
 
-.resumeCon{float:left; width:756px; background-color:#fff; padding:20px 28px 0 28px; position:relative; zoom:1;}
+.resumeCon{float:left; width:790px; background-color:#fff; padding:7px 11px 0 11px; position:relative; zoom:1;}
 .resumeCon_img{float:left; padding-left:10px;}
 .resumeCon_img span{width:103px; height:5px; border-bottom:1px solid #eca69e; display:block; overflow:hidden; background-color:#d94a39;}
 .resumeCon_img img{margin-top:22px;}
@@ -771,10 +771,10 @@ a:hover{color:#333; text-decoration:none;}
 .resumeRight_ul a{color:#5095c5; margin-left:17px;}
 .resumeRight_ulFloat li{float:left; width:170px;}
 
-.resumeCon_top img{width:106px; height:130px; float:left;
-	-moz-border-radius:35px;
-    -webkit-border-radius:35px;
-    border-radius:35px;
+.resumeCon_top img{width:130px; height:130px; float:left;
+	-moz-border-radius:65px;
+    -webkit-border-radius:65px;
+    border-radius:65px;
 }
 .resumeCon_topRight{float:left; color:#000; width:630px; margin:10px 0 0 20px; _display:inline;}
 .resumeCon_topRight h2{font-size:22px; line-height:24px;}
@@ -918,7 +918,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConI_header_info h2{font-size:34px; line-height:40px; margin-bottom:10px;}
 .resumeConI_header_info p{line-height:20px; font-size:13px;}
 .resumeConI_header_info p em{padding:0 7px;}
-.resumeConI_header_tell{float:right; width:258px; height:55px; border:1px solid #314551; padding:8px 0 0 14px; margin-top:29px;
+.resumeConI_header_tell{float:right; width:256px; height:55px; border:1px solid #314551; padding:8px 0 0 14px; margin-top:29px;
 	-moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;

@@ -58,14 +58,14 @@
 					WE.UI.show(_this.TIP.SUCCESS, {delay: 2000});
 				} else {
                     _this.ui.parent.append(_this.ui.file);
-                    WE.UI.show(msg);
+                    WE.UI.show(msg, {className: "msgRed", delay: 2000});
 				}
         	};
 
         	this.ui.file.change(function(){
         		var fileName = $(this).val();
 
-                WE.UI.show(_this.TIP.UPLOADING, {delay: 2000});
+                WE.UI.show(_this.TIP.UPLOADING);
 
         		if(_this.check(fileName)){
         			_this.ui.form.append(_this.ui.file);

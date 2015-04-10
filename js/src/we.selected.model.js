@@ -75,7 +75,7 @@
                     time: e.external,
                     collect: e.iscollect,
                     lock: 0,
-                    state: e.cid
+                    state: parseInt(e.cid)
                 });
             });
 

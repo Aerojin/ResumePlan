@@ -19,7 +19,9 @@
             this.initPageEvents();
 
             this.request = this.getRequest();
-            this.model.getResumeDetail(this.request.m_id);
+            this.model.set({mid: this.request.m_id});
+            
+            this.model.getResumeDetail();
         },
 
         initEvents: function () {
@@ -122,7 +124,7 @@
                         data.m_id = id;
 
                         _this.model.replaceTmplate(data, function (result) {
-                            _this.instance.setData("main", result);
+                            //_this.instance.setData("main", result);
                         });
                     }
                 };
