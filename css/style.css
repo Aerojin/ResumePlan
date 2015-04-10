@@ -787,7 +787,11 @@ a:hover{color:#333; text-decoration:none;}
 
 .resumeConE{ font-family:Arial; width:813px; margin:0 auto;}
 .resumeConE_header{background-color:#ffc739; padding:19px 42px; color:#fff;}
-.resumeConE_header img{float:left; width:118px; height:118px;}
+.resumeConE_header img{float:left; width:118px; height:118px;
+	-moz-border-radius:65px;
+    -webkit-border-radius:65px;
+    border-radius:65px;
+}
 .resumeConE_headerRight{float:left; margin-left:12px; width:500px; padding-top:15px;}
 .resumeConE_headerRight h2{ font-size:21px; line-height:26px; height:26px;}
 .resumeConE_headerRight ul{margin-top:5px;}
@@ -826,6 +830,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConF_header p{text-align:center; color:#005993; line-height:20px; margin-top:10px;}
 .resumeConF_header_nav{height:39px; line-height:39px; color:#fff; background-color:#595b5b; margin-top:5px;}
 .resumeConF_header_nav span{margin:0 20px;}
+.resumeConF_body_left{padding-right:6%;}
 
 .titleOne{height:20px; line-height:20px; color:#005993; font-size:16px; border-bottom:1px solid #aaa; display:block;}
 .titleOne span{position:relative; top:10px; background-color:#fff; padding-right:5px;}
@@ -874,7 +879,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConG_listBox_list li strong{font-size:12px; display:inline-block; width:100px; height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; vertical-align:middle;}
 .resumeConG_listBox_list li span{font-size:12px; margin-left:10px; color:#0d6c40; vertical-align:middle;}
 .resumeConG_listBox_list li p{font-size:12px; line-height:20px; color:#575757; margin-top:0; margin-left:17px;}
-.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:47px; width:532px;}
+.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:40px; width:410px;}
 .resumeConG_listBox_right strong{font-size:18px; font-weight:normal; margin-bottom:10px; display:block; color:#353535;}
 .resumeConG_listBox_right p{line-height:20px;}
 
@@ -894,7 +899,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConH_list_li{border-bottom:1px dashed #5ca5da; padding:10px 0 20px;}
 .resumeConH_list .infoBox h2{font-size:36px; line-height:40px; font-weight:normal;}
 .resumeConH_listBox{margin-top:20px;}
-.resumeConH_listBox span{float:left; width:200px; padding-left:46px; font-size:16px; line-height:20px; padding-top:10px;}
+.resumeConH_listBox span{float:left; width:190px; padding-left:36px; font-size:16px; line-height:20px; padding-top:10px;}
 .resumeConH_listInfo strong{position:relative; font-size:18px; font-weight:normal; display:block; margin-top:25px;}
 .resumeConH_listInfo span{font-size:14px;}
 .resumeConH_listInfo em{position:absolute; right:0; top:0; font-size:14px;}
@@ -938,6 +943,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConI_body strong span{display:block; font-weight:normal; margin-top:8px;}
 .resumeConI_body span{display:block; color:#2e4350; margin-top:8px; font-size:13px;}
 .resumeConI_body p{color:#636363; line-height:20px; font-size:13px; margin-top:8px; position:relative;}
+.resumeConI_body-left{padding-right:7%;}
 
 .resumeConJ{width:813px; margin:0 auto;}
 .resumeConJ_header_bg{background-color:#6d6d6d; height:11px; }
