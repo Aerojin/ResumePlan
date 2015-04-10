@@ -300,6 +300,8 @@
                         WE.UI.alert(result.msg, {type: "warn"});
                         break;
                 }
+
+                this.ui.btnRefresh.click();
             };
 
             WE.Api.Register(options, this);

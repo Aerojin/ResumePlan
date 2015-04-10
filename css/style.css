@@ -879,7 +879,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConG_listBox_list li strong{font-size:12px; display:inline-block; width:100px; height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; vertical-align:middle;}
 .resumeConG_listBox_list li span{font-size:12px; margin-left:10px; color:#0d6c40; vertical-align:middle;}
 .resumeConG_listBox_list li p{font-size:12px; line-height:20px; color:#575757; margin-top:0; margin-left:17px;}
-.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:40px; width:410px;}
+.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:40px; width:385px;}
 .resumeConG_listBox_right strong{font-size:18px; font-weight:normal; margin-bottom:10px; display:block; color:#353535;}
 .resumeConG_listBox_right p{line-height:20px;}
 

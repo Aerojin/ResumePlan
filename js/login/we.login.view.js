@@ -235,6 +235,8 @@
                         WE.UI.alert(result.msg, {type: "warn"});
                         break;
                 }
+
+                this.ui.btnRefresh.click();
             };
 
             WE.Api.Login(options, this);
