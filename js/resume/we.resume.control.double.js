@@ -73,7 +73,7 @@
 
         runHeight: function (dom) {
         	var height = 0;
-            var infoBox = dom.find(".infoBox");
+            var infoBox = dom.find(".resume-box");
 
             $.each(infoBox, function () {
                 height += $(this).outerHeight(true);
@@ -91,13 +91,13 @@
         },
         remove: function () {
         	if(this.runHeight(this.ui.left) && this.isRemove){
-             	this.ui.left.find(".infoBox").eq(-1).remove();
+             	this.ui.left.find(".resume-box").eq(-1).remove();
              	this.remove();
              	return;
             }
 
             if(this.runHeight(this.ui.right) && this.isRemove){
-             	this.ui.right.find(".infoBox").eq(-1).remove();
+             	this.ui.right.find(".resume-box").eq(-1).remove();
              	this.remove();
             }
         }

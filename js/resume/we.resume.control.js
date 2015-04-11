@@ -48,13 +48,15 @@
         initPageEvent: function () {
             var _this = this;
 
-            this.container.delegate(".infoBox", "mouseenter", function () {
-                $(this).addClass('hover');
-            });
+            if(!this.notDrag){
+                this.container.delegate("#resume-body .resume-box", "mouseenter", function () {
+                    $(this).addClass('hover');
+                });
 
-            this.container.delegate(".infoBox", "mouseleave", function () {
-                $(this).removeClass('hover');
-            });
+                this.container.delegate("#resume-body .resume-box", "mouseleave", function () {
+                    $(this).removeClass('hover');
+                });
+            }
         },
 
         render: function () {
@@ -214,7 +216,7 @@
         },
         getModuleSort: function () {
             var array = [];
-            var element = this.ui.wrap.find(".infoBox");
+            var element = this.ui.wrap.find(".resume-box");
 
             _.each(element, function (e) {
                 array.push($(e).data("key"));

@@ -36,6 +36,9 @@
                 $.cookie(WE.Constant.COOKIE_PHOTO, null);
                 $.cookie(WE.Constant.COOKIE_TOKEN, null);
                 
+
+                window.location.href = location.origin;
+                
 				return "您还未登陆, 请登陆后再操作!";
 			}
 

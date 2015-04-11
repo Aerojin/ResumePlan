@@ -192,7 +192,7 @@
             this.share.show({
                 title: data.title,
                 summary: data.title,
-                imageUrl: data.i_url,
+                imageUrl: data.image,
                 url: window.location.host
             });
         },

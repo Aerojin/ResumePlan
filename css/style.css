@@ -804,7 +804,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConE_box_time_line{border-left:2px solid #4f4f4f; position:relative; zoom:1; padding-left:53px; color:#6a6a6a; min-height:74px;}
 .resumeConE_box_time_line .i_icoTime{position:absolute; left:-7px; top:-6px;}
 .resumeConE_box_time_line span{color:#b6b6b6;}
-.resumeConE_box_info{float:left; width:437px;}
+.resumeConE_box_info{float:left; width:435px;}
 .resumeConE_box_info li{margin-top:5px; font-size:13px;}
 .resumeConE_box_info strong{font-size:15px; color:#666; line-height:20px;}
 .resumeConE_box_info i{margin:-2px 6px 0 0;}
@@ -879,7 +879,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConG_listBox_list li strong{font-size:12px; display:inline-block; width:100px; height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; vertical-align:middle;}
 .resumeConG_listBox_list li span{font-size:12px; margin-left:10px; color:#0d6c40; vertical-align:middle;}
 .resumeConG_listBox_list li p{font-size:12px; line-height:20px; color:#575757; margin-top:0; margin-left:17px;}
-.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:40px; width:385px;}
+.resumeConG_listBox_right{float:left; border-left:3px solid #5ca5da; padding-left:40px; width:380px;}
 .resumeConG_listBox_right strong{font-size:18px; font-weight:normal; margin-bottom:10px; display:block; color:#353535; line-height: 22px;}
 .resumeConG_listBox_right p{line-height:20px;}
 
@@ -984,12 +984,12 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConJ_body_boxOther_right p{line-height:20px;}
 
 .infoBox{border:1px solid #fff; padding:10px;}
-.infoBox.focus{border:1px solid #16bb00;
+.resume-box.focus{border:1px solid #16bb00;
 	-moz-box-shadow:0 0 4px #16bb00;
     -webkit-box-shadow:0 0 4px #16bb00;
     box-shadow:0 0 4px #16bb00;
 }
-.infoBox.hover{border:1px solid #ffba00;
+.resume-box.hover{border:1px solid #ffba00;
 	-moz-box-shadow:0 0 4px #ffba00;
     -webkit-box-shadow:0 0 4px #ffba00;
     box-shadow:0 0 4px #ffba00;

@@ -22,12 +22,14 @@
             '</div>'
         ].join("\n"),
 
-        jiaThisAPI: "http://www.jiathis.com/send/?webid=<%-shareid%>&url=<%-url%>&title=<%-title%>&summary=<%-summary%>&imageUrl=<%-imageUrl%>",
+        summary: '制作一份好简历居然可以这么简单，史上最强简历制作工具——“简历计划”，帮你做出HR心目中的好简历，面试机会滚滚来！@简历计划',
+
+        jiaThisAPI: "http://www.jiathis.com/send/?webid=<%-shareid%>&url=<%-url%>&title=<%-title%>&summary=<%-summary%>&pic=<%-imageUrl%>",
 
         initialize: function (options) {
             this.url = options.url;
             this.title = options.title;
-            this.summary = options.summary;
+            //this.summary = options.summary;
             this.imageUrl = options.imageUrl;
             this.container = options.container || $('body');
             this.onClose = options.onClose || this.onClose;
@@ -69,7 +71,7 @@
             var url = _.template(this.jiaThisAPI);
                 url = url({
                     shareid: shareID,
-                    url:  this.url || "http://www.baidu.com",
+                    url:  "http://www.jianlipro.com" || this.url,
                     title: this.title || "简历计划",
                     summary: this.summary || "简历计划",
                     imageUrl: this.imageUrl || ""
@@ -81,7 +83,7 @@
         show: function (options) {
             this.url = options.url;
             this.title = options.title;
-            this.summary = options.summary;
+            //this.summary = options.summary;
             this.imageUrl = options.imageUrl;
 
             this.ui.wrap.show();
