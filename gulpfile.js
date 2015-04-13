@@ -40,7 +40,7 @@ var createFile = function (obj, outPath) {
 	}
 	
 	if(obj.compress){
-		//stream = stream.pipe(uglify());
+		stream = stream.pipe(uglify());
 	}
 
 	stream.pipe(through.obj(function(file, enc, cb){
@@ -59,7 +59,7 @@ var createFileByCss = function (obj, outPath) {
 	}
 	
 	if(obj.compress){
-		//stream = stream.pipe(minifycss());
+		stream = stream.pipe(minifycss());
 	}
 
 	stream.pipe(through.obj(function(file, enc, cb){
