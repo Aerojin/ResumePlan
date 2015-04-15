@@ -779,9 +779,10 @@ a:hover{color:#333; text-decoration:none;}
 .resumeCon_topRight{float:left; color:#000; width:630px; margin:10px 0 0 20px; _display:inline;}
 .resumeCon_topRight h2{font-size:22px; line-height:24px;}
 .resumeCon_topRight li{float:left; margin:15px 20px 0 0; _display:inline;}
-.resumeCon_topRight_a{float:left; text-align:right; border-right:1px solid #dfdfdf; padding-right:7px; margin-right:7px;}
+/*.resumeCon_topRight_a{float:left; text-align:right; border-right:1px solid #dfdfdf; padding-right:7px; margin-right:7px;}*/
+.resumeCon_topRight_a{float:left; border-right:1px solid #dfdfdf; padding-right:7px; margin-right:7px;}
 .resumeCon_topRight_a strong{font-size:14px;}
-.resumeCon_topRight_a p{color:#7e7f7f; letter-spacing:-1px; font-size:10px;}
+.resumeCon_topRight_a p{color:#7e7f7f; /*letter-spacing:-1px;*/ font-size:10px;}
 .resumeCon_topRight_b{float:left; color:#757575;}
 .resumeCon_bottom{border-top:1px solid #bdbdbd; padding-top:4px; color:#bdbdbd; margin:60px auto 10px; width:50px; display:block;}
 
@@ -852,7 +853,7 @@ a:hover{color:#333; text-decoration:none;}
 .resumeConG_header strong{font-size:47px; color:#000; font-weight:normal;}
 .resumeConG_header span{color:#0d6c40; font-size:14px; font-weight:bold; margin-left:28px;}
 .resumeConG_header-img{background-color:#0d6c40; font-size:16px; height:76px; color:#fff; padding:0 50px; position:relative;}
-.resumeConG_header-img ul{width:520px; padding-top:15px;}
+.resumeConG_header-img ul{width:580px; padding-top:15px;}
 .resumeConG_header-img li{float:left; line-height:24px; margin-right:20px;}
 .resumeConG_header-img p{position:absolute; right:-10px; top:-40px; border:3px solid #0d6c40; width:150px; height:150px; background-color:#fff; text-align:center; overflow:hidden;
 	-moz-border-radius:80px;
@@ -1035,8 +1036,9 @@ a:hover{color:#333; text-decoration:none;}
 .infoBoxListF li p{margin-top:5px; line-height:20px;}
 .infoBoxListF li p strong{display:inline-block;}
 .infoBoxListF li p span{display:block; margin-left:18px;}
-.infoBoxListF_a strong{text-align:center; border-bottom:1px solid #dfdfdf; font-size:15px; padding-bottom:4px; margin-bottom:4px;}
-.infoBoxListF_a p{letter-spacing:-1px; text-align:center;}
+/*.infoBoxListF_a strong{text-align:center; border-bottom:1px solid #dfdfdf; font-size:15px; padding-bottom:4px; margin-bottom:4px;}*/
+.infoBoxListF_a strong{border-bottom:1px solid #dfdfdf; font-size:15px; padding:0 0 4px 20px; margin-bottom:4px; text-align: center;}
+/*.infoBoxListF_a p{letter-spacing:-1px; text-align:center;}*/
 
 /*制作菜单*/
 .resumeMenu{float:right; width:276px; background-color:#1a1a1a; padding:10px;}

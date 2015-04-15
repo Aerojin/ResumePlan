@@ -40,7 +40,7 @@ var createFile = function (obj, outPath) {
 	}
 	
 	if(obj.compress){
-		stream = stream.pipe(uglify());
+		//stream = stream.pipe(uglify());
 	}
 
 	stream.pipe(through.obj(function(file, enc, cb){
@@ -59,7 +59,7 @@ var createFileByCss = function (obj, outPath) {
 	}
 	
 	if(obj.compress){
-		stream = stream.pipe(minifycss());
+		//stream = stream.pipe(minifycss());
 	}
 
 	stream.pipe(through.obj(function(file, enc, cb){
@@ -105,24 +105,6 @@ var createCss = function () {
 	for(var c in config){
 		createFileByCss(config[c], out_css);
 	}
-
-	/*
-	var name = "style.pack.css";
-	var stream =gulp.src(css_path + '*.css')
-		.pipe(concat(name));
-
-
-	if(isMini){
-		stream = stream.pipe(minifycss());
-	}
-
-	stream.pipe(through.obj(function(file, enc, cb){
-		map[name] = getFileMd5Str(file.contents);
-	}));
-
-	stream.pipe(gulp.dest(out_css));
-	*/
-	//createMap(out_css, 'style.pack.css');
 };
 
 var createImage = function () {

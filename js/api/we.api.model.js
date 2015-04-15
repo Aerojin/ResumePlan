@@ -59,10 +59,10 @@
             });
         },
         getUrl: function (api) {
-            return "{0}/api.php?m={1}&a={2}".format(this.getHost, api.model, api.command);
+            return "http://{0}/api.php?m={1}&a={2}".format(this.getHost(), api.model, api.command);
         },
         getHost: function () {
-            return location.origin;
+            return location.host;
         },
         checkData: function (data) {
             if(_.isObject(data)){
